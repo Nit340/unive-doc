@@ -1,0 +1,1315 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Device Management API &mdash; IoT Gateway API Documentation 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tag Mapping API" href="tag-mapping.html" />
+    <link rel="prev" title="General Configuration API" href="general-configuration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            IoT Gateway API Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">Univa-Gateway API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#api-structure">API Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#base-url">Base URL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#support">Support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../authentication.html#register-user">Register User</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../authentication.html#login-user">Login User</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../authentication.html#get-current-user">Get Current User</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../authentication.html#logout">Logout</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core APIs</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="general-configuration.html">General Configuration API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#get-configuration">Get Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#update-configuration">Update Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#scan-wifi-networks">Scan WiFi Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#sync-time">Sync Time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="general-configuration.html#python-example">Python Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="general-configuration.html#javascript-example">JavaScript Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Device Management API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#endpoints">Endpoints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-device-management-page">Get Device Management Page</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-new-device">Create New Device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-device">Update Device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#delete-device">Delete Device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-device-details">Get Device Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-device-connection">Test Device Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#disable-enable-device">Disable/Enable Device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#duplicate-device">Duplicate Device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scan-for-devices">Scan for Devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-scan-status">Check Scan Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scan-wireless-devices">Scan Wireless Devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-device-groups">Get Device Groups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-device-group">Create Device Group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-device-group">Update Device Group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#delete-device-group">Delete Device Group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#assign-devices-to-group">Assign Devices to Group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#import-devices-from-csv">Import Devices from CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#export-devices-to-csv">Export Devices to CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pair-wireless-device">Pair Wireless Device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-device-packets">Get Device Packets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#python-create-device">Python - Create Device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python-scan-for-devices">Python - Scan for Devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#javascript-get-device-details">JavaScript - Get Device Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#javascript-manage-device-groups">JavaScript - Manage Device Groups</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tag-mapping.html">Tag Mapping API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#endpoints">Endpoints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#get-all-tag-mappings">Get All Tag Mappings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#get-available-devices">Get Available Devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#get-protocol-form-configuration">Get Protocol Form Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#create-tag-mapping">Create Tag Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#update-tag-mapping">Update Tag Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#delete-tag-mapping">Delete Tag Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#import-mappings-from-csv">Import Mappings from CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#export-mappings-to-csv">Export Mappings to CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#get-single-tag-mapping">Get Single Tag Mapping</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#data-types-and-protocols">Data Types and Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#python-create-tag-mapping">Python - Create Tag Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#python-import-from-csv">Python - Import from CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#javascript-dynamic-form-generation">JavaScript - Dynamic Form Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#javascript-create-tag-mapping">JavaScript - Create Tag Mapping</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#workflow-example">Workflow Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-integration.html">Cloud Integration API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#endpoints">Endpoints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#get-all-cloud-connections">Get All Cloud Connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#get-connection-types">Get Connection Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#get-connection-template">Get Connection Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#create-cloud-connection">Create Cloud Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#get-connection-details">Get Connection Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#test-connection">Test Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#update-connection">Update Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#get-available-tags">Get Available Tags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#delete-connection">Delete Connection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#additional-endpoints">Additional Endpoints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#get-connection-statistics">Get Connection Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#toggle-connection-state">Toggle Connection State</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#connection-types-reference">Connection Types Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#publishing-modes">Publishing Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#python-create-mqtt-connection">Python - Create MQTT Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#python-test-connection">Python - Test Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#javascript-dynamic-connection-form">JavaScript - Dynamic Connection Form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#javascript-manage-tags-for-publishing">JavaScript - Manage Tags for Publishing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#workflow-example">Workflow Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#security-considerations">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#monitoring-and-alerts">Monitoring and Alerts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#best-practices">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Licensing &amp; Subscriptions API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="license.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#endpoints">Endpoints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="license.html#license-status-overview">License Status &amp; Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-license-overview">Get License Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-license-statistics">Get License Statistics</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#license-key-management">License Key Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="license.html#validate-license-key">Validate License Key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#activate-license">Activate License</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#generate-offline-activation">Generate Offline Activation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#complete-offline-activation">Complete Offline Activation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#export-license-data">Export License Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#import-license-data">Import License Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#deactivate-license">Deactivate License</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#feature-management">Feature Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-feature-matrix">Get Feature Matrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#enable-disable-feature">Enable/Disable Feature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-feature-limits">Get Feature Limits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#check-feature-availability">Check Feature Availability</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#cloud-subscription-integration">Cloud Subscription Integration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-cloud-status">Get Cloud Status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#sync-with-cloud">Sync with Cloud</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#unlink-cloud-account">Unlink Cloud Account</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-sync-settings">Get Sync Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#update-sync-settings">Update Sync Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#trial-management">Trial Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-active-trials">Get Active Trials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#start-trial">Start Trial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#extend-trial">Extend Trial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#cancel-trial">Cancel Trial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#upgrade-trial-to-full-license">Upgrade Trial to Full License</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-available-trials">Get Available Trials</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#license-transfer-management">License Transfer &amp; Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="license.html#transfer-license">Transfer License</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-transfer-status">Get Transfer Status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#cancel-transfer">Cancel Transfer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-license-history">Get License History</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#renewal-billing">Renewal &amp; Billing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-renewal-options">Get Renewal Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#initiate-renewal">Initiate Renewal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#update-auto-renewal">Update Auto-Renewal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-billing-information">Get Billing Information</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#license-backup-restore">License Backup &amp; Restore</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="license.html#create-backup">Create Backup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#restore-backup">Restore Backup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-backup-history">Get Backup History</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#validation-compliance">Validation &amp; Compliance</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="license.html#run-license-check">Run License Check</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-compliance-report">Get Compliance Report</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#reset-all-trials">Reset All Trials</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#websocket-endpoints">WebSocket Endpoints</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="license.html#license-events-stream">License Events Stream</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="license.html#python-activate-license">Python - Activate License</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#python-manage-trials">Python - Manage Trials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#python-cloud-integration">Python - Cloud Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#javascript-license-operations">JavaScript - License Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#javascript-feature-management">JavaScript - Feature Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#javascript-websocket-integration">JavaScript - WebSocket Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#security-considerations">Security Considerations</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IoT Gateway API Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Device Management API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/device-management.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="device-management-api">
+<h1>Device Management API<a class="headerlink" href="#device-management-api" title="Link to this heading">¶</a></h1>
+<p>APIs for managing devices, groups, and device operations.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>This API handles all device management operations including device CRUD, scanning, grouping, and device diagnostics.</p>
+</section>
+<section id="endpoints">
+<h2>Endpoints<a class="headerlink" href="#endpoints" title="Link to this heading">¶</a></h2>
+<section id="get-device-management-page">
+<h3>Get Device Management Page<a class="headerlink" href="#get-device-management-page" title="Link to this heading">¶</a></h3>
+<dl class="http get">
+<dt class="sig sig-object http" id="get--device-management">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/device-management</span></span><a class="headerlink" href="#get--device-management" title="Link to this definition">¶</a></dt>
+<dd><p>Load entire device management page with devices, groups, and statistics.</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;devices&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;loadcell-001&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;LoadCell-Front&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Modbus RTU&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Slave 01&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Online&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;last_poll&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2 sec ago&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;firmware&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.2.4&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;group_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;group_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Crane-01&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;groups&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Crane-01&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;device_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;device_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;loadcell-001&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;statistics&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;total_devices&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;online&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;offline&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="create-new-device">
+<h3>Create New Device<a class="headerlink" href="#create-new-device" title="Link to this heading">¶</a></h3>
+<dl class="http post">
+<dt class="sig sig-object http" id="post--device-management-devices">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/devices</span></span><a class="headerlink" href="#post--device-management-devices" title="Link to this definition">¶</a></dt>
+<dd><p>Add new device (Add Device button).</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<span class="err">Content-Type: application/json</span>
+</pre></div>
+</div>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/device-management/devices</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;New Device&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;modbus-rtu&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;group_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;slave_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;baud_rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9600</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;parity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;None&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;stop_bits&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;polling_interval&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;device-123&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;New Device&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Modbus RTU&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Slave 01&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Online&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;last_poll&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Just now&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;group_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="update-device">
+<h3>Update Device<a class="headerlink" href="#update-device" title="Link to this heading">¶</a></h3>
+<dl class="http put">
+<dt class="sig sig-object http" id="put--device-management-devices-device_id">
+<span class="sig-name descname"><span class="pre">PUT</span> </span><span class="sig-name descname"><span class="pre">/device-management/devices/{device_id}</span></span><a class="headerlink" href="#put--device-management-devices-device_id" title="Link to this definition">¶</a></dt>
+<dd><p>Edit device configuration (Edit Device button).</p>
+<p><strong>Path Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>device_id</strong> (string): Device identifier</p></li>
+</ul>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<span class="err">Content-Type: application/json</span>
+</pre></div>
+</div>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">PUT</span> <span class="nn">/device-management/devices/loadcell-001</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Updated Device&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;modbus-rtu&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;group_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;slave_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;baud_rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">19200</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;loadcell-001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Updated Device&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Modbus RTU&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Slave 02&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Online&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="delete-device">
+<h3>Delete Device<a class="headerlink" href="#delete-device" title="Link to this heading">¶</a></h3>
+<dl class="http delete">
+<dt class="sig sig-object http" id="delete--device-management-devices-device_id">
+<span class="sig-name descname"><span class="pre">DELETE</span> </span><span class="sig-name descname"><span class="pre">/device-management/devices/{device_id}</span></span><a class="headerlink" href="#delete--device-management-devices-device_id" title="Link to this definition">¶</a></dt>
+<dd><p>Remove device (Delete Device button).</p>
+<p><strong>Path Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>device_id</strong> (string): Device identifier</p></li>
+</ul>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;device_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;loadcell-001&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="get-device-details">
+<h3>Get Device Details<a class="headerlink" href="#get-device-details" title="Link to this heading">¶</a></h3>
+<dl class="http get">
+<dt class="sig sig-object http" id="get--device-management-devices-device_id-details">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/device-management/devices/{device_id}/details</span></span><a class="headerlink" href="#get--device-management-devices-device_id-details" title="Link to this definition">¶</a></dt>
+<dd><p>View detailed device information (View Details button).</p>
+<p><strong>Path Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>device_id</strong> (string): Device identifier</p></li>
+</ul>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;device_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;loadcell-001&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;LoadCell-Front&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Modbus RTU&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Slave 01&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Online&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;last_response&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2 sec ago&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;retries&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;signal_strength&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;N/A (Wired)&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;firmware_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.2.4&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;group&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Crane-01&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;calibration&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;scale_factor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.000</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;zero_offset&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;test_reading&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.34 tons&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="test-device-connection">
+<h3>Test Device Connection<a class="headerlink" href="#test-device-connection" title="Link to this heading">¶</a></h3>
+<dl class="http post">
+<dt class="sig sig-object http" id="post--device-management-devices-device_id-test">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/devices/{device_id}/test</span></span><a class="headerlink" href="#post--device-management-devices-device_id-test" title="Link to this definition">¶</a></dt>
+<dd><p>Ping device to test connectivity (Ping Device button).</p>
+<p><strong>Path Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>device_id</strong> (string): Device identifier</p></li>
+</ul>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;ping_time_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Online&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="disable-enable-device">
+<h3>Disable/Enable Device<a class="headerlink" href="#disable-enable-device" title="Link to this heading">¶</a></h3>
+<dl class="http post">
+<dt class="sig sig-object http" id="post--device-management-devices-device_id-disable">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/devices/{device_id}/disable</span></span><a class="headerlink" href="#post--device-management-devices-device_id-disable" title="Link to this definition">¶</a></dt>
+<dd><p>Disable or enable a device (Disable Device button).</p>
+<p><strong>Path Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>device_id</strong> (string): Device identifier</p></li>
+</ul>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<span class="err">Content-Type: application/json</span>
+</pre></div>
+</div>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/device-management/devices/loadcell-001/disable</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;disabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Disabled&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="duplicate-device">
+<h3>Duplicate Device<a class="headerlink" href="#duplicate-device" title="Link to this heading">¶</a></h3>
+<dl class="http post">
+<dt class="sig sig-object http" id="post--device-management-devices-device_id-duplicate">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/devices/{device_id}/duplicate</span></span><a class="headerlink" href="#post--device-management-devices-device_id-duplicate" title="Link to this definition">¶</a></dt>
+<dd><p>Create a copy of device configuration (Duplicate button).</p>
+<p><strong>Path Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>device_id</strong> (string): Device identifier</p></li>
+</ul>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;new_device_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;device-copy-123&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;new_device&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;device-copy-123&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;LoadCell-Front (Copy)&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Modbus RTU&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Slave 02&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Online&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="scan-for-devices">
+<h3>Scan for Devices<a class="headerlink" href="#scan-for-devices" title="Link to this heading">¶</a></h3>
+<dl class="http post">
+<dt class="sig sig-object http" id="post--device-management-scan">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/scan</span></span><a class="headerlink" href="#post--device-management-scan" title="Link to this definition">¶</a></dt>
+<dd><p>Scan network for devices (Scan Networks button).</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<span class="err">Content-Type: application/json</span>
+</pre></div>
+</div>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/device-management/scan</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;scan_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;modbus-rtu&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;auto_add&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;overwrite&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;scan_range&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Default&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;scan_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;scan-123&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;devices_found&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Slave 01&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Modbus RTU&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name_suggestion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Load Cell&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="check-scan-status">
+<h3>Check Scan Status<a class="headerlink" href="#check-scan-status" title="Link to this heading">¶</a></h3>
+<dl class="http get">
+<dt class="sig sig-object http" id="get--device-management-scan-scan_id-status">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/device-management/scan/{scan_id}/status</span></span><a class="headerlink" href="#get--device-management-scan-scan_id-status" title="Link to this definition">¶</a></dt>
+<dd><p>Monitor scan progress.</p>
+<p><strong>Path Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>scan_id</strong> (string): Scan job identifier</p></li>
+</ul>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;scan_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;scan-123&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;completed&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;progress&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;devices_found&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;devices_added&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="scan-wireless-devices">
+<h3>Scan Wireless Devices<a class="headerlink" href="#scan-wireless-devices" title="Link to this heading">¶</a></h3>
+<dl class="http post">
+<dt class="sig sig-object http" id="post--device-management-wireless-scan">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/wireless/scan</span></span><a class="headerlink" href="#post--device-management-wireless-scan" title="Link to this definition">¶</a></dt>
+<dd><p>Scan for wireless devices (Scan button in Wireless config).</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;devices_found&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;rf_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RF:0x09&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;signal_strength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-70</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;device_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ACS Sensor&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="get-device-groups">
+<h3>Get Device Groups<a class="headerlink" href="#get-device-groups" title="Link to this heading">¶</a></h3>
+<dl class="http get">
+<dt class="sig sig-object http" id="get--device-management-groups">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/device-management/groups</span></span><a class="headerlink" href="#get--device-management-groups" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve all device groups.</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;groups&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Crane-01&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;device_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;blue&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="create-device-group">
+<h3>Create Device Group<a class="headerlink" href="#create-device-group" title="Link to this heading">¶</a></h3>
+<dl class="http post">
+<dt class="sig sig-object http" id="post--device-management-groups">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/groups</span></span><a class="headerlink" href="#post--device-management-groups" title="Link to this definition">¶</a></dt>
+<dd><p>Add new device group (Add New Group button).</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<span class="err">Content-Type: application/json</span>
+</pre></div>
+</div>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/device-management/groups</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Safety Sensors&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;red&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;group_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;group&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Safety Sensors&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;device_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;red&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="update-device-group">
+<h3>Update Device Group<a class="headerlink" href="#update-device-group" title="Link to this heading">¶</a></h3>
+<dl class="http put">
+<dt class="sig sig-object http" id="put--device-management-groups-group_id">
+<span class="sig-name descname"><span class="pre">PUT</span> </span><span class="sig-name descname"><span class="pre">/device-management/groups/{group_id}</span></span><a class="headerlink" href="#put--device-management-groups-group_id" title="Link to this definition">¶</a></dt>
+<dd><p>Edit device group.</p>
+<p><strong>Path Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>group_id</strong> (integer): Group identifier</p></li>
+</ul>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<span class="err">Content-Type: application/json</span>
+</pre></div>
+</div>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">PUT</span> <span class="nn">/device-management/groups/1</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Crane-01 Updated&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;darkblue&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Group updated&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="delete-device-group">
+<h3>Delete Device Group<a class="headerlink" href="#delete-device-group" title="Link to this heading">¶</a></h3>
+<dl class="http delete">
+<dt class="sig sig-object http" id="delete--device-management-groups-group_id">
+<span class="sig-name descname"><span class="pre">DELETE</span> </span><span class="sig-name descname"><span class="pre">/device-management/groups/{group_id}</span></span><a class="headerlink" href="#delete--device-management-groups-group_id" title="Link to this definition">¶</a></dt>
+<dd><p>Remove device group.</p>
+<p><strong>Path Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>group_id</strong> (integer): Group identifier</p></li>
+</ul>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Group deleted&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="assign-devices-to-group">
+<h3>Assign Devices to Group<a class="headerlink" href="#assign-devices-to-group" title="Link to this heading">¶</a></h3>
+<dl class="http post">
+<dt class="sig sig-object http" id="post--device-management-groups-group_id-assign-devices">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/groups/{group_id}/assign-devices</span></span><a class="headerlink" href="#post--device-management-groups-group_id-assign-devices" title="Link to this definition">¶</a></dt>
+<dd><p>Assign multiple devices to a group (Assign Devices modal).</p>
+<p><strong>Path Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>group_id</strong> (integer): Group identifier</p></li>
+</ul>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<span class="err">Content-Type: application/json</span>
+</pre></div>
+</div>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/device-management/groups/1/assign-devices</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;device_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;device-123&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;device-456&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;assigned_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;group_device_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="import-devices-from-csv">
+<h3>Import Devices from CSV<a class="headerlink" href="#import-devices-from-csv" title="Link to this heading">¶</a></h3>
+<dl class="http post">
+<dt class="sig sig-object http" id="post--device-management-import">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/import</span></span><a class="headerlink" href="#post--device-management-import" title="Link to this definition">¶</a></dt>
+<dd><p>Import devices from CSV file.</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<span class="err">Content-Type: multipart/form-data</span>
+</pre></div>
+</div>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/device-management/import</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">multipart/form-data</span>
+<span class="na">Content-Disposition</span><span class="o">:</span> <span class="l">form-data; name=&quot;file&quot;; filename=&quot;devices.csv&quot;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">text/csv</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;devices_added&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;imported_devices&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;device-123&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Imported Device&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Modbus RTU&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="export-devices-to-csv">
+<h3>Export Devices to CSV<a class="headerlink" href="#export-devices-to-csv" title="Link to this heading">¶</a></h3>
+<dl class="http post">
+<dt class="sig sig-object http" id="post--device-management-export">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/export</span></span><a class="headerlink" href="#post--device-management-export" title="Link to this definition">¶</a></dt>
+<dd><p>Export devices to CSV file (Export to CSV button).</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<span class="err">Content-Type: application/json</span>
+</pre></div>
+</div>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/device-management/export</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;include_config&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;include_timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">text/csv</span>
+<span class="na">Content-Disposition</span><span class="o">:</span> <span class="l">attachment; filename=&quot;devices_export_20250312.csv&quot;</span>
+
+id,name,type,address,status
+loadcell-001,LoadCell-Front,Modbus RTU,Slave 01,Online
+...
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="pair-wireless-device">
+<h3>Pair Wireless Device<a class="headerlink" href="#pair-wireless-device" title="Link to this heading">¶</a></h3>
+<dl class="http post">
+<dt class="sig sig-object http" id="post--device-management-wireless-pair">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/wireless/pair</span></span><a class="headerlink" href="#post--device-management-wireless-pair" title="Link to this definition">¶</a></dt>
+<dd><p>Pair with wireless device (Start Pairing button).</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<span class="err">Content-Type: application/json</span>
+</pre></div>
+</div>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/device-management/wireless/pair</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;rf_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RF:0x09&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;pairing_code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ABC123&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;timeout_seconds&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="get-device-packets">
+<h3>Get Device Packets<a class="headerlink" href="#get-device-packets" title="Link to this heading">¶</a></h3>
+<dl class="http get">
+<dt class="sig sig-object http" id="get--device-management-devices-device_id-packets">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/device-management/devices/{device_id}/packets</span></span><a class="headerlink" href="#get--device-management-devices-device_id-packets" title="Link to this definition">¶</a></dt>
+<dd><p>View last 10 communication packets (View Last 10 Packets button).</p>
+<p><strong>Path Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>device_id</strong> (string): Device identifier</p></li>
+</ul>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;packets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-03-12T10:02:01Z&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;direction&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tx&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;data_hex&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01 03 00 10 00 02 C4 0B&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-03-12T10:02:01Z&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;direction&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rx&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;data_hex&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01 03 04 00 12 01 1A 69 85&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+</section>
+<section id="error-codes">
+<h2>Error Codes<a class="headerlink" href="#error-codes" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Device Management Errors</span><a class="headerlink" href="#id1" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Error Code</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>DEVICE_001</p></td>
+<td><p>Device not found</p></td>
+</tr>
+<tr class="row-odd"><td><p>DEVICE_002</p></td>
+<td><p>Invalid device configuration</p></td>
+</tr>
+<tr class="row-even"><td><p>DEVICE_003</p></td>
+<td><p>Device already exists</p></td>
+</tr>
+<tr class="row-odd"><td><p>DEVICE_004</p></td>
+<td><p>Device communication timeout</p></td>
+</tr>
+<tr class="row-even"><td><p>DEVICE_005</p></td>
+<td><p>Group not found</p></td>
+</tr>
+<tr class="row-odd"><td><p>DEVICE_006</p></td>
+<td><p>Invalid CSV format</p></td>
+</tr>
+<tr class="row-even"><td><p>DEVICE_007</p></td>
+<td><p>Scan already in progress</p></td>
+</tr>
+<tr class="row-odd"><td><p>DEVICE_008</p></td>
+<td><p>Wireless pairing failed</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h2>
+<section id="python-create-device">
+<h3>Python - Create Device<a class="headerlink" href="#python-create-device" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="c1"># Create new Modbus device</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer your_token&quot;</span><span class="p">}</span>
+
+<span class="n">device_config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;New Load Cell&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;modbus-rtu&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;group_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;slave_address&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">&quot;baud_rate&quot;</span><span class="p">:</span> <span class="mi">9600</span><span class="p">,</span>
+        <span class="s2">&quot;parity&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;stop_bits&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;polling_interval&quot;</span><span class="p">:</span> <span class="mi">1000</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s2">&quot;https://api.example.com/v1/device-management/devices&quot;</span><span class="p">,</span>
+    <span class="n">json</span><span class="o">=</span><span class="n">device_config</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span><span class="p">:</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;device&quot;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Created device: </span><span class="si">{</span><span class="n">device</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="python-scan-for-devices">
+<h3>Python - Scan for Devices<a class="headerlink" href="#python-scan-for-devices" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start device scan</span>
+<span class="n">scan_config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;scan_type&quot;</span><span class="p">:</span> <span class="s2">&quot;modbus-rtu&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;auto_add&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;overwrite&quot;</span><span class="p">:</span> <span class="kc">False</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s2">&quot;https://api.example.com/v1/device-management/scan&quot;</span><span class="p">,</span>
+    <span class="n">json</span><span class="o">=</span><span class="n">scan_config</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
+<span class="p">)</span>
+
+<span class="n">scan_id</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;scan_id&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Scan started: </span><span class="si">{</span><span class="n">scan_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Check scan status</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">status_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;https://api.example.com/v1/device-management/scan/</span><span class="si">{</span><span class="n">scan_id</span><span class="si">}</span><span class="s2">/status&quot;</span><span class="p">,</span>
+        <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
+    <span class="p">)</span>
+
+    <span class="n">status</span> <span class="o">=</span> <span class="n">status_response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Progress: </span><span class="si">{</span><span class="n">status</span><span class="p">[</span><span class="s1">&#39;progress&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">status</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;completed&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="n">status</span><span class="p">[</span><span class="s1">&#39;devices_found&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> devices&quot;</span><span class="p">)</span>
+        <span class="k">break</span>
+
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="javascript-get-device-details">
+<h3>JavaScript - Get Device Details<a class="headerlink" href="#javascript-get-device-details" title="Link to this heading">¶</a></h3>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Get device details</span>
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">getDeviceDetails</span><span class="p">(</span><span class="nx">deviceId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`/device-management/devices/</span><span class="si">${</span><span class="nx">deviceId</span><span class="si">}</span><span class="sb">/details`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s1">&#39;Authorization&#39;</span><span class="o">:</span><span class="w"> </span><span class="sb">`Bearer </span><span class="si">${</span><span class="nx">token</span><span class="si">}</span><span class="sb">`</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Device details:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Display device info</span>
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;device-name&#39;</span><span class="p">).</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;device-status&#39;</span><span class="p">).</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">status</span><span class="p">;</span>
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;device-type&#39;</span><span class="p">).</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">type</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">data</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Test device connection</span>
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">pingDevice</span><span class="p">(</span><span class="nx">deviceId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`/device-management/devices/</span><span class="si">${</span><span class="nx">deviceId</span><span class="si">}</span><span class="sb">/test`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s1">&#39;Authorization&#39;</span><span class="o">:</span><span class="w"> </span><span class="sb">`Bearer </span><span class="si">${</span><span class="nx">token</span><span class="si">}</span><span class="sb">`</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">alert</span><span class="p">(</span><span class="sb">`Ping successful! Response time: </span><span class="si">${</span><span class="nx">result</span><span class="p">.</span><span class="nx">ping_time_ms</span><span class="si">}</span><span class="sb">ms`</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Device is offline or unreachable&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">result</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="javascript-manage-device-groups">
+<h3>JavaScript - Manage Device Groups<a class="headerlink" href="#javascript-manage-device-groups" title="Link to this heading">¶</a></h3>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create new group</span>
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">createGroup</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">color</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/device-management/groups&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s1">&#39;Authorization&#39;</span><span class="o">:</span><span class="w"> </span><span class="sb">`Bearer </span><span class="si">${</span><span class="nx">token</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+<span class="w">            </span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;application/json&#39;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="nx">color</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Created group: </span><span class="si">${</span><span class="nx">result</span><span class="p">.</span><span class="nx">group</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb"> (ID: </span><span class="si">${</span><span class="nx">result</span><span class="p">.</span><span class="nx">group_id</span><span class="si">}</span><span class="sb">)`</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">result</span><span class="p">.</span><span class="nx">group</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Assign devices to group</span>
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">assignToGroup</span><span class="p">(</span><span class="nx">groupId</span><span class="p">,</span><span class="w"> </span><span class="nx">deviceIds</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`/device-management/groups/</span><span class="si">${</span><span class="nx">groupId</span><span class="si">}</span><span class="sb">/assign-devices`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s1">&#39;Authorization&#39;</span><span class="o">:</span><span class="w"> </span><span class="sb">`Bearer </span><span class="si">${</span><span class="nx">token</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+<span class="w">            </span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;application/json&#39;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">device_ids</span><span class="o">:</span><span class="w"> </span><span class="nx">deviceIds</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Assigned </span><span class="si">${</span><span class="nx">result</span><span class="p">.</span><span class="nx">assigned_count</span><span class="si">}</span><span class="sb"> devices to group`</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">result</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Device Status</strong>: Online, Offline, Disabled, Error</p></li>
+<li><p><strong>Device Types</strong>: Modbus RTU, Modbus TCP, Wireless RF, Ethernet</p></li>
+<li><p><strong>Scan Types</strong>: modbus-rtu, modbus-tcp, wireless, auto</p></li>
+<li><p><strong>File Upload</strong>: CSV import supports .csv files with specific columns</p></li>
+<li><p><strong>Real-time Updates</strong>: Consider WebSocket for real-time device status updates</p></li>
+</ul>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Device Not Responding</strong>:
+- Check physical connection
+- Verify device address
+- Test with ping function</p></li>
+<li><p><strong>Scan Not Finding Devices</strong>:
+- Verify network configuration
+- Check firewall settings
+- Ensure correct scan type</p></li>
+<li><p><strong>Import/Export Issues</strong>:
+- Verify CSV format
+- Check file encoding (UTF-8 recommended)
+- Ensure required columns are present</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="general-configuration.html" class="btn btn-neutral float-left" title="General Configuration API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tag-mapping.html" class="btn btn-neutral float-right" title="Tag Mapping API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Your Company.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

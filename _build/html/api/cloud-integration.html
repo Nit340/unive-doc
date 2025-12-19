@@ -1,0 +1,1599 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloud Integration API &mdash; IoT Gateway API Documentation 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Licensing &amp; Subscriptions API" href="license.html" />
+    <link rel="prev" title="Tag Mapping API" href="tag-mapping.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            IoT Gateway API Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">Univa-Gateway API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#api-structure">API Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#base-url">Base URL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../about.html#support">Support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../authentication.html#register-user">Register User</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../authentication.html#login-user">Login User</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../authentication.html#get-current-user">Get Current User</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../authentication.html#logout">Logout</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core APIs</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="general-configuration.html">General Configuration API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#get-configuration">Get Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#update-configuration">Update Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#scan-wifi-networks">Scan WiFi Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#sync-time">Sync Time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="general-configuration.html#python-example">Python Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="general-configuration.html#javascript-example">JavaScript Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="device-management.html">Device Management API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="device-management.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device-management.html#endpoints">Endpoints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#get-device-management-page">Get Device Management Page</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#create-new-device">Create New Device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#update-device">Update Device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#delete-device">Delete Device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#get-device-details">Get Device Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#test-device-connection">Test Device Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#disable-enable-device">Disable/Enable Device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#duplicate-device">Duplicate Device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#scan-for-devices">Scan for Devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#check-scan-status">Check Scan Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#scan-wireless-devices">Scan Wireless Devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#get-device-groups">Get Device Groups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#create-device-group">Create Device Group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#update-device-group">Update Device Group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#delete-device-group">Delete Device Group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#assign-devices-to-group">Assign Devices to Group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#import-devices-from-csv">Import Devices from CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#export-devices-to-csv">Export Devices to CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#pair-wireless-device">Pair Wireless Device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#get-device-packets">Get Device Packets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="device-management.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device-management.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#python-create-device">Python - Create Device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#python-scan-for-devices">Python - Scan for Devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#javascript-get-device-details">JavaScript - Get Device Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#javascript-manage-device-groups">JavaScript - Manage Device Groups</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="device-management.html#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device-management.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tag-mapping.html">Tag Mapping API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#endpoints">Endpoints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#get-all-tag-mappings">Get All Tag Mappings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#get-available-devices">Get Available Devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#get-protocol-form-configuration">Get Protocol Form Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#create-tag-mapping">Create Tag Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#update-tag-mapping">Update Tag Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#delete-tag-mapping">Delete Tag Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#import-mappings-from-csv">Import Mappings from CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#export-mappings-to-csv">Export Mappings to CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#get-single-tag-mapping">Get Single Tag Mapping</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#data-types-and-protocols">Data Types and Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#python-create-tag-mapping">Python - Create Tag Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#python-import-from-csv">Python - Import from CSV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#javascript-dynamic-form-generation">JavaScript - Dynamic Form Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#javascript-create-tag-mapping">JavaScript - Create Tag Mapping</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#workflow-example">Workflow Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Cloud Integration API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#endpoints">Endpoints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-all-cloud-connections">Get All Cloud Connections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-connection-types">Get Connection Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-connection-template">Get Connection Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-cloud-connection">Create Cloud Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-connection-details">Get Connection Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-connection">Test Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-connection">Update Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-available-tags">Get Available Tags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#delete-connection">Delete Connection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#additional-endpoints">Additional Endpoints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-connection-statistics">Get Connection Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#toggle-connection-state">Toggle Connection State</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#connection-types-reference">Connection Types Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#publishing-modes">Publishing Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#python-create-mqtt-connection">Python - Create MQTT Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python-test-connection">Python - Test Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#javascript-dynamic-connection-form">JavaScript - Dynamic Connection Form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#javascript-manage-tags-for-publishing">JavaScript - Manage Tags for Publishing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#workflow-example">Workflow Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#security-considerations">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#monitoring-and-alerts">Monitoring and Alerts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#best-practices">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Licensing &amp; Subscriptions API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="license.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#endpoints">Endpoints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="license.html#license-status-overview">License Status &amp; Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-license-overview">Get License Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-license-statistics">Get License Statistics</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#license-key-management">License Key Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="license.html#validate-license-key">Validate License Key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#activate-license">Activate License</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#generate-offline-activation">Generate Offline Activation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#complete-offline-activation">Complete Offline Activation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#export-license-data">Export License Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#import-license-data">Import License Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#deactivate-license">Deactivate License</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#feature-management">Feature Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-feature-matrix">Get Feature Matrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#enable-disable-feature">Enable/Disable Feature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-feature-limits">Get Feature Limits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#check-feature-availability">Check Feature Availability</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#cloud-subscription-integration">Cloud Subscription Integration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-cloud-status">Get Cloud Status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#sync-with-cloud">Sync with Cloud</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#unlink-cloud-account">Unlink Cloud Account</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-sync-settings">Get Sync Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#update-sync-settings">Update Sync Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#trial-management">Trial Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-active-trials">Get Active Trials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#start-trial">Start Trial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#extend-trial">Extend Trial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#cancel-trial">Cancel Trial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#upgrade-trial-to-full-license">Upgrade Trial to Full License</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-available-trials">Get Available Trials</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#license-transfer-management">License Transfer &amp; Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="license.html#transfer-license">Transfer License</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-transfer-status">Get Transfer Status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#cancel-transfer">Cancel Transfer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-license-history">Get License History</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#renewal-billing">Renewal &amp; Billing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-renewal-options">Get Renewal Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#initiate-renewal">Initiate Renewal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#update-auto-renewal">Update Auto-Renewal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-billing-information">Get Billing Information</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#license-backup-restore">License Backup &amp; Restore</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="license.html#create-backup">Create Backup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#restore-backup">Restore Backup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-backup-history">Get Backup History</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#validation-compliance">Validation &amp; Compliance</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="license.html#run-license-check">Run License Check</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#get-compliance-report">Get Compliance Report</a></li>
+<li class="toctree-l4"><a class="reference internal" href="license.html#reset-all-trials">Reset All Trials</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#websocket-endpoints">WebSocket Endpoints</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="license.html#license-events-stream">License Events Stream</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="license.html#python-activate-license">Python - Activate License</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#python-manage-trials">Python - Manage Trials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#python-cloud-integration">Python - Cloud Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#javascript-license-operations">JavaScript - License Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#javascript-feature-management">JavaScript - Feature Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#javascript-websocket-integration">JavaScript - WebSocket Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#security-considerations">Security Considerations</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IoT Gateway API Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Cloud Integration API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/cloud-integration.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cloud-integration-api">
+<h1>Cloud Integration API<a class="headerlink" href="#cloud-integration-api" title="Link to this heading">¶</a></h1>
+<p>APIs for configuring and managing cloud service connections.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>The Cloud Integration API allows you to connect your IoT gateway to various cloud services and platforms for data publishing, remote monitoring, and analytics. Supports MQTT, HTTP, and other protocols.</p>
+</section>
+<section id="endpoints">
+<h2>Endpoints<a class="headerlink" href="#endpoints" title="Link to this heading">¶</a></h2>
+<section id="get-all-cloud-connections">
+<h3>Get All Cloud Connections<a class="headerlink" href="#get-all-cloud-connections" title="Link to this heading">¶</a></h3>
+<dl class="http get">
+<dt class="sig sig-object http" id="get--cloud-connections">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/cloud-connections</span></span><a class="headerlink" href="#get--cloud-connections" title="Link to this definition">¶</a></dt>
+<dd><p>List all configured cloud connections.</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;connections&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mqtt-123&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mqtt&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Production MQTT&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;connected&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;lastActive&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2 minutes ago&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;messageCount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1250</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;lastError&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http-456&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Analytics API&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;disconnected&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;lastActive&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5 hours ago&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;messageCount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">340</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;lastError&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Connection timeout&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;summary&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;connected&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="get-connection-types">
+<h3>Get Connection Types<a class="headerlink" href="#get-connection-types" title="Link to this heading">¶</a></h3>
+<dl class="http get">
+<dt class="sig sig-object http" id="get--cloud-connections-types">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/cloud-connections/types</span></span><a class="headerlink" href="#get--cloud-connections-types" title="Link to this definition">¶</a></dt>
+<dd><p>Get available connection types with metadata.</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;types&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mqtt&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MQTT Broker&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Publish data to MQTT broker&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fa-cloud&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;protocols&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mqtt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;mqtts&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ws&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;wss&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;supports&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;publish&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;subscribe&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;retain&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;qos&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;defaultPort&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1883</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HTTP Endpoint&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Send data to HTTP REST API&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fa-globe&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;protocols&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;http&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;https&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;supports&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;post&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;put&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;get&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;delete&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;defaultPort&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">443</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;aws-iot&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AWS IoT Core&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Amazon Web Services IoT Core&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fa-aws&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;protocols&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mqtts&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;supports&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;publish&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;subscribe&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;shadows&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;defaultPort&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8883</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;azure-iot&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Azure IoT Hub&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Microsoft Azure IoT Hub&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fa-microsoft&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;protocols&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mqtts&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;amqps&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;supports&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;publish&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;deviceTwins&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;directMethods&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;defaultPort&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8883</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="get-connection-template">
+<h3>Get Connection Template<a class="headerlink" href="#get-connection-template" title="Link to this heading">¶</a></h3>
+<dl class="http get">
+<dt class="sig sig-object http" id="get--cloud-connections-templates-type">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/cloud-connections/templates/{type}</span></span><a class="headerlink" href="#get--cloud-connections-templates-type" title="Link to this definition">¶</a></dt>
+<dd><p>Get form template and defaults for a connection type.</p>
+<p><strong>Path Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>type</strong> (string): Connection type (mqtt, http, aws-iot, azure-iot)</p></li>
+</ul>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response</strong> (MQTT Example):</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mqtt&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;defaults&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;New MQTT Connection&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;connection&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;protocol&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mqtts&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;host&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8883</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;clientId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gateway_${timestamp}&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;cleanSession&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;topics&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;baseTopic&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;factory/device/${deviceId}&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;dataTopic&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${baseTopic}/data&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;eventTopic&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${baseTopic}/events&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;commandTopic&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${baseTopic}/commands&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;retainMessages&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;payloadFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;json&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;jsonTemplate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{\&quot;timestamp\&quot;:\&quot;${timestamp}\&quot;,\&quot;device\&quot;:\&quot;${deviceId}\&quot;,\&quot;data\&quot;:${data}}&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;timestampFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;iso8601&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;includeMetadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;publishing&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">      </span><span class="nt">&quot;publishMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;onChange&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;changeThreshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;maxPublishRate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;batchSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;batchInterval&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;advanced&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;autoReconnect&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;reconnectInterval&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;keepAlive&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;qos&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;validation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;host&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^([a-zA-Z0-9\\-\\.]+)$&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;min&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;max&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">65535</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;clientId&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;maxLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;variables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;deviceId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Gateway device ID&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Current timestamp&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;random&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Random number&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="create-cloud-connection">
+<h3>Create Cloud Connection<a class="headerlink" href="#create-cloud-connection" title="Link to this heading">¶</a></h3>
+<dl class="http post">
+<dt class="sig sig-object http" id="post--cloud-connections">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/cloud-connections</span></span><a class="headerlink" href="#post--cloud-connections" title="Link to this definition">¶</a></dt>
+<dd><p>Create a new cloud connection.</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<span class="err">Content-Type: application/json</span>
+</pre></div>
+</div>
+<p><strong>Request</strong> (MQTT Example):</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/cloud-connections</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mqtt&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;My MQTT Broker&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;connection&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;host&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;broker.example.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1883</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;protocol&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mqtt&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gateway_user&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;secure_password_123&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;clientId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gateway_001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;cleanSession&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;topics&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;baseTopic&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;factory/line1/gateway001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;dataTopic&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${baseTopic}/telemetry&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eventTopic&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${baseTopic}/events&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;retainMessages&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;payloadFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;json&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;jsonTemplate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{\&quot;timestamp\&quot;:\&quot;${timestamp}\&quot;,\&quot;device\&quot;:\&quot;${deviceId}\&quot;,\&quot;data\&quot;:${data}}&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;timestampFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;iso8601&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;publishing&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Hoist_Load&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Boom_Angle&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Temperature_Cell&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;publishMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;onChange&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;changeThreshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;maxPublishRate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;advanced&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;autoReconnect&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;reconnectInterval&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;keepAlive&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;qos&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mqtt-456&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;connection&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mqtt-456&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mqtt&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;My MQTT Broker&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;connecting&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;createdAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-03-12T10:30:00Z&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Connection created successfully&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="get-connection-details">
+<h3>Get Connection Details<a class="headerlink" href="#get-connection-details" title="Link to this heading">¶</a></h3>
+<dl class="http get">
+<dt class="sig sig-object http" id="get--cloud-connections-id">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/cloud-connections/{id}</span></span><a class="headerlink" href="#get--cloud-connections-id" title="Link to this definition">¶</a></dt>
+<dd><p>Get detailed information for a specific connection.</p>
+<p><strong>Path Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>id</strong> (string): Connection ID</p></li>
+</ul>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mqtt-123&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mqtt&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Production MQTT&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;connected&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;connection&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;host&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;broker.example.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1883</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;protocol&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mqtt&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gateway_user&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;clientId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gateway_001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;cleanSession&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;topics&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;baseTopic&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;factory/line1/gateway001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;dataTopic&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;factory/line1/gateway001/telemetry&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eventTopic&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;factory/line1/gateway001/events&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;commandTopic&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;factory/line1/gateway001/commands&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;retainMessages&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;payloadFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;json&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;jsonTemplate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{\&quot;timestamp\&quot;:\&quot;${timestamp}\&quot;,\&quot;device\&quot;:\&quot;${deviceId}\&quot;,\&quot;data\&quot;:${data}}&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;timestampFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;iso8601&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;includeMetadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;publishing&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hoist_Load&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;published&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;lastValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">145.2</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;lastPublished&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-03-12T10:29:58Z&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Boom_Angle&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;published&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;lastValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">45.6</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;lastPublished&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-03-12T10:29:58Z&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;publishMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;onChange&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;changeThreshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;maxPublishRate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;batchSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;totalMessages&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1250</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;failedMessages&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;advanced&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;autoReconnect&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;reconnectInterval&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;keepAlive&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;qos&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;ssl&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;certificate&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;statistics&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;createdAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-03-01T09:00:00Z&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lastConnected&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-03-12T10:29:00Z&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lastDisconnected&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;uptimeSeconds&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">95040</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;totalMessages&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1250</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;failedMessages&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;averageLatency&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">124</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="test-connection">
+<h3>Test Connection<a class="headerlink" href="#test-connection" title="Link to this heading">¶</a></h3>
+<dl class="http post">
+<dt class="sig sig-object http" id="post--cloud-connections-id-test">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/cloud-connections/{id}/test</span></span><a class="headerlink" href="#post--cloud-connections-id-test" title="Link to this definition">¶</a></dt>
+<dd><p>Test connectivity to cloud service.</p>
+<p><strong>Path Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>id</strong> (string): Connection ID</p></li>
+</ul>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+</pre></div>
+</div>
+<p><strong>Request</strong> (Optional):</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/cloud-connections/mqtt-123/test</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;testType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;connectivity&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;testMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Test message from gateway&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5000</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;connected&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;latency&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">124</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Connected successfully to broker.example.com:1883&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;brokerVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;sessionPresent&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;testTimestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-03-12T10:30:45Z&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;testMessageId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;test_123456&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="update-connection">
+<h3>Update Connection<a class="headerlink" href="#update-connection" title="Link to this heading">¶</a></h3>
+<dl class="http put">
+<dt class="sig sig-object http" id="put--cloud-connections-id">
+<span class="sig-name descname"><span class="pre">PUT</span> </span><span class="sig-name descname"><span class="pre">/cloud-connections/{id}</span></span><a class="headerlink" href="#put--cloud-connections-id" title="Link to this definition">¶</a></dt>
+<dd><p>Update an existing cloud connection.</p>
+<p><strong>Path Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>id</strong> (string): Connection ID</p></li>
+</ul>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<span class="err">Content-Type: application/json</span>
+</pre></div>
+</div>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">PUT</span> <span class="nn">/cloud-connections/mqtt-123</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Updated MQTT Broker&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;connection&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;host&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;new-broker.example.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8883</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;protocol&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mqtts&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;new_user&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;new_password&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;topics&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;baseTopic&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;factory/updated/gateway001&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;publishing&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;publishMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;interval&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;interval&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Connection updated successfully&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;restartRequired&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;connection&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mqtt-123&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Updated MQTT Broker&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;restarting&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="get-available-tags">
+<h3>Get Available Tags<a class="headerlink" href="#get-available-tags" title="Link to this heading">¶</a></h3>
+<dl class="http get">
+<dt class="sig sig-object http" id="get--cloud-connections-available-tags">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/cloud-connections/available-tags</span></span><a class="headerlink" href="#get--cloud-connections-available-tags" title="Link to this definition">¶</a></dt>
+<dd><p>Get list of available tags for publishing.</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+</pre></div>
+</div>
+<p><strong>Query Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>search</strong> (optional): Search term for tag names</p></li>
+<li><p><strong>limit</strong> (optional): Maximum results (default: 100)</p></li>
+<li><p><strong>category</strong> (optional): Filter by tag category</p></li>
+</ul>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hoist_Load&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;displayName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hoist Load&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tons&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FLOAT32&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Load Monitoring&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;LoadCell_1&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Main hoist load measurement&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;currentValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">145.2</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;lastUpdate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-03-12T10:29:58Z&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Boom_Angle&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;displayName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Boom Angle&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;degrees&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FLOAT32&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Position Tracking&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Inclin_Arm&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Boom angle measurement&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;currentValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">45.6</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;lastUpdate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-03-12T10:29:58Z&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Temperature_Cell&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;displayName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cell Temperature&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;°C&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;dataType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FLOAT32&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Temperature&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;LoadCell_1&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Load cell temperature&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;currentValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">32.1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;lastUpdate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-03-12T10:29:58Z&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;categories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Load Monitoring&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Position Tracking&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Temperature&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Pressure&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Safety&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;selectedCount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="delete-connection">
+<h3>Delete Connection<a class="headerlink" href="#delete-connection" title="Link to this heading">¶</a></h3>
+<dl class="http delete">
+<dt class="sig sig-object http" id="delete--cloud-connections-id">
+<span class="sig-name descname"><span class="pre">DELETE</span> </span><span class="sig-name descname"><span class="pre">/cloud-connections/{id}</span></span><a class="headerlink" href="#delete--cloud-connections-id" title="Link to this definition">¶</a></dt>
+<dd><p>Delete a cloud connection.</p>
+<p><strong>Path Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>id</strong> (string): Connection ID</p></li>
+</ul>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+</pre></div>
+</div>
+<p><strong>Query Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>keepData</strong> (optional): Keep historical data (default: false)</p></li>
+</ul>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Connection deleted successfully&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;deletedId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mqtt-123&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;statistics&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;totalMessages&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1250</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;dataRetained&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;cleanupComplete&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+</section>
+<section id="additional-endpoints">
+<h2>Additional Endpoints<a class="headerlink" href="#additional-endpoints" title="Link to this heading">¶</a></h2>
+<section id="get-connection-statistics">
+<h3>Get Connection Statistics<a class="headerlink" href="#get-connection-statistics" title="Link to this heading">¶</a></h3>
+<dl class="http get">
+<dt class="sig sig-object http" id="get--cloud-connections-id-statistics">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/cloud-connections/{id}/statistics</span></span><a class="headerlink" href="#get--cloud-connections-id-statistics" title="Link to this definition">¶</a></dt>
+<dd><p>Get detailed statistics for a connection.</p>
+<p><strong>Path Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>id</strong> (string): Connection ID</p></li>
+</ul>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+</pre></div>
+</div>
+<p><strong>Query Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>timeRange</strong> (optional): Time range (1h, 24h, 7d, 30d)</p></li>
+</ul>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;connectionId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mqtt-123&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;timeRange&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;24h&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;messages&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1250</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;successful&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1247</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;failed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;ratePerMinute&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.87</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;latency&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;average&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">124</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;min&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">89</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;max&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">245</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;percentile95&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">189</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;bandwidth&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;totalBytes&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1250000</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;averageBytesPerMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;bytesPerSecond&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">14.5</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;uptime&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;percentage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.8</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;downtimeSeconds&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">172</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lastDowntime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-03-11T15:30:00Z&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;topTags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hoist_Load&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Boom_Angle&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Temperature_Cell&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="toggle-connection-state">
+<h3>Toggle Connection State<a class="headerlink" href="#toggle-connection-state" title="Link to this heading">¶</a></h3>
+<dl class="http post">
+<dt class="sig sig-object http" id="post--cloud-connections-id-toggle">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/cloud-connections/{id}/toggle</span></span><a class="headerlink" href="#post--cloud-connections-id-toggle" title="Link to this definition">¶</a></dt>
+<dd><p>Enable or disable a connection.</p>
+<p><strong>Path Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>id</strong> (string): Connection ID</p></li>
+</ul>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+</pre></div>
+</div>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/cloud-connections/mqtt-123/toggle</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Connection disabled&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;connection&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mqtt-123&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;disconnected&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+</section>
+<section id="connection-types-reference">
+<h2>Connection Types Reference<a class="headerlink" href="#connection-types-reference" title="Link to this heading">¶</a></h2>
+<p>### MQTT Configuration</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">MQTT Connection Options</span><a class="headerlink" href="#id1" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>host</strong></p></td>
+<td><p>MQTT broker hostname or IP</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>port</strong></p></td>
+<td><p>Port number (1883 for MQTT, 8883 for MQTTS)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>protocol</strong></p></td>
+<td><p>mqtt, mqtts, ws, wss</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>username/password</strong></p></td>
+<td><p>Authentication credentials</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>clientId</strong></p></td>
+<td><p>Unique client identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>cleanSession</strong></p></td>
+<td><p>Start with clean session</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>qos</strong></p></td>
+<td><p>Quality of Service (0, 1, 2)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>keepAlive</strong></p></td>
+<td><p>Keep-alive interval in seconds</p></td>
+</tr>
+</tbody>
+</table>
+<p>### HTTP Configuration</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">HTTP Connection Options</span><a class="headerlink" href="#id2" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>url</strong></p></td>
+<td><p>Complete endpoint URL</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>method</strong></p></td>
+<td><p>HTTP method (POST, PUT, GET)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>headers</strong></p></td>
+<td><p>Custom HTTP headers</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>authType</strong></p></td>
+<td><p>none, basic, bearer, apiKey</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>contentType</strong></p></td>
+<td><p>application/json, application/xml</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>timeout</strong></p></td>
+<td><p>Request timeout in milliseconds</p></td>
+</tr>
+</tbody>
+</table>
+<p>### AWS IoT Core</p>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">AWS IoT Configuration</span><a class="headerlink" href="#id3" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>endpoint</strong></p></td>
+<td><p>AWS IoT endpoint</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>thingName</strong></p></td>
+<td><p>IoT Thing name</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>certificate</strong></p></td>
+<td><p>Client certificate</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>privateKey</strong></p></td>
+<td><p>Private key</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>rootCA</strong></p></td>
+<td><p>Root CA certificate</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>region</strong></p></td>
+<td><p>AWS region</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="publishing-modes">
+<h2>Publishing Modes<a class="headerlink" href="#publishing-modes" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-text">Publishing Modes</span><a class="headerlink" href="#id4" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 40.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Mode</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>onChange</strong></p></td>
+<td><p>Publish when value changes beyond threshold</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>interval</strong></p></td>
+<td><p>Publish at fixed intervals</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>onEvent</strong></p></td>
+<td><p>Publish on specific events</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>conditional</strong></p></td>
+<td><p>Publish based on conditions</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>manual</strong></p></td>
+<td><p>Manual publishing only</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="error-codes">
+<h2>Error Codes<a class="headerlink" href="#error-codes" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default" id="id5">
+<caption><span class="caption-text">Cloud Integration Errors</span><a class="headerlink" href="#id5" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Error Code</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>CLOUD_001</strong></p></td>
+<td><p>Connection failed - host unreachable</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>CLOUD_002</strong></p></td>
+<td><p>Authentication failed</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>CLOUD_003</strong></p></td>
+<td><p>Invalid certificate</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>CLOUD_004</strong></p></td>
+<td><p>Topic format error</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>CLOUD_005</strong></p></td>
+<td><p>Paytoo large</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>CLOUD_006</strong></p></td>
+<td><p>Rate limit exceeded</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>CLOUD_007</strong></p></td>
+<td><p>Connection timeout</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>CLOUD_008</strong></p></td>
+<td><p>SSL/TLS handshake failed</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>CLOUD_009</strong></p></td>
+<td><p>Invalid JSON template</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h2>
+<section id="python-create-mqtt-connection">
+<h3>Python - Create MQTT Connection<a class="headerlink" href="#python-create-mqtt-connection" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="c1"># Create MQTT connection</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer your_token&quot;</span><span class="p">}</span>
+
+<span class="n">mqtt_config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;mqtt&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Production MQTT Broker&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;connection&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;mqtt.example.com&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="mi">1883</span><span class="p">,</span>
+        <span class="s2">&quot;protocol&quot;</span><span class="p">:</span> <span class="s2">&quot;mqtt&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;gateway&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;password123&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;clientId&quot;</span><span class="p">:</span> <span class="s2">&quot;gateway_001&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;cleanSession&quot;</span><span class="p">:</span> <span class="kc">True</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;topics&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;baseTopic&quot;</span><span class="p">:</span> <span class="s2">&quot;factory/area1/gateway001&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;dataTopic&quot;</span><span class="p">:</span> <span class="s2">&quot;$</span><span class="si">{baseTopic}</span><span class="s2">/data&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;eventTopic&quot;</span><span class="p">:</span> <span class="s2">&quot;$</span><span class="si">{baseTopic}</span><span class="s2">/events&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;payloadFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;json&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;jsonTemplate&quot;</span><span class="p">:</span> <span class="s1">&#39;&#39;&#39;{</span>
+<span class="s1">            &quot;timestamp&quot;: &quot;$</span><span class="si">{timestamp}</span><span class="s1">&quot;,</span>
+<span class="s1">            &quot;device&quot;: &quot;$</span><span class="si">{deviceId}</span><span class="s1">&quot;,</span>
+<span class="s1">            &quot;values&quot;: $</span><span class="si">{data}</span><span class="s1">,</span>
+<span class="s1">            &quot;metadata&quot;: {</span>
+<span class="s1">                &quot;gateway&quot;: &quot;Univa-GW-01&quot;,</span>
+<span class="s1">                &quot;location&quot;: &quot;Chennai Port&quot;</span>
+<span class="s1">            }</span>
+<span class="s1">        }&#39;&#39;&#39;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;publishing&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Hoist_Load&quot;</span><span class="p">,</span> <span class="s2">&quot;Boom_Angle&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;publishMode&quot;</span><span class="p">:</span> <span class="s2">&quot;onChange&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;changeThreshold&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+        <span class="s2">&quot;maxPublishRate&quot;</span><span class="p">:</span> <span class="mi">100</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="s2">&quot;https://api.example.com/v1/cloud-connections&quot;</span><span class="p">,</span>
+    <span class="n">json</span><span class="o">=</span><span class="n">mqtt_config</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span><span class="p">:</span>
+    <span class="n">connection</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;connection&quot;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Created connection: </span><span class="si">{</span><span class="n">connection</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (ID: </span><span class="si">{</span><span class="n">connection</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="python-test-connection">
+<h3>Python - Test Connection<a class="headerlink" href="#python-test-connection" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test existing connection</span>
+<span class="n">connection_id</span> <span class="o">=</span> <span class="s2">&quot;mqtt-123&quot;</span>
+
+<span class="n">test_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;https://api.example.com/v1/cloud-connections/</span><span class="si">{</span><span class="n">connection_id</span><span class="si">}</span><span class="s2">/test&quot;</span><span class="p">,</span>
+    <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
+<span class="p">)</span>
+
+<span class="n">test_result</span> <span class="o">=</span> <span class="n">test_response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">test_result</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connection successful! Latency: </span><span class="si">{</span><span class="n">test_result</span><span class="p">[</span><span class="s1">&#39;latency&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">ms&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connection failed: </span><span class="si">{</span><span class="n">test_result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Unknown error&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="javascript-dynamic-connection-form">
+<h3>JavaScript - Dynamic Connection Form<a class="headerlink" href="#javascript-dynamic-connection-form" title="Link to this heading">¶</a></h3>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Load connection types</span>
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">loadConnectionTypes</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/cloud-connections/types&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s1">&#39;Authorization&#39;</span><span class="o">:</span><span class="w"> </span><span class="sb">`Bearer </span><span class="si">${</span><span class="nx">token</span><span class="si">}</span><span class="sb">`</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">typeSelect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;connection-type&#39;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nx">data</span><span class="p">.</span><span class="nx">types</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">type</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;option&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">option</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">type</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">option</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">type</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">typeSelect</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">option</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">    </span><span class="c1">// Add change listener</span>
+<span class="w">    </span><span class="nx">typeSelect</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nx">loadConnectionTemplate</span><span class="p">(</span><span class="nx">type</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+
+<span class="c1">// Load template for selected type</span>
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">loadConnectionTemplate</span><span class="p">(</span><span class="nx">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`/cloud-connections/templates/</span><span class="si">${</span><span class="nx">type</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s1">&#39;Authorization&#39;</span><span class="o">:</span><span class="w"> </span><span class="sb">`Bearer </span><span class="si">${</span><span class="nx">token</span><span class="si">}</span><span class="sb">`</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">renderConnectionForm</span><span class="p">(</span><span class="nx">template</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Render dynamic form</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">renderConnectionForm</span><span class="p">(</span><span class="nx">template</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">formContainer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;connection-form&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">formContainer</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Render form based on template</span>
+<span class="w">    </span><span class="nx">renderSection</span><span class="p">(</span><span class="s1">&#39;Connection&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">template</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">connection</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">renderSection</span><span class="p">(</span><span class="s1">&#39;Topics&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">template</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">topics</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">renderSection</span><span class="p">(</span><span class="s1">&#39;Format&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">template</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">format</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">renderSection</span><span class="p">(</span><span class="s1">&#39;Publishing&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">template</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">publishing</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">renderSection</span><span class="p">(</span><span class="s1">&#39;Advanced&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">template</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">advanced</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">renderSection</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">fields</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">section</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">section</span><span class="p">.</span><span class="nx">className</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;form-section&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">heading</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;h3&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">heading</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">title</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">section</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">heading</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">fields</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(([</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">])</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">fieldDiv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">fieldDiv</span><span class="p">.</span><span class="nx">className</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;form-field&#39;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;label&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">label</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">key</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">label</span><span class="p">.</span><span class="nx">htmlFor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">key</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">input</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;boolean&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">input</span><span class="p">.</span><span class="nx">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;checkbox&#39;</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">input</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">key</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">input</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">key</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">input</span><span class="p">.</span><span class="nx">checked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">value</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;number&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">input</span><span class="p">.</span><span class="nx">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;number&#39;</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">input</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">key</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">input</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">key</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">input</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">value</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">input</span><span class="p">.</span><span class="nx">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;text&#39;</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">input</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">key</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">input</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">key</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">input</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">input</span><span class="p">.</span><span class="nx">placeholder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`Enter </span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nx">fieldDiv</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">label</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">fieldDiv</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">input</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">section</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">fieldDiv</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;connection-form&#39;</span><span class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">section</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="javascript-manage-tags-for-publishing">
+<h3>JavaScript - Manage Tags for Publishing<a class="headerlink" href="#javascript-manage-tags-for-publishing" title="Link to this heading">¶</a></h3>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Load available tags</span>
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">loadAvailableTags</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/cloud-connections/available-tags&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s1">&#39;Authorization&#39;</span><span class="o">:</span><span class="w"> </span><span class="sb">`Bearer </span><span class="si">${</span><span class="nx">token</span><span class="si">}</span><span class="sb">`</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">tagList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;available-tags&#39;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nx">data</span><span class="p">.</span><span class="nx">tags</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">tag</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">li</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">li</span><span class="p">.</span><span class="nx">className</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;tag-item&#39;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">checkbox</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">checkbox</span><span class="p">.</span><span class="nx">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;checkbox&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">checkbox</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`tag-</span><span class="si">${</span><span class="nx">tag</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">checkbox</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tag</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;label&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">label</span><span class="p">.</span><span class="nx">htmlFor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`tag-</span><span class="si">${</span><span class="nx">tag</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">label</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`</span>
+<span class="sb">            &lt;strong&gt;</span><span class="si">${</span><span class="nx">tag</span><span class="p">.</span><span class="nx">displayName</span><span class="si">}</span><span class="sb">&lt;/strong&gt;</span>
+<span class="sb">            &lt;span class=&quot;tag-info&quot;&gt;</span><span class="si">${</span><span class="nx">tag</span><span class="p">.</span><span class="nx">device</span><span class="si">}</span><span class="sb"> • </span><span class="si">${</span><span class="nx">tag</span><span class="p">.</span><span class="nx">unit</span><span class="si">}</span><span class="sb">&lt;/span&gt;</span>
+<span class="sb">            &lt;br&gt;</span>
+<span class="sb">            &lt;small&gt;</span><span class="si">${</span><span class="nx">tag</span><span class="p">.</span><span class="nx">description</span><span class="si">}</span><span class="sb">&lt;/small&gt;</span>
+<span class="sb">        `</span><span class="p">;</span>
+
+<span class="w">        </span><span class="nx">li</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">checkbox</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">li</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">label</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">tagList</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">li</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+
+<span class="c1">// Get selected tags</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">getSelectedTags</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">checkboxes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;#available-tags input[type=&quot;checkbox&quot;]:checked&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">Array</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="nx">checkboxes</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">cb</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">cb</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="workflow-example">
+<h2>Workflow Example<a class="headerlink" href="#workflow-example" title="Link to this heading">¶</a></h2>
+<p>### Complete Cloud Connection Setup</p>
+<ol class="arabic">
+<li><p><strong>Page Load</strong> - List existing connections</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Initial load</span>
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">loadCloudConnections</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">connections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">getConnections</span><span class="p">();</span>
+<span class="w">    </span><span class="nx">renderConnectionList</span><span class="p">(</span><span class="nx">connections</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Add New Connection</strong> - Show type selection</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">showAddConnection</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;connection-modal&#39;</span><span class="p">).</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;block&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">loadConnectionTypes</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Select Connection Type</strong> - Load template</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">onTypeSelect</span><span class="p">(</span><span class="nx">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">getConnectionTemplate</span><span class="p">(</span><span class="nx">type</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">renderConnectionForm</span><span class="p">(</span><span class="nx">template</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Configure Connection</strong> - Fill form</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">configureConnection</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">collectFormData</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Test before saving</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">testResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">testConnectionConfig</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">testResult</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nx">saveConnection</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Save and Enable</strong> - Create connection</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">saveConnection</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">createConnection</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Enable publishing</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nx">enableConnection</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Load tags for publishing</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">tags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">getAvailableTags</span><span class="p">();</span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="nx">selectTagsForPublishing</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="nx">tags</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="security-considerations">
+<h2>Security Considerations<a class="headerlink" href="#security-considerations" title="Link to this heading">¶</a></h2>
+<p>### Credential Management</p>
+<ol class="arabic simple">
+<li><p><strong>Password Storage</strong>
+- Encrypted at rest
+- Never logged in plaintext
+- Rotate regularly</p></li>
+<li><p><strong>Certificate Handling</strong>
+- Secure certificate upload
+- Private key protection
+- Certificate expiration monitoring</p></li>
+<li><p><strong>Network Security</strong>
+- Use TLS/SSL where available
+- Validate certificates
+- Use VPN for sensitive connections</p></li>
+</ol>
+<p>### Data Privacy</p>
+<ol class="arabic simple">
+<li><p><strong>Data Minimization</strong>
+- Only publish necessary tags
+- Consider data aggregation
+- Implement data masking if needed</p></li>
+<li><p><strong>Compliance</strong>
+- GDPR considerations
+- Industry-specific regulations
+- Data retention policies</p></li>
+</ol>
+</section>
+<section id="monitoring-and-alerts">
+<h2>Monitoring and Alerts<a class="headerlink" href="#monitoring-and-alerts" title="Link to this heading">¶</a></h2>
+<p>### Connection Health Monitoring</p>
+<ul class="simple">
+<li><p><strong>Heartbeat</strong>: Regular connectivity checks</p></li>
+<li><p><strong>Latency Monitoring</strong>: Track response times</p></li>
+<li><p><strong>Error Rate</strong>: Monitor failed messages</p></li>
+<li><p><strong>Bandwidth Usage</strong>: Track data volume</p></li>
+</ul>
+<p>### Alert Configuration</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;alerts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;connectionLost&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;notifications&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;email&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sms&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;highLatency&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;errorRate&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;window&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Connection Configuration</strong>
+- Use descriptive names
+- Document connection purposes
+- Test before production use</p></li>
+<li><p><strong>Data Publishing</strong>
+- Start with few tags, add gradually
+- Use appropriate publish modes
+- Monitor bandwidth usage</p></li>
+<li><p><strong>Error Handling</strong>
+- Implement retry logic
+- Log connection issues
+- Set up alerts for critical failures</p></li>
+<li><p><strong>Performance</strong>
+- Batch messages where possible
+- Use compression for large payloads
+- Optimize publish intervals</p></li>
+</ol>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
+<p>### Common Issues</p>
+<ol class="arabic simple">
+<li><p><strong>Connection Fails</strong>
+- Check network connectivity
+- Verify credentials
+- Check firewall settings</p></li>
+<li><p><strong>Authentication Errors</strong>
+- Verify username/password
+- Check certificate validity
+- Ensure proper permissions</p></li>
+<li><p><strong>High Latency</strong>
+- Check network bandwidth
+- Reduce publish frequency
+- Consider message batching</p></li>
+<li><p><strong>Message Loss</strong>
+- Increase QoS level
+- Check broker configuration
+- Verify topic permissions</p></li>
+</ol>
+<p>### Debug Tools</p>
+<ol class="arabic simple">
+<li><p><strong>Test Connection</strong> - Verify connectivity</p></li>
+<li><p><strong>Message Logs</strong> - View sent messages</p></li>
+<li><p><strong>Network Capture</strong> - Analyze traffic</p></li>
+<li><p><strong>Broker Tools</strong> - Use MQTT client for testing</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tag-mapping.html" class="btn btn-neutral float-left" title="Tag Mapping API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="license.html" class="btn btn-neutral float-right" title="Licensing &amp; Subscriptions API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Your Company.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
