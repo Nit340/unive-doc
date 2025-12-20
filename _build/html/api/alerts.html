@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>General Configuration API &mdash; IoT Gateway API Documentation 1.0.0 documentation</title>
+  <title>Alert Messages API Documentation &mdash; IoT Gateway API Documentation 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -19,8 +19,8 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Device Management API" href="device-management.html" />
-    <link rel="prev" title="Authentication API" href="../authentication.html" /> 
+    <link rel="next" title="Rules Engine API" href="rule.html" />
+    <link rel="prev" title="Scheduler &amp; Automation API" href="automation.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -60,16 +60,16 @@
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Core APIs</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">General Configuration API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#get-configuration">Get Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#update-configuration">Update Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#scan-wifi-networks">Scan WiFi Networks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#sync-time">Sync Time</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#error-codes">Error Codes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#python-example">Python Example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#javascript-example">JavaScript Example</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="general-configuration.html">General Configuration API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#get-configuration">Get Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#update-configuration">Update Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#scan-wifi-networks">Scan WiFi Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#sync-time">Sync Time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="general-configuration.html#python-example">Python Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="general-configuration.html#javascript-example">JavaScript Example</a></li>
 </ul>
 </li>
 </ul>
@@ -177,7 +177,7 @@
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">UNDER VALIDATION</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="license.html">Licensing &amp; Subscriptions API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="license.html#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="license.html#endpoints">Endpoints</a><ul>
@@ -921,50 +921,50 @@
 <li class="toctree-l2"><a class="reference internal" href="automation.html#release-notes">## Release Notes</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="alerts.html">Alert Messages API Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#purpose">Purpose</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#base-url">Base URL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#authentication">Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#endpoints">Endpoints</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="alerts.html#alert-classes-api">1. Alert Classes API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-alert-classes">GET /alert-classes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-alert-classes-id">GET /alert-classes/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#post-alert-classes">POST /alert-classes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#put-alert-classes-id">PUT /alert-classes/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#delete-alert-classes-id">DELETE /alert-classes/{id}</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Alert Messages API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#purpose">Purpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#base-url">Base URL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#endpoints">Endpoints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#alert-classes-api">1. Alert Classes API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#get-alert-classes">GET /alert-classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-alert-classes-id">GET /alert-classes/{id}</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#post-alert-classes">POST /alert-classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#put-alert-classes-id">PUT /alert-classes/{id}</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete-alert-classes-id">DELETE /alert-classes/{id}</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="alerts.html#alert-messages-api">2. Alert Messages API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-alert-messages">GET /alert-messages</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-alert-messages-id">GET /alert-messages/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#post-alert-messages">POST /alert-messages</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#put-alert-messages-id">PUT /alert-messages/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#delete-alert-messages-id">DELETE /alert-messages/{id}</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#alert-messages-api">2. Alert Messages API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#get-alert-messages">GET /alert-messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-alert-messages-id">GET /alert-messages/{id}</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#post-alert-messages">POST /alert-messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#put-alert-messages-id">PUT /alert-messages/{id}</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete-alert-messages-id">DELETE /alert-messages/{id}</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="alerts.html#preview-api">3. Preview API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#post-alert-messages-preview">POST /alert-messages/preview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#preview-api">3. Preview API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#post-alert-messages-preview">POST /alert-messages/preview</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="alerts.html#configuration-api">4. Configuration API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-configuration-export">GET /configuration/export</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#post-configuration-import">POST /configuration/import</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-api">4. Configuration API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#get-configuration-export">GET /configuration/export</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#post-configuration-import">POST /configuration/import</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="alerts.html#utilities-api">5. Utilities API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-variables-available">GET /variables/available</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-channels-available">GET /channels/available</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#utilities-api">5. Utilities API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#get-variables-available">GET /variables/available</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-channels-available">GET /channels/available</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#error-responses">Error Responses</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#webhooks">Webhooks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#versioning">Versioning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#changelog">Changelog</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#sdk-examples">SDK Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#support">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#error-responses">Error Responses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rate-limiting">Rate Limiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#webhooks">Webhooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#versioning">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#changelog">Changelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sdk-examples">SDK Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#support">Support</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="rule.html">Rules Engine API</a><ul>
@@ -1180,9 +1180,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">General Configuration API</li>
+      <li class="breadcrumb-item active">Alert Messages API Documentation</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/api/general-configuration.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/alerts.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -1190,317 +1190,849 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="general-configuration-api">
-<h1>General Configuration API<a class="headerlink" href="#general-configuration-api" title="Link to this heading">¶</a></h1>
-<p>APIs for managing gateway configuration settings.</p>
-<section id="get-configuration">
-<h2>Get Configuration<a class="headerlink" href="#get-configuration" title="Link to this heading">¶</a></h2>
-<dl class="http get">
-<dt class="sig sig-object http" id="get--general-configuration">
-<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/general-configuration</span></span><a class="headerlink" href="#get--general-configuration" title="Link to this definition">¶</a></dt>
-<dd><p>Load entire configuration page with current settings.</p>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-</pre></div>
-</div>
-<p><strong>Response</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-
-<span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;gateway_identity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Univa-GW-01&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;serial_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GW2025-1190021&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;deployment_site&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Chennai Port - Zone A&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;location_mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;manual&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">12.99123</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">80.12312</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;asset_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CRN-CT-12&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;date_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Asia/Kolkata&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;ntp_server&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pool.ntp.org&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;current_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12/03/2025&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;current_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;14:53&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;date_format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DD/MM/YYYY&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;time_format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;24-Hour&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;English&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;network&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ethernet&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;ethernet&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;ip_assignment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dhcp&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;static_ip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.1.50&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;subnet_mask&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;255.255.255.0&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;gateway&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.1.1&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;dns1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;8.8.8.8&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;dns2&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;8.8.4.4&quot;</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;wifi&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;ssid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;signal_strength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;cellular&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;apn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;internet&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;signal_strength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-67</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;mac_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00:1A:2B:3C:4D:5E&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;heartbeat&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;interval&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;offline_threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</dd></dl>
-
+  <section id="alert-messages-api-documentation">
+<h1>Alert Messages API Documentation<a class="headerlink" href="#alert-messages-api-documentation" title="Link to this heading">¶</a></h1>
+<section id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Link to this heading">¶</a></h2>
+<p>The Alert Messages API manages alert severity classes and message templates for the Univa Gateway system. It provides CRUD operations for defining visual properties of alerts (colors, icons, severity levels) and creating message templates with variables and delivery channels.</p>
 </section>
-<section id="update-configuration">
-<h2>Update Configuration<a class="headerlink" href="#update-configuration" title="Link to this heading">¶</a></h2>
-<dl class="http put">
-<dt class="sig sig-object http" id="put--general-configuration">
-<span class="sig-name descname"><span class="pre">PUT</span> </span><span class="sig-name descname"><span class="pre">/general-configuration</span></span><a class="headerlink" href="#put--general-configuration" title="Link to this definition">¶</a></dt>
-<dd><p>Save all configuration changes.</p>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<section id="base-url">
+<h2>Base URL<a class="headerlink" href="#base-url" title="Link to this heading">¶</a></h2>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">https://api.univagateway.com/v1</span>
+</pre></div>
+</div>
+</section>
+<section id="authentication">
+<h2>Authentication<a class="headerlink" href="#authentication" title="Link to this heading">¶</a></h2>
+<p>All API requests require authentication via API key.</p>
+<p><strong>Headers:</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;api_key&gt;</span>
 <span class="err">Content-Type: application/json</span>
 </pre></div>
 </div>
-<p><strong>Request</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">PUT</span> <span class="nn">/general-configuration</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-
-<span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;gateway_identity&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Univa-GW-01&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;deployment_site&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Chennai Port - Zone A&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;location_mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;manual&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">12.99123</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">80.12312</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;asset_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CRN-CT-12&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;date_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Asia/Kolkata&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;ntp_server&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pool.ntp.org&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;date_format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DD/MM/YYYY&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;time_format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;24-Hour&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;English&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;network&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ethernet&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;ethernet&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;ip_assignment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dhcp&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;static_ip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.1.50&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;subnet_mask&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;255.255.255.0&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;gateway&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.1.1&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;dns1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;8.8.8.8&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;dns2&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;8.8.4.4&quot;</span>
+</section>
+<section id="endpoints">
+<h2>Endpoints<a class="headerlink" href="#endpoints" title="Link to this heading">¶</a></h2>
+<section id="alert-classes-api">
+<h3>1. Alert Classes API<a class="headerlink" href="#alert-classes-api" title="Link to this heading">¶</a></h3>
+<section id="get-alert-classes">
+<h4>GET /alert-classes<a class="headerlink" href="#get-alert-classes" title="Link to this heading">¶</a></h4>
+<p>Retrieve all alert classes.</p>
+<p><strong>Request:</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/alert-classes</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Critical&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#DC2626&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fa-triangle-exclamation&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Immediate action required&quot;</span>
 <span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;wifi&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;ssid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;cellular&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;apn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;internet&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;High&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#F97316&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fa-circle-exclamation&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Attention required soon&quot;</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;heartbeat&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;interval&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;offline_threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;meta&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-01-15T10:30:00Z&quot;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Response</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-
-<span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Configuration saved successfully&quot;</span>
+<p><strong>Status Codes:</strong></p>
+<ul class="simple">
+<li><p><strong>200 OK</strong>: Successful retrieval</p></li>
+<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
+<li><p><strong>500 Internal Server Error</strong>: Server error</p></li>
+</ul>
+</section>
+<section id="get-alert-classes-id">
+<h4>GET /alert-classes/{id}<a class="headerlink" href="#get-alert-classes-id" title="Link to this heading">¶</a></h4>
+<p>Retrieve a specific alert class by ID.</p>
+<p><strong>Request:</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/alert-classes/1</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Critical&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#DC2626&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fa-triangle-exclamation&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Immediate action required&quot;</span>
+<span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-</dd></dl>
-
+<p><strong>Status Codes:</strong></p>
+<ul class="simple">
+<li><p><strong>200 OK</strong>: Successful retrieval</p></li>
+<li><p><strong>404 Not Found</strong>: Alert class not found</p></li>
+<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
+</ul>
 </section>
-<section id="scan-wifi-networks">
-<h2>Scan WiFi Networks<a class="headerlink" href="#scan-wifi-networks" title="Link to this heading">¶</a></h2>
-<dl class="http post">
-<dt class="sig sig-object http" id="post--general-configuration-wifi-scan">
-<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/general-configuration/wifi-scan</span></span><a class="headerlink" href="#post--general-configuration-wifi-scan" title="Link to this definition">¶</a></dt>
-<dd><p>Scan for available WiFi networks.</p>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-</pre></div>
-</div>
-<p><strong>Request</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/general-configuration/wifi-scan</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-
-<span class="p">{}</span>
-</pre></div>
-</div>
-<p><strong>Response</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<section id="post-alert-classes">
+<h4>POST /alert-classes<a class="headerlink" href="#post-alert-classes" title="Link to this heading">¶</a></h4>
+<p>Create a new alert class.</p>
+<p><strong>Request:</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/alert-classes</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
 <span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;networks&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span><span class="nt">&quot;ssid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Port_WiFi_5G&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;signal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">},</span>
-<span class="w">    </span><span class="p">{</span><span class="nt">&quot;ssid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Guest_WiFi&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;signal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Emergency&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#DC2626&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fa-fire&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Emergency situation requiring immediate action&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Required Fields:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> (string): Name of the alert class</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">severity</span></code> (integer): Severity level (1-5)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">color</span></code> (string): Hex color code</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">icon</span></code> (string): FontAwesome icon class</p></li>
+</ul>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Emergency&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#DC2626&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fa-fire&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Emergency situation requiring immediate action&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alert class created successfully&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Status Codes:</strong></p>
+<ul class="simple">
+<li><p><strong>201 Created</strong>: Alert class created successfully</p></li>
+<li><p><strong>400 Bad Request</strong>: Missing or invalid fields</p></li>
+<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
+<li><p><strong>409 Conflict</strong>: Alert class with same name already exists</p></li>
+</ul>
+</section>
+<section id="put-alert-classes-id">
+<h4>PUT /alert-classes/{id}<a class="headerlink" href="#put-alert-classes-id" title="Link to this heading">¶</a></h4>
+<p>Update an existing alert class.</p>
+<p><strong>Request:</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">PUT</span> <span class="nn">/alert-classes/6</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Emergency&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#B91C1C&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fa-fire-flame-curved&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Emergency situation - highest priority&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Emergency&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#B91C1C&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fa-fire-flame-curved&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Emergency situation - highest priority&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alert class updated successfully&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Status Codes:</strong></p>
+<ul class="simple">
+<li><p><strong>200 OK</strong>: Alert class updated successfully</p></li>
+<li><p><strong>400 Bad Request</strong>: Invalid fields</p></li>
+<li><p><strong>404 Not Found</strong>: Alert class not found</p></li>
+<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
+</ul>
+</section>
+<section id="delete-alert-classes-id">
+<h4>DELETE /alert-classes/{id}<a class="headerlink" href="#delete-alert-classes-id" title="Link to this heading">¶</a></h4>
+<p>Delete an alert class.</p>
+<p><strong>Request:</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">DELETE</span> <span class="nn">/alert-classes/6</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alert class deleted successfully&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Status Codes:</strong></p>
+<ul class="simple">
+<li><p><strong>200 OK</strong>: Alert class deleted successfully</p></li>
+<li><p><strong>404 Not Found</strong>: Alert class not found</p></li>
+<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
+<li><p><strong>409 Conflict</strong>: Cannot delete - alert messages are using this class</p></li>
+</ul>
+</section>
+</section>
+<section id="alert-messages-api">
+<h3>2. Alert Messages API<a class="headerlink" href="#alert-messages-api" title="Link to this heading">¶</a></h3>
+<section id="get-alert-messages">
+<h4>GET /alert-messages<a class="headerlink" href="#get-alert-messages" title="Link to this heading">¶</a></h4>
+<p>Retrieve all alert messages.</p>
+<p><strong>Request:</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/alert-messages</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
+</pre></div>
+</div>
+<p><strong>Query Parameters:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">class_id</span></code> (optional): Filter by alert class ID</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">channel</span></code> (optional): Filter by delivery channel</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">limit</span></code> (optional): Number of records per page (default: 20)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">page</span></code> (optional): Page number (default: 1)</p></li>
+</ul>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Critical Temperature&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;🔥 CRITICAL: {device} temperature is {value}°C (Threshold: {threshold}°C)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;class_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;channels&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mqtt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sms&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dashboard&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Device Offline&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;📴 {device} is offline at {timestamp}&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;class_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;channels&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;email&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dashboard&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;meta&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;page&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;total_pages&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-01-15T10:30:00Z&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Status Codes:</strong></p>
+<ul class="simple">
+<li><p><strong>200 OK</strong>: Successful retrieval</p></li>
+<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
+</ul>
+</section>
+<section id="get-alert-messages-id">
+<h4>GET /alert-messages/{id}<a class="headerlink" href="#get-alert-messages-id" title="Link to this heading">¶</a></h4>
+<p>Retrieve a specific alert message by ID.</p>
+<p><strong>Request:</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/alert-messages/1</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Critical Temperature&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;🔥 CRITICAL: {device} temperature is {value}°C (Threshold: {threshold}°C)&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;class_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;channels&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mqtt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sms&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dashboard&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;variables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;device&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;value&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;threshold&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Status Codes:</strong></p>
+<ul class="simple">
+<li><p><strong>200 OK</strong>: Successful retrieval</p></li>
+<li><p><strong>404 Not Found</strong>: Alert message not found</p></li>
+<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
+</ul>
+</section>
+<section id="post-alert-messages">
+<h4>POST /alert-messages<a class="headerlink" href="#post-alert-messages" title="Link to this heading">¶</a></h4>
+<p>Create a new alert message.</p>
+<p><strong>Request:</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/alert-messages</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;High Pressure Alert&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;⚠️ {device} pressure is {value} bar (Threshold: {threshold} bar)&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;class_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;channels&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mqtt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dashboard&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Required Fields:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> (string): Name of the alert message</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">message</span></code> (string): Message template with variables</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">class_id</span></code> (integer): ID of the alert class</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">channels</span></code> (array): Array of delivery channels</p></li>
+</ul>
+<p><strong>Valid Channels:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mqtt</span></code> - MQTT protocol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">email</span></code> - Email notification</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sms</span></code> - SMS notification</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dashboard</span></code> - Dashboard display</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">webhook</span></code> - Webhook endpoint</p></li>
+</ul>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;High Pressure Alert&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;⚠️ {device} pressure is {value} bar (Threshold: {threshold} bar)&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;class_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;channels&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mqtt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dashboard&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alert message created successfully&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Status Codes:</strong></p>
+<ul class="simple">
+<li><p><strong>201 Created</strong>: Alert message created successfully</p></li>
+<li><p><strong>400 Bad Request</strong>: Missing or invalid fields</p></li>
+<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
+<li><p><strong>404 Not Found</strong>: Alert class not found</p></li>
+</ul>
+</section>
+<section id="put-alert-messages-id">
+<h4>PUT /alert-messages/{id}<a class="headerlink" href="#put-alert-messages-id" title="Link to this heading">¶</a></h4>
+<p>Update an existing alert message.</p>
+<p><strong>Request:</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">PUT</span> <span class="nn">/alert-messages/6</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;High Pressure Warning&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;⚠️ WARNING: {device} pressure is {value} bar (Limit: {limit} bar)&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;class_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;channels&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mqtt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dashboard&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sms&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;High Pressure Warning&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;⚠️ WARNING: {device} pressure is {value} bar (Limit: {limit} bar)&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;class_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;channels&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mqtt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dashboard&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sms&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alert message updated successfully&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Status Codes:</strong></p>
+<ul class="simple">
+<li><p><strong>200 OK</strong>: Alert message updated successfully</p></li>
+<li><p><strong>400 Bad Request</strong>: Invalid fields</p></li>
+<li><p><strong>404 Not Found</strong>: Alert message or class not found</p></li>
+<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
+</ul>
+</section>
+<section id="delete-alert-messages-id">
+<h4>DELETE /alert-messages/{id}<a class="headerlink" href="#delete-alert-messages-id" title="Link to this heading">¶</a></h4>
+<p>Delete an alert message.</p>
+<p><strong>Request:</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">DELETE</span> <span class="nn">/alert-messages/6</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alert message deleted successfully&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Status Codes:</strong></p>
+<ul class="simple">
+<li><p><strong>200 OK</strong>: Alert message deleted successfully</p></li>
+<li><p><strong>404 Not Found</strong>: Alert message not found</p></li>
+<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
+<li><p><strong>409 Conflict</strong>: Cannot delete - rules are using this message</p></li>
+</ul>
+</section>
+</section>
+<section id="preview-api">
+<h3>3. Preview API<a class="headerlink" href="#preview-api" title="Link to this heading">¶</a></h3>
+<section id="post-alert-messages-preview">
+<h4>POST /alert-messages/preview<a class="headerlink" href="#post-alert-messages-preview" title="Link to this heading">¶</a></h4>
+<p>Preview an alert message with sample data.</p>
+<p><strong>Request:</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/alert-messages/preview</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;🔥 CRITICAL: {device} temperature is {value}°C at {timestamp}&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Crane-01&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;85.5&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-01-15T10:30:00Z&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Workshop A&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_Temperature&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;original&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;🔥 CRITICAL: {device} temperature is {value}°C at {timestamp}&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;rendered&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;🔥 CRITICAL: Crane-01 temperature is 85.5°C at 2024-01-15T10:30:00Z&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;missing_variables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;threshold&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;operator&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;sample_data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Crane-01&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;85.5&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-01-15T10:30:00Z&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Workshop A&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_Temperature&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Status Codes:</strong></p>
+<ul class="simple">
+<li><p><strong>200 OK</strong>: Preview generated successfully</p></li>
+<li><p><strong>400 Bad Request</strong>: Invalid message template</p></li>
+<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
+</ul>
+</section>
+</section>
+<section id="configuration-api">
+<h3>4. Configuration API<a class="headerlink" href="#configuration-api" title="Link to this heading">¶</a></h3>
+<section id="get-configuration-export">
+<h4>GET /configuration/export<a class="headerlink" href="#get-configuration-export" title="Link to this heading">¶</a></h4>
+<p>Export all alert configuration.</p>
+<p><strong>Request:</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/configuration/export</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;alert_classes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Critical&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#DC2626&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fa-triangle-exclamation&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Immediate action required&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;alert_messages&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Critical Temperature&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;🔥 CRITICAL: {device} temperature is {value}°C (Threshold: {threshold}°C)&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;class_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;channels&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mqtt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sms&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dashboard&quot;</span><span class="p">]</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;meta&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;export_timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-01-15T10:30:00Z&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;gateway&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Univa-GW-01&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Status Codes:</strong></p>
+<ul class="simple">
+<li><p><strong>200 OK</strong>: Configuration exported successfully</p></li>
+<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
+</ul>
+</section>
+<section id="post-configuration-import">
+<h4>POST /configuration/import<a class="headerlink" href="#post-configuration-import" title="Link to this heading">¶</a></h4>
+<p>Import alert configuration.</p>
+<p><strong>Request:</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/configuration/import</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;alert_classes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Critical&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#DC2626&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fa-triangle-exclamation&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Immediate action required&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;alert_messages&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Critical Temperature&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;🔥 CRITICAL: {device} temperature is {value}°C (Threshold: {threshold}°C)&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;class_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;channels&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mqtt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sms&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dashboard&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;overwrite_existing&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;preserve_defaults&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;imported_classes&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;imported_messages&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;skipped_classes&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;skipped_messages&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;errors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Configuration imported successfully&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Status Codes:</strong></p>
+<ul class="simple">
+<li><p><strong>200 OK</strong>: Configuration imported successfully</p></li>
+<li><p><strong>400 Bad Request</strong>: Invalid configuration format</p></li>
+<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
+</ul>
+</section>
+</section>
+<section id="utilities-api">
+<h3>5. Utilities API<a class="headerlink" href="#utilities-api" title="Link to this heading">¶</a></h3>
+<section id="get-variables-available">
+<h4>GET /variables/available<a class="headerlink" href="#get-variables-available" title="Link to this heading">¶</a></h4>
+<p>Get available variables for message templates.</p>
+<p><strong>Request:</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/variables/available</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;device&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Device name&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;example&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Crane-01&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;value&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Current value&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;example&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;85.5&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;timestamp&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Time of alert&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;datetime&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;example&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-01-15T10:30:00Z&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;threshold&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Trigger threshold&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;example&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;80&quot;</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-</dd></dl>
-
+<p><strong>Status Codes:</strong></p>
+<ul class="simple">
+<li><p><strong>200 OK</strong>: Variables retrieved successfully</p></li>
+<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
+</ul>
 </section>
-<section id="sync-time">
-<h2>Sync Time<a class="headerlink" href="#sync-time" title="Link to this heading">¶</a></h2>
-<dl class="http post">
-<dt class="sig sig-object http" id="post--general-configuration-time-sync">
-<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/general-configuration/time-sync</span></span><a class="headerlink" href="#post--general-configuration-time-sync" title="Link to this definition">¶</a></dt>
-<dd><p>Sync time with selected NTP server (Sync Now button).</p>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-<span class="err">Content-Type: application/json</span>
+<section id="get-channels-available">
+<h4>GET /channels/available<a class="headerlink" href="#get-channels-available" title="Link to this heading">¶</a></h4>
+<p>Get available delivery channels.</p>
+<p><strong>Request:</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/channels/available</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
 </pre></div>
 </div>
-<p><strong>Request</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/general-configuration/time-sync</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-
-<span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Asia/Kolkata&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;ntp_server&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pool.ntp.org&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;date_format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DD/MM/YYYY&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;time_format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;24-Hour&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;English&quot;</span>
+<p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mqtt&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MQTT protocol&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;config_required&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Email notification&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;config_required&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sms&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SMS notification&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;config_required&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dashboard&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Dashboard display&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;config_required&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;webhook&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Webhook endpoint&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;config_required&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Response</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-
-<span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;date_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;timezone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Asia/Kolkata&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;ntp_server&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pool.ntp.org&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;current_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12/03/2025&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;current_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;14:55&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;date_format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DD/MM/YYYY&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;time_format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;24-Hour&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;English&quot;</span>
-<span class="w">  </span><span class="p">}</span>
+<p><strong>Status Codes:</strong></p>
+<ul class="simple">
+<li><p><strong>200 OK</strong>: Channels retrieved successfully</p></li>
+<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="error-responses">
+<h2>Error Responses<a class="headerlink" href="#error-responses" title="Link to this heading">¶</a></h2>
+<p>All error responses follow this format:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ERROR_CODE&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Human readable error message&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;field&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;specific error details&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-01-15T10:30:00Z&quot;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-</dd></dl>
-
-</section>
-<section id="error-codes">
-<h2>Error Codes<a class="headerlink" href="#error-codes" title="Link to this heading">¶</a></h2>
+<p>Common Error Codes:</p>
 <table class="docutils align-default" id="id1">
-<caption><span class="caption-text">General Configuration Errors</span><a class="headerlink" href="#id1" title="Link to this table">¶</a></caption>
+<caption><span class="caption-text">Error Codes</span><a class="headerlink" href="#id1" title="Link to this table">¶</a></caption>
 <colgroup>
-<col style="width: 20.0%" />
-<col style="width: 80.0%" />
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Error Code</p></th>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
 <th class="head"><p>Description</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>CONFIG_001</p></td>
-<td><p>Invalid network configuration</p></td>
+<tr class="row-even"><td><p><strong>AUTH_001</strong></p></td>
+<td><p>Invalid API key</p></td>
 </tr>
-<tr class="row-odd"><td><p>CONFIG_002</p></td>
-<td><p>Timezone not supported</p></td>
+<tr class="row-odd"><td><p><strong>AUTH_002</strong></p></td>
+<td><p>Expired API key</p></td>
 </tr>
-<tr class="row-even"><td><p>CONFIG_003</p></td>
-<td><p>NTP server unreachable</p></td>
+<tr class="row-even"><td><p><strong>AUTH_003</strong></p></td>
+<td><p>Insufficient permissions</p></td>
 </tr>
-<tr class="row-odd"><td><p>CONFIG_004</p></td>
-<td><p>Invalid location coordinates</p></td>
+<tr class="row-odd"><td><p><strong>VAL_001</strong></p></td>
+<td><p>Validation error</p></td>
 </tr>
-<tr class="row-even"><td><p>CONFIG_005</p></td>
-<td><p>Configuration save failed</p></td>
+<tr class="row-even"><td><p><strong>VAL_002</strong></p></td>
+<td><p>Missing required field</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>VAL_003</strong></p></td>
+<td><p>Invalid field value</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>NOT_FOUND_001</strong></p></td>
+<td><p>Resource not found</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>CONFLICT_001</strong></p></td>
+<td><p>Resource already exists</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>CONFLICT_002</strong></p></td>
+<td><p>Cannot delete - in use</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>SERVER_001</strong></p></td>
+<td><p>Internal server error</p></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h2>
-<section id="python-example">
-<h3>Python Example<a class="headerlink" href="#python-example" title="Link to this heading">¶</a></h3>
+<section id="rate-limiting">
+<h2>Rate Limiting<a class="headerlink" href="#rate-limiting" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Standard Tier:</strong> 100 requests per minute</p></li>
+<li><p><strong>Enterprise Tier:</strong> 1000 requests per minute</p></li>
+</ul>
+<p><strong>Headers:</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">X-RateLimit-Limit: 100</span>
+<span class="err">X-RateLimit-Remaining: 95</span>
+<span class="err">X-RateLimit-Reset: 1609459200</span>
+</pre></div>
+</div>
+</section>
+<section id="webhooks">
+<h2>Webhooks<a class="headerlink" href="#webhooks" title="Link to this heading">¶</a></h2>
+<p>When an alert is triggered, a webhook can be sent:</p>
+<p><strong>Payload:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;alert.triggered&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-01-15T10:30:00Z&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;alert_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;alert_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Critical Temperature&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;🔥 CRITICAL: Crane-01 temperature is 85.5°C (Threshold: 80°C)&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;class&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Critical&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#DC2626&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;channels&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mqtt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sms&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dashboard&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;trigger_data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Crane-01&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;85.5&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;80&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-01-15T10:30:00Z&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Workshop A&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;gateway&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Univa-GW-01&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="versioning">
+<h2>Versioning<a class="headerlink" href="#versioning" title="Link to this heading">¶</a></h2>
+<p>API version is included in the URL path:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">/v1/alert-classes</span>
+</pre></div>
+</div>
+</section>
+<section id="changelog">
+<h2>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">API Changelog</span><a class="headerlink" href="#id2" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>v1.0.0</strong> (2024-01-15)</p></td>
+<td><p>Initial release with basic CRUD operations</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>v1.1.0</strong> (2024-02-01)</p></td>
+<td><p>Added preview and configuration import/export</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>v1.2.0</strong> (2024-03-01)</p></td>
+<td><p>Added webhook support and rate limiting</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sdk-examples">
+<h2>SDK Examples<a class="headerlink" href="#sdk-examples" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 
-<span class="c1"># Get configuration</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer your_token&quot;</span><span class="p">}</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://api.example.com/v1/general-configuration&quot;</span><span class="p">,</span>
-                       <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<span class="n">config</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gateway name: </span><span class="si">{</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;gateway_identity&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s2">&quot;your_api_key&quot;</span>
+<span class="n">base_url</span> <span class="o">=</span> <span class="s2">&quot;https://api.univagateway.com/v1&quot;</span>
 
-<span class="c1"># Update configuration</span>
-<span class="n">update_data</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;gateway_identity&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Updated-GW-01&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;deployment_site&quot;</span><span class="p">:</span> <span class="s2">&quot;Chennai Port - Zone B&quot;</span>
-    <span class="p">}</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Bearer </span><span class="si">{</span><span class="n">api_key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span>
 <span class="p">}</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;https://api.example.com/v1/general-configuration&quot;</span><span class="p">,</span>
-                       <span class="n">json</span><span class="o">=</span><span class="n">update_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;message&quot;</span><span class="p">])</span>
+
+<span class="c1"># Get all alert classes</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/alert-classes&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">classes</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">apiKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;your_api_key&quot;</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">baseUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://api.univagateway.com/v1&quot;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;Authorization&quot;</span><span class="o">:</span><span class="w"> </span><span class="sb">`Bearer </span><span class="si">${</span><span class="nx">apiKey</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Content-Type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span>
+<span class="p">};</span>
+
+<span class="c1">// Create new alert message</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">baseUrl</span><span class="si">}</span><span class="sb">/alert-messages`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;POST&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="nx">headers</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+<span class="w">        </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;High Vibration&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;⚠️ {device} vibration is {value} mm/s&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">class_id</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">channels</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mqtt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dashboard&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">data</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
 </pre></div>
 </div>
 </section>
-<section id="javascript-example">
-<h3>JavaScript Example<a class="headerlink" href="#javascript-example" title="Link to this heading">¶</a></h3>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Get configuration</span>
-<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">getConfiguration</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">);</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/general-configuration&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="s1">&#39;Authorization&#39;</span><span class="o">:</span><span class="w"> </span><span class="sb">`Bearer </span><span class="si">${</span><span class="nx">token</span><span class="si">}</span><span class="sb">`</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">});</span>
-
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Current config:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">);</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">data</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="c1">// Scan WiFi</span>
-<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">scanWiFi</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">);</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/general-configuration/wifi-scan&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="s1">&#39;Authorization&#39;</span><span class="o">:</span><span class="w"> </span><span class="sb">`Bearer </span><span class="si">${</span><span class="nx">token</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
-<span class="w">            </span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;application/json&#39;</span>
-<span class="w">        </span><span class="p">},</span>
-<span class="w">        </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({})</span>
-<span class="w">    </span><span class="p">});</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
+<section id="support">
+<h2>Support<a class="headerlink" href="#support" title="Link to this heading">¶</a></h2>
+<p>For API support, contact:</p>
+<ul class="simple">
+<li><p><strong>Email:</strong> <a class="reference external" href="mailto:api-support&#37;&#52;&#48;univagateway&#46;com">api-support<span>&#64;</span>univagateway<span>&#46;</span>com</a></p></li>
+<li><p><strong>Documentation:</strong> <a class="reference external" href="https://docs.univagateway.com/api">https://docs.univagateway.com/api</a></p></li>
+<li><p><strong>Status Page:</strong> <a class="reference external" href="https://status.univagateway.com">https://status.univagateway.com</a></p></li>
+</ul>
 </section>
 </section>
 
@@ -1508,8 +2040,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../authentication.html" class="btn btn-neutral float-left" title="Authentication API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="device-management.html" class="btn btn-neutral float-right" title="Device Management API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="automation.html" class="btn btn-neutral float-left" title="Scheduler &amp; Automation API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rule.html" class="btn btn-neutral float-right" title="Rules Engine API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

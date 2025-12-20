@@ -49,7 +49,6 @@
 <li class="toctree-l2"><a class="reference internal" href="about.html#api-structure">API Structure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="about.html#base-url">Base URL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="about.html#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="about.html#support">Support</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="authentication.html">Authentication API</a><ul>
@@ -176,6 +175,9 @@
 <li class="toctree-l2"><a class="reference internal" href="api/cloud-integration.html#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">UNDER VALIDATION</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="api/license.html">Licensing &amp; Subscriptions API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api/license.html#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/license.html#endpoints">Endpoints</a><ul>
@@ -446,6 +448,720 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api/security.html#real-time-monitoring-websocket">Real-time Monitoring (WebSocket)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/backup.html">System Backup &amp; Recovery API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#endpoints">Endpoints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#backup-status">Backup Status</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#backup-management">Backup Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#list-available-backups">List Available Backups</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-backup-details">Get Backup Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#create-manual-backup">Create Manual Backup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-backup-progress">Get Backup Progress</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#schedule-management">Schedule Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-backup-schedules">Get Backup Schedules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#create-update-schedule">Create/Update Schedule</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#recovery-operations">Recovery Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#restore-from-backup">Restore from Backup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-restore-progress">Get Restore Progress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#verify-backup-integrity">Verify Backup Integrity</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#storage-management">Storage Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-storage-configuration">Get Storage Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#update-storage-configuration">Update Storage Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#backup-retention-cleanup">Backup Retention &amp; Cleanup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-retention-policies">Get Retention Policies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#run-manual-cleanup">Run Manual Cleanup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#monitoring-reporting">Monitoring &amp; Reporting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-backup-health">Get Backup Health</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-backup-statistics">Get Backup Statistics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#job-management">Job Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#list-backup-jobs">List Backup Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#cancel-backup-job">Cancel Backup Job</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#websocket-real-time-updates">WebSocket Real-time Updates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#connection-endpoint">Connection Endpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#message-types">Message Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#error-handling">Error Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#error-response-format">Error Response Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#common-error-codes">Common Error Codes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#python-complete-backup-flow">Python - Complete Backup Flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#python-restore-from-backup">Python - Restore from Backup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#python-backup-management">Python - Backup Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#javascript-real-time-backup-monitoring">JavaScript - Real-time Backup Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#javascript-backup-dashboard-control">JavaScript - Backup Dashboard Control</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#best-practices">Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#backup-strategy">Backup Strategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#id1">Storage Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#recovery-planning">Recovery Planning</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#security-considerations">Security Considerations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#authentication-authorization">Authentication &amp; Authorization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#data-protection">Data Protection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#audit-compliance">Audit &amp; Compliance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#system-requirements">System Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#minimum-requirements">Minimum Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#supported-formats">Supported Formats</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#performance-considerations">Performance Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#support-troubleshooting">Support &amp; Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#getting-help">Getting Help</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#common-solutions">Common Solutions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/data-retention.html">Data Retention API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#base-url">Base URL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#storage-management-api">Storage Management API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#get-storage-status">Get Storage Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#update-storage-thresholds">Update Storage Thresholds</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#data-retention-policies-api">Data Retention Policies API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#get-retention-policies">Get Retention Policies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#update-retention-policy">Update Retention Policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#batch-update-policies">Batch Update Policies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#offline-buffering-api">Offline Buffering API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#get-offline-buffer-status">Get Offline Buffer Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#configure-offline-buffering">Configure Offline Buffering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#force-buffer-sync">Force Buffer Sync</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#purge-operations-api">Purge Operations API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#purge-old-data">Purge Old Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#get-purge-progress">Get Purge Progress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#emergency-storage-cleanup">Emergency Storage Cleanup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#analytics-reporting-api">Analytics &amp; Reporting API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#get-storage-analytics">Get Storage Analytics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#generate-retention-report">Generate Retention Report</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#export-diagnostics-api">Export &amp; Diagnostics API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#export-stored-data">Export Stored Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#run-storage-diagnostics">Run Storage Diagnostics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#manual-actions-api">Manual Actions API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#clear-non-critical-data">Clear Non-Critical Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#full-storage-reset">Full Storage Reset</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#compliance-audit-api">Compliance &amp; Audit API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#get-retention-compliance">Get Retention Compliance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#audit-log">Audit Log</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#websocket-events">WebSocket Events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#connection-endpoint">Connection Endpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#message-types">Message Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#error-handling">Error Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#error-response-format">Error Response Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#common-error-codes">Common Error Codes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#python-storage-management">Python - Storage Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#python-data-purge-operation">Python - Data Purge Operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#python-export-data">Python - Export Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#javascript-real-time-monitoring">JavaScript - Real-time Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#javascript-retention-dashboard">JavaScript - Retention Dashboard</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#best-practices">Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#storage-management">Storage Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#retention-strategy">Retention Strategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#emergency-procedures">Emergency Procedures</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#security-considerations">Security Considerations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#authentication-authorization">Authentication &amp; Authorization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#data-protection">Data Protection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#audit-compliance">Audit &amp; Compliance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#system-requirements">System Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#minimum-requirements">Minimum Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#performance-considerations">Performance Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#support-troubleshooting">Support &amp; Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#getting-help">Getting Help</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/data-retention.html#common-solutions">Common Solutions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#rate-limiting">Rate Limiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#compliance-notes">Compliance Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#versioning">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/data-retention.html#support">Support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/diagnostics.html">Diagnostics &amp; Terminal API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#base-url">Base URL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#system-logs-api">System Logs API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#get-real-time-logs">Get Real-Time Logs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#websocket-log-stream">WebSocket Log Stream</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/diagnostics.html#connection-endpoint">Connection Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/diagnostics.html#client-messages">Client Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/diagnostics.html#server-messages">Server Messages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#export-logs">Export Logs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#terminal-api">Terminal API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#establish-ssh-session">Establish SSH Session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#websocket-terminal-access">WebSocket Terminal Access</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/diagnostics.html#id1">Connection Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/diagnostics.html#id2">Client Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/diagnostics.html#id3">Server Messages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#execute-command-directly">Execute Command Directly</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#command-history">Command History</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#system-monitoring-api">System Monitoring API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#get-system-metrics">Get System Metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#websocket-metrics-stream">WebSocket Metrics Stream</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/diagnostics.html#id4">Connection Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/diagnostics.html#id5">Client Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/diagnostics.html#id6">Server Messages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#rf-signal-monitoring">RF Signal Monitoring</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#diagnostic-tools-api">Diagnostic Tools API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#packet-capture">Packet Capture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#stop-packet-capture">Stop Packet Capture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#serial-port-monitor">Serial Port Monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#rf-spectrum-scanner">RF Spectrum Scanner</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#get-rf-scan-results">Get RF Scan Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#quick-diagnostics-api">Quick Diagnostics API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#run-system-diagnostics">Run System Diagnostics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#get-diagnostic-results">Get Diagnostic Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#configuration-management-api">Configuration Management API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#get-diagnostics-configuration">Get Diagnostics Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#update-diagnostics-configuration">Update Diagnostics Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#export-backup-api">Export &amp; Backup API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#export-all-diagnostics-data">Export All Diagnostics Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#clear-diagnostic-data">Clear Diagnostic Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#system-control-api">System Control API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#reboot-gateway">Reboot Gateway</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#reset-to-factory-defaults">Reset to Factory Defaults</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#audit-security-api">Audit &amp; Security API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#get-audit-log">Get Audit Log</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#websocket-events">WebSocket Events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#base-connection-endpoint">Base Connection Endpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#event-types">Event Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#error-handling">Error Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#error-response-format">Error Response Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#common-error-codes">Common Error Codes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#python-system-monitoring">Python - System Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#python-terminal-operations">Python - Terminal Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#python-diagnostic-tools">Python - Diagnostic Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#javascript-real-time-diagnostics">JavaScript - Real-time Diagnostics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#javascript-diagnostic-dashboard">JavaScript - Diagnostic Dashboard</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#best-practices">Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#system-monitoring">System Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#terminal-operations">Terminal Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#diagnostic-tools">Diagnostic Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#security-considerations">Security Considerations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#authentication-authorization">Authentication &amp; Authorization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#data-privacy">Data Privacy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#audit-compliance">Audit &amp; Compliance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#system-requirements">System Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#minimum-requirements">Minimum Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#performance-considerations">Performance Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#support-troubleshooting">Support &amp; Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#getting-help">Getting Help</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/diagnostics.html#common-solutions">Common Solutions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#rate-limiting">Rate Limiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#compliance-notes">Compliance Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#versioning">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/diagnostics.html#support">Support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/loggar.html">Device-Level Logging API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#base-url">Base URL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#master-configuration-api">Master Configuration API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#get-global-logging-status">Get Global Logging Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#update-global-settings">Update Global Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#category-management-api">Category Management API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#list-log-categories">List Log Categories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#get-category-configuration">Get Category Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#update-category-configuration">Update Category Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#batch-update-categories">Batch Update Categories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#enable-disable-category">Enable/Disable Category</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#category-specific-configuration">Category-Specific Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#system-logs-configuration">System Logs Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#network-logs-configuration">Network Logs Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#can-bus-logs-configuration">CAN Bus Logs Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#modbus-logs-configuration">Modbus Logs Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#mqtt-logs-configuration">MQTT Logs Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#security-logs-configuration">Security Logs Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#output-destinations-api">Output Destinations API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#get-output-destinations">Get Output Destinations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#configure-output-destination">Configure Output Destination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#test-destination-connection">Test Destination Connection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#log-rotation-api">Log Rotation API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#get-rotation-configuration">Get Rotation Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#update-rotation-settings">Update Rotation Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#trigger-manual-rotation">Trigger Manual Rotation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#get-rotation-progress">Get Rotation Progress</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#log-statistics-api">Log Statistics API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#get-real-time-statistics">Get Real-Time Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#get-historical-statistics">Get Historical Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#get-error-statistics">Get Error Statistics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#log-operations-api">Log Operations API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#test-logging-configuration">Test Logging Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#restart-logging-service">Restart Logging Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#clear-log-files">Clear Log Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#export-log-configuration">Export Log Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#import-log-configuration">Import Log Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#real-time-monitoring-api">Real-Time Monitoring API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#websocket-log-stream">WebSocket Log Stream</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/loggar.html#connection-endpoint">Connection Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/loggar.html#connection-parameters">Connection Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/loggar.html#client-messages">Client Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/loggar.html#server-messages">Server Messages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#get-active-log-streams">Get Active Log Streams</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#health-diagnostics-api">Health &amp; Diagnostics API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#get-logging-health-status">Get Logging Health Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#run-logging-diagnostics">Run Logging Diagnostics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#error-handling">Error Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#error-response-format">Error Response Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#common-error-codes">Common Error Codes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#python-logging-configuration">Python - Logging Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#python-log-operations">Python - Log Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#javascript-real-time-log-monitoring">JavaScript - Real-time Log Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#javascript-logging-dashboard">JavaScript - Logging Dashboard</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#best-practices">Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#category-configuration">Category Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#destination-management">Destination Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#rotation-retention">Rotation &amp; Retention</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#security-considerations">Security Considerations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#authentication-authorization">Authentication &amp; Authorization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#data-protection">Data Protection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#audit-compliance">Audit &amp; Compliance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#system-requirements">System Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#minimum-requirements">Minimum Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#performance-considerations">Performance Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#support-troubleshooting">Support &amp; Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#getting-help">Getting Help</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/loggar.html#common-solutions">Common Solutions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#rate-limiting">Rate Limiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#compliance-notes">Compliance Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#versioning">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/loggar.html#support">Support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/automation.html">Scheduler &amp; Automation API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#overview">## Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#base-url">## Base URL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#authentication">## Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#jobs-management-api">## Jobs Management API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-all-jobs">### Get All Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#create-new-job">### Create New Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-job-details">### Get Job Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#update-job">### Update Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#delete-job">### Delete Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#enable-disable-job">### Enable/Disable Job</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#job-execution-api">## Job Execution API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#run-job-immediately">### Run Job Immediately</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-execution-status">### Get Execution Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-execution-history">### Get Execution History</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#schedule-types-api">## Schedule Types API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#create-interval-job">### Create Interval Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#create-daily-job">### Create Daily Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#create-weekly-job">### Create Weekly Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#create-cron-job">### Create Cron Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#create-sunrise-sunset-job">### Create Sunrise/Sunset Job</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#action-types-configuration">## Action Types Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#conflict-detection-api">## Conflict Detection API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#check-for-conflicts">### Check for Conflicts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-system-resource-usage">### Get System Resource Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#bulk-operations-api">## Bulk Operations API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#run-all-jobs">### Run All Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#disable-all-jobs">### Disable All Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#export-jobs-configuration">### Export Jobs Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#import-jobs-configuration">### Import Jobs Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#monitoring-analytics-api">## Monitoring &amp; Analytics API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-scheduler-statistics">### Get Scheduler Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-job-performance-metrics">### Get Job Performance Metrics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#websocket-events">## WebSocket Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#error-handling">## Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#rate-limiting">## Rate Limiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#security-considerations">## Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#performance-considerations">## Performance Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#backup-recovery">## Backup &amp; Recovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#versioning">## Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#examples">## Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#python-create-interval-job">### Python - Create Interval Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#javascript-websocket-monitoring">### JavaScript - WebSocket Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#python-bulk-job-management">### Python - Bulk Job Management</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#support">## Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#release-notes">## Release Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/alerts.html">Alert Messages API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/alerts.html#purpose">Purpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/alerts.html#base-url">Base URL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/alerts.html#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/alerts.html#endpoints">Endpoints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/alerts.html#alert-classes-api">1. Alert Classes API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#get-alert-classes">GET /alert-classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#get-alert-classes-id">GET /alert-classes/{id}</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#post-alert-classes">POST /alert-classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#put-alert-classes-id">PUT /alert-classes/{id}</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#delete-alert-classes-id">DELETE /alert-classes/{id}</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/alerts.html#alert-messages-api">2. Alert Messages API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#get-alert-messages">GET /alert-messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#get-alert-messages-id">GET /alert-messages/{id}</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#post-alert-messages">POST /alert-messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#put-alert-messages-id">PUT /alert-messages/{id}</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#delete-alert-messages-id">DELETE /alert-messages/{id}</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/alerts.html#preview-api">3. Preview API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#post-alert-messages-preview">POST /alert-messages/preview</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/alerts.html#configuration-api">4. Configuration API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#get-configuration-export">GET /configuration/export</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#post-configuration-import">POST /configuration/import</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/alerts.html#utilities-api">5. Utilities API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#get-variables-available">GET /variables/available</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#get-channels-available">GET /channels/available</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/alerts.html#error-responses">Error Responses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/alerts.html#rate-limiting">Rate Limiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/alerts.html#webhooks">Webhooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/alerts.html#versioning">Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/alerts.html#changelog">Changelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/alerts.html#sdk-examples">SDK Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/alerts.html#support">Support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/rule.html">Rules Engine API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/rule.html#purpose">Purpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/rule.html#base-url">Base URL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/rule.html#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/rule.html#endpoints">Endpoints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/rule.html#rules-management-api">Rules Management API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-all-rules">Get All Rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-single-rule">Get Single Rule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#create-rule">Create Rule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#update-rule">Update Rule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#update-rule-status">Update Rule Status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#delete-rule">Delete Rule</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/rule.html#rule-templates-api">Rule Templates API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-rule-templates">Get Rule Templates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#create-rule-from-template">Create Rule from Template</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/rule.html#rule-testing-api">Rule Testing API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#test-rule-configuration">Test Rule Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#test-existing-rule">Test Existing Rule</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/rule.html#rule-execution-api">Rule Execution API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-rule-executions">Get Rule Executions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#execute-rule-manually">Execute Rule Manually</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/rule.html#rule-configuration-api">Rule Configuration API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-configuration-options">Get Configuration Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#validate-rule-configuration">Validate Rule Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/rule.html#rule-import-export-api">Rule Import/Export API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#export-rules">Export Rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#import-rules">Import Rules</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/rule.html#rule-statistics-api">Rule Statistics API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-statistics">Get Statistics</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/rule.html#error-responses">Error Responses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/rule.html#webhooks">Webhooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/rule.html#rate-limiting">Rate Limiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/rule.html#sdk-examples">SDK Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/rule.html#support">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/rule.html#data-types-and-constraints">Data Types and Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/rule.html#performance-considerations">Performance Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/rule.html#best-practices">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/rule.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/notification.html">Notification Channels API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/notification.html#purpose">Purpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/notification.html#base-url">Base URL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/notification.html#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/notification.html#endpoints">Endpoints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/notification.html#channels-management-api">Channels Management API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#get-all-channels">Get All Channels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#get-single-channel">Get Single Channel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#create-channel">Create Channel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#update-channel">Update Channel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#update-channel-status">Update Channel Status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#delete-channel">Delete Channel</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/notification.html#channel-configuration-templates-api">Channel Configuration Templates API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#get-channel-template">Get Channel Template</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/notification.html#channel-testing-api">Channel Testing API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#test-channel-configuration">Test Channel Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#test-multiple-channels">Test Multiple Channels</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/notification.html#channel-statistics-api">Channel Statistics API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#get-channel-statistics">Get Channel Statistics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#get-overview-statistics">Get Overview Statistics</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/notification.html#channel-alert-delivery-api">Channel Alert Delivery API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#deliver-alert">Deliver Alert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#get-delivery-history">Get Delivery History</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/notification.html#channel-configuration-validation-api">Channel Configuration Validation API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#validate-configuration">Validate Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#test-connection">Test Connection</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/notification.html#channel-import-export-api">Channel Import/Export API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#export-channels">Export Channels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#import-channels">Import Channels</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/notification.html#channel-monitoring-api">Channel Monitoring API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#get-real-time-monitoring">Get Real-time Monitoring</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/notification.html#webhook-configuration-api">Webhook Configuration API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#configure-webhook-endpoints">Configure Webhook Endpoints</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/notification.html#error-responses">Error Responses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/notification.html#webhooks">Webhooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/notification.html#rate-limiting">Rate Limiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/notification.html#sdk-examples">SDK Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/notification.html#support">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/notification.html#channel-types-and-configuration">Channel Types and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/notification.html#security-best-practices">Security Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/notification.html#performance-considerations">Performance Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/notification.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/notification.html#compliance-and-regulations">Compliance and Regulations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/CraneIQ.html">CraneIQ Pro API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/CraneIQ.html#purpose">Purpose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/CraneIQ.html#base-url">Base URL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/CraneIQ.html#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/CraneIQ.html#endpoints">Endpoints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/CraneIQ.html#crane-profile-management">Crane Profile Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#get-all-cranes">Get All Cranes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#get-single-crane">Get Single Crane</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#create-crane-profile">Create Crane Profile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#update-crane-profile">Update Crane Profile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#update-operating-mode">Update Operating Mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#delete-crane-profile">Delete Crane Profile</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/CraneIQ.html#load-limiter-configuration">Load Limiter Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#get-load-limiter-configuration">Get Load Limiter Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#update-load-limiter-configuration">Update Load Limiter Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#calibrate-load-limiter">Calibrate Load Limiter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#get-load-limiter-history">Get Load Limiter History</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/CraneIQ.html#anti-collision-system-acs">Anti-Collision System (ACS)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#get-acs-configuration">Get ACS Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#update-acs-configuration">Update ACS Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#pair-cranes-for-acs">Pair Cranes for ACS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#get-real-time-acs-status">Get Real-time ACS Status</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/CraneIQ.html#zoning-configuration">Zoning Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#get-configured-zones">Get Configured Zones</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#create-new-zone">Create New Zone</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#delete-zone">Delete Zone</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/CraneIQ.html#health-monitoring">Health Monitoring</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#get-health-monitoring-configuration">Get Health Monitoring Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#get-real-time-health-status">Get Real-time Health Status</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/CraneIQ.html#iot-gateway-data-buffer-dataloggers">IoT Gateway Data Buffer (Dataloggers)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#get-configured-dataloggers">Get Configured Dataloggers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#create-new-datalogger">Create New Datalogger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#update-datalogger-status">Update Datalogger Status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#get-logged-data">Get Logged Data</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/CraneIQ.html#rule-engine-integration">Rule Engine Integration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#get-safety-rules">Get Safety Rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#get-rule-execution-history">Get Rule Execution History</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/CraneIQ.html#test-and-validation">Test and Validation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#test-connection">Test Connection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#test-safety-systems">Test Safety Systems</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/CraneIQ.html#configuration-management">Configuration Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#save-configuration">Save Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#reset-to-factory-defaults">Reset to Factory Defaults</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/CraneIQ.html#get-configuration-history">Get Configuration History</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/CraneIQ.html#error-responses">Error Responses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/CraneIQ.html#webhooks">Webhooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/CraneIQ.html#rate-limiting">Rate Limiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/CraneIQ.html#sdk-examples">SDK Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/CraneIQ.html#support">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/CraneIQ.html#crane-types-and-specifications">Crane Types and Specifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/CraneIQ.html#configuration-best-practices">Configuration Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/CraneIQ.html#safety-compliance-standards">Safety Compliance Standards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/CraneIQ.html#troubleshooting-guide">Troubleshooting Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/CraneIQ.html#maintenance-schedule">Maintenance Schedule</a></li>
 </ul>
 </li>
 </ul>

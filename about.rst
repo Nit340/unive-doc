@@ -11,21 +11,21 @@ API Structure
 
 All endpoints follow RESTful conventions and are organized into logical categories:
 
-### Authentication API
+**Authentication API**
 - User login, token management, and session handling
 - Separate authentication system with JWT tokens
 
-### Device Management API
+**Device Management API**
 - Gateway and device provisioning
 - Configuration management
 - Real-time monitoring
 
-### Data Collection API
+**Data Collection API**
 - Telemetry data ingestion
 - Historical data queries
 - Real-time data streams
 
-### Configuration API
+**Configuration API**
 - System settings
 - Gateway parameters
 - Network configuration
@@ -50,13 +50,6 @@ For complete endpoint details, parameters, and examples, refer to the interactiv
 
     https://docs.univa-gateway.com/api-reference
 
-Support
--------
 
-- **API Documentation**: https://docs.univa-gateway.com
-- **Developer Portal**: https://developer.univa-gateway.com
-- **Support Email**: api-support@univa-gateway.com
-
----
 
 *This document provides an overview of the Univa-Gateway API interface.*
