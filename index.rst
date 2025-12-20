@@ -17,9 +17,8 @@ IoT Gateway API Documentation
    api/tag-mapping
    api/cloud-integration
    api/license
-   
-   
-
+   api/ota-re
+   api/security
 
 ==================
 

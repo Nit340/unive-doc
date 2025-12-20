@@ -11,7 +11,7 @@
 
   
       <script src="_static/documentation_options.js?v=8d563738"></script>
-      <script src="_static/doctools.js?v=888ff710"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -260,6 +260,189 @@
 <li class="toctree-l2"><a class="reference internal" href="api/license.html#notes">Notes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/license.html#troubleshooting">Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/license.html#security-considerations">Security Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/ota-re.html">System OTA &amp; Recovery API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#endpoints">Endpoints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#gateway-status">Gateway Status</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#updates-management">Updates Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#check-for-available-updates">Check for Available Updates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#start-update-download">Start Update Download</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#get-update-progress">Get Update Progress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#start-update-installation">Start Update Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#manual-upload">Manual Upload</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#verify-uploaded-image">Verify Uploaded Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#deploy-manual-image">Deploy Manual Image</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#settings-management">Settings Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#get-update-settings">Get Update Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#update-settings">Update Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#recovery-operations">Recovery Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#get-recovery-status">Get Recovery Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#execute-rollback">Execute Rollback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#restore-previous-os">Restore Previous OS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#factory-reset">Factory Reset</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#safety-management">Safety Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#check-safety-status">Check Safety Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#override-safety-constraints">Override Safety Constraints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#monitoring-logging">Monitoring &amp; Logging</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#get-system-logs">Get System Logs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#get-current-status">Get Current Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#create-system-snapshot">Create System Snapshot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#get-debug-bundle">Get Debug Bundle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#job-management">Job Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#list-active-jobs">List Active Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#cancel-job">Cancel Job</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#history-reporting">History &amp; Reporting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#get-update-history">Get Update History</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#websocket-real-time-updates">WebSocket Real-time Updates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#connection-endpoint">Connection Endpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#message-types">Message Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#error-handling">Error Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#error-response-format">Error Response Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#common-error-codes">Common Error Codes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#python-complete-update-flow">Python - Complete Update Flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#python-manual-image-upload">Python - Manual Image Upload</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#python-safety-override-and-update">Python - Safety Override and Update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#javascript-real-time-monitoring">JavaScript - Real-time Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#javascript-ota-dashboard-control">JavaScript - OTA Dashboard Control</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#best-practices">Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#update-planning">Update Planning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#safety-considerations">Safety Considerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#security-considerations">Security Considerations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#authentication-authorization">Authentication &amp; Authorization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#data-protection">Data Protection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#audit-compliance">Audit &amp; Compliance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#system-requirements">System Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#minimum-requirements">Minimum Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#supported-formats">Supported Formats</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#performance-considerations">Performance Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#support-troubleshooting">Support &amp; Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#getting-help">Getting Help</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#common-solutions">Common Solutions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/security.html">Security &amp; Access Control API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#security-status">Security Status</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-security-status">Get Security Status</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#identity-access-management">Identity &amp; Access Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-users-list">Get Users List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#create-user">Create User</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#update-user">Update User</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#delete-user">Delete User</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-user-details">Get User Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-roles">Get Roles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#reset-user-password">Reset User Password</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#lock-unlock-user-account">Lock/Unlock User Account</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#authentication-policies">Authentication Policies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-authentication-settings">Get Authentication Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#update-authentication-settings">Update Authentication Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#test-password-strength">Test Password Strength</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#api-keys-tokens">API Keys &amp; Tokens</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-api-keys">Get API Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#generate-api-key">Generate API Key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#revoke-api-key">Revoke API Key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#update-api-key">Update API Key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-token-settings">Get Token Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#regenerate-webhook-secret">Regenerate Webhook Secret</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#ssh-access-control">SSH Access Control</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-ssh-settings">Get SSH Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#update-ssh-settings">Update SSH Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#upload-ssh-public-key">Upload SSH Public Key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-ssh-sessions">Get SSH Sessions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#terminate-ssh-session">Terminate SSH Session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#remove-ssh-key">Remove SSH Key</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#firewall-network-security">Firewall &amp; Network Security</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-firewall-status">Get Firewall Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-firewall-rules">Get Firewall Rules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#add-firewall-rule">Add Firewall Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#remove-firewall-rule">Remove Firewall Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#update-firewall-rule">Update Firewall Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#manage-ip-whitelist">Manage IP Whitelist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#manage-ip-blacklist">Manage IP Blacklist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#manage-blocked-ports">Manage Blocked Ports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#update-firewall-settings">Update Firewall Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-firewall-logs">Get Firewall Logs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#certificate-management">Certificate Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-certificates-status">Get Certificates Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#upload-certificate">Upload Certificate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#generate-self-signed-certificate">Generate Self-Signed Certificate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#update-certificate-settings">Update Certificate Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#validate-certificate">Validate Certificate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#renew-certificate">Renew Certificate</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#security-audit-log">Security Audit Log</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-audit-log">Get Audit Log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#export-audit-log">Export Audit Log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-audit-statistics">Get Audit Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#clear-audit-log">Clear Audit Log</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#security-operations">Security Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#run-security-scan">Run Security Scan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-scan-results">Get Scan Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-scan-progress">Get Scan Progress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#lock-system">Lock System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#unlock-system">Unlock System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#reset-security-settings">Reset Security Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#bulk-operations">Bulk Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#save-all-security-settings">Save All Security Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#backup-security-configuration">Backup Security Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#restore-security-configuration">Restore Security Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#real-time-monitoring-websocket">Real-time Monitoring (WebSocket)</a></li>
 </ul>
 </li>
 </ul>
