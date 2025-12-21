@@ -34,7 +34,7 @@ Endpoints
 GET /alert-classes
 ^^^^^^^^^^^^^^^^^^
 
-Retrieve all alert classes.
+Retrieve all alert classes with optional filtering.
 
 **Request:**
 
@@ -43,35 +43,35 @@ Retrieve all alert classes.
     GET /alert-classes HTTP/1.1
     Authorization: Bearer <api_key>
 
+**Query Parameters:**
+
+- ``min_severity`` (optional, integer): Filter classes with severity >= this value
+- ``max_severity`` (optional, integer): Filter classes with severity <= this value
+- ``sort`` (optional, string): Sort field (``name``, ``severity``, ``id``)
+- ``order`` (optional, string): Sort order (``asc``, ``desc``)
+
 **Response:**
 
 .. code-block:: json
 
-    {
-      "status": "success",
-      "data": [
-        {
-          "id": 1,
-          "name": "Critical",
-          "severity": 5,
-          "color": "#DC2626",
-          "icon": "fa-triangle-exclamation",
-          "description": "Immediate action required"
-        },
-        {
-          "id": 2,
-          "name": "High",
-          "severity": 4,
-          "color": "#F97316",
-          "icon": "fa-circle-exclamation",
-          "description": "Attention required soon"
-        }
-      ],
-      "meta": {
-        "count": 5,
-        "timestamp": "2024-01-15T10:30:00Z"
+    [
+      {
+        "id": 1,
+        "name": "Critical",
+        "severity": 5,
+        "color": "#DC2626",
+        "icon": "fa-triangle-exclamation",
+        "description": "Immediate action required"
+      },
+      {
+        "id": 2,
+        "name": "High",
+        "severity": 4,
+        "color": "#F97316",
+        "icon": "fa-circle-exclamation",
+        "description": "Attention required soon"
       }
-    }
+    ]
 
 **Status Codes:**
 
@@ -96,16 +96,45 @@ Retrieve a specific alert class by ID.
 .. code-block:: json
 
     {
-      "status": "success",
-      "data": {
-        "id": 1,
-        "name": "Critical",
-        "severity": 5,
-        "color": "#DC2626",
-        "icon": "fa-triangle-exclamation",
-        "description": "Immediate action required"
-      }
+      "id": 1,
+      "name": "Critical",
+      "severity": 5,
+      "color": "#DC2626",
+      "icon": "fa-triangle-exclamation",
+      "description": "Immediate action required"
     }
+
+**Status Codes:**
+
+- **200 OK**: Successful retrieval
+- **404 Not Found**: Alert class not found
+- **401 Unauthorized**: Invalid or missing API key
+
+GET /alert-classes/{id}/messages
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Get all alert messages for a specific alert class.
+
+**Request:**
+
+.. code-block:: http
+
+    GET /alert-classes/1/messages HTTP/1.1
+    Authorization: Bearer <api_key>
+
+**Response:**
+
+.. code-block:: json
+
+    [
+      {
+        "id": 1,
+        "name": "Critical Temperature",
+        "message": "🔥 CRITICAL: {device} temperature is {value}°C (Threshold: {threshold}°C)",
+        "class_id": 1,
+        "channels": ["mqtt", "email", "sms", "dashboard"]
+      }
+    ]
 
 **Status Codes:**
 
@@ -136,26 +165,26 @@ Create a new alert class.
 
 **Required Fields:**
 
-- ``name`` (string): Name of the alert class
-- ``severity`` (integer): Severity level (1-5)
-- ``color`` (string): Hex color code
-- ``icon`` (string): FontAwesome icon class
+- ``name`` (string, max 50 chars): Name of the alert class
+- ``severity`` (integer, 1-5): Severity level
+- ``color`` (string, hex format): Hex color code (e.g., #DC2626)
+- ``icon`` (string, max 50 chars): FontAwesome icon class
+
+**Optional Fields:**
+
+- ``description`` (string, max 200 chars): Description of the alert class
 
 **Response:**
 
 .. code-block:: json
 
     {
-      "status": "success",
-      "data": {
-        "id": 6,
-        "name": "Emergency",
-        "severity": 5,
-        "color": "#DC2626",
-        "icon": "fa-fire",
-        "description": "Emergency situation requiring immediate action"
-      },
-      "message": "Alert class created successfully"
+      "id": 6,
+      "name": "Emergency",
+      "severity": 5,
+      "color": "#DC2626",
+      "icon": "fa-fire",
+      "description": "Emergency situation requiring immediate action"
     }
 
 **Status Codes:**
@@ -168,7 +197,7 @@ Create a new alert class.
 PUT /alert-classes/{id}
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Update an existing alert class.
+Update an existing alert class (full update).
 
 **Request:**
 
@@ -191,16 +220,50 @@ Update an existing alert class.
 .. code-block:: json
 
     {
-      "status": "success",
-      "data": {
-        "id": 6,
-        "name": "Emergency",
-        "severity": 5,
-        "color": "#B91C1C",
-        "icon": "fa-fire-flame-curved",
-        "description": "Emergency situation - highest priority"
-      },
-      "message": "Alert class updated successfully"
+      "id": 6,
+      "name": "Emergency",
+      "severity": 5,
+      "color": "#B91C1C",
+      "icon": "fa-fire-flame-curved",
+      "description": "Emergency situation - highest priority"
+    }
+
+**Status Codes:**
+
+- **200 OK**: Alert class updated successfully
+- **400 Bad Request**: Invalid fields
+- **404 Not Found**: Alert class not found
+- **401 Unauthorized**: Invalid or missing API key
+
+PATCH /alert-classes/{id}
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Partially update an alert class.
+
+**Request:**
+
+.. code-block:: http
+
+    PATCH /alert-classes/6 HTTP/1.1
+    Authorization: Bearer <api_key>
+    Content-Type: application/json
+    
+    {
+      "color": "#B91C1C",
+      "description": "Updated description"
+    }
+
+**Response:**
+
+.. code-block:: json
+
+    {
+      "id": 6,
+      "name": "Emergency",
+      "severity": 5,
+      "color": "#B91C1C",
+      "icon": "fa-fire-flame-curved",
+      "description": "Updated description"
     }
 
 **Status Codes:**
@@ -227,8 +290,8 @@ Delete an alert class.
 .. code-block:: json
 
     {
-      "status": "success",
-      "message": "Alert class deleted successfully"
+      "deleted": true,
+      "id": 6
     }
 
 **Status Codes:**
@@ -244,7 +307,7 @@ Delete an alert class.
 GET /alert-messages
 ^^^^^^^^^^^^^^^^^^^
 
-Retrieve all alert messages.
+Retrieve all alert messages with filtering.
 
 **Request:**
 
@@ -255,40 +318,34 @@ Retrieve all alert messages.
 
 **Query Parameters:**
 
-- ``class_id`` (optional): Filter by alert class ID
-- ``channel`` (optional): Filter by delivery channel
-- ``limit`` (optional): Number of records per page (default: 20)
-- ``page`` (optional): Page number (default: 1)
+- ``class_id`` (optional, integer): Filter by alert class ID
+- ``channel`` (optional, string): Filter by delivery channel
+- ``search`` (optional, string): Search in name and message
+- ``sort`` (optional, string): Sort field (``name``, ``class_id``, ``id``)
+- ``order`` (optional, string): Sort order (``asc``, ``desc``)
+- ``limit`` (optional, integer): Number of records per page (default: 50, max: 100)
+- ``page`` (optional, integer): Page number (default: 1)
 
 **Response:**
 
 .. code-block:: json
 
-    {
-      "status": "success",
-      "data": [
-        {
-          "id": 1,
-          "name": "Critical Temperature",
-          "message": "🔥 CRITICAL: {device} temperature is {value}°C (Threshold: {threshold}°C)",
-          "class_id": 1,
-          "channels": ["mqtt", "email", "sms", "dashboard"]
-        },
-        {
-          "id": 2,
-          "name": "Device Offline",
-          "message": "📴 {device} is offline at {timestamp}",
-          "class_id": 2,
-          "channels": ["email", "dashboard"]
-        }
-      ],
-      "meta": {
-        "count": 5,
-        "page": 1,
-        "total_pages": 1,
-        "timestamp": "2024-01-15T10:30:00Z"
+    [
+      {
+        "id": 1,
+        "name": "Critical Temperature",
+        "message": "🔥 CRITICAL: {device} temperature is {value}°C (Threshold: {threshold}°C)",
+        "class_id": 1,
+        "channels": ["mqtt", "email", "sms", "dashboard"]
+      },
+      {
+        "id": 2,
+        "name": "Device Offline",
+        "message": "📴 {device} is offline at {timestamp}",
+        "class_id": 2,
+        "channels": ["email", "dashboard"]
       }
-    }
+    ]
 
 **Status Codes:**
 
@@ -312,15 +369,12 @@ Retrieve a specific alert message by ID.
 .. code-block:: json
 
     {
-      "status": "success",
-      "data": {
-        "id": 1,
-        "name": "Critical Temperature",
-        "message": "🔥 CRITICAL: {device} temperature is {value}°C (Threshold: {threshold}°C)",
-        "class_id": 1,
-        "channels": ["mqtt", "email", "sms", "dashboard"],
-        "variables": ["device", "value", "threshold"]
-      }
+      "id": 1,
+      "name": "Critical Temperature",
+      "message": "🔥 CRITICAL: {device} temperature is {value}°C (Threshold: {threshold}°C)",
+      "class_id": 1,
+      "channels": ["mqtt", "email", "sms", "dashboard"],
+      "variables": ["device", "value", "threshold"]
     }
 
 **Status Codes:**
@@ -351,10 +405,10 @@ Create a new alert message.
 
 **Required Fields:**
 
-- ``name`` (string): Name of the alert message
-- ``message`` (string): Message template with variables
+- ``name`` (string, max 100 chars): Name of the alert message
+- ``message`` (string, max 500 chars): Message template with variables
 - ``class_id`` (integer): ID of the alert class
-- ``channels`` (array): Array of delivery channels
+- ``channels`` (array): Array of delivery channels (min 1)
 
 **Valid Channels:**
 
@@ -369,15 +423,11 @@ Create a new alert message.
 .. code-block:: json
 
     {
-      "status": "success",
-      "data": {
-        "id": 6,
-        "name": "High Pressure Alert",
-        "message": "⚠️ {device} pressure is {value} bar (Threshold: {threshold} bar)",
-        "class_id": 3,
-        "channels": ["mqtt", "email", "dashboard"]
-      },
-      "message": "Alert message created successfully"
+      "id": 6,
+      "name": "High Pressure Alert",
+      "message": "⚠️ {device} pressure is {value} bar (Threshold: {threshold} bar)",
+      "class_id": 3,
+      "channels": ["mqtt", "email", "dashboard"]
     }
 
 **Status Codes:**
@@ -390,7 +440,7 @@ Create a new alert message.
 PUT /alert-messages/{id}
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Update an existing alert message.
+Update an existing alert message (full update).
 
 **Request:**
 
@@ -412,15 +462,48 @@ Update an existing alert message.
 .. code-block:: json
 
     {
-      "status": "success",
-      "data": {
-        "id": 6,
-        "name": "High Pressure Warning",
-        "message": "⚠️ WARNING: {device} pressure is {value} bar (Limit: {limit} bar)",
-        "class_id": 3,
-        "channels": ["mqtt", "email", "dashboard", "sms"]
-      },
-      "message": "Alert message updated successfully"
+      "id": 6,
+      "name": "High Pressure Warning",
+      "message": "⚠️ WARNING: {device} pressure is {value} bar (Limit: {limit} bar)",
+      "class_id": 3,
+      "channels": ["mqtt", "email", "dashboard", "sms"]
+    }
+
+**Status Codes:**
+
+- **200 OK**: Alert message updated successfully
+- **400 Bad Request**: Invalid fields
+- **404 Not Found**: Alert message or class not found
+- **401 Unauthorized**: Invalid or missing API key
+
+PATCH /alert-messages/{id}
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Partially update an alert message.
+
+**Request:**
+
+.. code-block:: http
+
+    PATCH /alert-messages/6 HTTP/1.1
+    Authorization: Bearer <api_key>
+    Content-Type: application/json
+    
+    {
+      "name": "High Pressure Alert",
+      "channels": ["mqtt", "dashboard"]
+    }
+
+**Response:**
+
+.. code-block:: json
+
+    {
+      "id": 6,
+      "name": "High Pressure Alert",
+      "message": "⚠️ {device} pressure is {value} bar (Threshold: {threshold} bar)",
+      "class_id": 3,
+      "channels": ["mqtt", "dashboard"]
     }
 
 **Status Codes:**
@@ -447,8 +530,8 @@ Delete an alert message.
 .. code-block:: json
 
     {
-      "status": "success",
-      "message": "Alert message deleted successfully"
+      "deleted": true,
+      "id": 6
     }
 
 **Status Codes:**
@@ -457,6 +540,44 @@ Delete an alert message.
 - **404 Not Found**: Alert message not found
 - **401 Unauthorized**: Invalid or missing API key
 - **409 Conflict**: Cannot delete - rules are using this message
+
+POST /alert-messages/bulk-delete
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Delete multiple alert messages in a single request.
+
+**Request:**
+
+.. code-block:: http
+
+    POST /alert-messages/bulk-delete HTTP/1.1
+    Authorization: Bearer <api_key>
+    Content-Type: application/json
+    
+    {
+      "ids": [6, 7, 8]
+    }
+
+**Required Fields:**
+
+- ``ids`` (array of integers): Array of alert message IDs to delete
+
+**Response:**
+
+.. code-block:: json
+
+    {
+      "deleted_count": 3,
+      "failed_ids": [],
+      "errors": []
+    }
+
+**Status Codes:**
+
+- **200 OK**: Bulk delete completed
+- **400 Bad Request**: Invalid request format
+- **401 Unauthorized**: Invalid or missing API key
+- **409 Conflict**: Some messages cannot be deleted (will be in failed_ids)
 
 3. Preview API
 ~~~~~~~~~~~~~~
@@ -479,51 +600,42 @@ Preview an alert message with sample data.
       "data": {
         "device": "Crane-01",
         "value": "85.5",
-        "timestamp": "2024-01-15T10:30:00Z",
-        "location": "Workshop A",
-        "tag": "Motor_Temperature"
+        "timestamp": "2024-01-15T10:30:00Z"
       }
     }
+
+**Required Fields:**
+
+- ``message`` (string): Message template to preview
+- ``data`` (object): Sample data for variables
 
 **Response:**
 
 .. code-block:: json
 
     {
-      "status": "success",
-      "data": {
-        "original": "🔥 CRITICAL: {device} temperature is {value}°C at {timestamp}",
-        "rendered": "🔥 CRITICAL: Crane-01 temperature is 85.5°C at 2024-01-15T10:30:00Z",
-        "missing_variables": ["threshold", "operator"],
-        "sample_data": {
-          "device": "Crane-01",
-          "value": "85.5",
-          "timestamp": "2024-01-15T10:30:00Z",
-          "location": "Workshop A",
-          "tag": "Motor_Temperature"
-        }
-      }
+      "original": "🔥 CRITICAL: {device} temperature is {value}°C at {timestamp}",
+      "rendered": "🔥 CRITICAL: Crane-01 temperature is 85.5°C at 2024-01-15T10:30:00Z",
+      "missing_variables": ["threshold", "operator"],
+      "extracted_variables": ["device", "value", "timestamp"]
     }
 
 **Status Codes:**
 
 - **200 OK**: Preview generated successfully
-- **400 Bad Request**: Invalid message template
+- **400 Bad Request**: Invalid message template or data
 - **401 Unauthorized**: Invalid or missing API key
 
-4. Configuration API
-~~~~~~~~~~~~~~~~~~~~
+GET /alert-messages/{id}/preview
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-GET /configuration/export
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Export all alert configuration.
+Preview a specific alert message with default sample data.
 
 **Request:**
 
 .. code-block:: http
 
-    GET /configuration/export HTTP/1.1
+    GET /alert-messages/1/preview HTTP/1.1
     Authorization: Bearer <api_key>
 
 **Response:**
@@ -531,33 +643,76 @@ Export all alert configuration.
 .. code-block:: json
 
     {
-      "status": "success",
-      "data": {
-        "alert_classes": [
-          {
-            "id": 1,
-            "name": "Critical",
-            "severity": 5,
-            "color": "#DC2626",
-            "icon": "fa-triangle-exclamation",
-            "description": "Immediate action required"
-          }
-        ],
-        "alert_messages": [
-          {
-            "id": 1,
-            "name": "Critical Temperature",
-            "message": "🔥 CRITICAL: {device} temperature is {value}°C (Threshold: {threshold}°C)",
-            "class_id": 1,
-            "channels": ["mqtt", "email", "sms", "dashboard"]
-          }
-        ],
-        "meta": {
-          "export_timestamp": "2024-01-15T10:30:00Z",
-          "version": "1.0.0",
-          "gateway": "Univa-GW-01"
+      "id": 1,
+      "name": "Critical Temperature",
+      "original_message": "🔥 CRITICAL: {device} temperature is {value}°C (Threshold: {threshold}°C)",
+      "rendered_message": "🔥 CRITICAL: Device-001 temperature is 85.5°C (Threshold: 80°C)",
+      "sample_data": {
+        "device": "Device-001",
+        "value": "85.5",
+        "threshold": "80"
+      },
+      "missing_variables": [],
+      "class_info": {
+        "name": "Critical",
+        "severity": 5,
+        "color": "#DC2626",
+        "icon": "fa-triangle-exclamation"
+      },
+      "channels": ["mqtt", "email", "sms", "dashboard"]
+    }
+
+**Status Codes:**
+
+- **200 OK**: Preview generated successfully
+- **404 Not Found**: Alert message not found
+- **401 Unauthorized**: Invalid or missing API key
+
+4. Configuration API
+~~~~~~~~~~~~~~~~~~~~
+
+GET /configuration/alert-settings
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Export all alert configuration.
+
+**Request:**
+
+.. code-block:: http
+
+    GET /configuration/alert-settings HTTP/1.1
+    Authorization: Bearer <api_key>
+
+**Query Parameters:**
+
+- ``format`` (optional, string): Export format (``json``, ``yaml``, ``csv``) - default: ``json``
+
+**Response:**
+
+.. code-block:: json
+
+    {
+      "alert_classes": [
+        {
+          "id": 1,
+          "name": "Critical",
+          "severity": 5,
+          "color": "#DC2626",
+          "icon": "fa-triangle-exclamation",
+          "description": "Immediate action required"
         }
-      }
+      ],
+      "alert_messages": [
+        {
+          "id": 1,
+          "name": "Critical Temperature",
+          "message": "🔥 CRITICAL: {device} temperature is {value}°C (Threshold: {threshold}°C)",
+          "class_id": 1,
+          "channels": ["mqtt", "email", "sms", "dashboard"]
+        }
+      ],
+      "export_timestamp": "2024-01-15T10:30:00Z",
+      "version": "1.0.0"
     }
 
 **Status Codes:**
@@ -565,8 +720,8 @@ Export all alert configuration.
 - **200 OK**: Configuration exported successfully
 - **401 Unauthorized**: Invalid or missing API key
 
-POST /configuration/import
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+POST /configuration/alert-settings/import
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Import alert configuration.
 
@@ -574,7 +729,7 @@ Import alert configuration.
 
 .. code-block:: http
 
-    POST /configuration/import HTTP/1.1
+    POST /configuration/alert-settings/import HTTP/1.1
     Authorization: Bearer <api_key>
     Content-Type: application/json
     
@@ -607,15 +762,11 @@ Import alert configuration.
 .. code-block:: json
 
     {
-      "status": "success",
-      "data": {
-        "imported_classes": 5,
-        "imported_messages": 5,
-        "skipped_classes": 0,
-        "skipped_messages": 0,
-        "errors": []
-      },
-      "message": "Configuration imported successfully"
+      "imported_classes": 5,
+      "imported_messages": 5,
+      "skipped_classes": 0,
+      "skipped_messages": 0,
+      "errors": []
     }
 
 **Status Codes:**
@@ -624,11 +775,48 @@ Import alert configuration.
 - **400 Bad Request**: Invalid configuration format
 - **401 Unauthorized**: Invalid or missing API key
 
+POST /configuration/reset
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Reset all alert configuration to defaults.
+
+**Request:**
+
+.. code-block:: http
+
+    POST /configuration/reset HTTP/1.1
+    Authorization: Bearer <api_key>
+    Content-Type: application/json
+    
+    {
+      "confirm": true
+    }
+
+**Required Fields:**
+
+- ``confirm`` (boolean): Must be true to confirm reset
+
+**Response:**
+
+.. code-block:: json
+
+    {
+      "reset": true,
+      "default_classes_count": 5,
+      "default_messages_count": 5
+    }
+
+**Status Codes:**
+
+- **200 OK**: Configuration reset successfully
+- **400 Bad Request**: Missing confirmation
+- **401 Unauthorized**: Invalid or missing API key
+
 5. Utilities API
 ~~~~~~~~~~~~~~~~
 
-GET /variables/available
-^^^^^^^^^^^^^^^^^^^^^^^^
+GET /variables
+^^^^^^^^^^^^^^
 
 Get available variables for message templates.
 
@@ -636,50 +824,47 @@ Get available variables for message templates.
 
 .. code-block:: http
 
-    GET /variables/available HTTP/1.1
+    GET /variables HTTP/1.1
     Authorization: Bearer <api_key>
 
 **Response:**
 
 .. code-block:: json
 
-    {
-      "status": "success",
-      "data": [
-        {
-          "name": "device",
-          "description": "Device name",
-          "type": "string",
-          "example": "Crane-01"
-        },
-        {
-          "name": "value",
-          "description": "Current value",
-          "type": "string",
-          "example": "85.5"
-        },
-        {
-          "name": "timestamp",
-          "description": "Time of alert",
-          "type": "datetime",
-          "example": "2024-01-15T10:30:00Z"
-        },
-        {
-          "name": "threshold",
-          "description": "Trigger threshold",
-          "type": "number",
-          "example": "80"
-        }
-      ]
-    }
+    [
+      {
+        "name": "device",
+        "description": "Device name",
+        "type": "string",
+        "example": "Crane-01"
+      },
+      {
+        "name": "value",
+        "description": "Current value",
+        "type": "string",
+        "example": "85.5"
+      },
+      {
+        "name": "timestamp",
+        "description": "Time of alert",
+        "type": "datetime",
+        "example": "2024-01-15T10:30:00Z"
+      },
+      {
+        "name": "threshold",
+        "description": "Trigger threshold",
+        "type": "number",
+        "example": "80"
+      }
+    ]
 
 **Status Codes:**
 
 - **200 OK**: Variables retrieved successfully
 - **401 Unauthorized**: Invalid or missing API key
 
-GET /channels/available
-^^^^^^^^^^^^^^^^^^^^^^^
+GET /channels
+^^^^^^^^^^^^^
 
 Get available delivery channels.
 
@@ -687,52 +872,194 @@ Get available delivery channels.
 
 .. code-block:: http
 
-    GET /channels/available HTTP/1.1
+    GET /channels HTTP/1.1
     Authorization: Bearer <api_key>
 
 **Response:**
 
 .. code-block:: json
 
-    {
-      "status": "success",
-      "data": [
-        {
-          "name": "mqtt",
-          "description": "MQTT protocol",
-          "enabled": true,
-          "config_required": true
-        },
-        {
-          "name": "email",
-          "description": "Email notification",
-          "enabled": true,
-          "config_required": true
-        },
-        {
-          "name": "sms",
-          "description": "SMS notification",
-          "enabled": false,
-          "config_required": true
-        },
-        {
-          "name": "dashboard",
-          "description": "Dashboard display",
-          "enabled": true,
-          "config_required": false
-        },
-        {
-          "name": "webhook",
-          "description": "Webhook endpoint",
-          "enabled": true,
-          "config_required": true
-        }
-      ]
-    }
+    [
+      {
+        "name": "mqtt",
+        "description": "MQTT protocol",
+        "enabled": true,
+        "config_required": true
+      },
+      {
+        "name": "email",
+        "description": "Email notification",
+        "enabled": true,
+        "config_required": true
+      },
+      {
+        "name": "sms",
+        "description": "SMS notification",
+        "enabled": false,
+        "config_required": true
+      },
+      {
+        "name": "dashboard",
+        "description": "Dashboard display",
+        "enabled": true,
+        "config_required": false
+      },
+      {
+        "name": "webhook",
+        "description": "Webhook endpoint",
+        "enabled": true,
+        "config_required": true
+      }
+    ]
 
 **Status Codes:**
 
 - **200 OK**: Channels retrieved successfully
+- **401 Unauthorized**: Invalid or missing API key
+
+GET /alert-colors
+^^^^^^^^^^^^^^^^^
+
+Get available color options for alert classes.
+
+**Request:**
+
+.. code-block:: http
+
+    GET /alert-colors HTTP/1.1
+    Authorization: Bearer <api_key>
+
+**Response:**
+
+.. code-block:: json
+
+    [
+      {
+        "name": "Red",
+        "value": "#DC2626"
+      },
+      {
+        "name": "Orange",
+        "value": "#F97316"
+      },
+      {
+        "name": "Amber",
+        "value": "#F59E0B"
+      },
+      {
+        "name": "Blue",
+        "value": "#3B82F6"
+      },
+      {
+        "name": "Green",
+        "value": "#10B981"
+      },
+      {
+        "name": "Purple",
+        "value": "#8B5CF6"
+      },
+      {
+        "name": "Pink",
+        "value": "#EC4899"
+      },
+      {
+        "name": "Gray",
+        "value": "#6B7280"
+      }
+    ]
+
+**Status Codes:**
+
+- **200 OK**: Colors retrieved successfully
+- **401 Unauthorized**: Invalid or missing API key
+
+GET /alert-icons
+^^^^^^^^^^^^^^^^
+
+Get available icon options for alert classes.
+
+**Request:**
+
+.. code-block:: http
+
+    GET /alert-icons HTTP/1.1
+    Authorization: Bearer <api_key>
+
+**Response:**
+
+.. code-block:: json
+
+    [
+      {
+        "name": "Critical",
+        "value": "fa-triangle-exclamation"
+      },
+      {
+        "name": "High",
+        "value": "fa-circle-exclamation"
+      },
+      {
+        "name": "Warning",
+        "value": "fa-exclamation"
+      },
+      {
+        "name": "Info",
+        "value": "fa-circle-info"
+      },
+      {
+        "name": "Low",
+        "value": "fa-circle-check"
+      },
+      {
+        "name": "Fire/Temperature",
+        "value": "fa-fire"
+      },
+      {
+        "name": "Power/Device",
+        "value": "fa-plug-circle-xmark"
+      },
+      {
+        "name": "Vibration",
+        "value": "fa-wave-square"
+      }
+    ]
+
+**Status Codes:**
+
+- **200 OK**: Icons retrieved successfully
+- **401 Unauthorized**: Invalid or missing API key
+
+POST /validate/message
+^^^^^^^^^^^^^^^^^^^^^^
+
+Validate a message template.
+
+**Request:**
+
+.. code-block:: http
+
+    POST /validate/message HTTP/1.1
+    Authorization: Bearer <api_key>
+    Content-Type: application/json
+    
+    {
+      "message": "🔥 {device} is at {value}°C"
+    }
+
+**Response:**
+
+.. code-block:: json
+
+    {
+      "valid": true,
+      "extracted_variables": ["device", "value"],
+      "error": null
+    }
+
+**Status Codes:**
+
+- **200 OK**: Validation completed
+- **400 Bad Request**: Invalid message format
 - **401 Unauthorized**: Invalid or missing API key
 
 Error Responses
@@ -743,15 +1070,13 @@ All error responses follow this format:
 .. code-block:: json
 
     {
-      "status": "error",
       "error": {
         "code": "ERROR_CODE",
         "message": "Human readable error message",
         "details": {
           "field": "specific error details"
         }
-      },
-      "timestamp": "2024-01-15T10:30:00Z"
+      }
     }
 
 Common Error Codes:
@@ -780,6 +1105,8 @@ Common Error Codes:
      - Resource already exists
    * - **CONFLICT_002**
      - Cannot delete - in use
+   * - **CONFLICT_003**
+     - Cannot delete default resource
    * - **SERVER_001**
      - Internal server error
 
@@ -796,42 +1123,6 @@ Rate Limiting
     X-RateLimit-Limit: 100
     X-RateLimit-Remaining: 95
     X-RateLimit-Reset: 1609459200
-
-Webhooks
---------
-
-Alert Trigger Webhook
-^^^^^^^^^^^^^^^^^^^^^
-
-When an alert is triggered, a webhook can be sent:
-
-**Payload:**
-
-.. code-block:: json
-
-    {
-      "event": "alert.triggered",
-      "timestamp": "2024-01-15T10:30:00Z",
-      "data": {
-        "alert_id": 1,
-        "alert_name": "Critical Temperature",
-        "message": "🔥 CRITICAL: Crane-01 temperature is 85.5°C (Threshold: 80°C)",
-        "class": {
-          "name": "Critical",
-          "severity": 5,
-          "color": "#DC2626"
-        },
-        "channels": ["mqtt", "email", "sms", "dashboard"],
-        "trigger_data": {
-          "device": "Crane-01",
-          "value": "85.5",
-          "threshold": "80",
-          "timestamp": "2024-01-15T10:30:00Z",
-          "location": "Workshop A"
-        },
-        "gateway": "Univa-GW-01"
-      }
-    }
 
 Versioning
 ----------
@@ -856,7 +1147,7 @@ Changelog
    * - **v1.1.0** (2024-02-01)
      - Added preview and configuration import/export
    * - **v1.2.0** (2024-03-01)
-     - Added webhook support and rate limiting
+     - Added PATCH methods, bulk operations, and validation endpoints
 
 SDK Examples
 ------------
@@ -867,45 +1158,90 @@ Python Example
 .. code-block:: python
 
     import requests
-
-    api_key = "your_api_key"
-    base_url = "https://api.univagateway.com/v1"
-
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-
-    # Get all alert classes
-    response = requests.get(f"{base_url}/alert-classes", headers=headers)
-    classes = response.json()["data"]
+    
+    class UnivaAlertClient:
+        def __init__(self, api_key, base_url="https://api.univagateway.com/v1"):
+            self.base_url = base_url
+            self.headers = {
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json"
+            }
+        
+        def get_alert_classes(self):
+            response = requests.get(f"{self.base_url}/alert-classes", headers=self.headers)
+            return response.json()
+        
+        def create_alert_message(self, name, message, class_id, channels):
+            payload = {
+                "name": name,
+                "message": message,
+                "class_id": class_id,
+                "channels": channels
+            }
+            response = requests.post(f"{self.base_url}/alert-messages", 
+                                   headers=self.headers, 
+                                   json=payload)
+            return response.json()
+        
+        def preview_message(self, message, data):
+            payload = {
+                "message": message,
+                "data": data
+            }
+            response = requests.post(f"{self.base_url}/alert-messages/preview",
+                                   headers=self.headers,
+                                   json=payload)
+            return response.json()
+    
+    # Usage
+    client = UnivaAlertClient("your_api_key")
+    classes = client.get_alert_classes()
+    print(classes)
 
 JavaScript Example
 ^^^^^^^^^^^^^^^^^^
 
 .. code-block:: javascript
 
-    const apiKey = "your_api_key";
-    const baseUrl = "https://api.univagateway.com/v1";
-
-    const headers = {
-        "Authorization": `Bearer ${apiKey}`,
-        "Content-Type": "application/json"
-    };
-
-    // Create new alert message
-    fetch(`${baseUrl}/alert-messages`, {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify({
-            name: "High Vibration",
-            message: "⚠️ {device} vibration is {value} mm/s",
-            class_id: 3,
-            channels: ["mqtt", "email", "dashboard"]
-        })
-    })
-    .then(response => response.json())
-    .then(data => console.log(data));
+    class UnivaAlertAPI {
+        constructor(apiKey) {
+            this.baseUrl = 'https://api.univagateway.com/v1';
+            this.headers = {
+                'Authorization': `Bearer ${apiKey}`,
+                'Content-Type': 'application/json'
+            };
+        }
+        
+        async getAlertMessages(filters = {}) {
+            const params = new URLSearchParams(filters);
+            const response = await fetch(`${this.baseUrl}/alert-messages?${params}`, {
+                headers: this.headers
+            });
+            return await response.json();
+        }
+        
+        async createAlertClass(alertClass) {
+            const response = await fetch(`${this.baseUrl}/alert-classes`, {
+                method: 'POST',
+                headers: this.headers,
+                body: JSON.stringify(alertClass)
+            });
+            return await response.json();
+        }
+        
+        async previewMessage(message, data) {
+            const response = await fetch(`${this.baseUrl}/alert-messages/preview`, {
+                method: 'POST',
+                headers: this.headers,
+                body: JSON.stringify({ message, data })
+            });
+            return await response.json();
+        }
+    }
+    
+    // Usage
+    const api = new UnivaAlertAPI('your_api_key');
+    const messages = await api.getAlertMessages({ class_id: 1 });
 
 Support
 -------
@@ -913,5 +1249,5 @@ Support
 For API support, contact:
 
 - **Email:** api-support@univagateway.com
-- **Documentation:** https://docs.univagateway.com/api
+- **Documentation:** https://docs.univagateway.com/api/alerts
 - **Status Page:** https://status.univagateway.com

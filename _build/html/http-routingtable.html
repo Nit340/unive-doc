@@ -11,7 +11,7 @@
 
   
       <script src="_static/documentation_options.js?v=8d563738"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/doctools.js?v=888ff710"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -183,363 +183,229 @@
 <p class="caption" role="heading"><span class="caption-text">UNDER VALIDATION</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api/license.html">Licensing &amp; Subscriptions API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/license.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/license.html#endpoints">Endpoints</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/license.html#license-status-overview">License Status &amp; Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/license.html#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/license.html#license-overview">License Overview</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/license.html#get-license-overview">Get License Overview</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#get-license-statistics">Get License Statistics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/license.html#sync-with-cloud">Sync with Cloud</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/license.html#deactivate-license">Deactivate License</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/license.html#feature-access-matrix">Feature Access Matrix</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/license.html#get-features">Get Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/license.html#toggle-feature">Toggle Feature</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api/license.html#license-key-management">License Key Management</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/license.html#validate-license-key">Validate License Key</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#activate-license">Activate License</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#generate-offline-activation">Generate Offline Activation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#complete-offline-activation">Complete Offline Activation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#export-license-data">Export License Data</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#import-license-data">Import License Data</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#deactivate-license">Deactivate License</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/license.html#get-current-license-info">Get Current License Info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/license.html#generate-demo-key">Generate Demo Key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/license.html#export-license">Export License</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/license.html#import-license">Import License</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="api/license.html#feature-management">Feature Management</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#get-feature-matrix">Get Feature Matrix</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#enable-disable-feature">Enable/Disable Feature</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#get-feature-limits">Get Feature Limits</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#check-feature-availability">Check Feature Availability</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="api/license.html#cloud-subscription-integration">Cloud Subscription Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/license.html#cloud-subscription">Cloud Subscription</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/license.html#get-cloud-status">Get Cloud Status</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#sync-with-cloud">Sync with Cloud</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#unlink-cloud-account">Unlink Cloud Account</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/license.html#unlink-cloud">Unlink Cloud</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/license.html#get-sync-settings">Get Sync Settings</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/license.html#update-sync-settings">Update Sync Settings</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="api/license.html#trial-management">Trial Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/license.html#trials-management">Trials Management</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/license.html#get-active-trials">Get Active Trials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/license.html#get-available-trials">Get Available Trials</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/license.html#start-trial">Start Trial</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/license.html#extend-trial">Extend Trial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/license.html#upgrade-trial">Upgrade Trial</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/license.html#cancel-trial">Cancel Trial</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#upgrade-trial-to-full-license">Upgrade Trial to Full License</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#get-available-trials">Get Available Trials</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="api/license.html#license-transfer-management">License Transfer &amp; Management</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#transfer-license">Transfer License</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#get-transfer-status">Get Transfer Status</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#cancel-transfer">Cancel Transfer</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#get-license-history">Get License History</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/license.html#license-logs">License Logs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/license.html#get-license-logs">Get License Logs</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="api/license.html#renewal-billing">Renewal &amp; Billing</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#get-renewal-options">Get Renewal Options</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#initiate-renewal">Initiate Renewal</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#update-auto-renewal">Update Auto-Renewal</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#get-billing-information">Get Billing Information</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="api/license.html#license-backup-restore">License Backup &amp; Restore</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/license.html#footer-actions">Footer Actions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/license.html#validate-all-licenses">Validate All Licenses</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/license.html#create-backup">Create Backup</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#restore-backup">Restore Backup</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#get-backup-history">Get Backup History</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/license.html#reset-trials">Reset Trials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/license.html#save-settings">Save Settings</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="api/license.html#validation-compliance">Validation &amp; Compliance</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#run-license-check">Run License Check</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#get-compliance-report">Get Compliance Report</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#reset-all-trials">Reset All Trials</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="api/license.html#websocket-endpoints">WebSocket Endpoints</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/license.html#license-events-stream">License Events Stream</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/license.html#modal-actions">Modal Actions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/license.html#get-renewal-options">Get Renewal Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/license.html#initiate-transfer">Initiate Transfer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/license.html#get-help">Get Help</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api/license.html#error-codes">Error Codes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/license.html#examples">Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/license.html#python-activate-license">Python - Activate License</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/license.html#python-manage-trials">Python - Manage Trials</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/license.html#python-cloud-integration">Python - Cloud Integration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/license.html#javascript-license-operations">JavaScript - License Operations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/license.html#javascript-feature-management">JavaScript - Feature Management</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/license.html#javascript-websocket-integration">JavaScript - WebSocket Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/license.html#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/license.html#rate-limiting">Rate Limiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/license.html#response-format">Response Format</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/license.html#notes">Notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/license.html#troubleshooting">Troubleshooting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/license.html#security-considerations">Security Considerations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/ota-re.html">Gateway OTA &amp; System Update API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#system-information">System Information</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#get-gateway-status">Get Gateway Status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#create-system-snapshot">Create System Snapshot</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="api/ota-re.html">System OTA &amp; Recovery API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#endpoints">Endpoints</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#gateway-status">Gateway Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#available-updates">Available Updates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#check-available-updates">Check Available Updates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#toggle-auto-update">Toggle Auto-Update</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#updates-management">Updates Management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#check-for-available-updates">Check for Available Updates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#start-update-download">Start Update Download</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#get-update-progress">Get Update Progress</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#start-update-installation">Start Update Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#download-installation">Download &amp; Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#start-update-download">Start Update Download</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#get-update-progress">Get Update Progress</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#install-downloaded-update">Install Downloaded Update</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#manual-upload">Manual Upload</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#verify-uploaded-image">Verify Uploaded Image</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#deploy-manual-image">Deploy Manual Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#manual-upload-management">Manual Upload Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#verify-uploaded-image">Verify Uploaded Image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#deploy-manual-image">Deploy Manual Image</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#settings-management">Settings Management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#get-update-settings">Get Update Settings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#update-settings">Update Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#update-settings-management">Update Settings Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#get-update-settings">Get Update Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#update-settings">Update Settings</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#recovery-operations">Recovery Operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#get-recovery-status">Get Recovery Status</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#execute-rollback">Execute Rollback</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#restore-previous-os">Restore Previous OS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#factory-reset">Factory Reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#recovery-operations">Recovery Operations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#execute-rollback">Execute Rollback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#restore-previous-os">Restore Previous OS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#factory-reset">Factory Reset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#upload-recovery-image">Upload Recovery Image</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#safety-management">Safety Management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#check-safety-status">Check Safety Status</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#override-safety-constraints">Override Safety Constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#safety-management">Safety Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#get-safety-status">Get Safety Status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#safety-override">Safety Override</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#monitoring-logging">Monitoring &amp; Logging</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#get-system-logs">Get System Logs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#get-current-status">Get Current Status</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#create-system-snapshot">Create System Snapshot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#get-debug-bundle">Get Debug Bundle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#monitor-logs">Monitor &amp; Logs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#get-system-logs">Get System Logs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#get-monitor-status">Get Monitor Status</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#job-management">Job Management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#list-active-jobs">List Active Jobs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#cancel-job">Cancel Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#cancel-operation">Cancel Operation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#cancel-update-operation">Cancel Update Operation</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#history-reporting">History &amp; Reporting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#get-update-history">Get Update History</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#websocket-real-time-updates">WebSocket Real-time Updates</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#connection-endpoint">Connection Endpoint</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#message-types">Message Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#authentication">Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#message-types">Message Types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#update-progress">Update Progress</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#system-status-update">System Status Update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#log-entry">Log Entry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/ota-re.html#safety-update">Safety Update</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#error-handling">Error Handling</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#error-response-format">Error Response Format</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#common-error-codes">Common Error Codes</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#examples">Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#python-complete-update-flow">Python - Complete Update Flow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#python-manual-image-upload">Python - Manual Image Upload</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#python-safety-override-and-update">Python - Safety Override and Update</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#javascript-real-time-monitoring">JavaScript - Real-time Monitoring</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#javascript-ota-dashboard-control">JavaScript - OTA Dashboard Control</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#best-practices">Best Practices</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#update-planning">Update Planning</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#safety-considerations">Safety Considerations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#troubleshooting">Troubleshooting</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#security-considerations">Security Considerations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#authentication-authorization">Authentication &amp; Authorization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#data-protection">Data Protection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#audit-compliance">Audit &amp; Compliance</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#system-requirements">System Requirements</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#minimum-requirements">Minimum Requirements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#supported-formats">Supported Formats</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#performance-considerations">Performance Considerations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#support-troubleshooting">Support &amp; Troubleshooting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#getting-help">Getting Help</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ota-re.html#common-solutions">Common Solutions</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#id1">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#rate-limiting">Rate Limiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#response-format">Response Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/ota-re.html#ui-api-mapping-summary">UI-API Mapping Summary</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/security.html">Security &amp; Access Control API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/security.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/security.html#security-status">Security Status</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-security-status">Get Security Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#overview">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/security.html#security-status">Security Status</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/security.html#get-security-status">Get Security Status</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/security.html#identity-access-management">Identity &amp; Access Management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-users-list">Get Users List</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#create-user">Create User</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#update-user">Update User</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#delete-user">Delete User</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-user-details">Get User Details</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-roles">Get Roles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#reset-user-password">Reset User Password</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#lock-unlock-user-account">Lock/Unlock User Account</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/security.html#authentication-policies">Authentication Policies</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-authentication-settings">Get Authentication Settings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#update-authentication-settings">Update Authentication Settings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#test-password-strength">Test Password Strength</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#identity-access-management-section-a">Identity &amp; Access Management (Section A)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#authentication-policies-section-b">Authentication Policies (Section B)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#api-keys-tokens-section-c">API Keys &amp; Tokens (Section C)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#ssh-access-control-section-d">SSH Access Control (Section D)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#firewall-network-security-section-e">Firewall &amp; Network Security (Section E)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#certificate-management-section-f">Certificate Management (Section F)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#security-audit-log-section-g">Security Audit Log (Section G)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#security-operations">Security Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#rate-limiting">Rate Limiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html#response-format">Response Format</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/security.html#api-keys-tokens">API Keys &amp; Tokens</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-api-keys">Get API Keys</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#generate-api-key">Generate API Key</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#revoke-api-key">Revoke API Key</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#update-api-key">Update API Key</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-token-settings">Get Token Settings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#regenerate-webhook-secret">Regenerate Webhook Secret</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api/security.html#ssh-access-control">SSH Access Control</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-ssh-settings">Get SSH Settings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#update-ssh-settings">Update SSH Settings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#upload-ssh-public-key">Upload SSH Public Key</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-ssh-sessions">Get SSH Sessions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#terminate-ssh-session">Terminate SSH Session</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#remove-ssh-key">Remove SSH Key</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api/security.html#firewall-network-security">Firewall &amp; Network Security</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-firewall-status">Get Firewall Status</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-firewall-rules">Get Firewall Rules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#add-firewall-rule">Add Firewall Rule</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#remove-firewall-rule">Remove Firewall Rule</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#update-firewall-rule">Update Firewall Rule</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#manage-ip-whitelist">Manage IP Whitelist</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#manage-ip-blacklist">Manage IP Blacklist</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#manage-blocked-ports">Manage Blocked Ports</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#update-firewall-settings">Update Firewall Settings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-firewall-logs">Get Firewall Logs</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api/security.html#certificate-management">Certificate Management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-certificates-status">Get Certificates Status</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#upload-certificate">Upload Certificate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#generate-self-signed-certificate">Generate Self-Signed Certificate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#update-certificate-settings">Update Certificate Settings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#validate-certificate">Validate Certificate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#renew-certificate">Renew Certificate</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api/security.html#security-audit-log">Security Audit Log</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-audit-log">Get Audit Log</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#export-audit-log">Export Audit Log</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-audit-statistics">Get Audit Statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#clear-audit-log">Clear Audit Log</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api/security.html#security-operations">Security Operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#run-security-scan">Run Security Scan</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-scan-results">Get Scan Results</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#get-scan-progress">Get Scan Progress</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#lock-system">Lock System</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#unlock-system">Unlock System</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#reset-security-settings">Reset Security Settings</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api/security.html#bulk-operations">Bulk Operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#save-all-security-settings">Save All Security Settings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#backup-security-configuration">Backup Security Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/security.html#restore-security-configuration">Restore Security Configuration</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api/security.html#real-time-monitoring-websocket">Real-time Monitoring (WebSocket)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="api/backup.html">System Backup &amp; Recovery API</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="api/backup.html">System Backup &amp; Recovery API Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api/backup.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/backup.html#endpoints">Endpoints</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#backup-status">Backup Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#backup-system-status">1. Backup System Status</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-backup-status">Get Backup Status</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/backup.html#backup-management">Backup Management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#list-available-backups">List Available Backups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#backup-management-section-1">2. Backup Management (SECTION 1)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-backup-list">Get Backup List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#create-backup">Create Backup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#download-backup">Download Backup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#delete-backup">Delete Backup</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-backup-details">Get Backup Details</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#create-manual-backup">Create Manual Backup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-backup-progress">Get Backup Progress</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/backup.html#schedule-management">Schedule Management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-backup-schedules">Get Backup Schedules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#create-update-schedule">Create/Update Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#snapshot-management">3. Snapshot Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-snapshots">Get Snapshots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#create-snapshot">Create Snapshot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#restore-snapshot">Restore Snapshot</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/backup.html#recovery-operations">Recovery Operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#restore-from-backup">Restore from Backup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-restore-progress">Get Restore Progress</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#verify-backup-integrity">Verify Backup Integrity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#scheduled-backups-section-2">4. Scheduled Backups (SECTION 2)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-schedules">Get Schedules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#update-schedule">Update Schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#toggle-schedule-status">Toggle Schedule Status</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/backup.html#storage-management">Storage Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#disaster-recovery-operations">5. Disaster Recovery Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#initiate-recovery">Initiate Recovery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-recovery-preview">Get Recovery Preview</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#import-export-operations">6. Import &amp; Export Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#import-backup-file">Import Backup File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#validate-import-file">Validate Import File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#export-configuration">Export Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#storage-management">7. Storage Management</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-storage-configuration">Get Storage Configuration</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/backup.html#update-storage-configuration">Update Storage Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#sync-to-cloud">Sync to Cloud</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/backup.html#backup-retention-cleanup">Backup Retention &amp; Cleanup</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-retention-policies">Get Retention Policies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#run-manual-cleanup">Run Manual Cleanup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#cleanup-operations">8. Cleanup Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#run-cleanup">Run Cleanup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#execute-cleanup">Execute Cleanup</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/backup.html#monitoring-reporting">Monitoring &amp; Reporting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-backup-health">Get Backup Health</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#progress-monitoring">9. Progress Monitoring</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-backup-progress">Get Backup Progress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-restore-progress">Get Restore Progress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#cancel-operation">Cancel Operation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#reporting-statistics">10. Reporting &amp; Statistics</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/backup.html#get-backup-statistics">Get Backup Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#generate-report">Generate Report</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/backup.html#job-management">Job Management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#list-backup-jobs">List Backup Jobs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#cancel-backup-job">Cancel Backup Job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#websocket-api">11. WebSocket API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#real-time-backup-updates">Real-time Backup Updates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#backup-notifications">Backup Notifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/backup.html#system-health-updates">System Health Updates</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/backup.html#websocket-real-time-updates">WebSocket Real-time Updates</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#connection-endpoint">Connection Endpoint</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#message-types">Message Types</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api/backup.html#error-handling">Error Handling</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#error-response-format">Error Response Format</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#common-error-codes">Common Error Codes</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api/backup.html#examples">Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#python-complete-backup-flow">Python - Complete Backup Flow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#python-restore-from-backup">Python - Restore from Backup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#python-backup-management">Python - Backup Management</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#javascript-real-time-backup-monitoring">JavaScript - Real-time Backup Monitoring</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#javascript-backup-dashboard-control">JavaScript - Backup Dashboard Control</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api/backup.html#best-practices">Best Practices</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#backup-strategy">Backup Strategy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#id1">Storage Management</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#recovery-planning">Recovery Planning</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api/backup.html#security-considerations">Security Considerations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#authentication-authorization">Authentication &amp; Authorization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#data-protection">Data Protection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#audit-compliance">Audit &amp; Compliance</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api/backup.html#system-requirements">System Requirements</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#minimum-requirements">Minimum Requirements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#supported-formats">Supported Formats</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api/backup.html#performance-considerations">Performance Considerations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/backup.html#support-troubleshooting">Support &amp; Troubleshooting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#getting-help">Getting Help</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/backup.html#common-solutions">Common Solutions</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api/backup.html#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#missing-websocket-requirements">Missing WebSocket Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#error-responses">Error Responses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#rate-limiting">Rate Limiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/backup.html#versioning">Versioning</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/data-retention.html">Data Retention API</a><ul>
@@ -864,68 +730,102 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/automation.html">Scheduler &amp; Automation API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/automation.html#overview">## Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/automation.html#base-url">## Base URL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/automation.html#authentication">## Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/automation.html#jobs-management-api">## Jobs Management API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-all-jobs">### Get All Jobs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#create-new-job">### Create New Job</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-job-details">### Get Job Details</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#update-job">### Update Job</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#delete-job">### Delete Job</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#enable-disable-job">### Enable/Disable Job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#base-url">Base URL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#quick-reference">Quick Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#jobs-management-api">Jobs Management API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-all-jobs">Get All Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#create-new-job">Create New Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-job-details">Get Job Details</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#update-job">Update Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#delete-job">Delete Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#toggle-job-status">Toggle Job Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-job-execution-history">Get Job Execution History</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-job-execution-logs">Get Job Execution Logs</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/automation.html#job-execution-api">## Job Execution API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#run-job-immediately">### Run Job Immediately</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-execution-status">### Get Execution Status</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-execution-history">### Get Execution History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#job-execution-api">Job Execution API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#run-job-immediately">Run Job Immediately</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-execution-status">Get Execution Status</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/automation.html#schedule-types-api">## Schedule Types API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#create-interval-job">### Create Interval Job</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#create-daily-job">### Create Daily Job</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#create-weekly-job">### Create Weekly Job</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#create-cron-job">### Create Cron Job</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#create-sunrise-sunset-job">### Create Sunrise/Sunset Job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#gateway-management-api">Gateway Management API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-available-gateways">Get Available Gateways</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-gateway-jobs">Get Gateway Jobs</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/automation.html#action-types-configuration">## Action Types Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/automation.html#conflict-detection-api">## Conflict Detection API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#check-for-conflicts">### Check for Conflicts</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-system-resource-usage">### Get System Resource Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#conflict-detection-api">Conflict Detection API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#check-for-conflicts">Check for Conflicts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-system-resource-usage">Get System Resource Usage</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/automation.html#bulk-operations-api">## Bulk Operations API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#run-all-jobs">### Run All Jobs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#disable-all-jobs">### Disable All Jobs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#export-jobs-configuration">### Export Jobs Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#import-jobs-configuration">### Import Jobs Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#bulk-operations-api">Bulk Operations API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#run-all-jobs">Run All Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#disable-all-jobs">Disable All Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#reset-all-jobs">Reset All Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#export-jobs-configuration">Export Jobs Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#import-jobs-configuration">Import Jobs Configuration</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/automation.html#monitoring-analytics-api">## Monitoring &amp; Analytics API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-scheduler-statistics">### Get Scheduler Statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-job-performance-metrics">### Get Job Performance Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#monitoring-analytics-api">Monitoring &amp; Analytics API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-scheduler-statistics">Get Scheduler Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-job-performance-metrics">Get Job Performance Metrics</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/automation.html#websocket-events">## WebSocket Events</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/automation.html#error-handling">## Error Handling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/automation.html#rate-limiting">## Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/automation.html#security-considerations">## Security Considerations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/automation.html#performance-considerations">## Performance Considerations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/automation.html#backup-recovery">## Backup &amp; Recovery</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/automation.html#versioning">## Versioning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/automation.html#examples">## Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#python-create-interval-job">### Python - Create Interval Job</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#javascript-websocket-monitoring">### JavaScript - WebSocket Monitoring</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/automation.html#python-bulk-job-management">### Python - Bulk Job Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#tag-management-api">Tag Management API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-all-tags">Get All Tags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#get-jobs-by-tag">Get Jobs by Tag</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api/automation.html#support">## Support</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/automation.html#release-notes">## Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#websocket-events-api">WebSocket Events API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#job-started-event">Job Started Event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#job-completed-event">Job Completed Event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#job-failed-event">Job Failed Event</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="api/alerts.html">Alert Messages API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#schedule-types-configuration">Schedule Types Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#interval-schedule">Interval Schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#daily-schedule">Daily Schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#weekly-schedule">Weekly Schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#monthly-schedule">Monthly Schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#cron-schedule">Cron Schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#sunrise-sunset-schedule">Sunrise/Sunset Schedule</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#action-types-configuration">Action Types Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#publish-action">Publish Action</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#log-action">Log Action</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#output-action">Output Action</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#system-action">System Action</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#file-action">File Action</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#rule-action">Rule Action</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#error-handling">Error Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#common-error-codes">Common Error Codes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#rate-limiting">Rate Limiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#performance-limits">Performance Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#python-create-daily-job">Python - Create Daily Job</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#javascript-websocket-monitoring">JavaScript - WebSocket Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#python-bulk-operations">Python - Bulk Operations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#api-versioning">API Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#deprecation-policy">Deprecation Policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#changelog">Changelog</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#v1-2-0-2025-03-15">v1.2.0 (2025-03-15)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#v1-1-0-2025-02-28">v1.1.0 (2025-02-28)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/automation.html#v1-0-0-2025-01-15">v1.0.0 (2025-01-15)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/automation.html#support">Support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/alerts.html">Alert Messages API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api/alerts.html#purpose">Purpose</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/alerts.html#base-url">Base URL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/alerts.html#authentication">Authentication</a></li>
@@ -933,38 +833,46 @@
 <li class="toctree-l3"><a class="reference internal" href="api/alerts.html#alert-classes-api">1. Alert Classes API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/alerts.html#get-alert-classes">GET /alert-classes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/alerts.html#get-alert-classes-id">GET /alert-classes/{id}</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#get-alert-classes-id-messages">GET /alert-classes/{id}/messages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/alerts.html#post-alert-classes">POST /alert-classes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/alerts.html#put-alert-classes-id">PUT /alert-classes/{id}</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#patch-alert-classes-id">PATCH /alert-classes/{id}</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/alerts.html#delete-alert-classes-id">DELETE /alert-classes/{id}</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="api/alerts.html#alert-messages-api">2. Alert Messages API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/alerts.html#id1">2. Alert Messages API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/alerts.html#get-alert-messages">GET /alert-messages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/alerts.html#get-alert-messages-id">GET /alert-messages/{id}</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/alerts.html#post-alert-messages">POST /alert-messages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/alerts.html#put-alert-messages-id">PUT /alert-messages/{id}</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#patch-alert-messages-id">PATCH /alert-messages/{id}</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/alerts.html#delete-alert-messages-id">DELETE /alert-messages/{id}</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#post-alert-messages-bulk-delete">POST /alert-messages/bulk-delete</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api/alerts.html#preview-api">3. Preview API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/alerts.html#post-alert-messages-preview">POST /alert-messages/preview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#get-alert-messages-id-preview">GET /alert-messages/{id}/preview</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api/alerts.html#configuration-api">4. Configuration API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#get-configuration-export">GET /configuration/export</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#post-configuration-import">POST /configuration/import</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#get-configuration-alert-settings">GET /configuration/alert-settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#post-configuration-alert-settings-import">POST /configuration/alert-settings/import</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#post-configuration-reset">POST /configuration/reset</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api/alerts.html#utilities-api">5. Utilities API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#get-variables-available">GET /variables/available</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#get-channels-available">GET /channels/available</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#get-variables">GET /variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#get-channels">GET /channels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#get-alert-colors">GET /alert-colors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#get-alert-icons">GET /alert-icons</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/alerts.html#post-validate-message">POST /validate/message</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api/alerts.html#error-responses">Error Responses</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/alerts.html#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/alerts.html#webhooks">Webhooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/alerts.html#versioning">Versioning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/alerts.html#changelog">Changelog</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/alerts.html#sdk-examples">SDK Examples</a></li>
@@ -977,54 +885,60 @@
 <li class="toctree-l2"><a class="reference internal" href="api/rule.html#authentication">Authentication</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/rule.html#endpoints">Endpoints</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/rule.html#rules-management-api">Rules Management API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-all-rules">Get All Rules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-single-rule">Get Single Rule</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/rule.html#create-rule">Create Rule</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/rule.html#update-rule">Update Rule</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/rule.html#update-rule-status">Update Rule Status</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/rule.html#delete-rule">Delete Rule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-rules">GET /rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-rules-id">GET /rules/{id}</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#post-rules">POST /rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#put-rules-id">PUT /rules/{id}</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#patch-rules-id-status">PATCH /rules/{id}/status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#delete-rules-id">DELETE /rules/{id}</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api/rule.html#rule-templates-api">Rule Templates API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-rule-templates">Get Rule Templates</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/rule.html#create-rule-from-template">Create Rule from Template</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-rules-templates">GET /rules/templates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#post-rules-templates-id-create">POST /rules/templates/{id}/create</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api/rule.html#rule-testing-api">Rule Testing API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/rule.html#test-rule-configuration">Test Rule Configuration</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/rule.html#test-existing-rule">Test Existing Rule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#post-rules-test">POST /rules/test</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#post-rules-id-test">POST /rules/{id}/test</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="api/rule.html#rule-execution-api">Rule Execution API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-rule-executions">Get Rule Executions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/rule.html#execute-rule-manually">Execute Rule Manually</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="api/rule.html#rule-configuration-api">Rule Configuration API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-configuration-options">Get Configuration Options</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/rule.html#validate-rule-configuration">Validate Rule Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/rule.html#configuration-discovery-api">Configuration Discovery API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-rules-devices">GET /rules/devices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-rules-tags">GET /rules/tags</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-rules-alerts-available">GET /rules/alerts/available</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api/rule.html#rule-import-export-api">Rule Import/Export API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/rule.html#export-rules">Export Rules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="api/rule.html#import-rules">Import Rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#post-rules-import">POST /rules/import</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-rules-export">GET /rules/export</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api/rule.html#rule-statistics-api">Rule Statistics API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-statistics">Get Statistics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-rules-statistics">GET /rules/statistics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-rules-id-statistics">GET /rules/{id}/statistics</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/rule.html#rule-validation-api">Rule Validation API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#post-rules-validate">POST /rules/validate</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/rule.html#utility-endpoints">Utility Endpoints</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-rules-conditions">GET /rules/conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/rule.html#get-rules-units">GET /rules/units</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api/rule.html#error-responses">Error Responses</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/rule.html#webhooks">Webhooks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/rule.html#rate-limiting">Rate Limiting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/rule.html#sdk-examples">SDK Examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/rule.html#support">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/rule.html#webhook-integration">Webhook Integration</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/rule.html#data-types-and-constraints">Data Types and Constraints</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/rule.html#performance-considerations">Performance Considerations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/rule.html#best-practices">Best Practices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/rule.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/rule.html#performance-notes">Performance Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/rule.html#changelog">Changelog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/rule.html#migration-notes">Migration Notes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/notification.html">Notification Channels API</a><ul>
@@ -1048,11 +962,13 @@
 <li class="toctree-l3"><a class="reference internal" href="api/notification.html#channel-testing-api">Channel Testing API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/notification.html#test-channel-configuration">Test Channel Configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/notification.html#test-multiple-channels">Test Multiple Channels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#get-channel-types-info">Get Channel Types Info</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api/notification.html#channel-statistics-api">Channel Statistics API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/notification.html#get-channel-statistics">Get Channel Statistics</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/notification.html#get-overview-statistics">Get Overview Statistics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#get-channel-status-dashboard">Get Channel Status Dashboard</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api/notification.html#channel-alert-delivery-api">Channel Alert Delivery API</a><ul>
@@ -1065,6 +981,11 @@
 <li class="toctree-l4"><a class="reference internal" href="api/notification.html#test-connection">Test Connection</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="api/notification.html#gateway-management-api">Gateway Management API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#get-available-gateways">Get Available Gateways</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#switch-gateway-context">Switch Gateway Context</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="api/notification.html#channel-import-export-api">Channel Import/Export API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/notification.html#export-channels">Export Channels</a></li>
 <li class="toctree-l4"><a class="reference internal" href="api/notification.html#import-channels">Import Channels</a></li>
@@ -1072,6 +993,11 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api/notification.html#channel-monitoring-api">Channel Monitoring API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api/notification.html#get-real-time-monitoring">Get Real-time Monitoring</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/notification.html#alert-messages-integration-api">Alert Messages Integration API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#get-alert-messages-for-testing">Get Alert Messages for Testing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/notification.html#test-alert-with-variables">Test Alert with Variables</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api/notification.html#webhook-configuration-api">Webhook Configuration API</a><ul>
@@ -1197,6 +1123,7 @@
    <h1>HTTP Routing Table</h1>
 
    <div class="modindex-jumpbox">
+   <a href="#cap-/api"><strong>/api</strong></a> | 
    <a href="#cap-/auth"><strong>/auth</strong></a> | 
    <a href="#cap-/channels"><strong>/channels</strong></a> | 
    <a href="#cap-/cloud-connections"><strong>/cloud-connections</strong></a> | 
@@ -1206,17 +1133,446 @@
    <a href="#cap-/device-management"><strong>/device-management</strong></a> | 
    <a href="#cap-/diagnostics"><strong>/diagnostics</strong></a> | 
    <a href="#cap-/executions"><strong>/executions</strong></a> | 
+   <a href="#cap-/gateways"><strong>/gateways</strong></a> | 
    <a href="#cap-/general-configuration"><strong>/general-configuration</strong></a> | 
    <a href="#cap-/jobs"><strong>/jobs</strong></a> | 
    <a href="#cap-/logging"><strong>/logging</strong></a> | 
    <a href="#cap-/resources"><strong>/resources</strong></a> | 
    <a href="#cap-/retention"><strong>/retention</strong></a> | 
-   <a href="#cap-/rules"><strong>/rules</strong></a> | 
    <a href="#cap-/statistics"><strong>/statistics</strong></a> | 
-   <a href="#cap-/tag-mapping"><strong>/tag-mapping</strong></a>
+   <a href="#cap-/tag-mapping"><strong>/tag-mapping</strong></a> | 
+   <a href="#cap-/tags"><strong>/tags</strong></a>
    </div>
 
    <table class="indextable modindextable">
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-/api"><td></td><td>
+       <strong>/api</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#get--api-v1-license-cloud"><code class="xref">GET /api/v1/license/cloud</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#get--api-v1-license-cloud-sync-settings"><code class="xref">GET /api/v1/license/cloud/sync-settings</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#get--api-v1-license-current"><code class="xref">GET /api/v1/license/current</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#get--api-v1-license-demo-key"><code class="xref">GET /api/v1/license/demo-key</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#get--api-v1-license-export"><code class="xref">GET /api/v1/license/export</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#get--api-v1-license-features"><code class="xref">GET /api/v1/license/features</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#get--api-v1-license-help"><code class="xref">GET /api/v1/license/help</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#get--api-v1-license-logs"><code class="xref">GET /api/v1/license/logs</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#get--api-v1-license-overview"><code class="xref">GET /api/v1/license/overview</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#get--api-v1-license-renewal-options"><code class="xref">GET /api/v1/license/renewal-options</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#get--api-v1-license-trials"><code class="xref">GET /api/v1/license/trials</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#get--api-v1-license-trials-available"><code class="xref">GET /api/v1/license/trials/available</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/ota-re.html#get--api-v1-ota-logs"><code class="xref">GET /api/v1/ota/logs</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/ota-re.html#get--api-v1-ota-monitor"><code class="xref">GET /api/v1/ota/monitor</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/ota-re.html#get--api-v1-ota-progress"><code class="xref">GET /api/v1/ota/progress</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/ota-re.html#get--api-v1-ota-safety"><code class="xref">GET /api/v1/ota/safety</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/ota-re.html#get--api-v1-ota-settings"><code class="xref">GET /api/v1/ota/settings</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/ota-re.html#get--api-v1-ota-status"><code class="xref">GET /api/v1/ota/status</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/ota-re.html#get--api-v1-ota-updates"><code class="xref">GET /api/v1/ota/updates</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#get--api-v1-security-api-keys"><code class="xref">GET /api/v1/security/api-keys</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#get--api-v1-security-audit-export"><code class="xref">GET /api/v1/security/audit/export</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#get--api-v1-security-audit-logs"><code class="xref">GET /api/v1/security/audit/logs</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#get--api-v1-security-audit-stats"><code class="xref">GET /api/v1/security/audit/stats</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#get--api-v1-security-authentication-settings"><code class="xref">GET /api/v1/security/authentication/settings</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#get--api-v1-security-backup"><code class="xref">GET /api/v1/security/backup</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#get--api-v1-security-certificates-status"><code class="xref">GET /api/v1/security/certificates/status</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#get--api-v1-security-firewall"><code class="xref">GET /api/v1/security/firewall</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#get--api-v1-security-roles"><code class="xref">GET /api/v1/security/roles</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#get--api-v1-security-scan-results"><code class="xref">GET /api/v1/security/scan/results</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#get--api-v1-security-ssh-sessions"><code class="xref">GET /api/v1/security/ssh/sessions</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#get--api-v1-security-ssh-settings"><code class="xref">GET /api/v1/security/ssh/settings</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#get--api-v1-security-status"><code class="xref">GET /api/v1/security/status</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#get--api-v1-security-tokens-settings"><code class="xref">GET /api/v1/security/tokens/settings</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#get--api-v1-security-users"><code class="xref">GET /api/v1/security/users</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#post--api-v1-license-backup"><code class="xref">POST /api/v1/license/backup</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#post--api-v1-license-cloud-sync-settings"><code class="xref">POST /api/v1/license/cloud/sync-settings</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#post--api-v1-license-cloud-unlink"><code class="xref">POST /api/v1/license/cloud/unlink</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#post--api-v1-license-deactivate"><code class="xref">POST /api/v1/license/deactivate</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#post--api-v1-license-features-feature_id-toggle"><code class="xref">POST /api/v1/license/features/{feature_id}/toggle</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#post--api-v1-license-import"><code class="xref">POST /api/v1/license/import</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#post--api-v1-license-settings"><code class="xref">POST /api/v1/license/settings</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#post--api-v1-license-sync"><code class="xref">POST /api/v1/license/sync</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#post--api-v1-license-transfer"><code class="xref">POST /api/v1/license/transfer</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#post--api-v1-license-trials-reset"><code class="xref">POST /api/v1/license/trials/reset</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#post--api-v1-license-trials-start"><code class="xref">POST /api/v1/license/trials/start</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#post--api-v1-license-trials-trial_id-cancel"><code class="xref">POST /api/v1/license/trials/{trial_id}/cancel</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#post--api-v1-license-trials-trial_id-extend"><code class="xref">POST /api/v1/license/trials/{trial_id}/extend</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#post--api-v1-license-trials-trial_id-upgrade"><code class="xref">POST /api/v1/license/trials/{trial_id}/upgrade</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#post--api-v1-license-validate"><code class="xref">POST /api/v1/license/validate</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/license.html#post--api-v1-license-validate-all"><code class="xref">POST /api/v1/license/validate-all</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/ota-re.html#post--api-v1-ota-auto-update"><code class="xref">POST /api/v1/ota/auto-update</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/ota-re.html#post--api-v1-ota-cancel"><code class="xref">POST /api/v1/ota/cancel</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/ota-re.html#post--api-v1-ota-download"><code class="xref">POST /api/v1/ota/download</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/ota-re.html#post--api-v1-ota-install"><code class="xref">POST /api/v1/ota/install</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/ota-re.html#post--api-v1-ota-recovery-factory"><code class="xref">POST /api/v1/ota/recovery/factory</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/ota-re.html#post--api-v1-ota-recovery-restore"><code class="xref">POST /api/v1/ota/recovery/restore</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/ota-re.html#post--api-v1-ota-recovery-rollback"><code class="xref">POST /api/v1/ota/recovery/rollback</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/ota-re.html#post--api-v1-ota-recovery-upload"><code class="xref">POST /api/v1/ota/recovery/upload</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/ota-re.html#post--api-v1-ota-safety-override"><code class="xref">POST /api/v1/ota/safety/override</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/ota-re.html#post--api-v1-ota-settings"><code class="xref">POST /api/v1/ota/settings</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/ota-re.html#post--api-v1-ota-snapshot"><code class="xref">POST /api/v1/ota/snapshot</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/ota-re.html#post--api-v1-ota-upload-deploy"><code class="xref">POST /api/v1/ota/upload/deploy</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/ota-re.html#post--api-v1-ota-upload-verify"><code class="xref">POST /api/v1/ota/upload/verify</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#post--api-v1-security-api-keys"><code class="xref">POST /api/v1/security/api-keys</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#post--api-v1-security-api-keys-key_id-revoke"><code class="xref">POST /api/v1/security/api-keys/{key_id}/revoke</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#post--api-v1-security-authentication-settings"><code class="xref">POST /api/v1/security/authentication/settings</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#post--api-v1-security-authentication-test-password"><code class="xref">POST /api/v1/security/authentication/test-password</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#post--api-v1-security-certificates-settings"><code class="xref">POST /api/v1/security/certificates/settings</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#post--api-v1-security-certificates-upload"><code class="xref">POST /api/v1/security/certificates/upload</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#post--api-v1-security-firewall-ports"><code class="xref">POST /api/v1/security/firewall/ports</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#post--api-v1-security-firewall-rules"><code class="xref">POST /api/v1/security/firewall/rules</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#post--api-v1-security-firewall-settings"><code class="xref">POST /api/v1/security/firewall/settings</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#post--api-v1-security-firewall-whitelist"><code class="xref">POST /api/v1/security/firewall/whitelist</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#post--api-v1-security-lock"><code class="xref">POST /api/v1/security/lock</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#post--api-v1-security-reset"><code class="xref">POST /api/v1/security/reset</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#post--api-v1-security-scan"><code class="xref">POST /api/v1/security/scan</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#post--api-v1-security-settings-save-all"><code class="xref">POST /api/v1/security/settings/save-all</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#post--api-v1-security-ssh-keys"><code class="xref">POST /api/v1/security/ssh/keys</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#post--api-v1-security-ssh-settings"><code class="xref">POST /api/v1/security/ssh/settings</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#post--api-v1-security-tokens-regenerate-secret"><code class="xref">POST /api/v1/security/tokens/regenerate-secret</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#post--api-v1-security-tokens-settings"><code class="xref">POST /api/v1/security/tokens/settings</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#post--api-v1-security-users"><code class="xref">POST /api/v1/security/users</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#put--api-v1-security-users-user_id"><code class="xref">PUT /api/v1/security/users/{user_id}</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#delete--api-v1-security-firewall-rules-rule_id"><code class="xref">DELETE /api/v1/security/firewall/rules/{rule_id}</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/security.html#delete--api-v1-security-users-user_id"><code class="xref">DELETE /api/v1/security/users/{user_id}</code></a></td><td>
+       <em></em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-/auth"><td></td><td>
        <strong>/auth</strong></td><td></td></tr>
@@ -1251,6 +1607,11 @@
      <tr>
        <td></td>
        <td>
+       <a href="api/notification.html#get--channels-alerts-available"><code class="xref">GET /channels/alerts/available</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
        <a href="api/notification.html#get--channels-deliveries"><code class="xref">GET /channels/deliveries</code></a></td><td>
        <em></em></td></tr>
      <tr>
@@ -1266,7 +1627,17 @@
      <tr>
        <td></td>
        <td>
+       <a href="api/notification.html#get--channels-status-dashboard"><code class="xref">GET /channels/status/dashboard</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
        <a href="api/notification.html#get--channels-templates-type"><code class="xref">GET /channels/templates/{type}</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/notification.html#get--channels-types-info"><code class="xref">GET /channels/types/info</code></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
@@ -1287,6 +1658,11 @@
        <td></td>
        <td>
        <a href="api/notification.html#post--channels"><code class="xref">POST /channels</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/notification.html#post--channels-alerts-alert_id-test-with-variables"><code class="xref">POST /channels/alerts/{alert_id}/test-with-variables</code></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
@@ -1407,12 +1783,12 @@
      <tr>
        <td></td>
        <td>
-       <a href="api/backup.html#get--cloud-integration-backup-health"><code class="xref">GET /cloud-integration/backup/health</code></a></td><td>
+       <a href="api/backup.html#get--cloud-integration-backup-download-backup_id"><code class="xref">GET /cloud-integration/backup/download/{backup_id}</code></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api/backup.html#get--cloud-integration-backup-jobs"><code class="xref">GET /cloud-integration/backup/jobs</code></a></td><td>
+       <a href="api/backup.html#get--cloud-integration-backup-export-config"><code class="xref">GET /cloud-integration/backup/export/config</code></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
@@ -1422,22 +1798,32 @@
      <tr>
        <td></td>
        <td>
-       <a href="api/backup.html#get--cloud-integration-backup-progress"><code class="xref">GET /cloud-integration/backup/progress</code></a></td><td>
+       <a href="api/backup.html#get--cloud-integration-backup-progress-job_id"><code class="xref">GET /cloud-integration/backup/progress/{job_id}</code></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api/backup.html#get--cloud-integration-backup-restore-progress"><code class="xref">GET /cloud-integration/backup/restore/progress</code></a></td><td>
+       <a href="api/backup.html#get--cloud-integration-backup-recovery-preview-backup_id"><code class="xref">GET /cloud-integration/backup/recovery/preview/{backup_id}</code></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api/backup.html#get--cloud-integration-backup-retention"><code class="xref">GET /cloud-integration/backup/retention</code></a></td><td>
+       <a href="api/backup.html#get--cloud-integration-backup-report-generate"><code class="xref">GET /cloud-integration/backup/report/generate</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/backup.html#get--cloud-integration-backup-restore-progress-restore_id"><code class="xref">GET /cloud-integration/backup/restore/progress/{restore_id}</code></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
        <a href="api/backup.html#get--cloud-integration-backup-schedules"><code class="xref">GET /cloud-integration/backup/schedules</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/backup.html#get--cloud-integration-backup-snapshots"><code class="xref">GET /cloud-integration/backup/snapshots</code></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
@@ -1457,237 +1843,12 @@
      <tr>
        <td></td>
        <td>
-       <a href="api/ota-re.html#get--cloud-integration-gateway-status"><code class="xref">GET /cloud-integration/gateway/status</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/ota-re.html#get--cloud-integration-history-updates"><code class="xref">GET /cloud-integration/history/updates</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/ota-re.html#get--cloud-integration-jobs"><code class="xref">GET /cloud-integration/jobs</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#get--cloud-integration-license-backup-history"><code class="xref">GET /cloud-integration/license/backup/history</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#get--cloud-integration-license-billing"><code class="xref">GET /cloud-integration/license/billing</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#get--cloud-integration-license-cloud-status"><code class="xref">GET /cloud-integration/license/cloud/status</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#get--cloud-integration-license-cloud-sync-settings"><code class="xref">GET /cloud-integration/license/cloud/sync-settings</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#get--cloud-integration-license-compliance"><code class="xref">GET /cloud-integration/license/compliance</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#get--cloud-integration-license-export"><code class="xref">GET /cloud-integration/license/export</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#get--cloud-integration-license-features"><code class="xref">GET /cloud-integration/license/features</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#get--cloud-integration-license-features-feature_id-availability"><code class="xref">GET /cloud-integration/license/features/{feature_id}/availability</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#get--cloud-integration-license-features-feature_id-limits"><code class="xref">GET /cloud-integration/license/features/{feature_id}/limits</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#get--cloud-integration-license-history"><code class="xref">GET /cloud-integration/license/history</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#get--cloud-integration-license-overview"><code class="xref">GET /cloud-integration/license/overview</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#get--cloud-integration-license-renewal-options"><code class="xref">GET /cloud-integration/license/renewal/options</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#get--cloud-integration-license-stats"><code class="xref">GET /cloud-integration/license/stats</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#get--cloud-integration-license-transfer-transfer_id"><code class="xref">GET /cloud-integration/license/transfer/{transfer_id}</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#get--cloud-integration-license-trials"><code class="xref">GET /cloud-integration/license/trials</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#get--cloud-integration-license-trials-available"><code class="xref">GET /cloud-integration/license/trials/available</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/ota-re.html#get--cloud-integration-monitor-debug"><code class="xref">GET /cloud-integration/monitor/debug</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/ota-re.html#get--cloud-integration-monitor-logs"><code class="xref">GET /cloud-integration/monitor/logs</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/ota-re.html#get--cloud-integration-monitor-status"><code class="xref">GET /cloud-integration/monitor/status</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/ota-re.html#get--cloud-integration-recovery-status"><code class="xref">GET /cloud-integration/recovery/status</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/ota-re.html#get--cloud-integration-safety-status"><code class="xref">GET /cloud-integration/safety/status</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#get--cloud-integration-security-api-keys"><code class="xref">GET /cloud-integration/security/api-keys</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#get--cloud-integration-security-audit-export"><code class="xref">GET /cloud-integration/security/audit/export</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#get--cloud-integration-security-audit-logs"><code class="xref">GET /cloud-integration/security/audit/logs</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#get--cloud-integration-security-audit-stats"><code class="xref">GET /cloud-integration/security/audit/stats</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#get--cloud-integration-security-authentication-settings"><code class="xref">GET /cloud-integration/security/authentication/settings</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#get--cloud-integration-security-backup"><code class="xref">GET /cloud-integration/security/backup</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#get--cloud-integration-security-certificates-status"><code class="xref">GET /cloud-integration/security/certificates/status</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#get--cloud-integration-security-firewall-logs"><code class="xref">GET /cloud-integration/security/firewall/logs</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#get--cloud-integration-security-firewall-rules"><code class="xref">GET /cloud-integration/security/firewall/rules</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#get--cloud-integration-security-firewall-status"><code class="xref">GET /cloud-integration/security/firewall/status</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#get--cloud-integration-security-roles"><code class="xref">GET /cloud-integration/security/roles</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#get--cloud-integration-security-scan-progress-scan_id"><code class="xref">GET /cloud-integration/security/scan/progress/{scan_id}</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#get--cloud-integration-security-scan-results"><code class="xref">GET /cloud-integration/security/scan/results</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#get--cloud-integration-security-ssh-sessions"><code class="xref">GET /cloud-integration/security/ssh/sessions</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#get--cloud-integration-security-ssh-settings"><code class="xref">GET /cloud-integration/security/ssh/settings</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#get--cloud-integration-security-status"><code class="xref">GET /cloud-integration/security/status</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#get--cloud-integration-security-tokens-settings"><code class="xref">GET /cloud-integration/security/tokens/settings</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#get--cloud-integration-security-users"><code class="xref">GET /cloud-integration/security/users</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#get--cloud-integration-security-users-user_id"><code class="xref">GET /cloud-integration/security/users/{user_id}</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/ota-re.html#get--cloud-integration-settings"><code class="xref">GET /cloud-integration/settings</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/ota-re.html#get--cloud-integration-updates-check"><code class="xref">GET /cloud-integration/updates/check</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/ota-re.html#get--cloud-integration-updates-progress"><code class="xref">GET /cloud-integration/updates/progress</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
        <a href="api/backup.html#post--cloud-integration-backup-cleanup"><code class="xref">POST /cloud-integration/backup/cleanup</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/backup.html#post--cloud-integration-backup-cleanup-execute"><code class="xref">POST /cloud-integration/backup/cleanup/execute</code></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
@@ -1697,362 +1858,57 @@
      <tr>
        <td></td>
        <td>
-       <a href="api/backup.html#post--cloud-integration-backup-jobs-cancel"><code class="xref">POST /cloud-integration/backup/jobs/cancel</code></a></td><td>
+       <a href="api/backup.html#post--cloud-integration-backup-delete"><code class="xref">POST /cloud-integration/backup/delete</code></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api/backup.html#post--cloud-integration-backup-restore"><code class="xref">POST /cloud-integration/backup/restore</code></a></td><td>
+       <a href="api/backup.html#post--cloud-integration-backup-import"><code class="xref">POST /cloud-integration/backup/import</code></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="api/backup.html#post--cloud-integration-backup-schedules"><code class="xref">POST /cloud-integration/backup/schedules</code></a></td><td>
+       <a href="api/backup.html#post--cloud-integration-backup-import-validate"><code class="xref">POST /cloud-integration/backup/import/validate</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/backup.html#post--cloud-integration-backup-operation-cancel"><code class="xref">POST /cloud-integration/backup/operation/cancel</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/backup.html#post--cloud-integration-backup-recovery-initiate"><code class="xref">POST /cloud-integration/backup/recovery/initiate</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/backup.html#post--cloud-integration-backup-schedules-toggle"><code class="xref">POST /cloud-integration/backup/schedules/toggle</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/backup.html#post--cloud-integration-backup-schedules-update"><code class="xref">POST /cloud-integration/backup/schedules/update</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/backup.html#post--cloud-integration-backup-snapshots-create"><code class="xref">POST /cloud-integration/backup/snapshots/create</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/backup.html#post--cloud-integration-backup-snapshots-restore"><code class="xref">POST /cloud-integration/backup/snapshots/restore</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/backup.html#post--cloud-integration-backup-storage-sync"><code class="xref">POST /cloud-integration/backup/storage/sync</code></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
        <a href="api/backup.html#post--cloud-integration-backup-storage-update"><code class="xref">POST /cloud-integration/backup/storage/update</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/backup.html#post--cloud-integration-backup-verify"><code class="xref">POST /cloud-integration/backup/verify</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/ota-re.html#post--cloud-integration-jobs-cancel"><code class="xref">POST /cloud-integration/jobs/cancel</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-activate"><code class="xref">POST /cloud-integration/license/activate</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-backup-create"><code class="xref">POST /cloud-integration/license/backup/create</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-backup-restore"><code class="xref">POST /cloud-integration/license/backup/restore</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-cloud-sync"><code class="xref">POST /cloud-integration/license/cloud/sync</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-cloud-sync-settings"><code class="xref">POST /cloud-integration/license/cloud/sync-settings</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-cloud-unlink"><code class="xref">POST /cloud-integration/license/cloud/unlink</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-deactivate"><code class="xref">POST /cloud-integration/license/deactivate</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-features-toggle"><code class="xref">POST /cloud-integration/license/features/toggle</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-import"><code class="xref">POST /cloud-integration/license/import</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-offline-complete"><code class="xref">POST /cloud-integration/license/offline/complete</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-offline-generate"><code class="xref">POST /cloud-integration/license/offline/generate</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-renewal-auto-renew"><code class="xref">POST /cloud-integration/license/renewal/auto-renew</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-renewal-initiate"><code class="xref">POST /cloud-integration/license/renewal/initiate</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-transfer"><code class="xref">POST /cloud-integration/license/transfer</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-transfer-transfer_id-cancel"><code class="xref">POST /cloud-integration/license/transfer/{transfer_id}/cancel</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-trials-cancel"><code class="xref">POST /cloud-integration/license/trials/cancel</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-trials-extend"><code class="xref">POST /cloud-integration/license/trials/extend</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-trials-reset-all"><code class="xref">POST /cloud-integration/license/trials/reset-all</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-trials-start"><code class="xref">POST /cloud-integration/license/trials/start</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-trials-upgrade"><code class="xref">POST /cloud-integration/license/trials/upgrade</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-validate"><code class="xref">POST /cloud-integration/license/validate</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/license.html#post--cloud-integration-license-validate-all"><code class="xref">POST /cloud-integration/license/validate/all</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/ota-re.html#post--cloud-integration-monitor-snapshot"><code class="xref">POST /cloud-integration/monitor/snapshot</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/ota-re.html#post--cloud-integration-recovery-factory"><code class="xref">POST /cloud-integration/recovery/factory</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/ota-re.html#post--cloud-integration-recovery-restore"><code class="xref">POST /cloud-integration/recovery/restore</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/ota-re.html#post--cloud-integration-recovery-rollback"><code class="xref">POST /cloud-integration/recovery/rollback</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/ota-re.html#post--cloud-integration-safety-override"><code class="xref">POST /cloud-integration/safety/override</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-api-keys-generate"><code class="xref">POST /cloud-integration/security/api-keys/generate</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-api-keys-revoke"><code class="xref">POST /cloud-integration/security/api-keys/revoke</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-api-keys-update"><code class="xref">POST /cloud-integration/security/api-keys/update</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-audit-clear"><code class="xref">POST /cloud-integration/security/audit/clear</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-authentication-test-password"><code class="xref">POST /cloud-integration/security/authentication/test-password</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-authentication-update"><code class="xref">POST /cloud-integration/security/authentication/update</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-certificates-generate-self-signed"><code class="xref">POST /cloud-integration/security/certificates/generate-self-signed</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-certificates-renew"><code class="xref">POST /cloud-integration/security/certificates/renew</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-certificates-settings"><code class="xref">POST /cloud-integration/security/certificates/settings</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-certificates-upload"><code class="xref">POST /cloud-integration/security/certificates/upload</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-certificates-validate"><code class="xref">POST /cloud-integration/security/certificates/validate</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-firewall-blacklist-manage"><code class="xref">POST /cloud-integration/security/firewall/blacklist/manage</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-firewall-ports-manage"><code class="xref">POST /cloud-integration/security/firewall/ports/manage</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-firewall-rules-add"><code class="xref">POST /cloud-integration/security/firewall/rules/add</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-firewall-rules-remove"><code class="xref">POST /cloud-integration/security/firewall/rules/remove</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-firewall-rules-update"><code class="xref">POST /cloud-integration/security/firewall/rules/update</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-firewall-settings"><code class="xref">POST /cloud-integration/security/firewall/settings</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-firewall-whitelist-manage"><code class="xref">POST /cloud-integration/security/firewall/whitelist/manage</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-lock"><code class="xref">POST /cloud-integration/security/lock</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-reset"><code class="xref">POST /cloud-integration/security/reset</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-restore"><code class="xref">POST /cloud-integration/security/restore</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-scan"><code class="xref">POST /cloud-integration/security/scan</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-settings-save-all"><code class="xref">POST /cloud-integration/security/settings/save-all</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-ssh-remove-key"><code class="xref">POST /cloud-integration/security/ssh/remove-key</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-ssh-terminate"><code class="xref">POST /cloud-integration/security/ssh/terminate</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-ssh-update"><code class="xref">POST /cloud-integration/security/ssh/update</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-ssh-upload-key"><code class="xref">POST /cloud-integration/security/ssh/upload-key</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-tokens-regenerate-secret"><code class="xref">POST /cloud-integration/security/tokens/regenerate-secret</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-unlock"><code class="xref">POST /cloud-integration/security/unlock</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-users-create"><code class="xref">POST /cloud-integration/security/users/create</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-users-delete"><code class="xref">POST /cloud-integration/security/users/delete</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-users-lock"><code class="xref">POST /cloud-integration/security/users/lock</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-users-reset-password"><code class="xref">POST /cloud-integration/security/users/reset-password</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/security.html#post--cloud-integration-security-users-update"><code class="xref">POST /cloud-integration/security/users/update</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/ota-re.html#post--cloud-integration-settings-update"><code class="xref">POST /cloud-integration/settings/update</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/ota-re.html#post--cloud-integration-updates-download"><code class="xref">POST /cloud-integration/updates/download</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/ota-re.html#post--cloud-integration-updates-install"><code class="xref">POST /cloud-integration/updates/install</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/ota-re.html#post--cloud-integration-upload-deploy"><code class="xref">POST /cloud-integration/upload/deploy</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/ota-re.html#post--cloud-integration-upload-verify"><code class="xref">POST /cloud-integration/upload/verify</code></a></td><td>
        <em></em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-/conflicts"><td></td><td>
@@ -2435,6 +2291,24 @@
        <a href="api/automation.html#get--executions-id"><code class="xref">GET /executions/{id}</code></a></td><td>
        <em></em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-/gateways"><td></td><td>
+       <strong>/gateways</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/notification.html#get--gateways"><code class="xref">GET /gateways</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/automation.html#get--gateways-id-jobs"><code class="xref">GET /gateways/{id}/jobs</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/notification.html#post--gateways-id-switch"><code class="xref">POST /gateways/{id}/switch</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-/general-configuration"><td></td><td>
        <strong>/general-configuration</strong></td><td></td></tr>
      <tr>
@@ -2478,22 +2352,17 @@
      <tr>
        <td></td>
        <td>
+       <a href="api/automation.html#get--jobs-id-logs"><code class="xref">GET /jobs/{id}/logs</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
        <a href="api/automation.html#get--jobs-id-metrics"><code class="xref">GET /jobs/{id}/metrics</code></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
        <a href="api/automation.html#post--jobs"><code class="xref">POST /jobs</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/automation.html#post--jobs-cron"><code class="xref">POST /jobs/cron</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/automation.html#post--jobs-daily"><code class="xref">POST /jobs/daily</code></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
@@ -2513,22 +2382,12 @@
      <tr>
        <td></td>
        <td>
-       <a href="api/automation.html#post--jobs-interval"><code class="xref">POST /jobs/interval</code></a></td><td>
+       <a href="api/automation.html#post--jobs-reset-all"><code class="xref">POST /jobs/reset/all</code></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
        <a href="api/automation.html#post--jobs-run-all"><code class="xref">POST /jobs/run/all</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/automation.html#post--jobs-sun"><code class="xref">POST /jobs/sun</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/automation.html#post--jobs-weekly"><code class="xref">POST /jobs/weekly</code></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
@@ -2815,94 +2674,6 @@
        <a href="api/data-retention.html#put--retention-storage-thresholds"><code class="xref">PUT /retention/storage/thresholds</code></a></td><td>
        <em></em></td></tr>
      <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-/rules"><td></td><td>
-       <strong>/rules</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/rule.html#get--rules"><code class="xref">GET /rules</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/rule.html#get--rules-configuration-options"><code class="xref">GET /rules/configuration/options</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/rule.html#get--rules-export"><code class="xref">GET /rules/export</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/rule.html#get--rules-statistics"><code class="xref">GET /rules/statistics</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/rule.html#get--rules-templates"><code class="xref">GET /rules/templates</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/rule.html#get--rules-id"><code class="xref">GET /rules/{id}</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/rule.html#get--rules-id-executions"><code class="xref">GET /rules/{id}/executions</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/rule.html#post--rules"><code class="xref">POST /rules</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/rule.html#post--rules-import"><code class="xref">POST /rules/import</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/rule.html#post--rules-templates-id-create"><code class="xref">POST /rules/templates/{id}/create</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/rule.html#post--rules-test"><code class="xref">POST /rules/test</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/rule.html#post--rules-validate"><code class="xref">POST /rules/validate</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/rule.html#post--rules-id-execute"><code class="xref">POST /rules/{id}/execute</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/rule.html#post--rules-id-test"><code class="xref">POST /rules/{id}/test</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/rule.html#put--rules-id"><code class="xref">PUT /rules/{id}</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/rule.html#delete--rules-id"><code class="xref">DELETE /rules/{id}</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="api/rule.html#patch--rules-id-status"><code class="xref">PATCH /rules/{id}/status</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
      <tr class="cap" id="cap-/statistics"><td></td><td>
        <strong>/statistics</strong></td><td></td></tr>
      <tr>
@@ -2957,6 +2728,19 @@
        <td></td>
        <td>
        <a href="api/tag-mapping.html#delete--tag-mapping-id"><code class="xref">DELETE /tag-mapping/{id}</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-/tags"><td></td><td>
+       <strong>/tags</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/automation.html#get--tags"><code class="xref">GET /tags</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="api/automation.html#get--tags-tag-jobs"><code class="xref">GET /tags/{tag}/jobs</code></a></td><td>
        <em></em></td></tr>
    </table>
 

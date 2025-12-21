@@ -44,6 +44,7 @@ Get All Channels
    * **status** (optional): Filter by status - ``active``, ``inactive``, ``testing``
    * **page** (optional): Page number (default: ``1``)
    * **limit** (optional): Items per page (default: ``20``)
+   * **gateway_id** (optional): Filter by gateway ID
 
    **Response:**
 
@@ -535,6 +536,73 @@ Test Multiple Channels
    * **400 Bad Request**: Invalid channel IDs or test data
    * **401 Unauthorized**: Invalid or missing API key
 
+Get Channel Types Info
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. http:get:: /channels/types/info
+
+   Get information about all supported channel types including icons and metadata.
+
+   **Response:**
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "status": "success",
+        "data": {
+          "types": [
+            {
+              "id": "mqtt",
+              "name": "MQTT Broker",
+              "description": "Publish alerts to MQTT broker",
+              "icon": "fa-satellite-dish",
+              "color": "#0ea5e9",
+              "supported_versions": ["3.1", "3.1.1", "5.0"]
+            },
+            {
+              "id": "email",
+              "name": "Email",
+              "description": "Send email notifications",
+              "icon": "fa-envelope",
+              "color": "#3b82f6",
+              "supported_providers": ["SMTP", "SendGrid", "Amazon SES"]
+            },
+            {
+              "id": "sms",
+              "name": "SMS",
+              "description": "Send SMS messages",
+              "icon": "fa-mobile-screen",
+              "color": "#10b981",
+              "supported_providers": ["Twilio", "MessageBird", "Vonage"]
+            },
+            {
+              "id": "webhook",
+              "name": "Webhook",
+              "description": "HTTP callbacks to custom endpoints",
+              "icon": "fa-code-branch",
+              "color": "#8b5cf6",
+              "supported_methods": ["POST", "PUT", "GET"]
+            },
+            {
+              "id": "push",
+              "name": "Push Notification",
+              "description": "Mobile push notifications",
+              "icon": "fa-bell",
+              "color": "#f59e0b",
+              "supported_platforms": ["iOS", "Android", "Web"]
+            }
+          ]
+        }
+      }
+
+   **Status Codes:**
+
+   * **200 OK**: Types retrieved successfully
+   * **401 Unauthorized**: Invalid or missing API key
+
 Channel Statistics API
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -641,6 +709,91 @@ Get Overview Statistics
    **Status Codes:**
 
    * **200 OK**: Overview retrieved successfully
+   * **401 Unauthorized**: Invalid or missing API key
+
+Get Channel Status Dashboard
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. http:get:: /channels/status/dashboard
+
+   Get real-time status dashboard for all channels.
+
+   **Query Parameters:**
+
+   * **gateway_id** (optional): Filter by gateway ID
+
+   **Response:**
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "status": "success",
+        "data": {
+          "gateway_id": "Univa-GW-01",
+          "timestamp": "2024-01-15T12:00:00Z",
+          "total_channels": 5,
+          "online_channels": 3,
+          "offline_channels": 2,
+          "channels": [
+            {
+              "id": "mqtt-primary",
+              "name": "MQTT Alert Broker",
+              "type": "mqtt",
+              "status": "online",
+              "last_heartbeat": "2024-01-15T11:59:45Z",
+              "connection_info": "mqtt.factory.com:1883/factory/alerts",
+              "message_rate": "2.5 msg/sec",
+              "health_score": 98
+            },
+            {
+              "id": "email-primary",
+              "name": "Corporate SMTP",
+              "type": "email",
+              "status": "online",
+              "last_heartbeat": "2024-01-15T11:58:30Z",
+              "connection_info": "smtp.gmail.com:587",
+              "message_rate": "0.8 msg/sec",
+              "health_score": 92
+            },
+            {
+              "id": "sms-emergency",
+              "name": "SMS Emergency",
+              "type": "sms",
+              "status": "testing",
+              "last_heartbeat": "2024-01-15T11:55:00Z",
+              "connection_info": "Twilio API",
+              "message_rate": "0 msg/sec",
+              "health_score": 75
+            },
+            {
+              "id": "webhook-primary",
+              "name": "Webhook API",
+              "type": "webhook",
+              "status": "offline",
+              "last_heartbeat": "2024-01-15T10:30:00Z",
+              "connection_info": "https://webhook.site/abcdef",
+              "message_rate": "0 msg/sec",
+              "health_score": 45,
+              "last_error": "Connection timeout"
+            }
+          ],
+          "summary": {
+            "all_online": false,
+            "health_status": "degraded",
+            "recommendations": [
+              "Check webhook-primary connectivity",
+              "Review SMS channel configuration"
+            ]
+          }
+        }
+      }
+
+   **Status Codes:**
+
+   * **200 OK**: Dashboard retrieved successfully
    * **401 Unauthorized**: Invalid or missing API key
 
 Channel Alert Delivery API
@@ -884,6 +1037,110 @@ Test Connection
    * **401 Unauthorized**: Invalid or missing API key
    * **503 Service Unavailable**: Connection failed
 
+Gateway Management API
+~~~~~~~~~~~~~~~~~~~~~~
+
+Get Available Gateways
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. http:get:: /gateways
+
+   Get list of available gateways for channel configuration.
+
+   **Query Parameters:**
+
+   * **status** (optional): Filter by gateway status - ``online``, ``offline``, ``maintenance``
+
+   **Response:**
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "status": "success",
+        "data": [
+          {
+            "id": "Univa-GW-01",
+            "name": "Primary Gateway",
+            "status": "online",
+            "location": "Factory Floor - Zone A",
+            "last_seen": "2024-01-15T12:00:00Z",
+            "ip_address": "192.168.1.100",
+            "channels_count": 5,
+            "active_channels": 4
+          },
+          {
+            "id": "Univa-GW-02",
+            "name": "Backup Gateway",
+            "status": "online",
+            "location": "Factory Floor - Zone B",
+            "last_seen": "2024-01-15T11:58:30Z",
+            "ip_address": "192.168.1.101",
+            "channels_count": 3,
+            "active_channels": 3
+          },
+          {
+            "id": "Univa-GW-HQ",
+            "name": "HQ Monitoring",
+            "status": "offline",
+            "location": "Headquarters",
+            "last_seen": "2024-01-15T10:30:00Z",
+            "ip_address": "10.0.1.50",
+            "channels_count": 2,
+            "active_channels": 0
+          }
+        ],
+        "meta": {
+          "total": 3,
+          "online": 2,
+          "offline": 1
+        }
+      }
+
+   **Status Codes:**
+
+   * **200 OK**: Gateways retrieved successfully
+   * **401 Unauthorized**: Invalid or missing API key
+
+Switch Gateway Context
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. http:post:: /gateways/{id}/switch
+
+   Switch to a different gateway for channel operations.
+
+   **Path Parameters:**
+
+   * **id** (string): Gateway ID
+
+   **Response:**
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "status": "success",
+        "data": {
+          "previous_gateway": "Univa-GW-01",
+          "current_gateway": "Univa-GW-02",
+          "timestamp": "2024-01-15T12:05:00Z",
+          "channels_transferred": 5,
+          "session_id": "sess-20250115-001"
+        },
+        "message": "Switched to gateway Univa-GW-02"
+      }
+
+   **Status Codes:**
+
+   * **200 OK**: Gateway switched successfully
+   * **404 Not Found**: Gateway not found
+   * **401 Unauthorized**: Invalid or missing API key
+   * **503 Service Unavailable**: Gateway unreachable
+
 Channel Import/Export API
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -898,6 +1155,7 @@ Export Channels
 
    * **format** (optional): Export format - ``json`` (default), ``yaml``
    * **include_secrets** (optional): Include passwords/API keys - ``true``, ``false`` (default: ``false``)
+   * **gateway_id** (optional): Filter by gateway ID
 
    **Response:**
 
@@ -914,7 +1172,8 @@ Export Channels
           "summary": {
             "channels_exported": 5,
             "secrets_included": false,
-            "file_size": "15.8 KB"
+            "file_size": "15.8 KB",
+            "gateway": "Univa-GW-01"
           }
         }
       }
@@ -954,7 +1213,8 @@ Import Channels
         "options": {
           "overwrite_existing": false,
           "enable_channels": true,
-          "update_secrets": false
+          "update_secrets": false,
+          "gateway_id": "Univa-GW-01"
         }
       }
 
@@ -1004,6 +1264,7 @@ Get Real-time Monitoring
    **Query Parameters:**
 
    * **duration** (optional): Monitoring duration in seconds (default: ``60``)
+   * **refresh** (optional): Auto-refresh interval in seconds
 
    **Response:**
 
@@ -1030,6 +1291,12 @@ Get Real-time Monitoring
             "messages_per_second": 0.25,
             "bytes_per_second": 512,
             "peak_throughput": 2.5
+          },
+          "health_metrics": {
+            "response_time_avg": "0.125s",
+            "success_rate": "99.8%",
+            "error_rate": "0.2%",
+            "last_error": null
           }
         }
       }
@@ -1038,6 +1305,135 @@ Get Real-time Monitoring
 
    * **200 OK**: Monitoring data retrieved
    * **404 Not Found**: Channel not found
+   * **401 Unauthorized**: Invalid or missing API key
+
+Alert Messages Integration API
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Get Alert Messages for Testing
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. http:get:: /channels/alerts/available
+
+   Get available alert messages for channel testing.
+
+   **Query Parameters:**
+
+   * **status** (optional): Filter by alert status - ``active``, ``draft``, ``archived``
+   * **severity** (optional): Filter by alert severity - ``info``, ``warning``, ``critical``
+   * **limit** (optional): Maximum number of alerts to return (default: ``50``)
+
+   **Response:**
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "status": "success",
+        "data": {
+          "alerts": [
+            {
+              "id": "alert-001",
+              "name": "High Temperature Alert",
+              "message": "🔥 CRITICAL: {device} temperature is {value}{unit} at {timestamp}",
+              "description": "Triggers when temperature exceeds threshold",
+              "severity": "critical",
+              "variables": ["device", "value", "unit", "timestamp"],
+              "created_at": "2024-01-10T08:30:00Z",
+              "updated_at": "2024-01-15T09:45:00Z"
+            },
+            {
+              "id": "alert-002",
+              "name": "Low Pressure Warning",
+              "message": "⚠️ WARNING: {device} pressure is {value}{unit} at {location}",
+              "description": "Triggers when pressure drops below threshold",
+              "severity": "warning",
+              "variables": ["device", "value", "unit", "location"],
+              "created_at": "2024-01-12T10:15:00Z",
+              "updated_at": "2024-01-15T11:30:00Z"
+            }
+          ],
+          "total": 12,
+          "variables_summary": {
+            "total_unique_variables": 8,
+            "most_common_variables": ["device", "value", "timestamp", "location"]
+          }
+        }
+      }
+
+   **Status Codes:**
+
+   * **200 OK**: Alerts retrieved successfully
+   * **401 Unauthorized**: Invalid or missing API key
+
+Test Alert with Variables
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. http:post:: /channels/alerts/{alert_id}/test-with-variables
+
+   Test an alert message with variable substitution.
+
+   **Path Parameters:**
+
+   * **alert_id** (string): Alert ID
+
+   **Request:**
+
+   .. sourcecode:: http
+
+      POST /channels/alerts/alert-001/test-with-variables HTTP/1.1
+      Content-Type: application/json
+      Authorization: Bearer <token>
+      
+      {
+        "variables": {
+          "device": "Crane_01",
+          "value": "85.6",
+          "unit": "°C",
+          "timestamp": "2024-01-15T12:00:00Z",
+          "location": "Factory Floor - Zone B",
+          "severity": "CRITICAL"
+        },
+        "channel_types": ["mqtt", "email"]
+      }
+
+   **Response:**
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "status": "success",
+        "data": {
+          "alert_id": "alert-001",
+          "original_message": "🔥 CRITICAL: {device} temperature is {value}{unit} at {timestamp}",
+          "formatted_message": "🔥 CRITICAL: Crane_01 temperature is 85.6°C at 2024-01-15T12:00:00Z",
+          "variables_used": ["device", "value", "unit", "timestamp"],
+          "variables_missing": [],
+          "channel_results": [
+            {
+              "channel_type": "mqtt",
+              "result": "success",
+              "message": "Test message formatted successfully"
+            },
+            {
+              "channel_type": "email",
+              "result": "success",
+              "message": "Test message formatted successfully"
+            }
+          ]
+        }
+      }
+
+   **Status Codes:**
+
+   * **200 OK**: Test completed successfully
+   * **404 Not Found**: Alert not found
+   * **400 Bad Request**: Missing required variables
    * **401 Unauthorized**: Invalid or missing API key
 
 Webhook Configuration API
@@ -1161,6 +1557,14 @@ Common Error Codes
      - Rate limit exceeded
    * - **CHANNELS_011**
      - Import/export error
+   * - **CHANNELS_012**
+     - Gateway not found
+   * - **CHANNELS_013**
+     - Alert not found
+   * - **CHANNELS_014**
+     - Missing required variables
+   * - **CHANNELS_015**
+     - Channel offline
 
 Webhooks
 --------
@@ -1204,6 +1608,25 @@ When alert delivery status changes:
        "timestamp": "2024-01-15T10:18:05Z",
        "message": "Alert delivered successfully",
        "response_time": "0.120s"
+     }
+   }
+
+Gateway Switch Webhook
+^^^^^^^^^^^^^^^^^^^^^^
+
+When gateway context is switched:
+
+.. code-block:: json
+
+   {
+     "event": "gateway.switched",
+     "timestamp": "2024-01-15T12:05:00Z",
+     "data": {
+       "previous_gateway": "Univa-GW-01",
+       "current_gateway": "Univa-GW-02",
+       "user": "admin@factory.com",
+       "channels_transferred": 5,
+       "session_id": "sess-20250115-001"
      }
    }
 
@@ -1262,13 +1685,15 @@ Python Example
        channel = response.json()["data"]
        print(f"Channel created: {channel['id']}")
    
-   # Test the channel
+   # Test the channel with an alert
    test_data = {
        "alert_id": "alert-001",
        "test_data": {
            "device": "Test_Device_01",
            "value": "85.6",
-           "timestamp": "2024-01-15T12:00:00Z"
+           "unit": "°C",
+           "timestamp": "2024-01-15T12:00:00Z",
+           "severity": "CRITICAL"
        }
    }
    
@@ -1277,6 +1702,17 @@ Python Example
        headers=headers,
        json=test_data
    )
+   
+   # Get channel status dashboard
+   dashboard_response = requests.get(
+       f"{base_url}/channels/status/dashboard",
+       headers=headers,
+       params={"gateway_id": "Univa-GW-01"}
+   )
+   
+   if dashboard_response.status_code == 200:
+       dashboard = dashboard_response.json()["data"]
+       print(f"Online channels: {dashboard['online_channels']}")
 
 JavaScript Example
 ^^^^^^^^^^^^^^^^^^
@@ -1312,6 +1748,28 @@ JavaScript Example
    })
    .then(response => response.json())
    .then(data => console.log(data.data.delivery_id));
+   
+   // Get available alert messages for testing
+   fetch(`${baseUrl}/channels/alerts/available`, {
+       headers: headers
+   })
+   .then(response => response.json())
+   .then(data => {
+       const alerts = data.data.alerts;
+       alerts.forEach(alert => {
+           console.log(`Alert: ${alert.name}, Variables: ${alert.variables.join(', ')}`);
+       });
+   });
+   
+   // Switch gateway context
+   fetch(`${baseUrl}/gateways/Univa-GW-02/switch`, {
+       method: "POST",
+       headers: headers
+   })
+   .then(response => response.json())
+   .then(data => {
+       console.log(`Switched to gateway: ${data.data.current_gateway}`);
+   });
 
 Support
 -------
