@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gateway OTA &amp; System Update API &mdash; IoT Gateway API Documentation 1.0.0 documentation</title>
+  <title>Gateway OTA &amp; System API &mdash; IoT Gateway API Documentation 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -19,8 +19,8 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="System Backup &amp; Recovery" href="backup.html" />
-    <link rel="prev" title="Security &amp; Access Control API" href="security.html" /> 
+    <link rel="next" title="Security &amp; Access Control" href="security.html" />
+    <link rel="prev" title="Cloud Integration API" href="cloud-integration.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -51,266 +51,96 @@
 <li class="toctree-l2"><a class="reference internal" href="../about.html#usage">Usage</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../authentication.html#register-user">Register User</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../authentication.html#login-user">Login User</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../authentication.html#get-current-user">Get Current User</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../authentication.html#logout">Logout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication System Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../authentication.html#page-routes-frontend">Page Routes (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../authentication.html#api-endpoints-backend">API Endpoints (Backend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../authentication.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../authentication.html#flow-examples">Flow Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../authentication.html#user-registration-flow">User Registration Flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../authentication.html#user-login-flow">User Login Flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../authentication.html#password-change-flow">Password Change Flow</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Core APIs</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="general-configuration.html">General Configuration API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#get-configuration">Get Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#update-configuration">Update Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#scan-wifi-networks">Scan WiFi Networks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#sync-time">Sync Time</a></li>
-<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#error-codes">Error Codes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#examples">Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="general-configuration.html#python-example">Python Example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="general-configuration.html#javascript-example">JavaScript Example</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#api-endpoints-backend">API Endpoints (Backend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#complete-user-flow">Complete User Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#advantages-of-this-approach">Advantages of This Approach</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="device-management.html">Device Management API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="device-management.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="device-management.html#endpoints">Endpoints</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#get-device-management-page">Get Device Management Page</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#create-new-device">Create New Device</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#update-device">Update Device</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#delete-device">Delete Device</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#get-device-details">Get Device Details</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#test-device-connection">Test Device Connection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#disable-enable-device">Disable/Enable Device</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#duplicate-device">Duplicate Device</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#scan-for-devices">Scan for Devices</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#check-scan-status">Check Scan Status</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#scan-wireless-devices">Scan Wireless Devices</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#get-device-groups">Get Device Groups</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#create-device-group">Create Device Group</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#update-device-group">Update Device Group</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#delete-device-group">Delete Device Group</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#assign-devices-to-group">Assign Devices to Group</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#import-devices-from-csv">Import Devices from CSV</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#export-devices-to-csv">Export Devices to CSV</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#pair-wireless-device">Pair Wireless Device</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#get-device-packets">Get Device Packets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device-management.html#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device-management.html#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#device-operations">Device Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#device-actions">Device Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#scanning-operations">Scanning Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#group-management">Group Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#import-export-operations">Import/Export Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#wireless-operations">Wireless Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="device-management.html#diagnostics">Diagnostics</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="device-management.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device-management.html#complete-user-flow">Complete User Flow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="device-management.html#error-codes">Error Codes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="device-management.html#examples">Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#python-create-device">Python - Create Device</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#python-scan-for-devices">Python - Scan for Devices</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#javascript-get-device-details">JavaScript - Get Device Details</a></li>
-<li class="toctree-l3"><a class="reference internal" href="device-management.html#javascript-manage-device-groups">JavaScript - Manage Device Groups</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="device-management.html#notes">Notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="device-management.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device-management.html#key-features">Key Features</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tag-mapping.html">Tag Mapping API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#endpoints">Endpoints</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#get-all-tag-mappings">Get All Tag Mappings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#get-available-devices">Get Available Devices</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#get-protocol-form-configuration">Get Protocol Form Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#create-tag-mapping">Create Tag Mapping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#update-tag-mapping">Update Tag Mapping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#delete-tag-mapping">Delete Tag Mapping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#import-mappings-from-csv">Import Mappings from CSV</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#export-mappings-to-csv">Export Mappings to CSV</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#get-single-tag-mapping">Get Single Tag Mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#tag-mapping-crud-operations">Tag Mapping CRUD Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#device-and-protocol-information">Device and Protocol Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#import-export-operations">Import/Export Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#filtering-and-search">Filtering and Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#device-testing-and-validation">Device Testing and Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#configuration-management">Configuration Management</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#data-types-and-protocols">Data Types and Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#complete-user-flow">Complete User Flow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#error-codes">Error Codes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#examples">Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#python-create-tag-mapping">Python - Create Tag Mapping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#python-import-from-csv">Python - Import from CSV</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#javascript-dynamic-form-generation">JavaScript - Dynamic Form Generation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#javascript-create-tag-mapping">JavaScript - Create Tag Mapping</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#workflow-example">Workflow Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#notes">Notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#key-features">Key Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#data-types-and-protocols">Data Types and Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#validation-rules">Validation Rules</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cloud-integration.html">Cloud Integration API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#endpoints">Endpoints</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#get-all-cloud-connections">Get All Cloud Connections</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#get-connection-types">Get Connection Types</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#get-connection-template">Get Connection Template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#create-cloud-connection">Create Cloud Connection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#get-connection-details">Get Connection Details</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#test-connection">Test Connection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#update-connection">Update Connection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#get-available-tags">Get Available Tags</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#delete-connection">Delete Connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#connection-crud-operations">Connection CRUD Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#connection-information-selection">Connection Information &amp; Selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#connection-types-templates">Connection Types &amp; Templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#connection-testing">Connection Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#connection-status-toggle">Connection Status Toggle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#tag-management">Tag Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#statistics-and-monitoring">Statistics and Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#configuration-management">Configuration Management</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#additional-endpoints">Additional Endpoints</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#get-connection-statistics">Get Connection Statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#toggle-connection-state">Toggle Connection State</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#connection-types-reference">Connection Types Reference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#publishing-modes">Publishing Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#complete-user-flow">Complete User Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#ui-component-details">UI Component Details</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#error-codes">Error Codes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#examples">Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#python-create-mqtt-connection">Python - Create MQTT Connection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#python-test-connection">Python - Test Connection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#javascript-dynamic-connection-form">JavaScript - Dynamic Connection Form</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#javascript-manage-tags-for-publishing">JavaScript - Manage Tags for Publishing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#supported-protocols">Supported Protocols</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#workflow-example">Workflow Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#security-considerations">Security Considerations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#monitoring-and-alerts">Monitoring and Alerts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#best-practices">Best Practices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#troubleshooting">Troubleshooting</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="license.html">Licensing &amp; Subscriptions API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="license.html#overview">Overview</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="license.html#license-overview">License Overview</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="license.html#get-license-overview">Get License Overview</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#sync-with-cloud">Sync with Cloud</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#deactivate-license">Deactivate License</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="license.html#feature-access-matrix">Feature Access Matrix</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="license.html#get-features">Get Features</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#toggle-feature">Toggle Feature</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="license.html#license-key-management">License Key Management</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="license.html#validate-license-key">Validate License Key</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#get-current-license-info">Get Current License Info</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#generate-demo-key">Generate Demo Key</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#export-license">Export License</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#import-license">Import License</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="license.html#cloud-subscription">Cloud Subscription</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="license.html#get-cloud-status">Get Cloud Status</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#unlink-cloud">Unlink Cloud</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#get-sync-settings">Get Sync Settings</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#update-sync-settings">Update Sync Settings</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="license.html#trials-management">Trials Management</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="license.html#get-active-trials">Get Active Trials</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#get-available-trials">Get Available Trials</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#start-trial">Start Trial</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#extend-trial">Extend Trial</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#upgrade-trial">Upgrade Trial</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#cancel-trial">Cancel Trial</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="license.html#license-logs">License Logs</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="license.html#get-license-logs">Get License Logs</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="license.html#footer-actions">Footer Actions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="license.html#validate-all-licenses">Validate All Licenses</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#create-backup">Create Backup</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#reset-trials">Reset Trials</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#save-settings">Save Settings</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="license.html#modal-actions">Modal Actions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="license.html#get-renewal-options">Get Renewal Options</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#initiate-transfer">Initiate Transfer</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#get-help">Get Help</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="license.html#error-codes">Error Codes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="license.html#authentication">Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="license.html#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="license.html#response-format">Response Format</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security &amp; Access Control API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="security.html#overview">Overview</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="security.html#security-status">Security Status</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="security.html#get-security-status">Get Security Status</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#identity-access-management-section-a">Identity &amp; Access Management (Section A)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#authentication-policies-section-b">Authentication Policies (Section B)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#api-keys-tokens-section-c">API Keys &amp; Tokens (Section C)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#ssh-access-control-section-d">SSH Access Control (Section D)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#firewall-network-security-section-e">Firewall &amp; Network Security (Section E)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#certificate-management-section-f">Certificate Management (Section F)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#security-audit-log-section-g">Security Audit Log (Section G)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#security-operations">Security Operations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#error-codes">Error Codes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#authentication">Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#response-format">Response Format</a></li>
-</ul>
-</li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">UNDER VALIDATION</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Gateway OTA &amp; System Update API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#system-information">System Information</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#get-gateway-status">Get Gateway Status</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#create-system-snapshot">Create System Snapshot</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#available-updates">Available Updates</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#check-available-updates">Check Available Updates</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#toggle-auto-update">Toggle Auto-Update</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#download-installation">Download &amp; Installation</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#start-update-download">Start Update Download</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#get-update-progress">Get Update Progress</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#install-downloaded-update">Install Downloaded Update</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#manual-upload-management">Manual Upload Management</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#verify-uploaded-image">Verify Uploaded Image</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#deploy-manual-image">Deploy Manual Image</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#update-settings-management">Update Settings Management</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#get-update-settings">Get Update Settings</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#update-settings">Update Settings</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#recovery-operations">Recovery Operations</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#execute-rollback">Execute Rollback</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#restore-previous-os">Restore Previous OS</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#factory-reset">Factory Reset</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#upload-recovery-image">Upload Recovery Image</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#safety-management">Safety Management</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#get-safety-status">Get Safety Status</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#safety-override">Safety Override</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#monitor-logs">Monitor &amp; Logs</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#get-system-logs">Get System Logs</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#get-monitor-status">Get Monitor Status</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#cancel-operation">Cancel Operation</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#cancel-update-operation">Cancel Update Operation</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Gateway OTA &amp; System API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#system-information-section-1">System Information (SECTION 1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#available-updates-section-2">Available Updates (SECTION 2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manual-upload-management-section-3">Manual Upload Management (SECTION 3)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-settings-management-section-4">Update Settings Management (SECTION 4)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#recovery-operations-section-5">Recovery Operations (SECTION 5)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#safety-management-section-6">Safety Management (SECTION 6)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#monitor-live-updates-section-7">Monitor &amp; Live Updates (SECTION 7)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#websocket-real-time-updates">WebSocket Real-time Updates</a><ul>
@@ -325,97 +155,118 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#complete-user-flow">Complete User Flow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#error-codes">Error Codes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id1">Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#response-format">Response Format</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#ui-api-mapping-summary">UI-API Mapping Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#authentication-context">Authentication &amp; Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#update-types">Update Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#safety-constraints">Safety Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#best-practices">Best Practices</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="backup.html">System Backup &amp; Recovery</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#backup-system-status">1. Backup System Status</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#get-backup-status">Get Backup Status</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security &amp; Access Control</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="security.html#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="security.html#security-status-overview">Security Status (Overview)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#identity-access-management-section-a">Identity &amp; Access Management (SECTION A)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#authentication-policies-section-b">Authentication Policies (SECTION B)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#api-keys-tokens-section-c">API Keys &amp; Tokens (SECTION C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#ssh-access-control-section-d">SSH Access Control (SECTION D)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#firewall-network-security-section-e">Firewall &amp; Network Security (SECTION E)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#certificate-management-section-f">Certificate Management (SECTION F)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#security-audit-log-section-g">Security Audit Log (SECTION G)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#security-operations">Security Operations</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#backup-management-section-1">2. Backup Management (SECTION 1)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#get-backup-list">Get Backup List</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#create-backup">Create Backup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#download-backup">Download Backup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#delete-backup">Delete Backup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#get-backup-details">Get Backup Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#complete-user-flow">Complete User Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#authentication-context">Authentication &amp; Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#support-information">Support Information</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#snapshot-management">3. Snapshot Management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#get-snapshots">Get Snapshots</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#create-snapshot">Create Snapshot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#restore-snapshot">Restore Snapshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Licensing &amp; Subscriptions API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="license.html#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="license.html#license-overview-section-1">License Overview (SECTION 1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#feature-access-matrix-section-2">Feature Access Matrix (SECTION 2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#license-key-management-section-3">License Key Management (SECTION 3)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#cloud-subscription-section-4">Cloud Subscription (SECTION 4)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#trials-management-section-5">Trials Management (SECTION 5)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#license-renewal-options">License Renewal Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#license-logs-section-6">License Logs (SECTION 6)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#footer-actions">Footer Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#modal-actions">Modal Actions</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#scheduled-backups-section-2">4. Scheduled Backups (SECTION 2)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#get-schedules">Get Schedules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#update-schedule">Update Schedule</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#toggle-schedule-status">Toggle Schedule Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#complete-user-flow">Complete User Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#authentication-context">Authentication &amp; Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#license-types-features">License Types &amp; Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#trial-management">Trial Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#cloud-integration">Cloud Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#renewal-process">Renewal Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#support-information">Support Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#version-history">Version History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#deprecation-notes">Deprecation Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#rate-limiting">Rate Limiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#data-formats">Data Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#glossary">Glossary</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#disaster-recovery-operations">5. Disaster Recovery Operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#initiate-recovery">Initiate Recovery</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#get-recovery-preview">Get Recovery Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backup.html">Backup &amp; Recovery Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="backup.html#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backup.html#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#backup-system-status-overview">Backup System Status (Overview)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#backup-management-section-1">Backup Management (SECTION 1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#scheduled-backups-section-2">Scheduled Backups (SECTION 2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#snapshot-management-section-3">Snapshot Management (SECTION 3)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#disaster-recovery-section-4">Disaster Recovery (SECTION 4)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#import-export-operations-section-5">Import &amp; Export Operations (SECTION 5)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#storage-management-section-6">Storage Management (SECTION 6)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#cleanup-maintenance-section-7">Cleanup &amp; Maintenance (SECTION 7)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#live-progress-monitor-logs-section-8">Live Progress Monitor &amp; Logs (SECTION 8)</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#import-export-operations">6. Import &amp; Export Operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#import-backup-file">Import Backup File</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#validate-import-file">Validate Import File</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#export-configuration">Export Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backup.html#websocket-real-time-updates">WebSocket Real-time Updates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#connection-endpoint">Connection Endpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#authentication">Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#message-types">Message Types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="backup.html#backup-progress">Backup Progress</a></li>
+<li class="toctree-l4"><a class="reference internal" href="backup.html#restore-progress">Restore Progress</a></li>
+<li class="toctree-l4"><a class="reference internal" href="backup.html#backup-completed">Backup Completed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="backup.html#storage-alert">Storage Alert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="backup.html#schedule-event">Schedule Event</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#storage-management">7. Storage Management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#get-storage-configuration">Get Storage Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#update-storage-configuration">Update Storage Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#sync-to-cloud">Sync to Cloud</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#cleanup-operations">8. Cleanup Operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#run-cleanup">Run Cleanup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#execute-cleanup">Execute Cleanup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backup.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backup.html#complete-user-flow">Complete User Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backup.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backup.html#authentication-context">Authentication &amp; Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backup.html#support-information">Support Information</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#progress-monitoring">9. Progress Monitoring</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#get-backup-progress">Get Backup Progress</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#get-restore-progress">Get Restore Progress</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#cancel-operation">Cancel Operation</a></li>
 </ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#reporting-statistics">10. Reporting &amp; Statistics</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#get-backup-statistics">Get Backup Statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#generate-report">Generate Report</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#websocket-api">11. WebSocket API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#real-time-backup-updates">Real-time Backup Updates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#backup-notifications">Backup Notifications</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#system-health-updates">System Health Updates</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#missing-websocket-requirements">Missing WebSocket Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#error-responses">Error Responses</a></li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#authentication">Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#versioning">Versioning</a></li>
-</ul>
-</li>
+<p class="caption" role="heading"><span class="caption-text">UNDER VALIDATION</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="data-retention.html">Data Retention API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="data-retention.html#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data-retention.html#base-url">Base URL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data-retention.html#authentication">Authentication</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data-retention.html#storage-management-api">Storage Management API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#get-storage-status">Get Storage Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data-retention.html#refresh-storage-status">Refresh Storage Status</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#update-storage-thresholds">Update Storage Thresholds</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="data-retention.html#data-retention-policies-api">Data Retention Policies API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="data-retention.html#get-retention-policies">Get Retention Policies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data-retention.html#get-all-policies">Get All Policies</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#update-retention-policy">Update Retention Policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data-retention.html#get-policy-status">Get Policy Status</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#batch-update-policies">Batch Update Policies</a></li>
 </ul>
 </li>
@@ -428,6 +279,8 @@
 <li class="toctree-l2"><a class="reference internal" href="data-retention.html#purge-operations-api">Purge Operations API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#purge-old-data">Purge Old Data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#get-purge-progress">Get Purge Progress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data-retention.html#clear-non-critical-data">Clear Non-Critical Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data-retention.html#clear-all-logs">Clear All Logs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#emergency-storage-cleanup">Emergency Storage Cleanup</a></li>
 </ul>
 </li>
@@ -438,11 +291,11 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="data-retention.html#export-diagnostics-api">Export &amp; Diagnostics API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#export-stored-data">Export Stored Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data-retention.html#export-logs">Export Logs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#run-storage-diagnostics">Run Storage Diagnostics</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="data-retention.html#manual-actions-api">Manual Actions API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="data-retention.html#clear-non-critical-data">Clear Non-Critical Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data-retention.html#system-actions-api">System Actions API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#full-storage-reset">Full Storage Reset</a></li>
 </ul>
 </li>
@@ -453,6 +306,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="data-retention.html#websocket-events">WebSocket Events</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#connection-endpoint">Connection Endpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data-retention.html#connection-status">Connection Status</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#message-types">Message Types</a></li>
 </ul>
 </li>
@@ -466,7 +320,7 @@
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#python-data-purge-operation">Python - Data Purge Operation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#python-export-data">Python - Export Data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#javascript-real-time-monitoring">JavaScript - Real-time Monitoring</a></li>
-<li class="toctree-l3"><a class="reference internal" href="data-retention.html#javascript-retention-dashboard">JavaScript - Retention Dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data-retention.html#javascript-retention-dashboard-integration">JavaScript - Retention Dashboard Integration</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="data-retention.html#best-practices">Best Practices</a><ul>
@@ -504,35 +358,17 @@
 <li class="toctree-l2"><a class="reference internal" href="diagnostics.html#authentication">Authentication</a></li>
 <li class="toctree-l2"><a class="reference internal" href="diagnostics.html#system-logs-api">System Logs API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#get-real-time-logs">Get Real-Time Logs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#websocket-log-stream">WebSocket Log Stream</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#connection-endpoint">Connection Endpoint</a></li>
-<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#client-messages">Client Messages</a></li>
-<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#server-messages">Server Messages</a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#export-logs">Export Logs</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="diagnostics.html#terminal-api">Terminal API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#establish-ssh-session">Establish SSH Session</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#websocket-terminal-access">WebSocket Terminal Access</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#id1">Connection Endpoint</a></li>
-<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#id2">Client Messages</a></li>
-<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#id3">Server Messages</a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#execute-command-directly">Execute Command Directly</a></li>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#command-history">Command History</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="diagnostics.html#system-monitoring-api">System Monitoring API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#get-system-metrics">Get System Metrics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#websocket-metrics-stream">WebSocket Metrics Stream</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#id4">Connection Endpoint</a></li>
-<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#id5">Client Messages</a></li>
-<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#id6">Server Messages</a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#rf-signal-monitoring">RF Signal Monitoring</a></li>
 </ul>
 </li>
@@ -564,13 +400,31 @@
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#reset-to-factory-defaults">Reset to Factory Defaults</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#audit-security-api">Audit &amp; Security API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#get-audit-log">Get Audit Log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#websocket-api">WebSocket API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#log-stream-websocket">Log Stream WebSocket</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#connection-endpoint">Connection Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#subscribe-message">Subscribe Message</a></li>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#log-message">Log Message</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#websocket-events">WebSocket Events</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#base-connection-endpoint">Base Connection Endpoint</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#event-types">Event Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#terminal-websocket">Terminal WebSocket</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#id1">Connection Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#send-command">Send Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#terminal-output">Terminal Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#exit-notification">Exit Notification</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#metrics-websocket">Metrics WebSocket</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#id2">Connection Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#id3">Subscribe Message</a></li>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#metrics-update">Metrics Update</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#general-websocket-events">General WebSocket Events</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#id4">Connection Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#event-types">Event Types</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="diagnostics.html#error-handling">Error Handling</a><ul>
@@ -580,39 +434,37 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="diagnostics.html#examples">Examples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#python-system-monitoring">Python - System Monitoring</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#python-terminal-operations">Python - Terminal Operations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#python-diagnostic-tools">Python - Diagnostic Tools</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#javascript-real-time-diagnostics">JavaScript - Real-time Diagnostics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#javascript-diagnostic-dashboard">JavaScript - Diagnostic Dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#javascript-real-time-monitoring">JavaScript - Real-time Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#python-complete-diagnostics-workflow">Python - Complete Diagnostics Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#javascript-dashboard-integration">JavaScript - Dashboard Integration</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="diagnostics.html#best-practices">Best Practices</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#system-monitoring">System Monitoring</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#terminal-operations">Terminal Operations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#diagnostic-tools">Diagnostic Tools</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="diagnostics.html#security-considerations">Security Considerations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#authentication-authorization">Authentication &amp; Authorization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#data-privacy">Data Privacy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#audit-compliance">Audit &amp; Compliance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#id5">Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#data-protection">Data Protection</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#rate-limiting">Rate Limiting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="diagnostics.html#system-requirements">System Requirements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#minimum-requirements">Minimum Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#performance-impact">Performance Impact</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#performance-considerations">Performance Considerations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#support-troubleshooting">Support &amp; Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#common-issues">Common Issues</a></li>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#getting-help">Getting Help</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#common-solutions">Common Solutions</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#notes">Notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#compliance-notes">Compliance Notes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="diagnostics.html#versioning">Versioning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#support">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#changelog">Changelog</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#v1-0-0-2025-03-12"><strong>v1.0.0</strong> (2025-03-12)</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="loggar.html">Device-Level Logging API</a><ul>
@@ -622,66 +474,46 @@
 <li class="toctree-l2"><a class="reference internal" href="loggar.html#master-configuration-api">Master Configuration API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="loggar.html#get-global-logging-status">Get Global Logging Status</a></li>
 <li class="toctree-l3"><a class="reference internal" href="loggar.html#update-global-settings">Update Global Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-global-dashboard-data">Get Global Dashboard Data</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="loggar.html#category-management-api">Category Management API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#list-log-categories">List Log Categories</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-category-configuration">Get Category Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#update-category-configuration">Update Category Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#batch-update-categories">Batch Update Categories</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#enable-disable-category">Enable/Disable Category</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#category-specific-configuration">Category-Specific Configuration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#system-logs-configuration">System Logs Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#network-logs-configuration">Network Logs Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#can-bus-logs-configuration">CAN Bus Logs Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#modbus-logs-configuration">Modbus Logs Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#mqtt-logs-configuration">MQTT Logs Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#security-logs-configuration">Security Logs Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#list-log-categories-with-ui-data">List Log Categories with UI Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-category-configuration-for-ui">Get Category Configuration for UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#update-category-configuration-ui-format">Update Category Configuration (UI Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#batch-toggle-categories">Batch Toggle Categories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#apply-global-level-to-all-categories">Apply Global Level to All Categories</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="loggar.html#output-destinations-api">Output Destinations API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-output-destinations">Get Output Destinations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#configure-output-destination">Configure Output Destination</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#test-destination-connection">Test Destination Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-output-destinations-for-ui">Get Output Destinations for UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#configure-output-destination-ui-format">Configure Output Destination (UI Format)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="loggar.html#log-rotation-api">Log Rotation API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-rotation-configuration">Get Rotation Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#update-rotation-settings">Update Rotation Settings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#trigger-manual-rotation">Trigger Manual Rotation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-rotation-progress">Get Rotation Progress</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#log-statistics-api">Log Statistics API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-real-time-statistics">Get Real-Time Statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-historical-statistics">Get Historical Statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-error-statistics">Get Error Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-rotation-configuration-for-ui">Get Rotation Configuration for UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#update-rotation-settings-ui-format">Update Rotation Settings (UI Format)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="loggar.html#log-operations-api">Log Operations API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#test-logging-configuration">Test Logging Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#restart-logging-service">Restart Logging Service</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#clear-log-files">Clear Log Files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#export-log-configuration">Export Log Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#import-log-configuration">Import Log Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#test-logging-configuration-ui-format">Test Logging Configuration (UI Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#trigger-manual-rotation-ui-format">Trigger Manual Rotation (UI Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#restart-logging-service-ui-format">Restart Logging Service (UI Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#save-all-configurations">Save All Configurations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#reset-to-default-configuration">Reset to Default Configuration</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#real-time-monitoring-api">Real-Time Monitoring API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#websocket-log-stream">WebSocket Log Stream</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="loggar.html#connection-endpoint">Connection Endpoint</a></li>
-<li class="toctree-l4"><a class="reference internal" href="loggar.html#connection-parameters">Connection Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="loggar.html#client-messages">Client Messages</a></li>
-<li class="toctree-l4"><a class="reference internal" href="loggar.html#server-messages">Server Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#gateway-management-api">Gateway Management API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#switch-gateway-context">Switch Gateway Context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-available-gateways">Get Available Gateways</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-active-log-streams">Get Active Log Streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#category-specific-configuration-api">Category-Specific Configuration API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-category-ui-configuration-template">Get Category UI Configuration Template</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#health-diagnostics-api">Health &amp; Diagnostics API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-logging-health-status">Get Logging Health Status</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#run-logging-diagnostics">Run Logging Diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#real-time-updates-api">Real-Time Updates API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#subscribe-to-configuration-updates">Subscribe to Configuration Updates</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="loggar.html#error-handling">Error Handling</a><ul>
@@ -690,135 +522,62 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="loggar.html#examples">Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#python-logging-configuration">Python - Logging Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#python-log-operations">Python - Log Operations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#javascript-real-time-log-monitoring">JavaScript - Real-time Log Monitoring</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#javascript-logging-dashboard">JavaScript - Logging Dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#javascript-complete-ui-integration">JavaScript - Complete UI Integration</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#best-practices">Best Practices</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#category-configuration">Category Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#destination-management">Destination Management</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#rotation-retention">Rotation &amp; Retention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#best-practices-for-ui-integration">Best Practices for UI Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#data-loading-strategy">Data Loading Strategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#real-time-updates">Real-time Updates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#validation">Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#performance-optimization">Performance Optimization</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#security-considerations">Security Considerations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#authentication-authorization">Authentication &amp; Authorization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#data-protection">Data Protection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#audit-compliance">Audit &amp; Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#security-considerations">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#common-issues">Common Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#debugging-tools">Debugging Tools</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#system-requirements">System Requirements</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#minimum-requirements">Minimum Requirements</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#performance-considerations">Performance Considerations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#support-troubleshooting">Support &amp; Troubleshooting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#getting-help">Getting Help</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#common-solutions">Common Solutions</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#notes">Notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#compliance-notes">Compliance Notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#versioning">Versioning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="loggar.html#support">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#version-history">Version History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#compliance">Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#deprecation-policy">Deprecation Policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#rate-limiting">Rate Limiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#license">License</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="automation.html">Scheduler &amp; Automation API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#base-url">Base URL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#authentication">Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#quick-reference">Quick Reference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#jobs-management-api">Jobs Management API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-all-jobs">Get All Jobs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#create-new-job">Create New Job</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-job-details">Get Job Details</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#update-job">Update Job</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#delete-job">Delete Job</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#toggle-job-status">Toggle Job Status</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-job-execution-history">Get Job Execution History</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-job-execution-logs">Get Job Execution Logs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="automation.html">Scheduler &amp; Automation Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="automation.html#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automation.html#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#system-status-overview">System Status (Overview)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#job-management-section-1">Job Management (SECTION 1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#job-configuration-section-2">Job Configuration (SECTION 2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#gateway-management-section-3">Gateway Management (SECTION 3)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#schedule-types-section-4">Schedule Types (SECTION 4)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#conflict-detection-section-5">Conflict Detection (SECTION 5)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#bulk-operations-section-6">Bulk Operations (SECTION 6)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#execution-history-section-7">Execution History (SECTION 7)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#live-monitoring-section-8">Live Monitoring (SECTION 8)</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#job-execution-api">Job Execution API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#run-job-immediately">Run Job Immediately</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-execution-status">Get Execution Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automation.html#websocket-real-time-updates">WebSocket Real-time Updates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#connection-endpoint">Connection Endpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#authentication">Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#message-types">Message Types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="automation.html#job-started-event">Job Started Event</a></li>
+<li class="toctree-l4"><a class="reference internal" href="automation.html#job-completed-event">Job Completed Event</a></li>
+<li class="toctree-l4"><a class="reference internal" href="automation.html#job-failed-event">Job Failed Event</a></li>
+<li class="toctree-l4"><a class="reference internal" href="automation.html#schedule-execution-event">Schedule Execution Event</a></li>
+<li class="toctree-l4"><a class="reference internal" href="automation.html#resource-alert-event">Resource Alert Event</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#gateway-management-api">Gateway Management API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-available-gateways">Get Available Gateways</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-gateway-jobs">Get Gateway Jobs</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#conflict-detection-api">Conflict Detection API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#check-for-conflicts">Check for Conflicts</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-system-resource-usage">Get System Resource Usage</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#bulk-operations-api">Bulk Operations API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#run-all-jobs">Run All Jobs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#disable-all-jobs">Disable All Jobs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#reset-all-jobs">Reset All Jobs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#export-jobs-configuration">Export Jobs Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#import-jobs-configuration">Import Jobs Configuration</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#monitoring-analytics-api">Monitoring &amp; Analytics API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-scheduler-statistics">Get Scheduler Statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-job-performance-metrics">Get Job Performance Metrics</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#tag-management-api">Tag Management API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-all-tags">Get All Tags</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-jobs-by-tag">Get Jobs by Tag</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#websocket-events-api">WebSocket Events API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#job-started-event">Job Started Event</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#job-completed-event">Job Completed Event</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#job-failed-event">Job Failed Event</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#schedule-types-configuration">Schedule Types Configuration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#interval-schedule">Interval Schedule</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#daily-schedule">Daily Schedule</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#weekly-schedule">Weekly Schedule</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#monthly-schedule">Monthly Schedule</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#cron-schedule">Cron Schedule</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#sunrise-sunset-schedule">Sunrise/Sunset Schedule</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#action-types-configuration">Action Types Configuration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#publish-action">Publish Action</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#log-action">Log Action</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#output-action">Output Action</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#system-action">System Action</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#file-action">File Action</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#rule-action">Rule Action</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#error-handling">Error Handling</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#common-error-codes">Common Error Codes</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#performance-limits">Performance Limits</a></li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#examples">Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#python-create-daily-job">Python - Create Daily Job</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#javascript-websocket-monitoring">JavaScript - WebSocket Monitoring</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#python-bulk-operations">Python - Bulk Operations</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#api-versioning">API Versioning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#deprecation-policy">Deprecation Policy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#changelog">Changelog</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#v1-2-0-2025-03-15">v1.2.0 (2025-03-15)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#v1-1-0-2025-02-28">v1.1.0 (2025-02-28)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#v1-0-0-2025-01-15">v1.0.0 (2025-01-15)</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#support">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automation.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automation.html#complete-user-flow">Complete User Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automation.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automation.html#authentication-context">Authentication &amp; Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automation.html#support-information">Support Information</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="alerts.html">Alert Messages API</a><ul>
@@ -1106,7 +865,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Gateway OTA &amp; System Update API</li>
+      <li class="breadcrumb-item active">Gateway OTA &amp; System API</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/api/ota-re.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -1116,105 +875,68 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="gateway-ota-system-update-api">
-<h1>Gateway OTA &amp; System Update API<a class="headerlink" href="#gateway-ota-system-update-api" title="Link to this heading">¶</a></h1>
-<p>API for managing Over-the-Air (OTA) updates, system recovery, and maintenance operations for Univa IoT Gateway.</p>
-<p>Base Path: /api/v1/ota</p>
-<nav class="contents local" id="table-of-contents">
-<p class="topic-title">Table of Contents</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#overview" id="id4">Overview</a></p>
-<ul>
-<li><p><a class="reference internal" href="#system-information" id="id5">System Information</a></p>
-<ul>
-<li><p><a class="reference internal" href="#get-gateway-status" id="id6">Get Gateway Status</a></p></li>
-<li><p><a class="reference internal" href="#create-system-snapshot" id="id7">Create System Snapshot</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#available-updates" id="id8">Available Updates</a></p>
-<ul>
-<li><p><a class="reference internal" href="#check-available-updates" id="id9">Check Available Updates</a></p></li>
-<li><p><a class="reference internal" href="#toggle-auto-update" id="id10">Toggle Auto-Update</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#download-installation" id="id11">Download &amp; Installation</a></p>
-<ul>
-<li><p><a class="reference internal" href="#start-update-download" id="id12">Start Update Download</a></p></li>
-<li><p><a class="reference internal" href="#get-update-progress" id="id13">Get Update Progress</a></p></li>
-<li><p><a class="reference internal" href="#install-downloaded-update" id="id14">Install Downloaded Update</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#manual-upload-management" id="id15">Manual Upload Management</a></p>
-<ul>
-<li><p><a class="reference internal" href="#verify-uploaded-image" id="id16">Verify Uploaded Image</a></p></li>
-<li><p><a class="reference internal" href="#deploy-manual-image" id="id17">Deploy Manual Image</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#update-settings-management" id="id18">Update Settings Management</a></p>
-<ul>
-<li><p><a class="reference internal" href="#get-update-settings" id="id19">Get Update Settings</a></p></li>
-<li><p><a class="reference internal" href="#update-settings" id="id20">Update Settings</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#recovery-operations" id="id21">Recovery Operations</a></p>
-<ul>
-<li><p><a class="reference internal" href="#execute-rollback" id="id22">Execute Rollback</a></p></li>
-<li><p><a class="reference internal" href="#restore-previous-os" id="id23">Restore Previous OS</a></p></li>
-<li><p><a class="reference internal" href="#factory-reset" id="id24">Factory Reset</a></p></li>
-<li><p><a class="reference internal" href="#upload-recovery-image" id="id25">Upload Recovery Image</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#safety-management" id="id26">Safety Management</a></p>
-<ul>
-<li><p><a class="reference internal" href="#get-safety-status" id="id27">Get Safety Status</a></p></li>
-<li><p><a class="reference internal" href="#safety-override" id="id28">Safety Override</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#monitor-logs" id="id29">Monitor &amp; Logs</a></p>
-<ul>
-<li><p><a class="reference internal" href="#get-system-logs" id="id30">Get System Logs</a></p></li>
-<li><p><a class="reference internal" href="#get-monitor-status" id="id31">Get Monitor Status</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#cancel-operation" id="id32">Cancel Operation</a></p>
-<ul>
-<li><p><a class="reference internal" href="#cancel-update-operation" id="id33">Cancel Update Operation</a></p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#websocket-real-time-updates" id="id34">WebSocket Real-time Updates</a></p>
-<ul>
-<li><p><a class="reference internal" href="#connection-endpoint" id="id35">Connection Endpoint</a></p></li>
-<li><p><a class="reference internal" href="#authentication" id="id36">Authentication</a></p></li>
-<li><p><a class="reference internal" href="#message-types" id="id37">Message Types</a></p>
-<ul>
-<li><p><a class="reference internal" href="#update-progress" id="id38">Update Progress</a></p></li>
-<li><p><a class="reference internal" href="#system-status-update" id="id39">System Status Update</a></p></li>
-<li><p><a class="reference internal" href="#log-entry" id="id40">Log Entry</a></p></li>
-<li><p><a class="reference internal" href="#safety-update" id="id41">Safety Update</a></p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#error-codes" id="id42">Error Codes</a></p></li>
-<li><p><a class="reference internal" href="#id1" id="id43">Authentication</a></p></li>
-<li><p><a class="reference internal" href="#rate-limiting" id="id44">Rate Limiting</a></p></li>
-<li><p><a class="reference internal" href="#response-format" id="id45">Response Format</a></p></li>
-<li><p><a class="reference internal" href="#ui-api-mapping-summary" id="id46">UI-API Mapping Summary</a></p></li>
-</ul>
-</nav>
-<section id="overview">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<p>This API handles all OTA update operations for the current gateway only. All endpoints operate on the current gateway context identified by the <cite>X-Gateway-ID</cite> header.</p>
-<section id="system-information">
-<h3><a class="toc-backref" href="#id5" role="doc-backlink">System Information</a><a class="headerlink" href="#system-information" title="Link to this heading">¶</a></h3>
-<section id="get-gateway-status">
-<h4><a class="toc-backref" href="#id6" role="doc-backlink">Get Gateway Status</a><a class="headerlink" href="#get-gateway-status" title="Link to this heading">¶</a></h4>
+  <section id="gateway-ota-system-api">
+<h1>Gateway OTA &amp; System API<a class="headerlink" href="#gateway-ota-system-api" title="Link to this heading">¶</a></h1>
+<p>This document describes the OTA update management page and its related API endpoints for managing Over-the-Air (OTA) updates, system recovery, and maintenance operations.</p>
+<section id="page-route-frontend">
+<h2>Page Route (Frontend)<a class="headerlink" href="#page-route-frontend" title="Link to this heading">¶</a></h2>
+<dl class="http get">
+<dt class="sig sig-object http" id="get--ota-system-updates">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/ota-system-updates</span></span><a class="headerlink" href="#get--ota-system-updates" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Renders the complete OTA update management page with all system information, available updates, settings, and recovery options embedded in the HTML.</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Cookie: session_token=&lt;token&gt;</span>
+<span class="err">X-Gateway-ID: GW-3920A9</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">text/html</span>
+
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>OTA <span class="err">&amp;</span> System Updates - Univa Gateway<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;app&quot;</span> <span class="na">data-system</span><span class="o">=</span><span class="s">&#39;{...}&#39;</span> <span class="na">data-updates</span><span class="o">=</span><span class="s">&#39;[...]&#39;</span> <span class="na">data-settings</span><span class="o">=</span><span class="s">&#39;{...}&#39;</span> <span class="na">data-safety</span><span class="o">=</span><span class="s">&#39;{...}&#39;</span><span class="p">&gt;</span>
+    <span class="cm">&lt;!-- OTA update page with:</span>
+<span class="cm">         SECTION 1: System Information &amp; Partition Status</span>
+<span class="cm">         SECTION 2: Available Updates</span>
+<span class="cm">         SECTION 3: Manual Upload Management</span>
+<span class="cm">         SECTION 4: Update Settings &amp; Schedule</span>
+<span class="cm">         SECTION 5: Recovery Operations</span>
+<span class="cm">         SECTION 6: Safety Constraints</span>
+<span class="cm">         SECTION 7: Live Update Monitor &amp; Logs</span>
+<span class="cm">    --&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p><strong>How it works</strong>:
+- Server renders the HTML page with embedded system and update data
+- All system information, available updates, settings, and safety status are embedded
+- JavaScript reads this data and renders the complete OTA update interface
+- No separate API calls needed on initial page load
+- Gateway context is provided via X-Gateway-ID header</p>
+<p><strong>Error Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Found</span>
+<span class="na">Location</span><span class="o">:</span> <span class="l">/login</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="api-endpoints-backend">
+<h2>API Endpoints (Backend)<a class="headerlink" href="#api-endpoints-backend" title="Link to this heading">¶</a></h2>
+<p>These endpoints handle all OTA update operations triggered from the page. All endpoints operate on the current gateway context identified by the <cite>X-Gateway-ID</cite> header.</p>
+<section id="system-information-section-1">
+<h3>System Information (SECTION 1)<a class="headerlink" href="#system-information-section-1" title="Link to this heading">¶</a></h3>
 <dl class="http get">
 <dt class="sig sig-object http" id="get--api-v1-ota-status">
 <span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/status</span></span><a class="headerlink" href="#get--api-v1-ota-status" title="Link to this definition">¶</a></dt>
-<dd><p>Get current gateway system information, partitions, and auto-rollback status.</p>
+<dd><p><strong>Description</strong>: Get current gateway system information, partitions, and auto-rollback status.</p>
 <p><strong>UI Element</strong>: SECTION 1: System Information cards and Partition Status</p>
 <p><strong>Headers</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
@@ -1263,13 +985,10 @@
 </div>
 </dd></dl>
 
-</section>
-<section id="create-system-snapshot">
-<h4><a class="toc-backref" href="#id7" role="doc-backlink">Create System Snapshot</a><a class="headerlink" href="#create-system-snapshot" title="Link to this heading">¶</a></h4>
 <dl class="http post">
 <dt class="sig sig-object http" id="post--api-v1-ota-snapshot">
 <span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/snapshot</span></span><a class="headerlink" href="#post--api-v1-ota-snapshot" title="Link to this definition">¶</a></dt>
-<dd><p>Create a system snapshot.</p>
+<dd><p><strong>Description</strong>: Create a system snapshot.</p>
 <p><strong>UI Element</strong>: SECTION 1: “Snapshot” button</p>
 <p><strong>Headers</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
@@ -1302,16 +1021,50 @@
 </div>
 </dd></dl>
 
+<dl class="http post">
+<dt class="sig sig-object http" id="post--api-v1-ota-debug-bundle">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/debug-bundle</span></span><a class="headerlink" href="#post--api-v1-ota-debug-bundle" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Generate debug bundle for troubleshooting.</p>
+<p><strong>UI Element</strong>: SECTION 1: “Debug Bundle” button</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<span class="err">X-Gateway-ID: GW-3920A9</span>
+<span class="err">Content-Type: application/json</span>
+</pre></div>
+</div>
+<p><strong>Request</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;include_logs&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;include_configs&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;include_metrics&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;bundle_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;debug-20250315-001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;creating&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;estimated_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;150 MB&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;download_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/api/v1/ota/debug/download/debug-20250315-001.tar.gz&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Debug bundle creation started&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
-</section>
-<section id="available-updates">
-<h3><a class="toc-backref" href="#id8" role="doc-backlink">Available Updates</a><a class="headerlink" href="#available-updates" title="Link to this heading">¶</a></h3>
-<section id="check-available-updates">
-<h4><a class="toc-backref" href="#id9" role="doc-backlink">Check Available Updates</a><a class="headerlink" href="#check-available-updates" title="Link to this heading">¶</a></h4>
+<section id="available-updates-section-2">
+<h3>Available Updates (SECTION 2)<a class="headerlink" href="#available-updates-section-2" title="Link to this heading">¶</a></h3>
 <dl class="http get">
 <dt class="sig sig-object http" id="get--api-v1-ota-updates">
 <span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/updates</span></span><a class="headerlink" href="#get--api-v1-ota-updates" title="Link to this definition">¶</a></dt>
-<dd><p>Get list of available updates for the gateway.</p>
+<dd><p><strong>Description</strong>: Get list of available updates for the gateway.</p>
 <p><strong>UI Element</strong>: SECTION 2: Available Updates table</p>
 <p><strong>Headers</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
@@ -1351,13 +1104,46 @@
 </div>
 </dd></dl>
 
-</section>
-<section id="toggle-auto-update">
-<h4><a class="toc-backref" href="#id10" role="doc-backlink">Toggle Auto-Update</a><a class="headerlink" href="#toggle-auto-update" title="Link to this heading">¶</a></h4>
+<dl class="http post">
+<dt class="sig sig-object http" id="post--api-v1-ota-check-updates">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/check-updates</span></span><a class="headerlink" href="#post--api-v1-ota-check-updates" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Manually check for new updates.</p>
+<p><strong>UI Element</strong>: SECTION 2: “Check for Updates” button</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<span class="err">X-Gateway-ID: GW-3920A9</span>
+<span class="err">Content-Type: application/json</span>
+</pre></div>
+</div>
+<p><strong>Request</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;force&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;background&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;check_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;check-20250315-001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;checking&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://ota.univa.com&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;estimated_duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00:00:30&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Update check initiated&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
 <dl class="http post">
 <dt class="sig sig-object http" id="post--api-v1-ota-auto-update">
 <span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/auto-update</span></span><a class="headerlink" href="#post--api-v1-ota-auto-update" title="Link to this definition">¶</a></dt>
-<dd><p>Toggle auto-update setting.</p>
+<dd><p><strong>Description</strong>: Toggle auto-update setting.</p>
 <p><strong>UI Element</strong>: SECTION 2: “Auto-Update: On/Off” button</p>
 <p><strong>Headers</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
@@ -1387,16 +1173,10 @@
 </div>
 </dd></dl>
 
-</section>
-</section>
-<section id="download-installation">
-<h3><a class="toc-backref" href="#id11" role="doc-backlink">Download &amp; Installation</a><a class="headerlink" href="#download-installation" title="Link to this heading">¶</a></h3>
-<section id="start-update-download">
-<h4><a class="toc-backref" href="#id12" role="doc-backlink">Start Update Download</a><a class="headerlink" href="#start-update-download" title="Link to this heading">¶</a></h4>
 <dl class="http post">
 <dt class="sig sig-object http" id="post--api-v1-ota-download">
 <span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/download</span></span><a class="headerlink" href="#post--api-v1-ota-download" title="Link to this definition">¶</a></dt>
-<dd><p>Start downloading an available update.</p>
+<dd><p><strong>Description</strong>: Start downloading an available update.</p>
 <p><strong>UI Element</strong>: SECTION 2: “Install Now” buttons</p>
 <p><strong>Headers</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
@@ -1438,104 +1218,12 @@
 </dd></dl>
 
 </section>
-<section id="get-update-progress">
-<h4><a class="toc-backref" href="#id13" role="doc-backlink">Get Update Progress</a><a class="headerlink" href="#get-update-progress" title="Link to this heading">¶</a></h4>
-<dl class="http get">
-<dt class="sig sig-object http" id="get--api-v1-ota-progress">
-<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/progress</span></span><a class="headerlink" href="#get--api-v1-ota-progress" title="Link to this definition">¶</a></dt>
-<dd><p>Get progress of ongoing update download or installation.</p>
-<p><strong>UI Element</strong>: SECTION 5: Live Update Monitor progress bar</p>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-<span class="err">X-Gateway-ID: GW-3920A9</span>
-</pre></div>
-</div>
-<p><strong>Query Parameters</strong>:</p>
-<ul class="simple">
-<li><p><strong>job_id</strong> (string): ID of the update job <em>(required)</em></p></li>
-</ul>
-<p><strong>Response</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-
-<span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;downloading&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;job_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OTA-JOB-8821X&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;progress&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;percentage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">65.5</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;current_operation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;downloading&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;speed&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;8.2 MB/s&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;downloaded&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;295 MB&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;452 MB&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;eta&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00:30&quot;</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;update&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;update-001&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;v5.0.5&quot;</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;elapsed_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00:05:30&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Update progress retrieved successfully&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</dd></dl>
-
-</section>
-<section id="install-downloaded-update">
-<h4><a class="toc-backref" href="#id14" role="doc-backlink">Install Downloaded Update</a><a class="headerlink" href="#install-downloaded-update" title="Link to this heading">¶</a></h4>
-<dl class="http post">
-<dt class="sig sig-object http" id="post--api-v1-ota-install">
-<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/install</span></span><a class="headerlink" href="#post--api-v1-ota-install" title="Link to this definition">¶</a></dt>
-<dd><p>Start installing a downloaded update.</p>
-<p><strong>UI Element</strong>: SECTION 5: Progress completion leading to installation</p>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-<span class="err">X-Gateway-ID: GW-3920A9</span>
-<span class="err">Content-Type: application/json</span>
-</pre></div>
-</div>
-<p><strong>Request</strong>:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;job_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OTA-JOB-8821X&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;strategy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;seamless&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;reboot_after&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;create_snapshot&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p><strong>Response</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-
-<span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;job_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OTA-JOB-8821X&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;installing&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;strategy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;seamless&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;target_partition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;reboot_after&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;next_boot_partition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;B&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Update installation started&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</dd></dl>
-
-</section>
-</section>
-<section id="manual-upload-management">
-<h3><a class="toc-backref" href="#id15" role="doc-backlink">Manual Upload Management</a><a class="headerlink" href="#manual-upload-management" title="Link to this heading">¶</a></h3>
-<section id="verify-uploaded-image">
-<h4><a class="toc-backref" href="#id16" role="doc-backlink">Verify Uploaded Image</a><a class="headerlink" href="#verify-uploaded-image" title="Link to this heading">¶</a></h4>
+<section id="manual-upload-management-section-3">
+<h3>Manual Upload Management (SECTION 3)<a class="headerlink" href="#manual-upload-management-section-3" title="Link to this heading">¶</a></h3>
 <dl class="http post">
 <dt class="sig sig-object http" id="post--api-v1-ota-upload-verify">
 <span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/upload/verify</span></span><a class="headerlink" href="#post--api-v1-ota-upload-verify" title="Link to this definition">¶</a></dt>
-<dd><p>Verify manually uploaded firmware image.</p>
+<dd><p><strong>Description</strong>: Verify manually uploaded firmware image.</p>
 <p><strong>UI Element</strong>: SECTION 3: “Verify &amp; Prepare Deployment” button</p>
 <p><strong>Headers</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
@@ -1576,13 +1264,10 @@
 </div>
 </dd></dl>
 
-</section>
-<section id="deploy-manual-image">
-<h4><a class="toc-backref" href="#id17" role="doc-backlink">Deploy Manual Image</a><a class="headerlink" href="#deploy-manual-image" title="Link to this heading">¶</a></h4>
 <dl class="http post">
 <dt class="sig sig-object http" id="post--api-v1-ota-upload-deploy">
 <span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/upload/deploy</span></span><a class="headerlink" href="#post--api-v1-ota-upload-deploy" title="Link to this definition">¶</a></dt>
-<dd><p>Deploy manually uploaded firmware image.</p>
+<dd><p><strong>Description</strong>: Deploy manually uploaded firmware image.</p>
 <p><strong>UI Element</strong>: SECTION 3: “Deploy to Partition B” button (appears after verification)</p>
 <p><strong>Headers</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
@@ -1621,16 +1306,13 @@
 </dd></dl>
 
 </section>
-</section>
-<section id="update-settings-management">
-<h3><a class="toc-backref" href="#id18" role="doc-backlink">Update Settings Management</a><a class="headerlink" href="#update-settings-management" title="Link to this heading">¶</a></h3>
-<section id="get-update-settings">
-<h4><a class="toc-backref" href="#id19" role="doc-backlink">Get Update Settings</a><a class="headerlink" href="#get-update-settings" title="Link to this heading">¶</a></h4>
+<section id="update-settings-management-section-4">
+<h3>Update Settings Management (SECTION 4)<a class="headerlink" href="#update-settings-management-section-4" title="Link to this heading">¶</a></h3>
 <dl class="http get">
 <dt class="sig sig-object http" id="get--api-v1-ota-settings">
 <span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/settings</span></span><a class="headerlink" href="#get--api-v1-ota-settings" title="Link to this definition">¶</a></dt>
-<dd><p>Get current update settings and configuration.</p>
-<p><strong>UI Element</strong>: SECTION 3: Update Settings &amp; Schedule cards</p>
+<dd><p><strong>Description</strong>: Get current update settings and configuration.</p>
+<p><strong>UI Element</strong>: SECTION 4: Update Settings &amp; Schedule cards</p>
 <p><strong>Headers</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
 <span class="err">X-Gateway-ID: GW-3920A9</span>
@@ -1662,14 +1344,11 @@
 </div>
 </dd></dl>
 
-</section>
-<section id="update-settings">
-<h4><a class="toc-backref" href="#id20" role="doc-backlink">Update Settings</a><a class="headerlink" href="#update-settings" title="Link to this heading">¶</a></h4>
 <dl class="http post">
 <dt class="sig sig-object http" id="post--api-v1-ota-settings">
 <span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/settings</span></span><a class="headerlink" href="#post--api-v1-ota-settings" title="Link to this definition">¶</a></dt>
-<dd><p>Update system settings.</p>
-<p><strong>UI Element</strong>: SECTION 3: All settings checkboxes and dropdowns</p>
+<dd><p><strong>Description</strong>: Update system settings.</p>
+<p><strong>UI Element</strong>: SECTION 4: All settings checkboxes and dropdowns</p>
 <p><strong>Headers</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
 <span class="err">X-Gateway-ID: GW-3920A9</span>
@@ -1709,16 +1388,13 @@
 </dd></dl>
 
 </section>
-</section>
-<section id="recovery-operations">
-<h3><a class="toc-backref" href="#id21" role="doc-backlink">Recovery Operations</a><a class="headerlink" href="#recovery-operations" title="Link to this heading">¶</a></h3>
-<section id="execute-rollback">
-<h4><a class="toc-backref" href="#id22" role="doc-backlink">Execute Rollback</a><a class="headerlink" href="#execute-rollback" title="Link to this heading">¶</a></h4>
+<section id="recovery-operations-section-5">
+<h3>Recovery Operations (SECTION 5)<a class="headerlink" href="#recovery-operations-section-5" title="Link to this heading">¶</a></h3>
 <dl class="http post">
 <dt class="sig sig-object http" id="post--api-v1-ota-recovery-rollback">
 <span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/recovery/rollback</span></span><a class="headerlink" href="#post--api-v1-ota-recovery-rollback" title="Link to this definition">¶</a></dt>
-<dd><p>Execute rollback to previous partition.</p>
-<p><strong>UI Element</strong>: SECTION 4: “Execute Rollback” button</p>
+<dd><p><strong>Description</strong>: Execute rollback to previous partition.</p>
+<p><strong>UI Element</strong>: SECTION 5: “Execute Rollback” button</p>
 <p><strong>Headers</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
 <span class="err">X-Gateway-ID: GW-3920A9</span>
@@ -1753,14 +1429,11 @@
 </div>
 </dd></dl>
 
-</section>
-<section id="restore-previous-os">
-<h4><a class="toc-backref" href="#id23" role="doc-backlink">Restore Previous OS</a><a class="headerlink" href="#restore-previous-os" title="Link to this heading">¶</a></h4>
 <dl class="http post">
 <dt class="sig sig-object http" id="post--api-v1-ota-recovery-restore">
 <span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/recovery/restore</span></span><a class="headerlink" href="#post--api-v1-ota-recovery-restore" title="Link to this definition">¶</a></dt>
-<dd><p>Restore from a snapshot.</p>
-<p><strong>UI Element</strong>: SECTION 4: “Start Restore” button</p>
+<dd><p><strong>Description</strong>: Restore from a snapshot.</p>
+<p><strong>UI Element</strong>: SECTION 5: “Start Restore” button</p>
 <p><strong>Headers</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
 <span class="err">X-Gateway-ID: GW-3920A9</span>
@@ -1792,14 +1465,11 @@
 </div>
 </dd></dl>
 
-</section>
-<section id="factory-reset">
-<h4><a class="toc-backref" href="#id24" role="doc-backlink">Factory Reset</a><a class="headerlink" href="#factory-reset" title="Link to this heading">¶</a></h4>
 <dl class="http post">
 <dt class="sig sig-object http" id="post--api-v1-ota-recovery-factory">
 <span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/recovery/factory</span></span><a class="headerlink" href="#post--api-v1-ota-recovery-factory" title="Link to this definition">¶</a></dt>
-<dd><p>Perform factory reset.</p>
-<p><strong>UI Element</strong>: SECTION 4: “Factory Reset” button</p>
+<dd><p><strong>Description</strong>: Perform factory reset.</p>
+<p><strong>UI Element</strong>: SECTION 5: “Factory Reset” button</p>
 <p><strong>Headers</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
 <span class="err">X-Gateway-ID: GW-3920A9</span>
@@ -1832,14 +1502,11 @@
 </div>
 </dd></dl>
 
-</section>
-<section id="upload-recovery-image">
-<h4><a class="toc-backref" href="#id25" role="doc-backlink">Upload Recovery Image</a><a class="headerlink" href="#upload-recovery-image" title="Link to this heading">¶</a></h4>
 <dl class="http post">
 <dt class="sig sig-object http" id="post--api-v1-ota-recovery-upload">
 <span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/recovery/upload</span></span><a class="headerlink" href="#post--api-v1-ota-recovery-upload" title="Link to this definition">¶</a></dt>
-<dd><p>Upload recovery image.</p>
-<p><strong>UI Element</strong>: SECTION 4: “Upload” recovery image button</p>
+<dd><p><strong>Description</strong>: Upload recovery image.</p>
+<p><strong>UI Element</strong>: SECTION 5: “Upload” recovery image button</p>
 <p><strong>Headers</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
 <span class="err">X-Gateway-ID: GW-3920A9</span>
@@ -1868,16 +1535,13 @@
 </dd></dl>
 
 </section>
-</section>
-<section id="safety-management">
-<h3><a class="toc-backref" href="#id26" role="doc-backlink">Safety Management</a><a class="headerlink" href="#safety-management" title="Link to this heading">¶</a></h3>
-<section id="get-safety-status">
-<h4><a class="toc-backref" href="#id27" role="doc-backlink">Get Safety Status</a><a class="headerlink" href="#get-safety-status" title="Link to this heading">¶</a></h4>
+<section id="safety-management-section-6">
+<h3>Safety Management (SECTION 6)<a class="headerlink" href="#safety-management-section-6" title="Link to this heading">¶</a></h3>
 <dl class="http get">
 <dt class="sig sig-object http" id="get--api-v1-ota-safety">
 <span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/safety</span></span><a class="headerlink" href="#get--api-v1-ota-safety" title="Link to this definition">¶</a></dt>
-<dd><p>Get current safety constraints status.</p>
-<p><strong>UI Element</strong>: SECTION 4: Safety Constraints checkboxes</p>
+<dd><p><strong>Description</strong>: Get current safety constraints status.</p>
+<p><strong>UI Element</strong>: SECTION 6: Safety Constraints checkboxes</p>
 <p><strong>Headers</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
 <span class="err">X-Gateway-ID: GW-3920A9</span>
@@ -1916,14 +1580,11 @@
 </div>
 </dd></dl>
 
-</section>
-<section id="safety-override">
-<h4><a class="toc-backref" href="#id28" role="doc-backlink">Safety Override</a><a class="headerlink" href="#safety-override" title="Link to this heading">¶</a></h4>
 <dl class="http post">
 <dt class="sig sig-object http" id="post--api-v1-ota-safety-override">
 <span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/safety/override</span></span><a class="headerlink" href="#post--api-v1-ota-safety-override" title="Link to this definition">¶</a></dt>
-<dd><p>Override safety constraints.</p>
-<p><strong>UI Element</strong>: SECTION 4: “Force Override” toggle</p>
+<dd><p><strong>Description</strong>: Override safety constraints.</p>
+<p><strong>UI Element</strong>: SECTION 6: “Force Override” toggle</p>
 <p><strong>Headers</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
 <span class="err">X-Gateway-ID: GW-3920A9</span>
@@ -1958,16 +1619,96 @@
 </dd></dl>
 
 </section>
-</section>
-<section id="monitor-logs">
-<h3><a class="toc-backref" href="#id29" role="doc-backlink">Monitor &amp; Logs</a><a class="headerlink" href="#monitor-logs" title="Link to this heading">¶</a></h3>
-<section id="get-system-logs">
-<h4><a class="toc-backref" href="#id30" role="doc-backlink">Get System Logs</a><a class="headerlink" href="#get-system-logs" title="Link to this heading">¶</a></h4>
+<section id="monitor-live-updates-section-7">
+<h3>Monitor &amp; Live Updates (SECTION 7)<a class="headerlink" href="#monitor-live-updates-section-7" title="Link to this heading">¶</a></h3>
+<dl class="http get">
+<dt class="sig sig-object http" id="get--api-v1-ota-progress">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/progress</span></span><a class="headerlink" href="#get--api-v1-ota-progress" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Get progress of ongoing update download or installation.</p>
+<p><strong>UI Element</strong>: SECTION 7: Live Update Monitor progress bar</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<span class="err">X-Gateway-ID: GW-3920A9</span>
+</pre></div>
+</div>
+<p><strong>Query Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>job_id</strong> (string): ID of the update job <em>(required)</em></p></li>
+</ul>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;downloading&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;job_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OTA-JOB-8821X&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;progress&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;percentage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">65.5</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;current_operation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;downloading&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;speed&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;8.2 MB/s&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;downloaded&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;295 MB&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;452 MB&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;eta&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00:30&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;update&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;update-001&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;v5.0.5&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;elapsed_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00:05:30&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Update progress retrieved successfully&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="http post">
+<dt class="sig sig-object http" id="post--api-v1-ota-install">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/install</span></span><a class="headerlink" href="#post--api-v1-ota-install" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Start installing a downloaded update.</p>
+<p><strong>UI Element</strong>: SECTION 7: Install button after download completes</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<span class="err">X-Gateway-ID: GW-3920A9</span>
+<span class="err">Content-Type: application/json</span>
+</pre></div>
+</div>
+<p><strong>Request</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;job_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OTA-JOB-8821X&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;strategy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;seamless&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;reboot_after&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;create_snapshot&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;job_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OTA-JOB-8821X&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;installing&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;strategy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;seamless&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;target_partition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;reboot_after&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;next_boot_partition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;B&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Update installation started&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
 <dl class="http get">
 <dt class="sig sig-object http" id="get--api-v1-ota-logs">
 <span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/logs</span></span><a class="headerlink" href="#get--api-v1-ota-logs" title="Link to this definition">¶</a></dt>
-<dd><p>Get system logs for monitoring.</p>
-<p><strong>UI Element</strong>: SECTION 5: Update Activity Log</p>
+<dd><p><strong>Description</strong>: Get system logs for monitoring.</p>
+<p><strong>UI Element</strong>: SECTION 7: Update Activity Log</p>
 <p><strong>Headers</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
 <span class="err">X-Gateway-ID: GW-3920A9</span>
@@ -2001,14 +1742,11 @@
 </div>
 </dd></dl>
 
-</section>
-<section id="get-monitor-status">
-<h4><a class="toc-backref" href="#id31" role="doc-backlink">Get Monitor Status</a><a class="headerlink" href="#get-monitor-status" title="Link to this heading">¶</a></h4>
 <dl class="http get">
 <dt class="sig sig-object http" id="get--api-v1-ota-monitor">
 <span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/monitor</span></span><a class="headerlink" href="#get--api-v1-ota-monitor" title="Link to this definition">¶</a></dt>
-<dd><p>Get real-time system monitoring status.</p>
-<p><strong>UI Element</strong>: SECTION 5: Live Update Monitor</p>
+<dd><p><strong>Description</strong>: Get real-time system monitoring status.</p>
+<p><strong>UI Element</strong>: SECTION 7: Live Update Monitor status</p>
 <p><strong>Headers</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
 <span class="err">X-Gateway-ID: GW-3920A9</span>
@@ -2036,17 +1774,11 @@
 </div>
 </dd></dl>
 
-</section>
-</section>
-<section id="cancel-operation">
-<h3><a class="toc-backref" href="#id32" role="doc-backlink">Cancel Operation</a><a class="headerlink" href="#cancel-operation" title="Link to this heading">¶</a></h3>
-<section id="cancel-update-operation">
-<h4><a class="toc-backref" href="#id33" role="doc-backlink">Cancel Update Operation</a><a class="headerlink" href="#cancel-update-operation" title="Link to this heading">¶</a></h4>
 <dl class="http post">
 <dt class="sig sig-object http" id="post--api-v1-ota-cancel">
 <span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/v1/ota/cancel</span></span><a class="headerlink" href="#post--api-v1-ota-cancel" title="Link to this definition">¶</a></dt>
-<dd><p>Cancel ongoing update operation.</p>
-<p><strong>UI Element</strong>: SECTION 5: Cancel button (implied in UI)</p>
+<dd><p><strong>Description</strong>: Cancel ongoing update operation.</p>
+<p><strong>UI Element</strong>: SECTION 7: Cancel button</p>
 <p><strong>Headers</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
 <span class="err">X-Gateway-ID: GW-3920A9</span>
@@ -2079,18 +1811,17 @@
 
 </section>
 </section>
-</section>
 <section id="websocket-real-time-updates">
-<h2><a class="toc-backref" href="#id34" role="doc-backlink">WebSocket Real-time Updates</a><a class="headerlink" href="#websocket-real-time-updates" title="Link to this heading">¶</a></h2>
+<h2>WebSocket Real-time Updates<a class="headerlink" href="#websocket-real-time-updates" title="Link to this heading">¶</a></h2>
 <section id="connection-endpoint">
-<h3><a class="toc-backref" href="#id35" role="doc-backlink">Connection Endpoint</a><a class="headerlink" href="#connection-endpoint" title="Link to this heading">¶</a></h3>
+<h3>Connection Endpoint<a class="headerlink" href="#connection-endpoint" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ws</span><span class="p">:</span><span class="o">//</span><span class="p">{</span><span class="n">gateway</span><span class="o">-</span><span class="n">ip</span><span class="p">}</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">ota</span><span class="o">/</span><span class="n">ws</span>
 <span class="n">wss</span><span class="p">:</span><span class="o">//</span><span class="p">{</span><span class="n">gateway</span><span class="o">-</span><span class="n">ip</span><span class="p">}</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">ota</span><span class="o">/</span><span class="n">ws</span> <span class="p">(</span><span class="n">secure</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <section id="authentication">
-<h3><a class="toc-backref" href="#id36" role="doc-backlink">Authentication</a><a class="headerlink" href="#authentication" title="Link to this heading">¶</a></h3>
+<h3>Authentication<a class="headerlink" href="#authentication" title="Link to this heading">¶</a></h3>
 <p>Connect with authentication token:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;auth&quot;</span><span class="p">,</span>
@@ -2100,9 +1831,9 @@
 </div>
 </section>
 <section id="message-types">
-<h3><a class="toc-backref" href="#id37" role="doc-backlink">Message Types</a><a class="headerlink" href="#message-types" title="Link to this heading">¶</a></h3>
+<h3>Message Types<a class="headerlink" href="#message-types" title="Link to this heading">¶</a></h3>
 <section id="update-progress">
-<h4><a class="toc-backref" href="#id38" role="doc-backlink">Update Progress</a><a class="headerlink" href="#update-progress" title="Link to this heading">¶</a></h4>
+<h4>Update Progress<a class="headerlink" href="#update-progress" title="Link to this heading">¶</a></h4>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;update_progress&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;job_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OTA-JOB-8821X&quot;</span><span class="p">,</span>
@@ -2117,7 +1848,7 @@
 </div>
 </section>
 <section id="system-status-update">
-<h4><a class="toc-backref" href="#id39" role="doc-backlink">System Status Update</a><a class="headerlink" href="#system-status-update" title="Link to this heading">¶</a></h4>
+<h4>System Status Update<a class="headerlink" href="#system-status-update" title="Link to this heading">¶</a></h4>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;system_status&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;installing&quot;</span><span class="p">,</span>
@@ -2133,7 +1864,7 @@
 </div>
 </section>
 <section id="log-entry">
-<h4><a class="toc-backref" href="#id40" role="doc-backlink">Log Entry</a><a class="headerlink" href="#log-entry" title="Link to this heading">¶</a></h4>
+<h4>Log Entry<a class="headerlink" href="#log-entry" title="Link to this heading">¶</a></h4>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;log_entry&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-03-15T11:58:00Z&quot;</span><span class="p">,</span>
@@ -2145,7 +1876,7 @@
 </div>
 </section>
 <section id="safety-update">
-<h4><a class="toc-backref" href="#id41" role="doc-backlink">Safety Update</a><a class="headerlink" href="#safety-update" title="Link to this heading">¶</a></h4>
+<h4>Safety Update<a class="headerlink" href="#safety-update" title="Link to this heading">¶</a></h4>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;safety_update&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;constraint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;crane_motion&quot;</span><span class="p">,</span>
@@ -2158,8 +1889,191 @@
 </section>
 </section>
 </section>
+<section id="route-summary">
+<h2>Route Summary<a class="headerlink" href="#route-summary" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">OTA Update Management Routes</span><a class="headerlink" href="#id1" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 15.0%" />
+<col style="width: 50.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Method</p></th>
+<th class="head"><p>Route &amp; Purpose</p></th>
+<th class="head"><p>Auth</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Page</p></td>
+<td><p>GET</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/ota-system-updates</span></code> - Main OTA update page</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>System Info</p></td>
+<td><p>GET</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/status</span></code> - System information</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>System Info</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/snapshot</span></code> - Create snapshot</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>System Info</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/debug-bundle</span></code> - Generate debug bundle</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Available Updates</p></td>
+<td><p>GET</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/updates</span></code> - Available updates</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Available Updates</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/check-updates</span></code> - Check for updates</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Available Updates</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/auto-update</span></code> - Toggle auto-update</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Available Updates</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/download</span></code> - Download update</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Manual Upload</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/upload/verify</span></code> - Verify uploaded image</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Manual Upload</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/upload/deploy</span></code> - Deploy manual image</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Settings</p></td>
+<td><p>GET</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/settings</span></code> - Get update settings</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Settings</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/settings</span></code> - Update settings</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Recovery</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/recovery/rollback</span></code> - Execute rollback</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Recovery</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/recovery/restore</span></code> - Restore OS</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Recovery</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/recovery/factory</span></code> - Factory reset</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Recovery</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/recovery/upload</span></code> - Upload recovery image</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Safety</p></td>
+<td><p>GET</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/safety</span></code> - Safety status</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Safety</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/safety/override</span></code> - Safety override</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Monitor</p></td>
+<td><p>GET</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/progress</span></code> - Update progress</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Monitor</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/install</span></code> - Install update</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Monitor</p></td>
+<td><p>GET</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/logs</span></code> - System logs</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Monitor</p></td>
+<td><p>GET</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/monitor</span></code> - Monitor status</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Monitor</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/cancel</span></code> - Cancel operation</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Real-time</p></td>
+<td><p>WS</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/ota/ws</span></code> - WebSocket for real-time updates</p></td>
+<td><p>Yes</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="complete-user-flow">
+<h2>Complete User Flow<a class="headerlink" href="#complete-user-flow" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>User goes to page</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/ota-system-updates</span></code>
+- Server renders HTML with embedded system and update data
+- All 7 sections populated with current data</p></li>
+<li><p><strong>User views system information</strong> (SECTION 1):
+- Gateway model, OS version, kernel, uptime
+- Partition status (A/B partitions)
+- “Snapshot” button → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/v1/ota/snapshot</span></code>
+- “Debug Bundle” button → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/v1/ota/debug-bundle</span></code></p></li>
+<li><p><strong>User checks available updates</strong> (SECTION 2):
+- Available updates table with versions and types
+- “Check for Updates” button → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/v1/ota/check-updates</span></code>
+- “Auto-Update: On/Off” toggle → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/v1/ota/auto-update</span></code>
+- “Install Now” buttons → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/v1/ota/download</span></code></p></li>
+<li><p><strong>User manages manual uploads</strong> (SECTION 3):
+- File upload area for custom firmware
+- “Verify &amp; Prepare Deployment” → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/v1/ota/upload/verify</span></code>
+- “Deploy to Partition B” → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/v1/ota/upload/deploy</span></code></p></li>
+<li><p><strong>User configures update settings</strong> (SECTION 4):
+- Auto-update settings checkboxes
+- Maintenance window schedule
+- Update strategy selection
+- “Save Settings” → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/v1/ota/settings</span></code></p></li>
+<li><p><strong>User performs recovery operations</strong> (SECTION 5):
+- “Execute Rollback” → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/v1/ota/recovery/rollback</span></code>
+- “Start Restore” → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/v1/ota/recovery/restore</span></code>
+- “Factory Reset” → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/v1/ota/recovery/factory</span></code>
+- “Upload” recovery image → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/v1/ota/recovery/upload</span></code></p></li>
+<li><p><strong>User monitors safety constraints</strong> (SECTION 6):
+- Safety constraint status (crane motion, ACS, UPS battery)
+- “Force Override” toggle → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/v1/ota/safety/override</span></code></p></li>
+<li><p><strong>User monitors live updates</strong> (SECTION 7):
+- Progress bar for ongoing operations → <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/v1/ota/progress</span></code>
+- “Install” button after download → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/v1/ota/install</span></code>
+- Update activity logs → <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/v1/ota/logs</span></code>
+- Real-time monitoring → <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/v1/ota/monitor</span></code>
+- “Cancel” button → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/v1/ota/cancel</span></code>
+- WebSocket connection for real-time updates → <code class="docutils literal notranslate"><span class="pre">/api/v1/ota/ws</span></code></p></li>
+</ol>
+</section>
 <section id="error-codes">
-<h2><a class="toc-backref" href="#id42" role="doc-backlink">Error Codes</a><a class="headerlink" href="#error-codes" title="Link to this heading">¶</a></h2>
+<h2>Error Codes<a class="headerlink" href="#error-codes" title="Link to this heading">¶</a></h2>
 <table class="docutils align-default" id="id2">
 <caption><span class="caption-text">OTA Error Codes</span><a class="headerlink" href="#id2" title="Link to this table">¶</a></caption>
 <colgroup>
@@ -2172,139 +2086,90 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong>OTA_INVALID_IMAGE</strong></p></td>
+<tr class="row-even"><td><p>OTA_INVALID_IMAGE</p></td>
 <td><p>Invalid firmware image</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>OTA_SIGNATURE_FAILED</strong></p></td>
+<tr class="row-odd"><td><p>OTA_SIGNATURE_FAILED</p></td>
 <td><p>Signature verification failed</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>OTA_INSUFFICIENT_SPACE</strong></p></td>
+<tr class="row-even"><td><p>OTA_INSUFFICIENT_SPACE</p></td>
 <td><p>Insufficient disk space for update</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>OTA_UPDATE_BLOCKED</strong></p></td>
+<tr class="row-odd"><td><p>OTA_UPDATE_BLOCKED</p></td>
 <td><p>Update blocked by safety constraints</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>OTA_DOWNLOAD_FAILED</strong></p></td>
+<tr class="row-even"><td><p>OTA_DOWNLOAD_FAILED</p></td>
 <td><p>Download failed</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>OTA_INSTALL_FAILED</strong></p></td>
+<tr class="row-odd"><td><p>OTA_INSTALL_FAILED</p></td>
 <td><p>Installation failed</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>OTA_ROLLBACK_FAILED</strong></p></td>
+<tr class="row-even"><td><p>OTA_ROLLBACK_FAILED</p></td>
 <td><p>Rollback operation failed</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>OTA_RECOVERY_FAILED</strong></p></td>
+<tr class="row-odd"><td><p>OTA_RECOVERY_FAILED</p></td>
 <td><p>Recovery operation failed</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>OTA_INVALID_PIN</strong></p></td>
+<tr class="row-even"><td><p>OTA_INVALID_PIN</p></td>
 <td><p>Invalid PIN for operation</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>OTA_OPERATION_IN_PROGRESS</strong></p></td>
+<tr class="row-odd"><td><p>OTA_OPERATION_IN_PROGRESS</p></td>
 <td><p>Another operation is in progress</p></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="id1">
-<h2><a class="toc-backref" href="#id43" role="doc-backlink">Authentication</a><a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
-<p>All endpoints require:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;jwt_token&gt;</span>
-<span class="err">X-Gateway-ID: GW-3920A9</span>
+<section id="authentication-context">
+<h2>Authentication &amp; Context<a class="headerlink" href="#authentication-context" title="Link to this heading">¶</a></h2>
+<p>All endpoints require gateway context identification:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Cookie</span><span class="p">:</span> <span class="n">session_token</span><span class="o">=&lt;</span><span class="n">token</span><span class="o">&gt;</span>
+<span class="n">X</span><span class="o">-</span><span class="n">Gateway</span><span class="o">-</span><span class="n">ID</span><span class="p">:</span> <span class="n">GW</span><span class="o">-</span><span class="mi">3920</span><span class="n">A9</span>
 </pre></div>
 </div>
+<p><strong>Important</strong>: This API only manages OTA updates for the current gateway specified in <cite>X-Gateway-ID</cite> header.</p>
 </section>
-<section id="rate-limiting">
-<h2><a class="toc-backref" href="#id44" role="doc-backlink">Rate Limiting</a><a class="headerlink" href="#rate-limiting" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>60 requests per minute per user</p></li>
-<li><p>Rate limit headers included in responses</p></li>
-</ul>
+<section id="update-types">
+<h2>Update Types<a class="headerlink" href="#update-types" title="Link to this heading">¶</a></h2>
+<p>### Update Severity Levels
+- <strong>Critical</strong>: Security patches, critical bug fixes
+- <strong>High</strong>: Important feature updates
+- <strong>Medium</strong>: Minor improvements and optimizations
+- <strong>Low</strong>: Optional feature enhancements</p>
+<p>### Update Strategies
+1. <strong>Seamless Update</strong>: Download to inactive partition, switch on reboot
+2. <strong>In-place Update</strong>: Update current partition directly
+3. <strong>Rolling Update</strong>: Update one component at a time</p>
 </section>
-<section id="response-format">
-<h2><a class="toc-backref" href="#id45" role="doc-backlink">Response Format</a><a class="headerlink" href="#response-format" title="Link to this heading">¶</a></h2>
-<p>All responses:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Operation successful&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>Error responses:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OTA_UPDATE_BLOCKED&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Update blocked by safety constraints&quot;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
+<section id="safety-constraints">
+<h2>Safety Constraints<a class="headerlink" href="#safety-constraints" title="Link to this heading">¶</a></h2>
+<p>### Constraint Types
+1. <strong>Crane Motion</strong>: Blocks updates if crane is in motion
+2. <strong>ACS (Anti-Collision System)</strong>: Blocks updates if collision risk detected
+3. <strong>UPS Battery</strong>: Blocks updates if battery below threshold (typically 30%)
+4. <strong>Network Connectivity</strong>: Requires stable network connection
+5. <strong>System Load</strong>: Blocks updates during high system load</p>
+<p>### Override Process
+1. User provides PIN for verification
+2. Specify reason for override
+3. Select constraints to override
+4. Override expires after 15 minutes or operation completion</p>
 </section>
-<section id="ui-api-mapping-summary">
-<h2><a class="toc-backref" href="#id46" role="doc-backlink">UI-API Mapping Summary</a><a class="headerlink" href="#ui-api-mapping-summary" title="Link to this heading">¶</a></h2>
-<table class="docutils align-default" id="id3">
-<caption><span class="caption-text">OTA UI to API Mapping</span><a class="headerlink" href="#id3" title="Link to this table">¶</a></caption>
-<colgroup>
-<col style="width: 25.0%" />
-<col style="width: 35.0%" />
-<col style="width: 40.0%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>UI Section</p></th>
-<th class="head"><p>GET Endpoints</p></th>
-<th class="head"><p>POST Endpoints</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>System Info</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">/ota/status</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">/ota/snapshot</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Available Updates</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">/ota/updates</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">/ota/auto-update</span></code>, <code class="docutils literal notranslate"><span class="pre">/ota/download</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Update Progress</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">/ota/progress</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">/ota/install</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Manual Upload</strong></p></td>
-<td><ul class="simple">
-<li></li>
-</ul>
-</td>
-<td><p><code class="docutils literal notranslate"><span class="pre">/ota/upload/verify</span></code>, <code class="docutils literal notranslate"><span class="pre">/ota/upload/deploy</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Update Settings</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">/ota/settings</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">/ota/settings</span></code> (POST)</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Recovery</strong></p></td>
-<td><ul class="simple">
-<li></li>
-</ul>
-</td>
-<td><p><code class="docutils literal notranslate"><span class="pre">/ota/recovery/rollback</span></code>, <code class="docutils literal notranslate"><span class="pre">/ota/recovery/restore</span></code>, <code class="docutils literal notranslate"><span class="pre">/ota/recovery/factory</span></code>, <code class="docutils literal notranslate"><span class="pre">/ota/recovery/upload</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Safety</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">/ota/safety</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">/ota/safety/override</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Monitor</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">/ota/logs</span></code>, <code class="docutils literal notranslate"><span class="pre">/ota/monitor</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">/ota/cancel</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Real-time</strong></p></td>
-<td><p>WebSocket <code class="docutils literal notranslate"><span class="pre">/ota/ws</span></code></p></td>
-<td><ul class="simple">
-<li></li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Create Snapshots</strong>: Always create snapshot before major updates</p></li>
+<li><p><strong>Check Safety Constraints</strong>: Verify all safety constraints are clear</p></li>
+<li><p><strong>Schedule During Maintenance</strong>: Use maintenance windows for updates</p></li>
+<li><p><strong>Monitor Progress</strong>: Watch update progress in real-time</p></li>
+<li><p><strong>Test After Update</strong>: Verify system functionality post-update</p></li>
+<li><p><strong>Enable Auto-rollback</strong>: Keep auto-rollback enabled for safety</p></li>
+<li><p><strong>Keep Recovery Images</strong>: Maintain current recovery images</p></li>
+<li><p><strong>Verify Signatures</strong>: Always verify update signatures</p></li>
+</ol>
+<p>—
+<em>Document last updated: March 15, 2025</em>
+<em>API Version: 1.0.0</em>
+<em>Gateway OTA Version: 3.2.1</em></p>
 </section>
 </section>
 
@@ -2312,8 +2177,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="security.html" class="btn btn-neutral float-left" title="Security &amp; Access Control API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="backup.html" class="btn btn-neutral float-right" title="System Backup &amp; Recovery" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="cloud-integration.html" class="btn btn-neutral float-left" title="Cloud Integration API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="security.html" class="btn btn-neutral float-right" title="Security &amp; Access Control" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

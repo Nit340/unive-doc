@@ -1,89 +1,99 @@
 Licensing & Subscriptions API
 =============================
 
-API for managing gateway licenses, subscriptions, feature entitlements, trials, and cloud integration.
+This document describes the licensing management page and its related API endpoints for managing gateway licenses, subscriptions, feature entitlements, trials, and cloud integration.
 
-Base Path: /api/v1/license
+Page Route (Frontend)
+---------------------
 
-.. contents:: Table of Contents
-   :depth: 3
-   :local:
+.. http:get:: /license-management
 
-Overview
---------
+   **Description**: Renders the complete licensing and subscriptions management page with all license data, features, trials, and cloud status embedded in the HTML.
 
-This API handles all licensing operations for the current gateway only. All endpoints operate on the current gateway context identified by the `X-Gateway-ID` header.
+   **Headers**::
 
-License Overview
-~~~~~~~~~~~~~~~~
-
-Get License Overview
-^^^^^^^^^^^^^^^^^^^^
-
-.. http:get:: /api/v1/license/overview
-
-   Get current license status and overview information.
-   
-   **UI Element**: SECTION 1: License Overview cards
-   
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
       X-Gateway-ID: GW-3920A9
 
-   **Response**:
+   **Response**::
 
-   .. sourcecode:: http
+      HTTP/1.1 200 OK
+      Content-Type: text/html
+      
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Licensing & Subscriptions - Univa Gateway</title>
+      </head>
+      <body>
+        <div id="app" data-license='{...}' data-features='[...]' data-trials='[...]' data-cloud='{...}'>
+          <!-- Licensing page with:
+               SECTION 1: License Overview cards
+               SECTION 2: Feature Access Matrix table
+               SECTION 3: License Key Management
+               SECTION 4: Cloud Subscription Link
+               SECTION 5: Trials Management
+               SECTION 6: License Change Log
+               FOOTER: Validation, Backup, Save actions
+          -->
+        </div>
+      </body>
+      </html>
+
+   **How it works**:
+   - Server renders the HTML page with embedded license data
+   - All license information, feature access, active trials, and cloud status are embedded
+   - JavaScript reads this data and renders the complete licensing interface
+   - No separate API calls needed on initial page load
+   - Gateway context is provided via X-Gateway-ID header
+
+   **Error Response**::
+
+      HTTP/1.1 302 Found
+      Location: /login
+
+API Endpoints (Backend)
+-----------------------
+
+These endpoints handle all licensing operations triggered from the page. All endpoints operate on the current gateway context identified by the `X-Gateway-ID` header.
+
+License Overview (SECTION 1)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:get:: /api/license-management/overview
+
+   **Description**: Get current license status and overview information.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
         "license_type": "pro",
-        "license_tier": "Pro License",
         "license_status": "active",
-        "subscription_status": "active",
-        "auto_renewal": true,
         "activation_date": "2024-03-15",
         "expiry_date": "2026-08-12",
         "days_remaining": 615,
         "gateway_id": "GW-3920A9",
-        "license_id": "LIC-PRO-2024-3920A9",
-        "issued_to": "Innospace Solutions",
-        "issued_on": "2024-03-15",
-        "last_sync": "2024-03-20T14:25:22Z",
-        "sync_status": "success"
+        "auto_renewal": true
       }
 
-Sync with Cloud
-^^^^^^^^^^^^^^^
+.. http:post:: /api/license-management/sync
 
-.. http:post:: /api/v1/license/sync
-
-   Synchronize licenses with cloud.
+   **Description**: Synchronize licenses with cloud.
    
-   **UI Element**: SECTION 1: "Sync with Cloud" button
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
    
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      X-Gateway-ID: GW-3920A9
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /api/v1/license/sync HTTP/1.1
-      Authorization: Bearer <token>
-      X-Gateway-ID: GW-3920A9
-
-   **Response**:
-
-   .. sourcecode:: http
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
@@ -94,34 +104,17 @@ Sync with Cloud
         "message": "Cloud sync completed successfully"
       }
 
-Deactivate License
-^^^^^^^^^^^^^^^^^^
+.. http:post:: /api/license-management/deactivate
 
-.. http:post:: /api/v1/license/deactivate
-
-   Deactivate current license.
+   **Description**: Deactivate current license.
    
-   **UI Element**: SECTION 1: "Deactivate" button
-   
-   **Headers**:
+   **Headers**::
 
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
       X-Gateway-ID: GW-3920A9
       Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: json
-
-      {
-        "reason": "decommissioning"
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
@@ -131,28 +124,52 @@ Deactivate License
         "message": "License deactivated successfully"
       }
 
-Feature Access Matrix
-~~~~~~~~~~~~~~~~~~~~~
+.. http:post:: /api/license-management/transfer
 
-Get Features
-^^^^^^^^^^^^
-
-.. http:get:: /api/v1/license/features
-
-   Get all features with their status.
+   **Description**: Transfer license to another gateway.
    
-   **UI Element**: SECTION 2: Feature Access Matrix table
-   
-   **Headers**:
+   **Headers**::
 
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
       X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+   
+   **Request**::
 
-   **Response**:
+      POST /api/license-management/transfer HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+      
+      {
+        "target_gateway_id": "GW-1234B5",
+        "transfer_type": "copy"
+      }
+   
+   **Success Response**::
 
-   .. sourcecode:: http
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "transferred": true,
+        "transfer_id": "TRANSFER-20240320-001",
+        "message": "License transfer initiated successfully"
+      }
+
+Feature Access Matrix (SECTION 2)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:get:: /api/license-management/features
+
+   **Description**: Get all features with their status.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
@@ -164,56 +181,28 @@ Get Features
             "name": "CraneIQ Pro",
             "category": "Safety",
             "status": "active",
-            "source": "cloud",
-            "expiry": "2026-08-12",
-            "limits": "Full Access"
-          },
-          {
-            "id": "advanced_analytics",
-            "name": "Advanced Analytics",
-            "category": "Analytics",
-            "status": "trial",
-            "source": "trial",
-            "expiry": "2024-04-10",
-            "limits": "Limited Access"
+            "expiry": "2026-08-12"
           }
         ],
         "total_features": 12,
         "active_count": 8
       }
 
-Toggle Feature
-^^^^^^^^^^^^^^
+.. http:post:: /api/license-management/features/{feature_id}/toggle
 
-.. http:post:: /api/v1/license/features/{feature_id}/toggle
-
-   Enable/disable a feature.
-   
-   **UI Element**: SECTION 2: Enable/Disable buttons
+   **Description**: Enable/disable a feature.
    
    **Path Parameters**:
-
+   
    * **feature_id** (string): Feature identifier
+   
+   **Headers**::
 
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
       X-Gateway-ID: GW-3920A9
       Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: json
-
-      {
-        "enabled": false
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
@@ -225,38 +214,32 @@ Toggle Feature
         "message": "Feature disabled successfully"
       }
 
-License Key Management
-~~~~~~~~~~~~~~~~~~~~~~
+License Key Management (SECTION 3)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Validate License Key
-^^^^^^^^^^^^^^^^^^^^
+.. http:post:: /api/license-management/validate
 
-.. http:post:: /api/v1/license/validate
-
-   Validate and activate a license key.
+   **Description**: Validate and activate a license key.
    
-   **UI Element**: SECTION 3: "Validate & Activate" button
-   
-   **Headers**:
+   **Headers**::
 
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
       X-Gateway-ID: GW-3920A9
       Content-Type: application/json
+   
+   **Request**::
 
-   **Request**:
-
-   .. sourcecode:: json
-
+      POST /api/license-management/validate HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+      
       {
         "license_key": "XXXX-XXXX-XXXX-XXXX",
         "activation_mode": "online"
       }
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
@@ -268,25 +251,16 @@ Validate License Key
         "message": "License activated successfully"
       }
 
-Get Current License Info
-^^^^^^^^^^^^^^^^^^^^^^^^
+.. http:get:: /api/license-management/license-info
 
-.. http:get:: /api/v1/license/current
-
-   Get current license information.
+   **Description**: Get current license information for display in UI.
    
-   **UI Element**: SECTION 3: Current License card
-   
-   **Headers**:
+   **Headers**::
 
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
       X-Gateway-ID: GW-3920A9
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
@@ -295,128 +269,88 @@ Get Current License Info
         "license_id": "LIC-PRO-2024-3920A9",
         "issued_to": "Innospace Solutions",
         "issued_on": "2024-03-15",
-        "activation_count": "1 of 3"
+        "activation_count": "1 of 3 devices"
       }
 
-Generate Demo Key
-^^^^^^^^^^^^^^^^^
+.. http:post:: /api/license-management/import
 
-.. http:get:: /api/v1/license/demo-key
-
-   Generate a demo license key.
+   **Description**: Import license from file.
    
-   **UI Element**: SECTION 3: Magic wand icon
-   
-   **Headers**:
+   **Headers**::
 
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      X-Gateway-ID: GW-3920A9
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "demo_key": "DEMO-XXXX-XXXX-XXXX",
-        "expires_in": "30 days"
-      }
-
-Export License
-^^^^^^^^^^^^^^
-
-.. http:get:: /api/v1/license/export
-
-   Export current license data.
-   
-   **UI Element**: SECTION 3: "Export" button
-   
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      X-Gateway-ID: GW-3920A9
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "download_url": "/api/v1/license/export/download/license_export.json",
-        "filename": "license_export.json",
-        "expires_in": 3600
-      }
-
-Import License
-^^^^^^^^^^^^^^
-
-.. http:post:: /api/v1/license/import
-
-   Import license from file.
-   
-   **UI Element**: SECTION 3: "Import File" button modal
-   
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
       X-Gateway-ID: GW-3920A9
       Content-Type: multipart/form-data
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /api/v1/license/import HTTP/1.1
-      Authorization: Bearer <token>
-      X-Gateway-ID: GW-3920A9
-      Content-Type: multipart/form-data
-      Content-Disposition: form-data; name="file"; filename="license.lic"
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
         "imported": true,
-        "license_id": "LIC-PRO-2024-3920A9",
         "message": "License imported successfully"
       }
 
-Cloud Subscription
-~~~~~~~~~~~~~~~~~~
+.. http:get:: /api/license-management/export
 
-Get Cloud Status
-^^^^^^^^^^^^^^^^
-
-.. http:get:: /api/v1/license/cloud
-
-   Get cloud subscription status.
+   **Description**: Export current license data.
    
-   **UI Element**: SECTION 4: Cloud Subscription Link section
-   
-   **Headers**:
+   **Headers**::
 
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
       X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
 
-   **Response**:
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      Content-Disposition: attachment; filename="license_export.json"
+      
+      {
+        "license_data": { ... }
+      }
 
-   .. sourcecode:: http
+.. http:get:: /api/license-management/license-history
+
+   **Description**: Get license activation history.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "history": [
+          {
+            "timestamp": "2024-03-15 10:30:00",
+            "license_key": "XXXX-XXXX-XXXX-XXXX",
+            "license_type": "pro",
+            "action": "activated",
+            "gateway_id": "GW-3920A9"
+          }
+        ],
+        "total_activations": 2
+      }
+
+Cloud Subscription (SECTION 4)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:get:: /api/license-management/cloud
+
+   **Description**: Get cloud subscription status.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
@@ -425,42 +359,20 @@ Get Cloud Status
         "linked": true,
         "account_email": "admin@innospace.com",
         "subscription_tier": "Enterprise",
-        "auto_renewal": true,
-        "sync_status": {
-          "last_sync": "2024-03-20T14:25:22Z",
-          "next_sync": "2024-03-20T20:30:00Z",
-          "sync_enabled": true
-        }
+        "auto_renewal": true
       }
 
-Unlink Cloud
-^^^^^^^^^^^^
+.. http:post:: /api/license-management/cloud/unlink
 
-.. http:post:: /api/v1/license/cloud/unlink
-
-   Unlink cloud account.
+   **Description**: Unlink cloud account.
    
-   **UI Element**: SECTION 4: "Unlink" button
-   
-   **Headers**:
+   **Headers**::
 
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
       X-Gateway-ID: GW-3920A9
       Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: json
-
-      {
-        "confirm": true
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
@@ -470,25 +382,16 @@ Unlink Cloud
         "message": "Cloud account unlinked successfully"
       }
 
-Get Sync Settings
-^^^^^^^^^^^^^^^^^
+.. http:get:: /api/license-management/cloud/sync-settings
 
-.. http:get:: /api/v1/license/cloud/sync-settings
-
-   Get cloud sync settings.
+   **Description**: Get cloud sync settings.
    
-   **UI Element**: SECTION 4: "Sync Settings" button modal
-   
-   **Headers**:
+   **Headers**::
 
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
       X-Gateway-ID: GW-3920A9
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
@@ -499,35 +402,17 @@ Get Sync Settings
         "next_sync": "2024-03-20T20:30:00Z"
       }
 
-Update Sync Settings
-^^^^^^^^^^^^^^^^^^^^
+.. http:post:: /api/license-management/cloud/sync-settings
 
-.. http:post:: /api/v1/license/cloud/sync-settings
-
-   Update cloud sync settings.
+   **Description**: Update cloud sync settings.
    
-   **UI Element**: SECTION 4: Sync settings modal save
-   
-   **Headers**:
+   **Headers**::
 
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
       X-Gateway-ID: GW-3920A9
       Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: json
-
-      {
-        "auto_sync": true,
-        "sync_frequency": "daily"
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
@@ -537,28 +422,19 @@ Update Sync Settings
         "message": "Sync settings updated successfully"
       }
 
-Trials Management
-~~~~~~~~~~~~~~~~~
+Trials Management (SECTION 5)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Get Active Trials
-^^^^^^^^^^^^^^^^^
+.. http:get:: /api/license-management/trials
 
-.. http:get:: /api/v1/license/trials
-
-   Get all active trials.
+   **Description**: Get all active trials.
    
-   **UI Element**: SECTION 5: Active Trials cards
-   
-   **Headers**:
+   **Headers**::
 
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
       X-Gateway-ID: GW-3920A9
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
@@ -576,25 +452,16 @@ Get Active Trials
         ]
       }
 
-Get Available Trials
-^^^^^^^^^^^^^^^^^^^^
+.. http:get:: /api/license-management/trials/available
 
-.. http:get:: /api/v1/license/trials/available
-
-   Get available trials.
+   **Description**: Get available trials.
    
-   **UI Element**: SECTION 5: Available Trials list
-   
-   **Headers**:
+   **Headers**::
 
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
       X-Gateway-ID: GW-3920A9
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
@@ -609,34 +476,17 @@ Get Available Trials
         ]
       }
 
-Start Trial
-^^^^^^^^^^^
+.. http:post:: /api/license-management/trials/start
 
-.. http:post:: /api/v1/license/trials/start
-
-   Start a trial.
+   **Description**: Start a trial.
    
-   **UI Element**: SECTION 5: "Start 14-day Trial" buttons
-   
-   **Headers**:
+   **Headers**::
 
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
       X-Gateway-ID: GW-3920A9
       Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: json
-
-      {
-        "trial_id": "rule_engine_pro"
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
@@ -648,122 +498,21 @@ Start Trial
         "message": "Trial started successfully"
       }
 
-Extend Trial
-^^^^^^^^^^^^
+.. http:post:: /api/license-management/trials/{trial_id}/cancel
 
-.. http:post:: /api/v1/license/trials/{trial_id}/extend
-
-   Extend a trial.
-   
-   **UI Element**: SECTION 5: "Extend Trial" button
+   **Description**: Cancel a trial.
    
    **Path Parameters**:
-
+   
    * **trial_id** (string): Trial identifier
+   
+   **Headers**::
 
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
       X-Gateway-ID: GW-3920A9
       Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: json
-
-      {
-        "days": 7
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "extended": true,
-        "new_end_date": "2024-04-22",
-        "message": "Trial extended by 7 days"
-      }
-
-Upgrade Trial
-^^^^^^^^^^^^^
-
-.. http:post:: /api/v1/license/trials/{trial_id}/upgrade
-
-   Upgrade trial to full license.
    
-   **UI Element**: SECTION 5: "Upgrade Now" button
-   
-   **Path Parameters**:
-
-   * **trial_id** (string): Trial identifier
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      X-Gateway-ID: GW-3920A9
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: json
-
-      {
-        "license_tier": "pro"
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "upgraded": true,
-        "payment_url": "https://checkout.innospace.com/upgrade-abc123",
-        "message": "Upgrade initiated successfully"
-      }
-
-Cancel Trial
-^^^^^^^^^^^^
-
-.. http:post:: /api/v1/license/trials/{trial_id}/cancel
-
-   Cancel a trial.
-   
-   **UI Element**: SECTION 5: "Cancel Trial" button
-   
-   **Path Parameters**:
-
-   * **trial_id** (string): Trial identifier
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      X-Gateway-ID: GW-3920A9
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: json
-
-      {
-        "reason": "no_longer_needed"
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
@@ -773,28 +522,56 @@ Cancel Trial
         "message": "Trial cancelled successfully"
       }
 
-License Logs
-~~~~~~~~~~~~
+License Renewal Options
+~~~~~~~~~~~~~~~~~~~~~~~
 
-Get License Logs
-^^^^^^^^^^^^^^^^
+.. http:get:: /api/license-management/renewal-options
 
-.. http:get:: /api/v1/license/logs
-
-   Get license activity logs.
+   **Description**: Get simple renewal options for modal display.
    
-   **UI Element**: SECTION 6: License Change Log
-   
-   **Headers**:
+   **Headers**::
 
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
       X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
 
-   **Response**:
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "current_expiry": "2026-08-12",
+        "options": [
+          {
+            "period": "1_year",
+            "display_name": "1 Year",
+            "price": 499,
+            "currency": "USD",
+            "description": "Per gateway"
+          },
+          {
+            "period": "3_years",
+            "display_name": "3 Years",
+            "price": 1199,
+            "currency": "USD",
+            "description": "Save 20% • $399/year"
+          }
+        ]
+      }
 
-   .. sourcecode:: http
+License Logs (SECTION 6)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:get:: /api/license-management/logs
+
+   **Description**: Get license activity logs.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
@@ -814,25 +591,16 @@ Get License Logs
 Footer Actions
 ~~~~~~~~~~~~~~
 
-Validate All Licenses
-^^^^^^^^^^^^^^^^^^^^^
+.. http:post:: /api/license-management/validate-all
 
-.. http:post:: /api/v1/license/validate-all
-
-   Validate all licenses.
+   **Description**: Validate all licenses.
    
-   **UI Element**: Footer: "Validate All Licenses" button
-   
-   **Headers**:
+   **Headers**::
 
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
       X-Gateway-ID: GW-3920A9
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
@@ -842,111 +610,38 @@ Validate All Licenses
         "message": "All licenses validated successfully"
       }
 
-Create Backup
-^^^^^^^^^^^^^
+.. http:post:: /api/license-management/backup
 
-.. http:post:: /api/v1/license/backup
-
-   Create license backup.
+   **Description**: Create license backup.
    
-   **UI Element**: Footer: "Backup License Data" button modal
-   
-   **Headers**:
+   **Headers**::
 
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
       X-Gateway-ID: GW-3920A9
       Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: json
-
-      {
-        "format": "json",
-        "encrypt": true
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
         "backup_id": "BACKUP-20240320-001",
-        "download_url": "/api/v1/license/backup/download/BACKUP-20240320-001.json",
+        "download_url": "/api/license-management/backup/download/BACKUP-20240320-001.json",
         "message": "Backup created successfully"
       }
 
-Reset Trials
-^^^^^^^^^^^^
+.. http:post:: /api/license-management/settings
 
-.. http:post:: /api/v1/license/trials/reset
-
-   Reset all trials.
+   **Description**: Save license settings.
    
-   **UI Element**: Footer: "Reset Trials" button
-   
-   **Headers**:
+   **Headers**::
 
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
       X-Gateway-ID: GW-3920A9
       Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: json
-
-      {
-        "confirm": true
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "reset": true,
-        "message": "All trials reset successfully"
-      }
-
-Save Settings
-^^^^^^^^^^^^^
-
-.. http:post:: /api/v1/license/settings
-
-   Save license settings.
    
-   **UI Element**: Footer: "Save License Settings" button
-   
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      X-Gateway-ID: GW-3920A9
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: json
-
-      {
-        "auto_sync": true,
-        "notify_on_expiry": true
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
@@ -959,103 +654,16 @@ Save Settings
 Modal Actions
 ~~~~~~~~~~~~~
 
-Get Renewal Options
-^^^^^^^^^^^^^^^^^^^
+.. http:get:: /api/license-management/help
 
-.. http:get:: /api/v1/license/renewal-options
-
-   Get renewal options (opens modal).
+   **Description**: Get help documentation.
    
-   **UI Element**: SECTION 1: "Renew License" button modal
-   
-   **Headers**:
+   **Headers**::
 
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
       X-Gateway-ID: GW-3920A9
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "options": [
-          {
-            "period": "1_year",
-            "price": 499,
-            "currency": "USD"
-          },
-          {
-            "period": "3_years",
-            "price": 1199,
-            "currency": "USD",
-            "savings": "20%"
-          }
-        ]
-      }
-
-Initiate Transfer
-^^^^^^^^^^^^^^^^^
-
-.. http:post:: /api/v1/license/transfer
-
-   Initiate license transfer (opens modal).
    
-   **UI Element**: SECTION 1: "Transfer License" button modal
-   
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      X-Gateway-ID: GW-3920A9
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: json
-
-      {
-        "target_gateway": "GW-2024-00234",
-        "transfer_type": "copy"
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "transfer_initiated": true,
-        "support_ticket": "SUP-20240320-001",
-        "message": "Transfer request submitted"
-      }
-
-Get Help
-^^^^^^^^
-
-.. http:get:: /api/v1/license/help
-
-   Get help documentation.
-   
-   **UI Element**: Header: "Help" button modal
-   
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      X-Gateway-ID: GW-3920A9
-
-   **Response**:
-
-   .. sourcecode:: http
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
@@ -1069,10 +677,180 @@ Get Help
         }
       }
 
+Route Summary
+-------------
+
+.. list-table:: Licensing Management Routes
+   :header-rows: 1
+   :widths: 15 15 50 20
+   
+   * - Type
+     - Method
+     - Route & Purpose
+     - Auth
+   * - Page
+     - GET
+     - ``/license-management`` - Main licensing page
+     - Yes
+   * - Overview
+     - GET
+     - ``/api/license-management/overview`` - License overview
+     - Yes
+   * - Overview
+     - POST
+     - ``/api/license-management/sync`` - Sync with cloud
+     - Yes
+   * - Overview
+     - POST
+     - ``/api/license-management/deactivate`` - Deactivate license
+     - Yes
+   * - Overview
+     - POST
+     - ``/api/license-management/transfer`` - Transfer license
+     - Yes
+   * - Features
+     - GET
+     - ``/api/license-management/features`` - Get features
+     - Yes
+   * - Features
+     - POST
+     - ``/api/license-management/features/{id}/toggle`` - Toggle feature
+     - Yes
+   * - License Key
+     - POST
+     - ``/api/license-management/validate`` - Validate & activate license key
+     - Yes
+   * - License Key
+     - GET
+     - ``/api/license-management/license-info`` - Current license info
+     - Yes
+   * - License Key
+     - POST
+     - ``/api/license-management/import`` - Import license file
+     - Yes
+   * - License Key
+     - GET
+     - ``/api/license-management/export`` - Export license data
+     - Yes
+   * - License Key
+     - GET
+     - ``/api/license-management/license-history`` - License activation history
+     - Yes
+   * - Cloud
+     - GET
+     - ``/api/license-management/cloud`` - Cloud status
+     - Yes
+   * - Cloud
+     - POST
+     - ``/api/license-management/cloud/unlink`` - Unlink cloud
+     - Yes
+   * - Cloud
+     - GET
+     - ``/api/license-management/cloud/sync-settings`` - Get sync settings
+     - Yes
+   * - Cloud
+     - POST
+     - ``/api/license-management/cloud/sync-settings`` - Update sync settings
+     - Yes
+   * - Trials
+     - GET
+     - ``/api/license-management/trials`` - Active trials
+     - Yes
+   * - Trials
+     - GET
+     - ``/api/license-management/trials/available`` - Available trials
+     - Yes
+   * - Trials
+     - POST
+     - ``/api/license-management/trials/start`` - Start trial
+     - Yes
+   * - Trials
+     - POST
+     - ``/api/license-management/trials/{id}/cancel`` - Cancel trial
+     - Yes
+   * - Renewal
+     - GET
+     - ``/api/license-management/renewal-options`` - Renewal options
+     - Yes
+   * - Logs
+     - GET
+     - ``/api/license-management/logs`` - License logs
+     - Yes
+   * - Footer
+     - POST
+     - ``/api/license-management/validate-all`` - Validate all licenses
+     - Yes
+   * - Footer
+     - POST
+     - ``/api/license-management/backup`` - Create backup
+     - Yes
+   * - Footer
+     - POST
+     - ``/api/license-management/settings`` - Save settings
+     - Yes
+   * - Modal
+     - GET
+     - ``/api/license-management/help`` - Get help
+     - Yes
+
+Complete User Flow
+------------------
+
+1. **User goes to page**: ``GET /license-management``
+   - Server renders HTML with embedded license data
+   - All 6 sections populated with current data
+
+2. **User views license overview** (SECTION 1):
+   - License status cards show active/expired status
+   - "Sync with Cloud" button → ``POST /api/license-management/sync``
+   - "Renew License" button → ``GET /api/license-management/renewal-options``
+   - "Transfer License" button → ``POST /api/license-management/transfer``
+   - "Deactivate" button → ``POST /api/license-management/deactivate``
+
+3. **User manages features** (SECTION 2):
+   - Feature table shows all available features
+   - Enable/Disable buttons → ``POST /api/license-management/features/{id}/toggle``
+   - "View All Features" shows complete list
+
+4. **User manages license keys** (SECTION 3):
+   - "Validate & Activate" button → ``POST /api/license-management/validate``
+   - "Import File" button → ``POST /api/license-management/import``
+   - "Export" button → ``GET /api/license-management/export``
+   - "History" button → ``GET /api/license-management/license-history``
+   - Current license info from ``GET /api/license-management/license-info``
+
+5. **User manages cloud subscription** (SECTION 4):
+   - Cloud link status shown
+   - "Sync Now" button → ``POST /api/license-management/sync``
+   - "Sync Settings" modal → ``GET/POST /api/license-management/cloud/sync-settings``
+   - "Unlink" button → ``POST /api/license-management/cloud/unlink``
+
+6. **User manages trials** (SECTION 5):
+   - Active trials shown with progress bars
+   - Available trials list for starting new ones
+   - "Start Trial" → ``POST /api/license-management/trials/start``
+   - "Cancel Trial" → ``POST /api/license-management/trials/{id}/cancel``
+   - "Upgrade" and "Extend" buttons for active trials
+
+7. **User views logs** (SECTION 6):
+   - License activity log shows all changes
+   - Filter logs by type (All, Activations, Sync Events)
+   - Export logs for audit purposes
+
+8. **User uses footer actions**:
+   - "Validate All Licenses" → ``POST /api/license-management/validate-all``
+   - "Backup License Data" → ``POST /api/license-management/backup``
+   - "Reset Trials" button (triggers trial reset)
+   - "Save License Settings" → ``POST /api/license-management/settings``
+
+9. **User accesses modal actions**:
+   - "Help" button → ``GET /api/license-management/help``
+   - "Renew License" modal → ``GET /api/license-management/renewal-options``
+
 Error Codes
 -----------
 
-.. list-table:: Simplified Error Codes
+.. list-table:: Licensing Error Codes
    :widths: 30 70
    :header-rows: 1
 
@@ -1086,59 +864,229 @@ Error Codes
      - Maximum activations reached
    * - TRIAL_NOT_AVAILABLE
      - Trial not available
-   * - TRIAL_MAX_REACHED
-     - Maximum concurrent trials reached
    * - CLOUD_SYNC_FAILED
      - Cloud sync failed
-   * - CLOUD_NOT_LINKED
-     - Cloud account not linked
    * - FEATURE_NOT_LICENSED
      - Feature not licensed
-   * - TRANSFER_NOT_ALLOWED
-     - Transfer not allowed
-   * - PAYMENT_REQUIRED
-     - Payment required
    * - BACKUP_FAILED
      - Backup creation failed
 
-Authentication
---------------
+Authentication & Context
+------------------------
 
-All endpoints require:
+All endpoints require gateway context identification::
 
-.. code-block:: http
-
-   Authorization: Bearer <jwt_token>
+   Cookie: session_token=<token>
    X-Gateway-ID: GW-3920A9
+
+**Important**: This API only manages licenses for the current gateway specified in `X-Gateway-ID` header. Each gateway has its own independent license state.
+
+License Types & Features
+------------------------
+
+### Supported License Tiers
+
+.. list-table:: License Tiers
+   :widths: 30 40 30
+   :header-rows: 1
+
+   * - Tier
+     - Description
+     - Max Features
+   * - **Basic**
+     - Core gateway functionality
+     - 5
+   * - **Pro**
+     - Advanced features + analytics
+     - 12
+   * - **Enterprise**
+     - Full feature set + cloud sync
+     - Unlimited
+
+### Feature Categories
+
+1. **Safety Features**: CraneIQ Pro, Load Monitoring, Sway Detection
+2. **Analytics Features**: Advanced Analytics, Historical Reports, Predictive Maintenance
+3. **Connectivity Features**: Cloud Sync, Multi-Protocol Support, API Access
+4. **Management Features**: Remote Configuration, Bulk Operations, Role-Based Access
+
+Trial Management
+----------------
+
+### Trial Types
+- **Feature Trials**: Individual feature trials (14-30 days)
+- **Tier Trials**: Full license tier trials (30 days)
+- **Demo Mode**: Limited functionality for evaluation
+
+### Trial Limitations
+- Maximum 2 concurrent trials per gateway
+- Trials cannot be extended beyond original period
+- Some features may be limited during trial
+
+Cloud Integration
+-----------------
+
+### Sync Modes
+- **Manual Sync**: User-initiated synchronization
+- **Auto Sync**: Scheduled synchronization (every 6 hours, daily, weekly)
+- **Real-time Sync**: Immediate sync on changes (Enterprise only)
+
+### Data Synchronized
+- License status and expiry
+- Feature entitlements
+- Trial information
+- Usage statistics
+- Configuration settings
+
+Renewal Process
+---------------
+
+### Simple Renewal Flow
+1. User clicks "Renew License" button in SECTION 1
+2. Modal opens with renewal options (1 Year, 3 Years)
+3. User selects option and clicks "Proceed to Payment"
+4. System redirects to payment gateway
+5. After payment, license expiry is extended
+
+### Renewal Options
+- **1 Year**: $499 per gateway
+- **3 Years**: $1,199 (Save 20% - $399/year)
+
+### Auto-renewal
+- Can be enabled/disabled in renewal modal
+- Recommended for uninterrupted service
+- Sends email notifications before renewal
+
+Support Information
+-------------------
+
+- **Email**: licenses@univa.com
+- **Phone**: +1 (555) 123-4567
+- **Support Hours**: Monday-Friday 9am-6pm EST
+- **Documentation**: https://docs.univa.com/licensing
+
+Version History
+---------------
+
+.. list-table:: API Version History
+   :widths: 15 85
+   :header-rows: 1
+
+   * - Version
+     - Changes
+   * - 1.0.0
+     - Initial release of Licensing & Subscriptions API
+   * - 1.1.0
+     - Added license transfer functionality
+   * - 1.2.0
+     - Enhanced cloud sync with detailed status
+   * - 1.3.0
+     - Added license activation history
+
+Deprecation Notes
+-----------------
+
+No endpoints are currently deprecated. All endpoints are fully supported in the current version.
 
 Rate Limiting
 -------------
 
-* 60 requests per minute per user
-* Rate limit headers included in responses
+- **General Endpoints**: 60 requests per minute per gateway
+- **Sync Operations**: 10 requests per minute per gateway
+- **License Validation**: 5 requests per minute per gateway
+- **Backup Operations**: 2 requests per minute per gateway
 
-Response Format
+All rate limits are per gateway ID. Exceeding limits will result in HTTP 429 Too Many Requests response.
+
+Data Formats
+------------
+
+### License Key Format
+- Format: XXXX-XXXX-XXXX-XXXX (24 characters)
+- Characters: A-Z, 0-9
+- Validation: Checksum validation included
+
+### Import Formats
+- **JSON**: Plain text JSON file with license data
+- **Encrypted**: Encrypted license file (.lic extension)
+- **Text**: Plain text license key
+
+### Export Formats
+- **JSON**: Human-readable JSON format
+- **Encrypted**: Secure encrypted format for backup
+- **CSV**: Comma-separated values for spreadsheet import
+
+Troubleshooting
 ---------------
 
-All responses:
+### Common Issues
 
-.. code-block:: json
+1. **License activation fails**
+   - Verify internet connection for online activation
+   - Check license key format
+   - Ensure gateway ID matches
 
-   {
-     "data": { ... },
-     "error": null,
-     "success": true
-   }
+2. **Cloud sync fails**
+   - Check network connectivity
+   - Verify cloud account credentials
+   - Check sync settings configuration
 
-Error responses:
+3. **Feature not enabling**
+   - Verify license tier supports the feature
+   - Check feature expiry date
+   - Ensure cloud sync completed successfully
 
-.. code-block:: json
+4. **Backup creation fails**
+   - Verify sufficient disk space
+   - Check file system permissions
+   - Ensure backup directory exists
 
-   {
-     "data": null,
-     "error": {
-       "code": "LICENSE_INVALID",
-       "message": "Invalid license key"
-     },
-     "success": false
-   }
+### Debug Information
+
+Include the following when contacting support:
+- Gateway ID
+- License ID
+- Error message received
+- Timestamp of issue
+- Steps to reproduce
+
+Glossary
+--------
+
+.. glossary::
+
+   License Key
+      A unique 24-character code used to activate license features.
+
+   Feature Entitlement
+      Permission to use a specific software feature based on license.
+
+   Trial Period
+      Temporary access to features for evaluation purposes.
+
+   Cloud Sync
+      Synchronization of license data with cloud subscription service.
+
+   Auto-renewal
+      Automatic renewal of subscription before expiry.
+
+   Activation Count
+      Number of devices where license is currently activated vs. maximum allowed.
+
+   Gateway ID
+      Unique identifier for the physical gateway device.
+
+   Subscription Tier
+      Level of service (Basic, Pro, Enterprise) determining available features.
+
+   License Expiry
+      Date when current license becomes invalid.
+
+   Grace Period
+      Time after license expiry where features remain active before deactivation.
+
+
+---
+*Document last updated: March 20, 2024*
+*API Version: 1.3.0*
+*Gateway Version: 2.5.1*

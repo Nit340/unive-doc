@@ -1,5 +1,5 @@
 Data Retention API
-================================
+==================
 
 APIs for managing storage policies, data lifecycle, and retention configuration.
 
@@ -34,6 +34,10 @@ Get Storage Status
 
    Retrieve current storage usage and configuration.
 
+   **Query Parameters**:
+   
+   * **gateway_id** (optional): Gateway ID to get storage status for specific gateway
+
    **Headers**:
 
    .. code-block:: http
@@ -49,6 +53,7 @@ Get Storage Status
       
       {
         "success": true,
+        "gateway_id": "Univa-GW-01",
         "storage": {
           "total_capacity_mb": 4096,
           "used_mb": 1380,
@@ -70,6 +75,32 @@ Get Storage Status
           }
         },
         "last_check": "2025-03-12T14:30:00Z"
+      }
+
+Refresh Storage Status
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:post:: /retention/storage/refresh
+
+   Force immediate storage status refresh.
+
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "success": true,
+        "message": "Storage status refreshed",
+        "refresh_time": "2025-03-12T15:45:00Z"
       }
 
 Update Storage Thresholds
@@ -95,6 +126,7 @@ Update Storage Thresholds
       Content-Type: application/json
       
       {
+        "gateway_id": "Univa-GW-01",
         "high_usage_warning": 85,
         "critical_purge_trigger": 95,
         "enable_auto_purge": true,
@@ -122,12 +154,17 @@ Update Storage Thresholds
 Data Retention Policies API
 ---------------------------
 
-Get Retention Policies
-~~~~~~~~~~~~~~~~~~~~~~
+Get All Policies
+~~~~~~~~~~~~~~~~
 
 .. http:get:: /retention/policies
 
    Retrieve all configured data retention policies.
+
+   **Query Parameters**:
+   
+   * **gateway_id** (optional): Gateway ID to get policies for specific gateway
+   * **include_size** (optional): Include current size data (boolean, default: true)
 
    **Headers**:
 
@@ -144,6 +181,7 @@ Get Retention Policies
       
       {
         "success": true,
+        "gateway_id": "Univa-GW-01",
         "policies": [
           {
             "category_id": "telemetry",
@@ -236,6 +274,7 @@ Update Retention Policy
       Content-Type: application/json
       
       {
+        "gateway_id": "Univa-GW-01",
         "enabled": true,
         "retention_days": 30,
         "max_size_mb": 500,
@@ -279,6 +318,54 @@ Update Retention Policy
         "code": "PROTECTED_POLICY"
       }
 
+Get Policy Status
+~~~~~~~~~~~~~~~~~
+
+.. http:get:: /retention/policies/status
+
+   Get current status of all policies including size and last purge.
+
+   **Query Parameters**:
+   
+   * **gateway_id** (optional): Gateway ID
+   * **category_ids** (optional): Comma-separated category IDs
+
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "success": true,
+        "gateway_id": "Univa-GW-01",
+        "policies_status": [
+          {
+            "category_id": "telemetry",
+            "enabled": true,
+            "current_size_mb": 320,
+            "last_purge": "2025-03-10T02:00:00Z",
+            "next_purge": "2025-03-17T02:00:00Z",
+            "records_count": 45000
+          },
+          {
+            "category_id": "craneiq_safety",
+            "enabled": true,
+            "current_size_mb": 450,
+            "last_purge": "2025-03-05T02:00:00Z",
+            "next_purge": "2025-03-12T02:00:00Z",
+            "records_count": 12000
+          }
+        ]
+      }
+
 Batch Update Policies
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -302,6 +389,7 @@ Batch Update Policies
       Content-Type: application/json
       
       {
+        "gateway_id": "Univa-GW-01",
         "policies": [
           {
             "category_id": "telemetry",
@@ -345,6 +433,10 @@ Get Offline Buffer Status
 
    Retrieve offline buffering configuration and status.
 
+   **Query Parameters**:
+   
+   * **gateway_id** (optional): Gateway ID
+
    **Headers**:
 
    .. code-block:: http
@@ -360,6 +452,7 @@ Get Offline Buffer Status
       
       {
         "success": true,
+        "gateway_id": "Univa-GW-01",
         "offline_buffering": {
           "enabled": true,
           "status": "active",
@@ -398,6 +491,7 @@ Configure Offline Buffering
       Content-Type: application/json
       
       {
+        "gateway_id": "Univa-GW-01",
         "enabled": true,
         "max_queue_size_mb": 100,
         "retry_interval_seconds": 30,
@@ -446,6 +540,7 @@ Force Buffer Sync
       Content-Type: application/json
       
       {
+        "gateway_id": "Univa-GW-01",
         "force": false, // Force sync even if offline
         "categories": ["all"] // or specific categories
       }
@@ -492,6 +587,7 @@ Purge Old Data
       Content-Type: application/json
       
       {
+        "gateway_id": "Univa-GW-01",
         "categories": ["all"], // or specific category IDs
         "older_than_days": null, // Optional: override retention policy
         "exclude_critical": true,
@@ -556,6 +652,100 @@ Get Purge Progress
         "categories_purged": ["telemetry", "events", "alerts"]
       }
 
+Clear Non-Critical Data
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:post:: /retention/purge/non-critical
+
+   Clear all non-critical data categories.
+
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      Content-Type: application/json
+
+   **Request**:
+
+   .. sourcecode:: http
+
+      POST /retention/purge/non-critical HTTP/1.1
+      Authorization: Bearer <token>
+      Content-Type: application/json
+      
+      {
+        "gateway_id": "Univa-GW-01",
+        "confirmation": {
+          "user_id": "admin",
+          "timestamp": "2025-03-12T18:00:00Z"
+        },
+        "backup_before_clear": true
+      }
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "success": true,
+        "operation_id": "clear_non_critical_20250312_180000",
+        "status": "started",
+        "categories_to_clear": ["telemetry", "events", "alerts", "ota_history"],
+        "categories_preserved": ["craneiq_safety"],
+        "estimated_freed_space_mb": 795,
+        "backup_created": true,
+        "backup_id": "backup_pre_clear_20250312_180000"
+      }
+
+Clear All Logs
+~~~~~~~~~~~~~~
+
+.. http:post:: /retention/purge/all-logs
+
+   Clear all log files.
+
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      Content-Type: application/json
+
+   **Request**:
+
+   .. sourcecode:: http
+
+      POST /retention/purge/all-logs HTTP/1.1
+      Authorization: Bearer <token>
+      Content-Type: application/json
+      
+      {
+        "gateway_id": "Univa-GW-01",
+        "exclude_critical_logs": true,
+        "confirmation": {
+          "user_id": "admin"
+        }
+      }
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "success": true,
+        "operation_id": "clear_all_logs_20250312_180000",
+        "status": "started",
+        "excluded_categories": ["craneiq_safety"],
+        "estimated_freed_space_mb": 850
+      }
+
 Emergency Storage Cleanup
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -579,6 +769,7 @@ Emergency Storage Cleanup
       Content-Type: application/json
       
       {
+        "gateway_id": "Univa-GW-01",
         "target_percentage": 75, // Target usage after cleanup
         "preserve_critical": true,
         "preserve_last_n_days": 7,
@@ -624,6 +815,7 @@ Get Storage Analytics
 
    **Query Parameters**:
 
+   * **gateway_id** (optional): Gateway ID
    * **time_range** (optional): Time period ("7d", "30d", "90d", default: "30d")
    * **include_forecast** (optional): Include forecast data (boolean, default: true)
 
@@ -636,6 +828,7 @@ Get Storage Analytics
       
       {
         "success": true,
+        "gateway_id": "Univa-GW-01",
         "analytics": {
           "time_range": "30d",
           "storage_trend": {
@@ -684,6 +877,7 @@ Generate Retention Report
       Content-Type: application/json
       
       {
+        "gateway_id": "Univa-GW-01",
         "report_type": "comprehensive", // "summary", "comprehensive", "compliance"
         "format": "pdf", // "json", "pdf", "csv"
         "include_recommendations": true,
@@ -732,6 +926,7 @@ Export Stored Data
       Content-Type: application/json
       
       {
+        "gateway_id": "Univa-GW-01",
         "categories": ["telemetry", "events", "alerts"],
         "date_from": "2025-02-01",
         "date_to": "2025-03-12",
@@ -757,6 +952,52 @@ Export Stored Data
         "estimated_completion": "2025-03-12T17:30:00Z"
       }
 
+Export Logs
+~~~~~~~~~~~
+
+.. http:post:: /retention/export/logs
+
+   Export log files only.
+
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      Content-Type: application/json
+
+   **Request**:
+
+   .. sourcecode:: http
+
+      POST /retention/export/logs HTTP/1.1
+      Authorization: Bearer <token>
+      Content-Type: application/json
+      
+      {
+        "gateway_id": "Univa-GW-01",
+        "log_types": ["system", "application", "security"],
+        "date_from": "2025-02-01",
+        "date_to": "2025-03-12",
+        "format": "text",
+        "compression": "gzip"
+      }
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "success": true,
+        "export_id": "export_logs_20250312_171500",
+        "status": "processing",
+        "estimated_size_mb": 150,
+        "download_url": "/api/v1/retention/export/logs/download/export_logs_20250312_171500"
+      }
+
 Run Storage Diagnostics
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -780,6 +1021,7 @@ Run Storage Diagnostics
       Content-Type: application/json
       
       {
+        "gateway_id": "Univa-GW-01",
         "checks": ["integrity", "performance", "configuration"],
         "verbose": true,
         "fix_issues": false
@@ -811,61 +1053,13 @@ Run Storage Diagnostics
         "results_url": "/api/v1/retention/diagnostics/results/diag_20250312_172000"
       }
 
-Manual Actions API
+System Actions API
 ------------------
-
-Clear Non-Critical Data
-~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:post:: /retention/manual/clear-non-critical
-
-   Clear all non-critical data categories.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /retention/manual/clear-non-critical HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "confirmation": {
-          "user_id": "admin",
-          "timestamp": "2025-03-12T18:00:00Z"
-        },
-        "backup_before_clear": true
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "operation_id": "clear_non_critical_20250312_180000",
-        "status": "started",
-        "categories_to_clear": ["telemetry", "events", "alerts", "ota_history"],
-        "categories_preserved": ["craneiq_safety"],
-        "estimated_freed_space_mb": 795,
-        "backup_created": true,
-        "backup_id": "backup_pre_clear_20250312_180000"
-      }
 
 Full Storage Reset
 ~~~~~~~~~~~~~~~~~~
 
-.. http:post:: /retention/manual/full-reset
+.. http:post:: /retention/system/reset
 
    Complete storage reset (requires admin approval).
 
@@ -880,11 +1074,12 @@ Full Storage Reset
 
    .. sourcecode:: http
 
-      POST /retention/manual/full-reset HTTP/1.1
+      POST /retention/system/reset HTTP/1.1
       Authorization: Bearer <token>
       Content-Type: application/json
       
       {
+        "gateway_id": "Univa-GW-01",
         "confirmation": {
           "user_id": "admin",
           "password": "encrypted_admin_password",
@@ -931,6 +1126,7 @@ Get Retention Compliance
 
    **Query Parameters**:
 
+   * **gateway_id** (optional): Gateway ID
    * **check_categories** (optional): Comma-separated category IDs
 
    **Response**:
@@ -942,6 +1138,7 @@ Get Retention Compliance
       
       {
         "success": true,
+        "gateway_id": "Univa-GW-01",
         "compliance_check": {
           "timestamp": "2025-03-12T18:30:00Z",
           "overall_compliance": 95.7,
@@ -985,6 +1182,7 @@ Audit Log
 
    **Query Parameters**:
 
+   * **gateway_id** (optional): Gateway ID
    * **start_date** (optional): ISO date string
    * **end_date** (optional): ISO date string
    * **operation_type** (optional): "purge", "policy_change", "export", "reset"
@@ -1000,6 +1198,7 @@ Audit Log
       
       {
         "success": true,
+        "gateway_id": "Univa-GW-01",
         "audit_log": [
           {
             "timestamp": "2025-03-12T02:00:00Z",
@@ -1039,6 +1238,34 @@ Connection Endpoint
 
    wss://univa-gateway/api/v1/retention/ws
 
+Connection Status
+~~~~~~~~~~~~~~~~~
+
+.. http:get:: /retention/ws/status
+
+   Get WebSocket connection status.
+
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "success": true,
+        "connected": true,
+        "last_message": "2025-03-12T15:30:00Z",
+        "active_clients": 3,
+        "connection_id": "ws_conn_abc123"
+      }
+
 Message Types
 ~~~~~~~~~~~~~
 
@@ -1048,6 +1275,7 @@ Message Types
 
    {
      "event": "storage_threshold_warning",
+     "gateway_id": "Univa-GW-01",
      "data": {
        "current_usage_percentage": 87,
        "threshold": 85,
@@ -1062,6 +1290,7 @@ Message Types
 
    {
      "event": "purge_progress",
+     "gateway_id": "Univa-GW-01",
      "data": {
        "purge_id": "purge_20250312_160015",
        "progress": 65,
@@ -1077,6 +1306,7 @@ Message Types
 
    {
      "event": "policy_updated",
+     "gateway_id": "Univa-GW-01",
      "data": {
        "category_id": "telemetry",
        "changes": {
@@ -1094,12 +1324,28 @@ Message Types
 
    {
      "event": "storage_critical",
+     "gateway_id": "Univa-GW-01",
      "data": {
        "current_usage_percentage": 95,
        "threshold": 95,
        "emergency_action": "emergency_purge_required",
        "available_space_mb": 204,
        "time_until_full": "2 hours"
+     }
+   }
+
+**Real-time Storage Update**:
+
+.. code-block:: json
+
+   {
+     "event": "storage_update",
+     "gateway_id": "Univa-GW-01",
+     "data": {
+       "used_mb": 1395,
+       "remaining_mb": 2701,
+       "usage_percentage": 34.1,
+       "timestamp": "2025-03-12T15:45:00Z"
      }
    }
 
@@ -1119,6 +1365,7 @@ Error Response Format
      "error": "Error Code",
      "message": "Human-readable error message",
      "code": "ERROR_CODE",
+     "gateway_id": "Univa-GW-01",
      "timestamp": "2025-03-12T16:00:00Z",
      "request_id": "req_abc123def456"
    }
@@ -1152,6 +1399,10 @@ Common Error Codes
      - Export exceeds maximum allowed size
    * - **RATE_LIMIT_EXCEEDED**
      - API rate limit exceeded
+   * - **GATEWAY_NOT_FOUND**
+     - Specified gateway ID not found
+   * - **CATEGORY_NOT_FOUND**
+     - Data category not found
 
 Examples
 --------
@@ -1167,7 +1418,7 @@ Python - Storage Management
    headers = {"Authorization": "Bearer your_token"}
    
    status_response = requests.get(
-       "https://univa-gateway/api/v1/retention/storage/status",
+       "https://univa-gateway/api/v1/retention/storage/status?gateway_id=Univa-GW-01",
        headers=headers
    )
    
@@ -1177,6 +1428,7 @@ Python - Storage Management
    
    # Update storage thresholds
    threshold_request = {
+       "gateway_id": "Univa-GW-01",
        "high_usage_warning": 80,
        "critical_purge_trigger": 90,
        "enable_auto_purge": True,
@@ -1194,7 +1446,7 @@ Python - Storage Management
    
    # Get retention policies
    policies_response = requests.get(
-       "https://univa-gateway/api/v1/retention/policies",
+       "https://univa-gateway/api/v1/retention/policies?gateway_id=Univa-GW-01",
        headers=headers
    )
    
@@ -1212,6 +1464,7 @@ Python - Data Purge Operation
    import time
    
    purge_request = {
+       "gateway_id": "Univa-GW-01",
        "categories": ["telemetry", "events"],
        "older_than_days": 30,
        "exclude_critical": True,
@@ -1261,6 +1514,7 @@ Python - Export Data
    import requests
    
    export_request = {
+       "gateway_id": "Univa-GW-01",
        "categories": ["telemetry", "events"],
        "date_from": "2025-02-01",
        "date_to": "2025-03-12",
@@ -1298,6 +1552,11 @@ JavaScript - Real-time Monitoring
    
    ws.onopen = function() {
        console.log('Connected to Data Retention WebSocket');
+       // Send gateway identification
+       ws.send(JSON.stringify({
+           action: "subscribe",
+           gateway_id: "Univa-GW-01"
+       }));
    };
    
    ws.onmessage = function(event) {
@@ -1305,39 +1564,57 @@ JavaScript - Real-time Monitoring
        
        switch(message.event) {
            case 'storage_threshold_warning':
-               showStorageWarning(
-                   message.data.current_usage_percentage,
-                   message.data.threshold,
-                   message.data.recommended_action
-               );
+               if (message.gateway_id === "Univa-GW-01") {
+                   showStorageWarning(
+                       message.data.current_usage_percentage,
+                       message.data.threshold,
+                       message.data.recommended_action
+                   );
+               }
+               break;
+               
+           case 'storage_update':
+               if (message.gateway_id === "Univa-GW-01") {
+                   updateStorageDisplay(
+                       message.data.used_mb,
+                       message.data.remaining_mb,
+                       message.data.usage_percentage
+                   );
+               }
                break;
                
            case 'purge_progress':
-               updatePurgeProgress(
-                   message.data.purge_id,
-                   message.data.progress,
-                   message.data.current_category
-               );
-               updatePurgeStats(
-                   message.data.records_deleted,
-                   message.data.freed_space_mb
-               );
+               if (message.gateway_id === "Univa-GW-01") {
+                   updatePurgeProgress(
+                       message.data.purge_id,
+                       message.data.progress,
+                       message.data.current_category
+                   );
+                   updatePurgeStats(
+                       message.data.records_deleted,
+                       message.data.freed_space_mb
+                   );
+               }
                break;
                
            case 'policy_updated':
-               showPolicyUpdateNotification(
-                   message.data.category_id,
-                   message.data.changes,
-                   message.data.user
-               );
+               if (message.gateway_id === "Univa-GW-01") {
+                   showPolicyUpdateNotification(
+                       message.data.category_id,
+                       message.data.changes,
+                       message.data.user
+                   );
+               }
                break;
                
            case 'storage_critical':
-               showCriticalAlert(
-                   message.data.current_usage_percentage,
-                   message.data.emergency_action
-               );
-               triggerEmergencyActions();
+               if (message.gateway_id === "Univa-GW-01") {
+                   showCriticalAlert(
+                       message.data.current_usage_percentage,
+                       message.data.emergency_action
+                   );
+                   triggerEmergencyActions();
+               }
                break;
        }
    };
@@ -1351,28 +1628,25 @@ JavaScript - Real-time Monitoring
    };
    
    // UI update functions
-   function showStorageWarning(usage, threshold, action) {
-       const warning = document.createElement('div');
-       warning.className = 'storage-warning';
-       warning.innerHTML = `
-           <strong>Storage Warning: ${usage}% used</strong>
-           <p>Threshold: ${threshold}%</p>
-           <p>Recommended: ${action}</p>
-       `;
-       document.getElementById('alerts-container').appendChild(warning);
+   function updateStorageDisplay(used, remaining, percentage) {
+       document.getElementById('storage-used').textContent = used + ' MB';
+       document.getElementById('storage-remaining').textContent = remaining + ' MB';
+       document.getElementById('storage-percentage').textContent = percentage + '%';
+       document.getElementById('storage-progress').style.width = percentage + '%';
    }
 
-JavaScript - Retention Dashboard
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+JavaScript - Retention Dashboard Integration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: javascript
 
    // Load storage analytics
    async function loadStorageAnalytics() {
        const token = localStorage.getItem('token');
+       const gatewayId = document.getElementById('gateway-select').value;
        
        try {
-           const response = await fetch('/api/v1/retention/analytics?time_range=30d', {
+           const response = await fetch(`/api/v1/retention/analytics?gateway_id=${gatewayId}&time_range=30d`, {
                headers: {
                    'Authorization': `Bearer ${token}`
                }
@@ -1390,6 +1664,7 @@ JavaScript - Retention Dashboard
    // Update retention policy
    async function updateRetentionPolicy(categoryId, policyData) {
        const token = localStorage.getItem('token');
+       const gatewayId = document.getElementById('gateway-select').value;
        
        try {
            const response = await fetch(`/api/v1/retention/policies/${categoryId}`, {
@@ -1398,7 +1673,10 @@ JavaScript - Retention Dashboard
                    'Authorization': `Bearer ${token}`,
                    'Content-Type': 'application/json'
                },
-               body: JSON.stringify(policyData)
+               body: JSON.stringify({
+                   gateway_id: gatewayId,
+                   ...policyData
+               })
            });
            
            const result = await response.json();
@@ -1418,8 +1696,10 @@ JavaScript - Retention Dashboard
    // Run manual purge
    async function runManualPurge(categories, options) {
        const token = localStorage.getItem('token');
+       const gatewayId = document.getElementById('gateway-select').value;
        
        const purgeRequest = {
+           gateway_id: gatewayId,
            categories: categories,
            older_than_days: options.olderThanDays || null,
            exclude_critical: options.excludeCritical || true,
@@ -1451,6 +1731,24 @@ JavaScript - Retention Dashboard
        } catch (error) {
            console.error('Error starting purge:', error);
            showError('Failed to start purge operation');
+       }
+   }
+   
+   // Get WebSocket connection status
+   async function getWebSocketStatus() {
+       const token = localStorage.getItem('token');
+       
+       try {
+           const response = await fetch('/api/v1/retention/ws/status', {
+               headers: {
+                   'Authorization': `Bearer ${token}`
+               }
+           });
+           
+           const status = await response.json();
+           updateConnectionStatus(status.connected, status.last_message);
+       } catch (error) {
+           console.error('Error getting WebSocket status:', error);
        }
    }
 
@@ -1698,6 +1996,9 @@ Rate Limiting
    * - **Export operations**
      - 2GB per hour
      - Size limit for exports
+   * - **WebSocket connections**
+     - 10 per gateway
+     - Automatic reconnection
 
 Compliance Notes
 ----------------
@@ -1730,4 +2031,4 @@ For API support, contact:
 - **Email**: retention-support@univagateway.com
 - **Documentation**: https://docs.univagateway.com/api/retention
 - **Emergency Contact**: +1-800-RETENTION
-- **API Status**: https://status.univagateway.com/api
+- **API Status**: https://status.univagateway.com

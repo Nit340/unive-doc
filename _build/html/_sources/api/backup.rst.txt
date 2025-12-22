@@ -1,107 +1,191 @@
-System Backup & Recovery 
-==========================================
+Backup & Recovery Management
+============================
 
-Overview
---------
-Comprehensive REST APIs for managing system backups, recovery operations, scheduled snapshots, storage management, and disaster recovery. These APIs power the Backup & Recovery web interface.
+This document describes the backup and recovery management page and its related API endpoints for managing system backups, snapshots, recovery operations, and storage management.
 
+Page Route (Frontend)
+---------------------
 
-1. Backup System Status
+.. http:get:: /backup-recovery
+
+   **Description**: Renders the complete backup and recovery management page with all backup status, storage information, schedules, and recovery options embedded in the HTML.
+
+   **Headers**:
+
+   .. code-block:: http
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: text/html
+      
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Backup & Recovery - Univa Gateway</title>
+      </head>
+      <body>
+        <div id="app" data-backup='{...}' data-storage='{...}' data-schedules='[...]' data-recovery='{...}'>
+          <!-- Backup & Recovery page with:
+               SECTION 1: Backup Management & Storage Status
+               SECTION 2: Scheduled Backup Configuration
+               SECTION 3: Snapshot Management
+               SECTION 4: Disaster Recovery Operations
+               SECTION 5: Import & Export Operations
+               SECTION 6: Storage Management
+               SECTION 7: Cleanup & Maintenance
+               SECTION 8: Live Progress Monitor & Logs
+          -->
+        </div>
+      </body>
+      </html>
+
+   **How it works**:
+   - Server renders the HTML page with embedded backup and recovery data
+   - All backup status, storage information, schedules, and recovery options are embedded
+   - JavaScript reads this data and renders the complete backup management interface
+   - No separate API calls needed on initial page load
+   - Gateway context is provided via X-Gateway-ID header
+
+   **Error Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 302 Found
+      Location: /login
+
+API Endpoints (Backend)
 -----------------------
 
-Get Backup Status
-~~~~~~~~~~~~~~~~~
-.. http:get:: /cloud-integration/backup/status
+These endpoints handle all backup and recovery operations triggered from the page. All endpoints operate on the current gateway context identified by the `X-Gateway-ID` header.
 
-   Get overall backup system status, health, and configuration.
+Base Path: ``/api/v1/backup``
+
+Backup System Status (Overview)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:get:: /api/v1/backup/status
+
+   **Description**: Get overall backup system status, health, and configuration.
    
-   :reqheader Authorization: Bearer <token>
+   **UI Element**: Security status badge at top of page
    
-   :statuscode 200: Backup status retrieved successfully
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
       {
-        "backup_system": "healthy",
-        "security_score": 95,
-        "last_successful_backup": "2025-03-15T02:00:00Z",
-        "total_backups": 12,
-        "storage_used": "1.4 GB",
-        "components": {
-          "scheduler": {"status": "enabled", "next_run": "2025-03-16T02:00:00Z"},
-          "local_storage": {"status": "healthy", "used": "14%", "available": "8.6 GB"},
-          "cloud_storage": {"status": "connected", "used": "320 MB"},
-          "encryption": {"status": "enabled", "algorithm": "AES-256"}
+        "data": {
+          "backup_system": "healthy",
+          "security_score": 95,
+          "last_successful_backup": "2025-03-15T02:00:00Z",
+          "total_backups": 12,
+          "storage_used": "1.4 GB",
+          "components": {
+            "scheduler": {"status": "enabled", "next_run": "2025-03-16T02:00:00Z"},
+            "local_storage": {"status": "healthy", "used": "14%", "available": "8.6 GB"},
+            "cloud_storage": {"status": "connected", "used": "320 MB"},
+            "encryption": {"status": "enabled", "algorithm": "AES-256"}
+          },
+          "alerts": [
+            {"level": "info", "message": "Scheduled backup in 15 hours"},
+            {"level": "warning", "message": "MQTT certificate expiring in 14 days"}
+          ]
         },
-        "alerts": [
-          {"level": "info", "message": "Scheduled backup in 15 hours"},
-          {"level": "warning", "message": "MQTT certificate expiring in 14 days"}
-        ]
+        "success": true,
+        "message": "Backup system status retrieved successfully"
       }
 
-**UI Integration:** Updates all status cards in the overview section.
+Backup Management (SECTION 1)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-2. Backup Management (SECTION 1)
----------------------------------
+.. http:get:: /api/v1/backup/list
 
-Get Backup List
-~~~~~~~~~~~~~~~
-.. http:get:: /cloud-integration/backup/list
+   **Description**: Retrieve all backup files for table display.
+   
+   **UI Element**: SECTION 1 - Backup files table
+   
+   **Headers**:
 
-   Retrieve all backup files for table display.
-   
-   :query type: Filter by type (full, config, pre-ota) *(optional)*
-   :query date_from: Filter from date (YYYY-MM-DD) *(optional)*
-   :query date_to: Filter to date (YYYY-MM-DD) *(optional)*
-   :query limit: Number of results (default: 50) *(optional)*
-   :reqheader Authorization: Bearer <token>
-   
-   :statuscode 200: Backup list retrieved successfully
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+
+   **Query Parameters**:
+
+   * **type** (string): Filter by type (full, config, pre-ota) *(optional)*
+   * **date_from** (string): Filter from date (YYYY-MM-DD) *(optional)*
+   * **date_to** (string): Filter to date (YYYY-MM-DD) *(optional)*
+   * **limit** (integer): Number of results (default: 50) *(optional)*
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
       {
-        "backups": [
-          {
-            "id": 1,
-            "name": "DailyBackup_20250612",
-            "filename": "backup_2025-06-12_0200_full.tar.gz",
-            "type": "Full System",
-            "created_at": "2025-06-12T02:00:00Z",
-            "size": 220000000,
-            "size_display": "220 MB",
-            "checksum": "a1b2c3d4e5f6g7h8",
-            "location": "local",
-            "encrypted": true,
-            "integrity": "verified",
-            "description": "Full System • Encrypted • Local",
-            "components": ["system", "data", "config", "database"]
-          }
-        ],
-        "total": 12,
-        "storage_used": "1.4 GB",
-        "storage_available": "8.6 GB"
+        "data": {
+          "backups": [
+            {
+              "id": 1,
+              "name": "DailyBackup_20250612",
+              "filename": "backup_2025-06-12_0200_full.tar.gz",
+              "type": "Full System",
+              "created_at": "2025-06-12T02:00:00Z",
+              "size": 220000000,
+              "size_display": "220 MB",
+              "checksum": "a1b2c3d4e5f6g7h8",
+              "location": "local",
+              "encrypted": true,
+              "integrity": "verified",
+              "description": "Full System • Encrypted • Local",
+              "components": ["system", "data", "config", "database"]
+            }
+          ],
+          "total": 12,
+          "storage_used": "1.4 GB",
+          "storage_available": "8.6 GB"
+        },
+        "success": true,
+        "message": "Backup list retrieved successfully"
       }
 
-**UI Integration:** Powers the backup files table in Section 1.
+.. http:post:: /api/v1/backup/create
 
-Create Backup
-~~~~~~~~~~~~~
-.. http:post:: /cloud-integration/backup/create
+   **Description**: Create new manual backup from "Create Backup" modal.
+   
+   **UI Element**: SECTION 1 - "Create Backup" button
+   
+   **Headers**:
 
-   Create new manual backup from "Create Backup" modal.
-   
-   :reqheader Authorization: Bearer <token>
-   :reqheader Content-Type: application/json
-   
-   **Request:**
-   
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+
+   **Request**:
+
    .. sourcecode:: json
-   
+
       {
         "name": "pre_maintenance_backup_20250315",
         "type": "full",
@@ -112,297 +196,232 @@ Create Backup
         "verify_integrity": true,
         "description": "Manual backup before system maintenance"
       }
-   
-   :statuscode 201: Backup creation started
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
       {
-        "status": "started",
-        "backup_id": "backup_20250315_1430",
-        "job_id": "JOB-001",
-        "estimated_size": "220 MB",
-        "estimated_duration": "5 minutes",
-        "progress_url": "/cloud-integration/backup/progress/JOB-001"
+        "data": {
+          "status": "started",
+          "backup_id": "backup_20250315_1430",
+          "job_id": "JOB-001",
+          "estimated_size": "220 MB",
+          "estimated_duration": "5 minutes",
+          "progress_url": "/api/v1/backup/progress/JOB-001"
+        },
+        "success": true,
+        "message": "Backup creation started"
       }
 
-**UI Integration:** Initiates backup from modal and shows progress.
+.. http:get:: /api/v1/backup/download/{backup_id}
 
-Download Backup
-~~~~~~~~~~~~~~~
-.. http:get:: /cloud-integration/backup/download/{backup_id}
+   **Description**: Download backup file.
+   
+   **UI Element**: SECTION 1 - "Download" button in backup table
+   
+   **Path Parameters**:
 
-   Download backup file.
-   
-   :reqheader Authorization: Bearer <token>
-   
-   :statuscode 200: Backup file download
-   :resheader Content-Type: application/octet-stream
-   :resheader Content-Disposition: attachment; filename="backup_2025-06-12.tar.gz"
-   
-   **Response:**
-   
-   Binary backup file.
+   * **backup_id** (string): Backup identifier
 
-**UI Integration:** "Download" button in backup table actions.
+   **Headers**:
 
-Delete Backup
-~~~~~~~~~~~~~
-.. http:post:: /cloud-integration/backup/delete
+   .. code-block:: http
 
-   Delete backup file from table.
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/octet-stream
+      Content-Disposition: attachment; filename="backup_2025-06-12.tar.gz"
+      
+      [binary backup data]
+
+.. http:post:: /api/v1/backup/delete
+
+   **Description**: Delete backup file from table.
    
-   :reqheader Authorization: Bearer <token>
-   :reqheader Content-Type: application/json
+   **UI Element**: SECTION 1 - "Delete" button in backup table
    
-   **Request:**
-   
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+
+   **Request**:
+
    .. sourcecode:: json
-   
+
       {
         "backup_id": 1,
         "reason": "Storage cleanup"
       }
-   
-   :statuscode 200: Backup deleted successfully
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
       {
-        "status": "deleted",
-        "message": "Backup deleted successfully",
-        "storage_freed": "220 MB"
-      }
-
-**UI Integration:** "Delete" button in backup table actions.
-
-Get Backup Details
-~~~~~~~~~~~~~~~~~~
-.. http:get:: /cloud-integration/backup/details/{backup_id}
-
-   Get detailed information about a specific backup.
-   
-   :reqheader Authorization: Bearer <token>
-   
-   :statuscode 200: Backup details retrieved successfully
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
-      {
-        "id": 1,
-        "name": "DailyBackup_20250612",
-        "filename": "backup_2025-06-12_0200_full.tar.gz",
-        "type": "Full System",
-        "created_at": "2025-06-12T02:00:00Z",
-        "size": 220000000,
-        "compressed_size": 150000000,
-        "compression_ratio": 1.47,
-        "checksum": "a1b2c3d4e5f6g7h8",
-        "integrity": {
-          "verified": true,
-          "verification_time": "2025-06-12T03:00:00Z",
-          "signature_valid": true
+        "data": {
+          "status": "deleted",
+          "storage_freed": "220 MB"
         },
-        "encryption": {
-          "enabled": true,
-          "algorithm": "AES-256",
-          "key_id": "key_001"
-        },
-        "components": {
-          "system": {"included": true, "size": "120 MB"},
-          "data": {"included": true, "size": "85 MB"},
-          "config": {"included": true, "size": "15 MB"},
-          "database": {"included": false, "size": "0 MB"}
-        },
-        "metadata": {
-          "created_by": "scheduler",
-          "gateway_id": "GW-001",
-          "version": "v3.2.1",
-          "description": "Scheduled nightly backup"
-        },
-        "storage_locations": [
-          {
-            "type": "local",
-            "path": "/backups/2025-06-12/backup.tar.gz",
-            "verified": true
-          }
-        ]
+        "success": true,
+        "message": "Backup deleted successfully"
       }
 
-**UI Integration:** "Restore Preview" button in backup table.
+.. http:get:: /api/v1/backup/details/{backup_id}
 
-3. Snapshot Management
-----------------------
+   **Description**: Get detailed information about a specific backup.
+   
+   **UI Element**: SECTION 1 - "Restore Preview" button in backup table
+   
+   **Path Parameters**:
 
-Get Snapshots
-~~~~~~~~~~~~~
-.. http:get:: /cloud-integration/backup/snapshots
+   * **backup_id** (string): Backup identifier
 
-   Get all configuration snapshots.
-   
-   :reqheader Authorization: Bearer <token>
-   
-   :statuscode 200: Snapshots retrieved successfully
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
       {
-        "snapshots": [
-          {
-            "id": 1,
-            "name": "Pre_ACS_Update",
-            "description": "Snapshot before ACS module update",
-            "created_at": "2025-03-15T11:05:00Z",
-            "size": "45 MB",
-            "tags": ["ACS", "Zoning"],
-            "components": ["acs_config", "zone_mappings"],
-            "created_by": "admin",
-            "status": "active"
-          }
-        ],
-        "total": 3,
-        "active": 3
-      }
-
-**UI Integration:** Updates snapshots card in overview.
-
-Create Snapshot
-~~~~~~~~~~~~~~~
-.. http:post:: /cloud-integration/backup/snapshots/create
-
-   Create new configuration snapshot.
-   
-   :reqheader Authorization: Bearer <token>
-   :reqheader Content-Type: application/json
-   
-   **Request:**
-   
-   .. sourcecode:: json
-   
-      {
-        "name": "Pre_ACS_Update_v2",
-        "description": "Snapshot before ACS module v2.0 update",
-        "tags": ["ACS", "Update", "Safety"],
-        "components": ["acs_config", "zone_mappings", "user_permissions"],
-        "include_settings": true,
-        "include_data": false
-      }
-   
-   :statuscode 201: Snapshot created successfully
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
-      {
-        "status": "created",
-        "snapshot_id": 4,
-        "name": "Pre_ACS_Update_v2",
-        "size": "52 MB",
-        "message": "Snapshot created successfully"
-      }
-
-**UI Integration:** "Take Snapshot" modal submission.
-
-Restore Snapshot
-~~~~~~~~~~~~~~~~
-.. http:post:: /cloud-integration/backup/snapshots/restore
-
-   Restore configuration from snapshot.
-   
-   :reqheader Authorization: Bearer <token>
-   :reqheader Content-Type: application/json
-   
-   **Request:**
-   
-   .. sourcecode:: json
-   
-      {
-        "snapshot_id": 1,
-        "components": ["acs_config", "zone_mappings"],
-        "create_backup": true,
-        "reason": "Rollback after failed update"
-      }
-   
-   :statuscode 200: Snapshot restore started
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
-      {
-        "status": "restore_started",
-        "restore_id": "RESTORE-001",
-        "estimated_duration": "2 minutes",
-        "pre_restore_backup_id": "backup_pre_restore_001",
-        "progress_url": "/cloud-integration/backup/restore/progress/RESTORE-001"
-      }
-
-4. Scheduled Backups (SECTION 2)
---------------------------------
-
-Get Schedules
-~~~~~~~~~~~~~
-.. http:get:: /cloud-integration/backup/schedules
-
-   Get all backup schedules for form initialization.
-   
-   :reqheader Authorization: Bearer <token>
-   
-   :statuscode 200: Schedules retrieved successfully
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
-      {
-        "schedules": [
-          {
-            "id": "schedule_nightly",
+        "data": {
+          "id": 1,
+          "name": "DailyBackup_20250612",
+          "filename": "backup_2025-06-12_0200_full.tar.gz",
+          "type": "Full System",
+          "created_at": "2025-06-12T02:00:00Z",
+          "size": 220000000,
+          "compressed_size": 150000000,
+          "compression_ratio": 1.47,
+          "checksum": "a1b2c3d4e5f6g7h8",
+          "integrity": {
+            "verified": true,
+            "verification_time": "2025-06-12T03:00:00Z",
+            "signature_valid": true
+          },
+          "encryption": {
             "enabled": true,
-            "name": "Nightly Full Backup",
-            "type": "full",
-            "frequency": "daily",
-            "time": "02:00",
-            "timezone": "UTC",
-            "retention_count": 5,
-            "encryption": true,
-            "destination": "local",
-            "auto_purge": true,
-            "last_execution": "2025-06-12T02:00:00Z",
-            "next_execution": "2025-06-13T02:00:00Z",
-            "notifications": {
-              "on_success": true,
-              "on_failure": true
+            "algorithm": "AES-256",
+            "key_id": "key_001"
+          },
+          "components": {
+            "system": {"included": true, "size": "120 MB"},
+            "data": {"included": true, "size": "85 MB"},
+            "config": {"included": true, "size": "15 MB"},
+            "database": {"included": false, "size": "0 MB"}
+          },
+          "metadata": {
+            "created_by": "scheduler",
+            "gateway_id": "GW-001",
+            "version": "v3.2.1",
+            "description": "Scheduled nightly backup"
+          },
+          "storage_locations": [
+            {
+              "type": "local",
+              "path": "/backups/2025-06-12/backup.tar.gz",
+              "verified": true
             }
-          }
-        ],
-        "total_schedules": 1
+          ]
+        },
+        "success": true,
+        "message": "Backup details retrieved successfully"
       }
 
-**UI Integration:** Initializes all form fields in Section 2 accordion.
+Scheduled Backups (SECTION 2)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Update Schedule
-~~~~~~~~~~~~~~~
-.. http:post:: /cloud-integration/backup/schedules/update
+.. http:get:: /api/v1/backup/schedules
 
-   Save schedule configuration.
+   **Description**: Get all backup schedules for form initialization.
    
-   :reqheader Authorization: Bearer <token>
-   :reqheader Content-Type: application/json
+   **UI Element**: SECTION 2 - Scheduled backups configuration form
    
-   **Request:**
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "data": {
+          "schedules": [
+            {
+              "id": "schedule_nightly",
+              "enabled": true,
+              "name": "Nightly Full Backup",
+              "type": "full",
+              "frequency": "daily",
+              "time": "02:00",
+              "timezone": "UTC",
+              "retention_count": 5,
+              "encryption": true,
+              "destination": "local",
+              "auto_purge": true,
+              "last_execution": "2025-06-12T02:00:00Z",
+              "next_execution": "2025-06-13T02:00:00Z",
+              "notifications": {
+                "on_success": true,
+                "on_failure": true
+              }
+            }
+          ],
+          "total_schedules": 1
+        },
+        "success": true,
+        "message": "Backup schedules retrieved successfully"
+      }
+
+.. http:post:: /api/v1/backup/schedules/update
+
+   **Description**: Save schedule configuration.
    
+   **UI Element**: SECTION 2 - "Save Schedule" button
+   
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+
+   **Request**:
+
    .. sourcecode:: json
-   
+
       {
         "schedule_id": "schedule_nightly",
         "enabled": true,
@@ -418,71 +437,219 @@ Update Schedule
           "on_failure": true
         }
       }
-   
-   :statuscode 200: Schedule updated successfully
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
       {
-        "status": "updated",
-        "schedule_id": "schedule_nightly",
-        "next_execution": "2025-06-13T02:00:00Z",
+        "data": {
+          "status": "updated",
+          "schedule_id": "schedule_nightly",
+          "next_execution": "2025-06-13T02:00:00Z"
+        },
+        "success": true,
         "message": "Schedule updated successfully"
       }
 
-**UI Integration:** "Save Schedule" button in Section 2.
+.. http:post:: /api/v1/backup/schedules/toggle
 
-Toggle Schedule Status
-~~~~~~~~~~~~~~~~~~~~~~
-.. http:post:: /cloud-integration/backup/schedules/toggle
+   **Description**: Enable/disable a backup schedule.
+   
+   **UI Element**: SECTION 2 - Toggle switch in schedule header
+   
+   **Headers**:
 
-   Enable/disable a backup schedule.
-   
-   :reqheader Authorization: Bearer <token>
-   :reqheader Content-Type: application/json
-   
-   **Request:**
-   
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+
+   **Request**:
+
    .. sourcecode:: json
-   
+
       {
         "schedule_id": "schedule_nightly",
         "enabled": false
       }
-   
-   :statuscode 200: Schedule status updated
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
       {
-        "status": "updated",
-        "schedule_id": "schedule_nightly",
-        "enabled": false,
+        "data": {
+          "status": "updated",
+          "schedule_id": "schedule_nightly",
+          "enabled": false
+        },
+        "success": true,
         "message": "Schedule disabled"
       }
 
-**UI Integration:** Toggle switch in Section 2 header.
+Snapshot Management (SECTION 3)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-5. Disaster Recovery Operations
--------------------------------
+.. http:get:: /api/v1/backup/snapshots
 
-Initiate Recovery
-~~~~~~~~~~~~~~~~~
-.. http:post:: /cloud-integration/backup/recovery/initiate
+   **Description**: Get all configuration snapshots.
+   
+   **UI Element**: SECTION 3 - Snapshots management table
+   
+   **Headers**:
 
-   Initiate disaster recovery from backup.
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "data": {
+          "snapshots": [
+            {
+              "id": 1,
+              "name": "Pre_ACS_Update",
+              "description": "Snapshot before ACS module update",
+              "created_at": "2025-03-15T11:05:00Z",
+              "size": "45 MB",
+              "tags": ["ACS", "Zoning"],
+              "components": ["acs_config", "zone_mappings"],
+              "created_by": "admin",
+              "status": "active"
+            }
+          ],
+          "total": 3,
+          "active": 3
+        },
+        "success": true,
+        "message": "Snapshots retrieved successfully"
+      }
+
+.. http:post:: /api/v1/backup/snapshots/create
+
+   **Description**: Create new configuration snapshot.
    
-   :reqheader Authorization: Bearer <token>
-   :reqheader Content-Type: application/json
+   **UI Element**: SECTION 3 - "Take Snapshot" modal
    
-   **Request:**
-   
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+
+   **Request**:
+
    .. sourcecode:: json
+
+      {
+        "name": "Pre_ACS_Update_v2",
+        "description": "Snapshot before ACS module v2.0 update",
+        "tags": ["ACS", "Update", "Safety"],
+        "components": ["acs_config", "zone_mappings", "user_permissions"],
+        "include_settings": true,
+        "include_data": false
+      }
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "data": {
+          "status": "created",
+          "snapshot_id": 4,
+          "name": "Pre_ACS_Update_v2",
+          "size": "52 MB"
+        },
+        "success": true,
+        "message": "Snapshot created successfully"
+      }
+
+.. http:post:: /api/v1/backup/snapshots/restore
+
+   **Description**: Restore configuration from snapshot.
    
+   **UI Element**: SECTION 3 - "Restore" button in snapshot table
+   
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+
+   **Request**:
+
+   .. sourcecode:: json
+
+      {
+        "snapshot_id": 1,
+        "components": ["acs_config", "zone_mappings"],
+        "create_backup": true,
+        "reason": "Rollback after failed update"
+      }
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "data": {
+          "status": "restore_started",
+          "restore_id": "RESTORE-001",
+          "estimated_duration": "2 minutes",
+          "pre_restore_backup_id": "backup_pre_restore_001",
+          "progress_url": "/api/v1/backup/restore/progress/RESTORE-001"
+        },
+        "success": true,
+        "message": "Snapshot restore started"
+      }
+
+Disaster Recovery (SECTION 4)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:post:: /api/v1/backup/recovery/initiate
+
+   **Description**: Initiate disaster recovery from backup.
+   
+   **UI Element**: SECTION 4 - "Initiate Recovery" button in modal
+   
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+
+   **Request**:
+
+   .. sourcecode:: json
+
       {
         "backup_id": 1,
         "recovery_type": "full",
@@ -491,181 +658,198 @@ Initiate Recovery
         "reason": "System corruption detected",
         "confirmation": true
       }
-   
-   :statuscode 200: Recovery initiated
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
-      {
-        "status": "recovery_started",
-        "recovery_id": "RECOVERY-001",
-        "backup_id": 1,
-        "estimated_duration": "15 minutes",
-        "pre_recovery_snapshot_id": 5,
-        "warning": "System will restart after recovery",
-        "progress_url": "/cloud-integration/backup/recovery/progress/RECOVERY-001"
-      }
 
-**UI Integration:** "Initiate Recovery" button in Disaster Recovery modal.
+   **Response**:
 
-Get Recovery Preview
-~~~~~~~~~~~~~~~~~~~~
-.. http:get:: /cloud-integration/backup/recovery/preview/{backup_id}
-
-   Get recovery preview and impact analysis.
-   
-   :reqheader Authorization: Bearer <token>
-   
-   :statuscode 200: Recovery preview generated
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
-      {
-        "backup_id": 1,
-        "backup_name": "DailyBackup_20250612",
-        "recovery_type": "full",
-        "impact_analysis": {
-          "components_affected": ["system", "data", "config"],
-          "estimated_downtime": "15 minutes",
-          "restart_required": true,
-          "data_loss_risk": "low",
-          "pre_recovery_actions": ["stop_services", "create_snapshot"],
-          "post_recovery_actions": ["verify_integrity", "restart_services"]
-        },
-        "warnings": [
-          "All current data will be replaced",
-          "Gateway will restart automatically"
-        ],
-        "recommendations": [
-          "Ensure no users are connected",
-          "Verify backup integrity before proceeding"
-        ]
-      }
-
-**UI Integration:** Recovery preview in Disaster Recovery modal.
-
-6. Import & Export Operations
-------------------------------
-
-Import Backup File
-~~~~~~~~~~~~~~~~~~
-.. http:post:: /cloud-integration/backup/import
-
-   Import external backup file.
-   
-   :reqheader Authorization: Bearer <token>
-   :reqheader Content-Type: multipart/form-data
-   
-   **Request:**
-   
    .. sourcecode:: http
-   
-      POST /cloud-integration/backup/import HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: multipart/form-data
-      Content-Disposition: form-data; name="file"; filename="external_backup.tar.gz"
-      Content-Type: application/gzip
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
       
-      --form-data; name="auto_restore"
-      
-      false
-      
-      --form-data; name="create_backup_before"
-      
-      true
-   
-   :statuscode 200: Import started successfully
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
       {
-        "status": "import_started",
-        "import_id": "IMPORT-001",
-        "filename": "external_backup.tar.gz",
-        "validation_results": {
-          "format": "valid",
-          "signature": "verified",
-          "version": "compatible",
-          "checksum": "valid"
+        "data": {
+          "status": "recovery_started",
+          "recovery_id": "RECOVERY-001",
+          "backup_id": 1,
+          "estimated_duration": "15 minutes",
+          "pre_recovery_snapshot_id": 5,
+          "warning": "System will restart after recovery"
         },
-        "backup_info": {
-          "name": "ExternalBackup_20250610",
-          "type": "full",
-          "size": "210 MB",
-          "created": "2025-06-10T14:30:00Z",
-          "gateway_compatibility": "GW-001 v3.x"
-        },
-        "progress_url": "/cloud-integration/backup/import/progress/IMPORT-001"
+        "success": true,
+        "message": "Disaster recovery initiated"
       }
 
-**UI Integration:** File upload in Import Backup modal.
+.. http:get:: /api/v1/backup/recovery/preview/{backup_id}
 
-Validate Import File
-~~~~~~~~~~~~~~~~~~~~
-.. http:post:: /cloud-integration/backup/import/validate
+   **Description**: Get recovery preview and impact analysis.
+   
+   **UI Element**: SECTION 4 - Recovery preview in modal
+   
+   **Path Parameters**:
 
-   Validate backup file before import.
-   
-   :reqheader Authorization: Bearer <token>
-   :reqheader Content-Type: multipart/form-data
-   
-   **Request:**
-   
+   * **backup_id** (string): Backup identifier
+
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+
+   **Response**:
+
    .. sourcecode:: http
-   
-      POST /cloud-integration/backup/import/validate HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: multipart/form-data
-      Content-Disposition: form-data; name="file"; filename="backup.tar.gz"
-      Content-Type: application/gzip
-   
-   :statuscode 200: Validation completed
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
       {
-        "status": "validated",
-        "validation": {
-          "file_format": "valid",
-          "signature": "verified",
-          "checksum": "sha256:a1b2c3...",
-          "version_compatibility": "compatible",
-          "size": "210 MB",
-          "type": "full",
-          "created": "2025-06-10T14:30:00Z",
-          "gateway_id": "GW-002",
-          "components": ["system", "data", "config"]
+        "data": {
+          "backup_id": 1,
+          "backup_name": "DailyBackup_20250612",
+          "recovery_type": "full",
+          "impact_analysis": {
+            "components_affected": ["system", "data", "config"],
+            "estimated_downtime": "15 minutes",
+            "restart_required": true,
+            "data_loss_risk": "low",
+            "pre_recovery_actions": ["stop_services", "create_snapshot"],
+            "post_recovery_actions": ["verify_integrity", "restart_services"]
+          },
+          "warnings": [
+            "All current data will be replaced",
+            "Gateway will restart automatically"
+          ],
+          "recommendations": [
+            "Ensure no users are connected",
+            "Verify backup integrity before proceeding"
+          ]
         },
-        "warnings": [],
-        "recommendations": ["Create current backup before restore"]
+        "success": true,
+        "message": "Recovery preview generated"
       }
 
-**UI Integration:** File validation in Import Backup modal.
+Import & Export Operations (SECTION 5)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Export Configuration
-~~~~~~~~~~~~~~~~~~~~
-.. http:get:: /cloud-integration/backup/export/config
+.. http:post:: /api/v1/backup/import
 
-   Export current configuration only.
+   **Description**: Import external backup file.
    
-   :reqheader Authorization: Bearer <token>
+   **UI Element**: SECTION 5 - Import Backup modal file upload
    
-   :statuscode 200: Configuration exported
-   :resheader Content-Type: application/json
-   :resheader Content-Disposition: attachment; filename="config_export_20250315.json"
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: multipart/form-data
+
+   **Form Parameters**:
+
+   * **file** (required): Backup file to import
+   * **auto_restore** (boolean): Automatically restore after import *(optional, default: false)*
+   * **create_backup_before** (boolean): Create backup before import *(optional, default: true)*
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "data": {
+          "status": "import_started",
+          "import_id": "IMPORT-001",
+          "filename": "external_backup.tar.gz",
+          "validation_results": {
+            "format": "valid",
+            "signature": "verified",
+            "version": "compatible",
+            "checksum": "valid"
+          },
+          "backup_info": {
+            "name": "ExternalBackup_20250610",
+            "type": "full",
+            "size": "210 MB",
+            "created": "2025-06-10T14:30:00Z",
+            "gateway_compatibility": "GW-001 v3.x"
+          },
+          "progress_url": "/api/v1/backup/import/progress/IMPORT-001"
+        },
+        "success": true,
+        "message": "Backup import started"
+      }
+
+.. http:post:: /api/v1/backup/import/validate
+
+   **Description**: Validate backup file before import.
    
-   **Response:**
+   **UI Element**: SECTION 5 - File validation in Import modal
    
-   .. sourcecode:: json
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: multipart/form-data
+
+   **Form Parameters**:
+
+   * **file** (required): Backup file to validate
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "data": {
+          "status": "validated",
+          "validation": {
+            "file_format": "valid",
+            "signature": "verified",
+            "checksum": "sha256:a1b2c3...",
+            "version_compatibility": "compatible",
+            "size": "210 MB",
+            "type": "full",
+            "created": "2025-06-10T14:30:00Z",
+            "gateway_id": "GW-002",
+            "components": ["system", "data", "config"]
+          },
+          "warnings": [],
+          "recommendations": ["Create current backup before restore"]
+        },
+        "success": true,
+        "message": "Backup validation completed"
+      }
+
+.. http:get:: /api/v1/backup/export/config
+
+   **Description**: Export current configuration only.
    
+   **UI Element**: SECTION 5 - "Export Configuration" button
+   
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      Content-Disposition: attachment; filename="config_export_20250315.json"
+      
       {
         "export_type": "configuration",
         "timestamp": "2025-03-15T14:30:00Z",
@@ -675,98 +859,111 @@ Export Configuration
           "name": "Univa-GW-01"
         },
         "modules": {
-          "acs": {...},
-          "zoning": {...},
-          "network": {...}
+          "acs": {},
+          "zoning": {},
+          "network": {}
         },
-        "settings": {...},
+        "settings": {},
         "metadata": {
           "exported_by": "admin",
           "export_reason": "migration"
         }
       }
 
-7. Storage Management
----------------------
+Storage Management (SECTION 6)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Get Storage Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~
-.. http:get:: /cloud-integration/backup/storage
+.. http:get:: /api/v1/backup/storage
 
-   Get storage configuration for all locations.
+   **Description**: Get storage configuration for all locations.
    
-   :reqheader Authorization: Bearer <token>
+   **UI Element**: SECTION 6 - Storage Management modal
    
-   :statuscode 200: Storage configuration retrieved
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
       {
-        "storage_locations": [
-          {
-            "id": "local",
-            "type": "local",
-            "name": "Local Storage",
-            "enabled": true,
-            "path": "/backups",
-            "quota": "10 GB",
-            "used": "1.4 GB",
-            "available": "8.6 GB",
-            "health": "good",
-            "default": true
+        "data": {
+          "storage_locations": [
+            {
+              "id": "local",
+              "type": "local",
+              "name": "Local Storage",
+              "enabled": true,
+              "path": "/backups",
+              "quota": "10 GB",
+              "used": "1.4 GB",
+              "available": "8.6 GB",
+              "health": "good",
+              "default": true
+            },
+            {
+              "id": "aws",
+              "type": "cloud",
+              "name": "AWS S3 Bucket",
+              "enabled": true,
+              "provider": "AWS S3",
+              "bucket": "company-backups",
+              "region": "us-east-1",
+              "used": "320 MB",
+              "health": "connected",
+              "last_sync": "2025-03-15T02:15:00Z"
+            },
+            {
+              "id": "sftp",
+              "type": "remote",
+              "name": "SFTP Server",
+              "enabled": false,
+              "health": "offline",
+              "configuration_required": true
+            }
+          ],
+          "policies": {
+            "default_location": "local",
+            "replication_enabled": true,
+            "encryption_default": true,
+            "compression_default": "gzip"
           },
-          {
-            "id": "aws",
-            "type": "cloud",
-            "name": "AWS S3 Bucket",
-            "enabled": true,
-            "provider": "AWS S3",
-            "bucket": "company-backups",
-            "region": "us-east-1",
-            "used": "320 MB",
-            "health": "connected",
-            "last_sync": "2025-03-15T02:15:00Z"
-          },
-          {
-            "id": "sftp",
-            "type": "remote",
-            "name": "SFTP Server",
-            "enabled": false,
-            "health": "offline",
-            "configuration_required": true
+          "summary": {
+            "total_backups": 12,
+            "total_size": "1.4 GB",
+            "largest_backup": "220 MB",
+            "oldest_backup": "2025-06-01T02:00:00Z"
           }
-        ],
-        "policies": {
-          "default_location": "local",
-          "replication_enabled": true,
-          "encryption_default": true,
-          "compression_default": "gzip"
         },
-        "summary": {
-          "total_backups": 12,
-          "total_size": "1.4 GB",
-          "largest_backup": "220 MB",
-          "oldest_backup": "2025-06-01T02:00:00Z"
-        }
+        "success": true,
+        "message": "Storage configuration retrieved successfully"
       }
 
-**UI Integration:** Storage Management modal content.
+.. http:post:: /api/v1/backup/storage/update
 
-Update Storage Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.. http:post:: /cloud-integration/backup/storage/update
+   **Description**: Update storage configuration.
+   
+   **UI Element**: SECTION 6 - "Save Storage Settings" button
+   
+   **Headers**:
 
-   Update storage configuration.
-   
-   :reqheader Authorization: Bearer <token>
-   :reqheader Content-Type: application/json
-   
-   **Request:**
-   
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+
+   **Request**:
+
    .. sourcecode:: json
-   
+
       {
         "storage_locations": {
           "local": {
@@ -783,75 +980,92 @@ Update Storage Configuration
           "encryption_default": true
         }
       }
-   
-   :statuscode 200: Storage configuration updated
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
       {
-        "status": "updated",
-        "message": "Storage configuration updated",
-        "restart_required": false,
-        "changes_applied": true
+        "data": {
+          "status": "updated",
+          "restart_required": false,
+          "changes_applied": true
+        },
+        "success": true,
+        "message": "Storage configuration updated successfully"
       }
 
-Sync to Cloud
-~~~~~~~~~~~~~
-.. http:post:: /cloud-integration/backup/storage/sync
+.. http:post:: /api/v1/backup/storage/sync
 
-   Sync local backups to cloud storage.
+   **Description**: Sync local backups to cloud storage.
    
-   :reqheader Authorization: Bearer <token>
-   :reqheader Content-Type: application/json
+   **UI Element**: SECTION 6 - "Sync to Cloud" button
    
-   **Request:**
-   
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+
+   **Request**:
+
    .. sourcecode:: json
-   
+
       {
         "source": "local",
         "destination": "aws",
         "backup_ids": ["all"],
         "verify_after_sync": true
       }
-   
-   :statuscode 200: Sync started
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
       {
-        "status": "sync_started",
-        "sync_id": "SYNC-001",
-        "source": "local",
-        "destination": "aws",
-        "backups_to_sync": 12,
-        "estimated_size": "1.4 GB",
-        "estimated_duration": "10 minutes",
-        "progress_url": "/cloud-integration/backup/storage/sync/progress/SYNC-001"
+        "data": {
+          "status": "sync_started",
+          "sync_id": "SYNC-001",
+          "source": "local",
+          "destination": "aws",
+          "backups_to_sync": 12,
+          "estimated_size": "1.4 GB",
+          "estimated_duration": "10 minutes",
+          "progress_url": "/api/v1/backup/storage/sync/progress/SYNC-001"
+        },
+        "success": true,
+        "message": "Storage sync started"
       }
 
-**UI Integration:** "Sync to Cloud" button in Storage Management modal.
+Cleanup & Maintenance (SECTION 7)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-8. Cleanup Operations
----------------------
+.. http:post:: /api/v1/backup/cleanup
 
-Run Cleanup
-~~~~~~~~~~~
-.. http:post:: /cloud-integration/backup/cleanup
+   **Description**: Run backup cleanup based on retention policies.
+   
+   **UI Element**: SECTION 7 - "Purge Old" button
+   
+   **Headers**:
 
-   Run backup cleanup based on retention policies.
-   
-   :reqheader Authorization: Bearer <token>
-   :reqheader Content-Type: application/json
-   
-   **Request:**
-   
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+
+   **Request**:
+
    .. sourcecode:: json
-   
+
       {
         "dry_run": true,
         "storage_locations": ["local"],
@@ -860,428 +1074,590 @@ Run Cleanup
         "min_free_space": "5 GB",
         "reason": "Monthly cleanup"
       }
-   
-   :statuscode 200: Cleanup analysis completed
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
       {
-        "status": "analyzed",
-        "dry_run": true,
-        "analysis": {
-          "total_backups": 12,
-          "eligible_for_removal": 7,
-          "space_to_free": "850 MB",
-          "backups_to_keep": 5,
-          "protected_backups": 0
+        "data": {
+          "status": "analyzed",
+          "dry_run": true,
+          "analysis": {
+            "total_backups": 12,
+            "eligible_for_removal": 7,
+            "space_to_free": "850 MB",
+            "backups_to_keep": 5,
+            "protected_backups": 0
+          },
+          "action_required": true,
+          "confirm_action": "cleanup_execute"
         },
-        "action_required": true,
-        "confirm_action": "cleanup_execute"
+        "success": true,
+        "message": "Cleanup analysis completed"
       }
 
-**UI Integration:** "Purge Old" button in Storage Management modal.
+.. http:post:: /api/v1/backup/cleanup/execute
 
-Execute Cleanup
-~~~~~~~~~~~~~~~
-.. http:post:: /cloud-integration/backup/cleanup/execute
+   **Description**: Execute cleanup after dry run analysis.
+   
+   **UI Element**: SECTION 7 - "Execute Cleanup" button
+   
+   **Headers**:
 
-   Execute cleanup after dry run analysis.
-   
-   :reqheader Authorization: Bearer <token>
-   :reqheader Content-Type: application/json
-   
-   **Request:**
-   
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+
+   **Request**:
+
    .. sourcecode:: json
-   
+
       {
         "cleanup_plan_id": "ANALYSIS-001",
         "confirmation": true,
         "notify_on_completion": true
       }
-   
-   :statuscode 200: Cleanup executed
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
       {
-        "status": "cleanup_started",
-        "cleanup_id": "CLEANUP-001",
-        "backups_to_remove": 7,
-        "estimated_space": "850 MB",
-        "estimated_duration": "2 minutes",
-        "progress_url": "/cloud-integration/backup/cleanup/progress/CLEANUP-001"
-      }
-
-9. Progress Monitoring
-----------------------
-
-Get Backup Progress
-~~~~~~~~~~~~~~~~~~~
-.. http:get:: /cloud-integration/backup/progress/{job_id}
-
-   Get progress of backup operation.
-   
-   :reqheader Authorization: Bearer <token>
-   
-   :statuscode 200: Progress information retrieved
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
-      {
-        "job_id": "JOB-001",
-        "operation": "backup_create",
-        "status": "running",
-        "progress": 65,
-        "current_step": "compressing_data",
-        "current_component": "database",
-        "details": {
-          "processed": "143 MB",
-          "total": "220 MB",
-          "speed": "15 MB/s",
-          "eta": "00:01:30",
-          "elapsed": "00:03:45"
+        "data": {
+          "status": "cleanup_started",
+          "cleanup_id": "CLEANUP-001",
+          "backups_to_remove": 7,
+          "estimated_space": "850 MB",
+          "estimated_duration": "2 minutes"
         },
-        "errors": 0,
-        "warnings": 2
+        "success": true,
+        "message": "Cleanup operation started"
       }
 
-**UI Integration:** Progress modal updates.
+Live Progress Monitor & Logs (SECTION 8)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Get Restore Progress
-~~~~~~~~~~~~~~~~~~~~
-.. http:get:: /cloud-integration/backup/restore/progress/{restore_id}
+.. http:get:: /api/v1/backup/progress/{job_id}
 
-   Get progress of restore operation.
+   **Description**: Get progress of backup operation.
    
-   :reqheader Authorization: Bearer <token>
+   **UI Element**: SECTION 8 - Progress modal
    
-   :statuscode 200: Restore progress retrieved
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
+   **Path Parameters**:
+
+   * **job_id** (string): Job identifier
+
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
       {
-        "restore_id": "RESTORE-001",
-        "operation": "recovery",
-        "status": "running",
-        "progress": 45,
-        "current_step": "restoring_data",
-        "current_component": "system",
-        "details": {
-          "files_processed": 4500,
-          "files_total": 10000,
-          "data_processed": "99 MB",
-          "data_total": "220 MB",
-          "eta": "00:05:30",
-          "elapsed": "00:04:30"
+        "data": {
+          "job_id": "JOB-001",
+          "operation": "backup_create",
+          "status": "running",
+          "progress": 65,
+          "current_step": "compressing_data",
+          "current_component": "database",
+          "details": {
+            "processed": "143 MB",
+            "total": "220 MB",
+            "speed": "15 MB/s",
+            "eta": "00:01:30",
+            "elapsed": "00:03:45"
+          },
+          "errors": 0,
+          "warnings": 2
         },
-        "integrity_check": "pending",
-        "restart_required": true
+        "success": true,
+        "message": "Progress retrieved successfully"
       }
 
-Cancel Operation
-~~~~~~~~~~~~~~~~
-.. http:post:: /cloud-integration/backup/operation/cancel
+.. http:get:: /api/v1/backup/restore/progress/{restore_id}
 
-   Cancel running backup/restore operation.
+   **Description**: Get progress of restore operation.
    
-   :reqheader Authorization: Bearer <token>
-   :reqheader Content-Type: application/json
+   **UI Element**: SECTION 8 - Restore progress display
    
-   **Request:**
+   **Path Parameters**:
+
+   * **restore_id** (string): Restore identifier
+
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "data": {
+          "restore_id": "RESTORE-001",
+          "operation": "recovery",
+          "status": "running",
+          "progress": 45,
+          "current_step": "restoring_data",
+          "current_component": "system",
+          "details": {
+            "files_processed": 4500,
+            "files_total": 10000,
+            "data_processed": "99 MB",
+            "data_total": "220 MB",
+            "eta": "00:05:30",
+            "elapsed": "00:04:30"
+          },
+          "integrity_check": "pending",
+          "restart_required": true
+        },
+        "success": true,
+        "message": "Restore progress retrieved successfully"
+      }
+
+.. http:post:: /api/v1/backup/operation/cancel
+
+   **Description**: Cancel running backup/restore operation.
    
+   **UI Element**: SECTION 8 - "Cancel Operation" button
+   
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+
+   **Request**:
+
    .. sourcecode:: json
-   
+
       {
         "job_id": "JOB-001",
         "reason": "User requested cancellation"
       }
-   
-   :statuscode 200: Operation cancelled
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
       {
-        "status": "cancelled",
-        "job_id": "JOB-001",
-        "partial_data_cleaned": true,
-        "can_restart": true
-      }
-
-10. Reporting & Statistics
---------------------------
-
-Get Backup Statistics
-~~~~~~~~~~~~~~~~~~~~~
-.. http:get:: /cloud-integration/backup/statistics
-
-   Get backup system statistics.
-   
-   :query period: Time period (24h, 7d, 30d, 90d) *(optional)*
-   :reqheader Authorization: Bearer <token>
-   
-   :statuscode 200: Statistics retrieved
-   
-   **Response:**
-   
-   .. sourcecode:: json
-   
-      {
-        "period": "30d",
-        "summary": {
-          "total_backups": 30,
-          "successful": 29,
-          "failed": 1,
-          "success_rate": "96.7%",
-          "total_size": "6.5 GB",
-          "average_size": "216 MB",
-          "storage_used": "1.4 GB",
-          "storage_growth": "120 MB/week"
+        "data": {
+          "status": "cancelled",
+          "job_id": "JOB-001",
+          "partial_data_cleaned": true,
+          "can_restart": true
         },
-        "by_type": {
-          "full": {"count": 5, "size": "1.1 GB"},
-          "config": {"count": 20, "size": "640 MB"},
-          "snapshot": {"count": 5, "size": "85 MB"}
+        "success": true,
+        "message": "Operation cancelled successfully"
+      }
+
+.. http:get:: /api/v1/backup/statistics
+
+   **Description**: Get backup system statistics.
+   
+   **UI Element**: SECTION 8 - Statistics dashboard
+   
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+
+   **Query Parameters**:
+
+   * **period** (string): Time period (24h, 7d, 30d, 90d) *(optional)*
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "data": {
+          "period": "30d",
+          "summary": {
+            "total_backups": 30,
+            "successful": 29,
+            "failed": 1,
+            "success_rate": "96.7%",
+            "total_size": "6.5 GB",
+            "average_size": "216 MB",
+            "storage_used": "1.4 GB",
+            "storage_growth": "120 MB/week"
+          },
+          "by_type": {
+            "full": {"count": 5, "size": "1.1 GB"},
+            "config": {"count": 20, "size": "640 MB"},
+            "snapshot": {"count": 5, "size": "85 MB"}
+          },
+          "timeline": [
+            {"date": "2025-06-12", "successful": 1, "size": "220 MB"},
+            {"date": "2025-06-11", "successful": 1, "size": "215 MB"}
+          ],
+          "storage_distribution": {
+            "local": {"count": 30, "size": "1.4 GB"},
+            "cloud": {"count": 12, "size": "320 MB"}
+          }
         },
-        "timeline": [
-          {"date": "2025-06-12", "successful": 1, "size": "220 MB"},
-          {"date": "2025-06-11", "successful": 1, "size": "215 MB"}
-        ],
-        "storage_distribution": {
-          "local": {"count": 30, "size": "1.4 GB"},
-          "cloud": {"count": 12, "size": "320 MB"}
-        }
+        "success": true,
+        "message": "Statistics retrieved successfully"
       }
 
-**UI Integration:** "Generate Report" button in Storage Management modal.
+WebSocket Real-time Updates
+---------------------------
 
-Generate Report
-~~~~~~~~~~~~~~~
-.. http:get:: /cloud-integration/backup/report/generate
-
-   Generate detailed backup report.
-   
-   :query format: Report format (pdf, html, csv) *(optional)*
-   :query start_date: Start date (YYYY-MM-DD) *(optional)*
-   :query end_date: End date (YYYY-MM-DD) *(optional)*
-   :reqheader Authorization: Bearer <token>
-   
-   :statuscode 200: Report generated
-   :resheader Content-Type: application/pdf
-   :resheader Content-Disposition: attachment; filename="backup_report_20250315.pdf"
-   
-   **Response:**
-   
-   Report file in requested format.
-
-11. WebSocket API
------------------
-
-Real-time Backup Updates
-~~~~~~~~~~~~~~~~~~~~~~~~
-.. websocket:: /ws/backup/updates
-
-   Real-time updates for backup operations.
-   
-   **Message Types:**
-   
-   * **backup_progress** - Backup creation progress
-   * **restore_progress** - Restore operation progress
-   * **import_progress** - Import operation progress
-   * **sync_progress** - Storage sync progress
-   * **cleanup_progress** - Cleanup operation progress
-   
-   **Example Messages:**
-   
-   .. sourcecode:: json
-   
-      {
-        "type": "backup_progress",
-        "job_id": "JOB-001",
-        "backup_id": "backup_20250315_1430",
-        "progress": 85,
-        "current_step": "encrypting_data",
-        "eta": "00:01:15"
-      }
-      
-      {
-        "type": "restore_progress",
-        "restore_id": "RESTORE-001",
-        "progress": 60,
-        "current_step": "restoring_config",
-        "eta": "00:03:45"
-      }
-      
-      {
-        "type": "import_progress",
-        "import_id": "IMPORT-001",
-        "progress": 30,
-        "current_step": "validating_data",
-        "eta": "00:02:30"
-      }
-
-**UI Integration:** Auto-updates progress bars and status indicators.
-
-Backup Notifications
-~~~~~~~~~~~~~~~~~~~~
-.. websocket:: /ws/backup/notifications
-
-   Backup system notifications.
-   
-   **Message Types:**
-   
-   * **backup_completed** - Backup finished
-   * **backup_failed** - Backup failed
-   * **restore_completed** - Restore finished
-   * **storage_alert** - Storage space warning
-   * **schedule_event** - Schedule execution
-   
-   **Example Messages:**
-   
-   .. sourcecode:: json
-   
-      {
-        "type": "backup_completed",
-        "backup_id": "backup_20250315_1430",
-        "name": "pre_maintenance_backup",
-        "size": "220 MB",
-        "duration": "00:05:15",
-        "timestamp": "2025-03-15T14:35:15Z"
-      }
-      
-      {
-        "type": "storage_alert",
-        "level": "warning",
-        "storage": "local",
-        "message": "Storage usage at 80%",
-        "available": "2 GB",
-        "used": "8 GB",
-        "total": "10 GB"
-      }
-      
-      {
-        "type": "schedule_event",
-        "event": "execution_started",
-        "schedule_id": "schedule_nightly",
-        "timestamp": "2025-03-16T02:00:00Z"
-      }
-
-**UI Integration:** Toast notifications and status badge updates.
-
-System Health Updates
-~~~~~~~~~~~~~~~~~~~~~
-.. websocket:: /ws/backup/health
-
-   Backup system health monitoring.
-   
-   **Message Types:**
-   
-   * **storage_health** - Storage health status
-   * **service_status** - Backup service status
-   * **connectivity_status** - Cloud connectivity
-   
-   **Example Messages:**
-   
-   .. sourcecode:: json
-   
-      {
-        "type": "storage_health",
-        "local": {
-          "health": "good",
-          "used": "1.4 GB",
-          "available": "8.6 GB",
-          "utilization": 14
-        },
-        "cloud": {
-          "health": "connected",
-          "last_sync": "2025-03-15T14:45:00Z"
-        }
-      }
-      
-      {
-        "type": "service_status",
-        "scheduler": "running",
-        "encryption": "enabled",
-        "compression": "enabled"
-      }
-
-**UI Integration:** Auto-updates status cards in overview.
-
-Missing WebSocket Requirements
-------------------------------
-
-The following real-time features need WebSocket integration:
-
-1. **Backup Progress Updates** - Current progress modal uses simulated progress
-2. **Storage Health Monitoring** - Storage cards show static data
-3. **Schedule Execution Events** - Schedule status doesn't update in real-time
-4. **Notification Streaming** - Toast notifications are triggered manually
-5. **System Health Alerts** - Health status is poll-based
-
-Error Responses
----------------
-
-All endpoints return standardized error responses:
-
-.. sourcecode:: json
-
-   {
-     "error": {
-       "code": "BACKUP_FAILED",
-       "message": "Backup creation failed",
-       "details": "Insufficient storage space",
-       "timestamp": "2025-03-15T14:35:00Z"
-     }
-   }
-
-Common error codes:
-
-- ``BACKUP_FAILED`` - Backup operation failed
-- ``RESTORE_FAILED`` - Restore operation failed
-- ``STORAGE_FULL`` - Storage quota exceeded
-- ``BACKUP_NOT_FOUND`` - Backup file not found
-- ``VALIDATION_ERROR`` - Backup validation failed
-- ``ENCRYPTION_ERROR`` - Encryption/decryption failed
-- ``SCHEDULE_CONFLICT`` - Schedule configuration conflict
-
-Rate Limiting
--------------
-
-- **Backup Operations:** 5 concurrent operations maximum
-- **File Uploads:** 5GB max file size, 1 concurrent upload
-- **API Endpoints:** 60 requests/minute per IP
-- **WebSocket Connections:** 3 concurrent connections per user
-- **Report Generation:** 1 report/minute maximum
-
-Authentication
---------------
-
-All endpoints require Bearer token authentication:
-
-.. sourcecode:: http
-
-   Authorization: Bearer <jwt_token>
-
-Tokens are obtained via the authentication service and include user roles and permissions.
-
-Versioning
-----------
-
-API version is included in the URL path:
-
+Connection Endpoint
+~~~~~~~~~~~~~~~~~~~
 ::
 
-   /cloud-integration/v1/backup/...
+   ws://{gateway-ip}/api/v1/backup/ws
+   wss://{gateway-ip}/api/v1/backup/ws (secure)
 
-Current version: **v1**
+Authentication
+~~~~~~~~~~~~~~
+Connect with authentication token:
 
+.. code-block:: json
+
+   {
+     "type": "auth",
+     "token": "your_jwt_token"
+   }
+
+Message Types
+~~~~~~~~~~~~~
+
+Backup Progress
+^^^^^^^^^^^^^^^
+.. code-block:: json
+
+   {
+     "type": "backup_progress",
+     "job_id": "JOB-001",
+     "backup_id": "backup_20250315_1430",
+     "progress": 85,
+     "current_step": "encrypting_data",
+     "eta": "00:01:15",
+     "timestamp": "2025-03-15T14:55:00Z"
+   }
+
+Restore Progress
+^^^^^^^^^^^^^^^^
+.. code-block:: json
+
+   {
+     "type": "restore_progress",
+     "restore_id": "RESTORE-001",
+     "progress": 60,
+     "current_step": "restoring_config",
+     "eta": "00:03:45",
+     "timestamp": "2025-03-15T15:30:00Z"
+   }
+
+Backup Completed
+^^^^^^^^^^^^^^^^
+.. code-block:: json
+
+   {
+     "type": "backup_completed",
+     "backup_id": "backup_20250315_1430",
+     "name": "pre_maintenance_backup",
+     "size": "220 MB",
+     "duration": "00:05:15",
+     "timestamp": "2025-03-15T14:35:15Z"
+   }
+
+Storage Alert
+^^^^^^^^^^^^^
+.. code-block:: json
+
+   {
+     "type": "storage_alert",
+     "level": "warning",
+     "storage": "local",
+     "message": "Storage usage at 80%",
+     "available": "2 GB",
+     "used": "8 GB",
+     "total": "10 GB",
+     "timestamp": "2025-03-15T16:20:00Z"
+   }
+
+Schedule Event
+^^^^^^^^^^^^^^
+.. code-block:: json
+
+   {
+     "type": "schedule_event",
+     "event": "execution_started",
+     "schedule_id": "schedule_nightly",
+     "timestamp": "2025-03-16T02:00:00Z"
+   }
+
+Route Summary
+-------------
+
+.. list-table:: Backup & Recovery Routes
+   :header-rows: 1
+   :widths: 15 15 50 20
+   
+   * - Type
+     - Method
+     - Route & Purpose
+     - Auth
+   * - Page
+     - GET
+     - ``/backup-recovery`` - Main backup page
+     - Yes
+   * - Status
+     - GET
+     - ``/api/v1/backup/status`` - System status
+     - Yes
+   * - Backup Mgmt
+     - GET
+     - ``/api/v1/backup/list`` - List backups
+     - Yes
+   * - Backup Mgmt
+     - POST
+     - ``/api/v1/backup/create`` - Create backup
+     - Yes
+   * - Backup Mgmt
+     - GET
+     - ``/api/v1/backup/download/{id}`` - Download backup
+     - Yes
+   * - Backup Mgmt
+     - POST
+     - ``/api/v1/backup/delete`` - Delete backup
+     - Yes
+   * - Backup Mgmt
+     - GET
+     - ``/api/v1/backup/details/{id}`` - Backup details
+     - Yes
+   * - Schedules
+     - GET
+     - ``/api/v1/backup/schedules`` - Get schedules
+     - Yes
+   * - Schedules
+     - POST
+     - ``/api/v1/backup/schedules/update`` - Update schedule
+     - Yes
+   * - Schedules
+     - POST
+     - ``/api/v1/backup/schedules/toggle`` - Toggle schedule
+     - Yes
+   * - Snapshots
+     - GET
+     - ``/api/v1/backup/snapshots`` - Get snapshots
+     - Yes
+   * - Snapshots
+     - POST
+     - ``/api/v1/backup/snapshots/create`` - Create snapshot
+     - Yes
+   * - Snapshots
+     - POST
+     - ``/api/v1/backup/snapshots/restore`` - Restore snapshot
+     - Yes
+   * - Recovery
+     - POST
+     - ``/api/v1/backup/recovery/initiate`` - Initiate recovery
+     - Yes
+   * - Recovery
+     - GET
+     - ``/api/v1/backup/recovery/preview/{id}`` - Recovery preview
+     - Yes
+   * - Import/Export
+     - POST
+     - ``/api/v1/backup/import`` - Import backup
+     - Yes
+   * - Import/Export
+     - POST
+     - ``/api/v1/backup/import/validate`` - Validate import
+     - Yes
+   * - Import/Export
+     - GET
+     - ``/api/v1/backup/export/config`` - Export config
+     - Yes
+   * - Storage
+     - GET
+     - ``/api/v1/backup/storage`` - Get storage config
+     - Yes
+   * - Storage
+     - POST
+     - ``/api/v1/backup/storage/update`` - Update storage
+     - Yes
+   * - Storage
+     - POST
+     - ``/api/v1/backup/storage/sync`` - Sync storage
+     - Yes
+   * - Cleanup
+     - POST
+     - ``/api/v1/backup/cleanup`` - Run cleanup
+     - Yes
+   * - Cleanup
+     - POST
+     - ``/api/v1/backup/cleanup/execute`` - Execute cleanup
+     - Yes
+   * - Progress
+     - GET
+     - ``/api/v1/backup/progress/{id}`` - Get progress
+     - Yes
+   * - Progress
+     - GET
+     - ``/api/v1/backup/restore/progress/{id}`` - Get restore progress
+     - Yes
+   * - Progress
+     - POST
+     - ``/api/v1/backup/operation/cancel`` - Cancel operation
+     - Yes
+   * - Statistics
+     - GET
+     - ``/api/v1/backup/statistics`` - Get statistics
+     - Yes
+   * - Real-time
+     - WS
+     - ``/api/v1/backup/ws`` - WebSocket for real-time updates
+     - Yes
+
+Complete User Flow
+------------------
+
+1. **User goes to page**: ``GET /backup-recovery``
+   - Server renders HTML with embedded backup and recovery data
+   - All 8 sections populated with current data
+
+2. **User views system status**:
+   - Backup system health and security score
+   - Last successful backup timestamp
+   - Storage usage and availability
+
+3. **User manages backups** (SECTION 1):
+   - View all backup files in table
+   - "Create Backup" button → ``POST /api/v1/backup/create``
+   - "Download" button → ``GET /api/v1/backup/download/{id}``
+   - "Delete" button → ``POST /api/v1/backup/delete``
+   - "Restore Preview" → ``GET /api/v1/backup/details/{id}``
+
+4. **User configures scheduled backups** (SECTION 2):
+   - Schedule configuration form
+   - "Save Schedule" → ``POST /api/v1/backup/schedules/update``
+   - Toggle switch → ``POST /api/v1/backup/schedules/toggle``
+
+5. **User manages snapshots** (SECTION 3):
+   - Snapshots table with create/restore
+   - "Take Snapshot" → ``POST /api/v1/backup/snapshots/create``
+   - "Restore" button → ``POST /api/v1/backup/snapshots/restore``
+
+6. **User performs disaster recovery** (SECTION 4):
+   - "Initiate Recovery" → ``POST /api/v1/backup/recovery/initiate``
+   - Recovery preview → ``GET /api/v1/backup/recovery/preview/{id}``
+
+7. **User handles import/export** (SECTION 5):
+   - Import backup file → ``POST /api/v1/backup/import``
+   - Validate file → ``POST /api/v1/backup/import/validate``
+   - Export configuration → ``GET /api/v1/backup/export/config``
+
+8. **User manages storage** (SECTION 6):
+   - Storage configuration → ``GET /api/v1/backup/storage``
+   - Update settings → ``POST /api/v1/backup/storage/update``
+   - Sync to cloud → ``POST /api/v1/backup/storage/sync``
+
+9. **User runs cleanup** (SECTION 7):
+   - Purge old backups → ``POST /api/v1/backup/cleanup``
+   - Execute cleanup → ``POST /api/v1/backup/cleanup/execute``
+
+10. **User monitors operations** (SECTION 8):
+    - Progress monitoring → ``GET /api/v1/backup/progress/{id}``
+    - Statistics dashboard → ``GET /api/v1/backup/statistics``
+    - Cancel operations → ``POST /api/v1/backup/operation/cancel``
+    - WebSocket connection → ``/api/v1/backup/ws``
+
+Error Codes
+-----------
+
+.. list-table:: Backup & Recovery Error Codes
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Error Code
+     - Description
+   * - BACKUP_FAILED
+     - Backup operation failed
+   * - RESTORE_FAILED
+     - Restore operation failed
+   * - STORAGE_FULL
+     - Storage quota exceeded
+   * - BACKUP_NOT_FOUND
+     - Backup file not found
+   * - VALIDATION_ERROR
+     - Backup validation failed
+   * - ENCRYPTION_ERROR
+     - Encryption/decryption failed
+   * - SCHEDULE_CONFLICT
+     - Schedule configuration conflict
+   * - IMPORT_FAILED
+     - Backup import failed
+   * - EXPORT_FAILED
+     - Configuration export failed
+   * - SNAPSHOT_FAILED
+     - Snapshot operation failed
+   * - CLEANUP_FAILED
+     - Cleanup operation failed
+   * - SYNC_FAILED
+     - Storage sync failed
+   * - OPERATION_IN_PROGRESS
+     - Another operation is in progress
+
+Authentication & Context
+------------------------
+
+All endpoints require gateway context identification::
+
+   Authorization: Bearer <token>
+   X-Gateway-ID: GW-3920A9
+
+**Important**: This API only manages backups for the current gateway specified in `X-Gateway-ID` header.
+
+Support Information
+-------------------
+
+- **Backup Support**: backup-support@univa.com
+- **Disaster Recovery**: +1 (555) 789-0789
+- **Support Hours**: 24/7 for recovery incidents
+- **Documentation**: https://docs.univa.com/backup
+- **Status Page**: https://status.univa.com/backup
+
+---
+*Document last updated: March 15, 2025*
+*API Version: 1.0.0*
+*Backup Module Version: 2.3.0*

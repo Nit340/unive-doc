@@ -1,28 +1,74 @@
-Gateway OTA & System Update API 
-===============================================
+Gateway OTA & System API
+=======================================
 
-API for managing Over-the-Air (OTA) updates, system recovery, and maintenance operations for Univa IoT Gateway.
+This document describes the OTA update management page and its related API endpoints for managing Over-the-Air (OTA) updates, system recovery, and maintenance operations.
 
-Base Path: /api/v1/ota
+Page Route (Frontend)
+---------------------
 
-.. contents:: Table of Contents
-   :depth: 3
-   :local:
+.. http:get:: /ota-system-updates
 
-Overview
---------
+   **Description**: Renders the complete OTA update management page with all system information, available updates, settings, and recovery options embedded in the HTML.
 
-This API handles all OTA update operations for the current gateway only. All endpoints operate on the current gateway context identified by the `X-Gateway-ID` header.
+   **Headers**:
 
-System Information
-~~~~~~~~~~~~~~~~~~
+   .. code-block:: http
 
-Get Gateway Status
-^^^^^^^^^^^^^^^^^^
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: text/html
+      
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>OTA & System Updates - Univa Gateway</title>
+      </head>
+      <body>
+        <div id="app" data-system='{...}' data-updates='[...]' data-settings='{...}' data-safety='{...}'>
+          <!-- OTA update page with:
+               SECTION 1: System Information & Partition Status
+               SECTION 2: Available Updates
+               SECTION 3: Manual Upload Management
+               SECTION 4: Update Settings & Schedule
+               SECTION 5: Recovery Operations
+               SECTION 6: Safety Constraints
+               SECTION 7: Live Update Monitor & Logs
+          -->
+        </div>
+      </body>
+      </html>
+
+   **How it works**:
+   - Server renders the HTML page with embedded system and update data
+   - All system information, available updates, settings, and safety status are embedded
+   - JavaScript reads this data and renders the complete OTA update interface
+   - No separate API calls needed on initial page load
+   - Gateway context is provided via X-Gateway-ID header
+
+   **Error Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 302 Found
+      Location: /login
+
+API Endpoints (Backend)
+-----------------------
+
+These endpoints handle all OTA update operations triggered from the page. All endpoints operate on the current gateway context identified by the `X-Gateway-ID` header.
+
+System Information (SECTION 1)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. http:get:: /api/v1/ota/status
 
-   Get current gateway system information, partitions, and auto-rollback status.
+   **Description**: Get current gateway system information, partitions, and auto-rollback status.
    
    **UI Element**: SECTION 1: System Information cards and Partition Status
    
@@ -75,12 +121,9 @@ Get Gateway Status
         "message": "Gateway status retrieved successfully"
       }
 
-Create System Snapshot
-^^^^^^^^^^^^^^^^^^^^^^
-
 .. http:post:: /api/v1/ota/snapshot
 
-   Create a system snapshot.
+   **Description**: Create a system snapshot.
    
    **UI Element**: SECTION 1: "Snapshot" button
    
@@ -119,15 +162,54 @@ Create System Snapshot
         "message": "Snapshot creation started"
       }
 
-Available Updates
-~~~~~~~~~~~~~~~~~
+.. http:post:: /api/v1/ota/debug-bundle
 
-Check Available Updates
-^^^^^^^^^^^^^^^^^^^^^^^
+   **Description**: Generate debug bundle for troubleshooting.
+   
+   **UI Element**: SECTION 1: "Debug Bundle" button
+   
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+
+   **Request**:
+
+   .. sourcecode:: json
+
+      {
+        "include_logs": true,
+        "include_configs": true,
+        "include_metrics": true
+      }
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "data": {
+          "bundle_id": "debug-20250315-001",
+          "status": "creating",
+          "estimated_size": "150 MB",
+          "download_url": "/api/v1/ota/debug/download/debug-20250315-001.tar.gz"
+        },
+        "success": true,
+        "message": "Debug bundle creation started"
+      }
+
+Available Updates (SECTION 2)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. http:get:: /api/v1/ota/updates
 
-   Get list of available updates for the gateway.
+   **Description**: Get list of available updates for the gateway.
    
    **UI Element**: SECTION 2: Available Updates table
    
@@ -171,12 +253,50 @@ Check Available Updates
         "message": "Available updates retrieved successfully"
       }
 
-Toggle Auto-Update
-^^^^^^^^^^^^^^^^^^
+.. http:post:: /api/v1/ota/check-updates
+
+   **Description**: Manually check for new updates.
+   
+   **UI Element**: SECTION 2: "Check for Updates" button
+   
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+
+   **Request**:
+
+   .. sourcecode:: json
+
+      {
+        "force": true,
+        "background": false
+      }
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "data": {
+          "check_id": "check-20250315-001",
+          "status": "checking",
+          "server": "https://ota.univa.com",
+          "estimated_duration": "00:00:30"
+        },
+        "success": true,
+        "message": "Update check initiated"
+      }
 
 .. http:post:: /api/v1/ota/auto-update
 
-   Toggle auto-update setting.
+   **Description**: Toggle auto-update setting.
    
    **UI Element**: SECTION 2: "Auto-Update: On/Off" button
    
@@ -212,15 +332,9 @@ Toggle Auto-Update
         "message": "Auto-update enabled"
       }
 
-Download & Installation
-~~~~~~~~~~~~~~~~~~~~~~~
-
-Start Update Download
-^^^^^^^^^^^^^^^^^^^^^
-
 .. http:post:: /api/v1/ota/download
 
-   Start downloading an available update.
+   **Description**: Start downloading an available update.
    
    **UI Element**: SECTION 2: "Install Now" buttons
    
@@ -267,112 +381,12 @@ Start Update Download
         "message": "Update download started"
       }
 
-Get Update Progress
-^^^^^^^^^^^^^^^^^^^
-
-.. http:get:: /api/v1/ota/progress
-
-   Get progress of ongoing update download or installation.
-   
-   **UI Element**: SECTION 5: Live Update Monitor progress bar
-   
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      X-Gateway-ID: GW-3920A9
-
-   **Query Parameters**:
-
-   * **job_id** (string): ID of the update job *(required)*
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "data": {
-          "status": "downloading",
-          "job_id": "OTA-JOB-8821X",
-          "progress": {
-            "percentage": 65.5,
-            "current_operation": "downloading",
-            "speed": "8.2 MB/s",
-            "downloaded": "295 MB",
-            "total": "452 MB",
-            "eta": "00:30"
-          },
-          "update": {
-            "id": "update-001",
-            "version": "v5.0.5"
-          },
-          "elapsed_time": "00:05:30"
-        },
-        "success": true,
-        "message": "Update progress retrieved successfully"
-      }
-
-Install Downloaded Update
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. http:post:: /api/v1/ota/install
-
-   Start installing a downloaded update.
-   
-   **UI Element**: SECTION 5: Progress completion leading to installation
-   
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      X-Gateway-ID: GW-3920A9
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: json
-
-      {
-        "job_id": "OTA-JOB-8821X",
-        "strategy": "seamless",
-        "reboot_after": true,
-        "create_snapshot": true
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "data": {
-          "job_id": "OTA-JOB-8821X",
-          "status": "installing",
-          "strategy": "seamless",
-          "target_partition": "B",
-          "reboot_after": true,
-          "next_boot_partition": "B"
-        },
-        "success": true,
-        "message": "Update installation started"
-      }
-
-Manual Upload Management
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Verify Uploaded Image
-^^^^^^^^^^^^^^^^^^^^^
+Manual Upload Management (SECTION 3)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. http:post:: /api/v1/ota/upload/verify
 
-   Verify manually uploaded firmware image.
+   **Description**: Verify manually uploaded firmware image.
    
    **UI Element**: SECTION 3: "Verify & Prepare Deployment" button
    
@@ -417,12 +431,9 @@ Verify Uploaded Image
         "message": "Image verified successfully"
       }
 
-Deploy Manual Image
-^^^^^^^^^^^^^^^^^^^
-
 .. http:post:: /api/v1/ota/upload/deploy
 
-   Deploy manually uploaded firmware image.
+   **Description**: Deploy manually uploaded firmware image.
    
    **UI Element**: SECTION 3: "Deploy to Partition B" button (appears after verification)
    
@@ -466,17 +477,14 @@ Deploy Manual Image
         "message": "Manual image deployment started"
       }
 
-Update Settings Management
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Get Update Settings
-^^^^^^^^^^^^^^^^^^^
+Update Settings Management (SECTION 4)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. http:get:: /api/v1/ota/settings
 
-   Get current update settings and configuration.
+   **Description**: Get current update settings and configuration.
    
-   **UI Element**: SECTION 3: Update Settings & Schedule cards
+   **UI Element**: SECTION 4: Update Settings & Schedule cards
    
    **Headers**:
 
@@ -511,14 +519,11 @@ Get Update Settings
         "message": "Update settings retrieved successfully"
       }
 
-Update Settings
-^^^^^^^^^^^^^^^
-
 .. http:post:: /api/v1/ota/settings
 
-   Update system settings.
+   **Description**: Update system settings.
    
-   **UI Element**: SECTION 3: All settings checkboxes and dropdowns
+   **UI Element**: SECTION 4: All settings checkboxes and dropdowns
    
    **Headers**:
 
@@ -562,17 +567,14 @@ Update Settings
         "message": "Settings updated successfully"
       }
 
-Recovery Operations
-~~~~~~~~~~~~~~~~~~~
-
-Execute Rollback
-^^^^^^^^^^^^^^^^
+Recovery Operations (SECTION 5)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. http:post:: /api/v1/ota/recovery/rollback
 
-   Execute rollback to previous partition.
+   **Description**: Execute rollback to previous partition.
    
-   **UI Element**: SECTION 4: "Execute Rollback" button
+   **UI Element**: SECTION 5: "Execute Rollback" button
    
    **Headers**:
 
@@ -612,14 +614,11 @@ Execute Rollback
         "message": "Rollback executed successfully"
       }
 
-Restore Previous OS
-^^^^^^^^^^^^^^^^^^^
-
 .. http:post:: /api/v1/ota/recovery/restore
 
-   Restore from a snapshot.
+   **Description**: Restore from a snapshot.
    
-   **UI Element**: SECTION 4: "Start Restore" button
+   **UI Element**: SECTION 5: "Start Restore" button
    
    **Headers**:
 
@@ -656,14 +655,11 @@ Restore Previous OS
         "message": "OS restoration started"
       }
 
-Factory Reset
-^^^^^^^^^^^^^
-
 .. http:post:: /api/v1/ota/recovery/factory
 
-   Perform factory reset.
+   **Description**: Perform factory reset.
    
-   **UI Element**: SECTION 4: "Factory Reset" button
+   **UI Element**: SECTION 5: "Factory Reset" button
    
    **Headers**:
 
@@ -701,14 +697,11 @@ Factory Reset
         "message": "Factory reset started"
       }
 
-Upload Recovery Image
-^^^^^^^^^^^^^^^^^^^^^
-
 .. http:post:: /api/v1/ota/recovery/upload
 
-   Upload recovery image.
+   **Description**: Upload recovery image.
    
-   **UI Element**: SECTION 4: "Upload" recovery image button
+   **UI Element**: SECTION 5: "Upload" recovery image button
    
    **Headers**:
 
@@ -739,17 +732,14 @@ Upload Recovery Image
         "message": "Recovery image uploaded successfully"
       }
 
-Safety Management
-~~~~~~~~~~~~~~~~~
-
-Get Safety Status
-^^^^^^^^^^^^^^^^^
+Safety Management (SECTION 6)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. http:get:: /api/v1/ota/safety
 
-   Get current safety constraints status.
+   **Description**: Get current safety constraints status.
    
-   **UI Element**: SECTION 4: Safety Constraints checkboxes
+   **UI Element**: SECTION 6: Safety Constraints checkboxes
    
    **Headers**:
 
@@ -791,14 +781,11 @@ Get Safety Status
         "message": "Safety status retrieved successfully"
       }
 
-Safety Override
-^^^^^^^^^^^^^^^
-
 .. http:post:: /api/v1/ota/safety/override
 
-   Override safety constraints.
+   **Description**: Override safety constraints.
    
-   **UI Element**: SECTION 4: "Force Override" toggle
+   **UI Element**: SECTION 6: "Force Override" toggle
    
    **Headers**:
 
@@ -837,17 +824,105 @@ Safety Override
         "message": "Safety override enabled"
       }
 
-Monitor & Logs
-~~~~~~~~~~~~~~
+Monitor & Live Updates (SECTION 7)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Get System Logs
-^^^^^^^^^^^^^^^
+.. http:get:: /api/v1/ota/progress
+
+   **Description**: Get progress of ongoing update download or installation.
+   
+   **UI Element**: SECTION 7: Live Update Monitor progress bar
+   
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+
+   **Query Parameters**:
+
+   * **job_id** (string): ID of the update job *(required)*
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "data": {
+          "status": "downloading",
+          "job_id": "OTA-JOB-8821X",
+          "progress": {
+            "percentage": 65.5,
+            "current_operation": "downloading",
+            "speed": "8.2 MB/s",
+            "downloaded": "295 MB",
+            "total": "452 MB",
+            "eta": "00:30"
+          },
+          "update": {
+            "id": "update-001",
+            "version": "v5.0.5"
+          },
+          "elapsed_time": "00:05:30"
+        },
+        "success": true,
+        "message": "Update progress retrieved successfully"
+      }
+
+.. http:post:: /api/v1/ota/install
+
+   **Description**: Start installing a downloaded update.
+   
+   **UI Element**: SECTION 7: Install button after download completes
+   
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+
+   **Request**:
+
+   .. sourcecode:: json
+
+      {
+        "job_id": "OTA-JOB-8821X",
+        "strategy": "seamless",
+        "reboot_after": true,
+        "create_snapshot": true
+      }
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "data": {
+          "job_id": "OTA-JOB-8821X",
+          "status": "installing",
+          "strategy": "seamless",
+          "target_partition": "B",
+          "reboot_after": true,
+          "next_boot_partition": "B"
+        },
+        "success": true,
+        "message": "Update installation started"
+      }
 
 .. http:get:: /api/v1/ota/logs
 
-   Get system logs for monitoring.
+   **Description**: Get system logs for monitoring.
    
-   **UI Element**: SECTION 5: Update Activity Log
+   **UI Element**: SECTION 7: Update Activity Log
    
    **Headers**:
 
@@ -884,14 +959,11 @@ Get System Logs
         "message": "System logs retrieved successfully"
       }
 
-Get Monitor Status
-^^^^^^^^^^^^^^^^^^
-
 .. http:get:: /api/v1/ota/monitor
 
-   Get real-time system monitoring status.
+   **Description**: Get real-time system monitoring status.
    
-   **UI Element**: SECTION 5: Live Update Monitor
+   **UI Element**: SECTION 7: Live Update Monitor status
    
    **Headers**:
 
@@ -922,17 +994,11 @@ Get Monitor Status
         "message": "Monitor status retrieved successfully"
       }
 
-Cancel Operation
-~~~~~~~~~~~~~~~~
-
-Cancel Update Operation
-^^^^^^^^^^^^^^^^^^^^^^^
-
 .. http:post:: /api/v1/ota/cancel
 
-   Cancel ongoing update operation.
+   **Description**: Cancel ongoing update operation.
    
-   **UI Element**: SECTION 5: Cancel button (implied in UI)
+   **UI Element**: SECTION 7: Cancel button
    
    **Headers**:
 
@@ -1047,6 +1113,162 @@ Safety Update
      "estimated_clear": "00:01:30"
    }
 
+Route Summary
+-------------
+
+.. list-table:: OTA Update Management Routes
+   :header-rows: 1
+   :widths: 15 15 50 20
+   
+   * - Type
+     - Method
+     - Route & Purpose
+     - Auth
+   * - Page
+     - GET
+     - ``/ota-system-updates`` - Main OTA update page
+     - Yes
+   * - System Info
+     - GET
+     - ``/api/v1/ota/status`` - System information
+     - Yes
+   * - System Info
+     - POST
+     - ``/api/v1/ota/snapshot`` - Create snapshot
+     - Yes
+   * - System Info
+     - POST
+     - ``/api/v1/ota/debug-bundle`` - Generate debug bundle
+     - Yes
+   * - Available Updates
+     - GET
+     - ``/api/v1/ota/updates`` - Available updates
+     - Yes
+   * - Available Updates
+     - POST
+     - ``/api/v1/ota/check-updates`` - Check for updates
+     - Yes
+   * - Available Updates
+     - POST
+     - ``/api/v1/ota/auto-update`` - Toggle auto-update
+     - Yes
+   * - Available Updates
+     - POST
+     - ``/api/v1/ota/download`` - Download update
+     - Yes
+   * - Manual Upload
+     - POST
+     - ``/api/v1/ota/upload/verify`` - Verify uploaded image
+     - Yes
+   * - Manual Upload
+     - POST
+     - ``/api/v1/ota/upload/deploy`` - Deploy manual image
+     - Yes
+   * - Settings
+     - GET
+     - ``/api/v1/ota/settings`` - Get update settings
+     - Yes
+   * - Settings
+     - POST
+     - ``/api/v1/ota/settings`` - Update settings
+     - Yes
+   * - Recovery
+     - POST
+     - ``/api/v1/ota/recovery/rollback`` - Execute rollback
+     - Yes
+   * - Recovery
+     - POST
+     - ``/api/v1/ota/recovery/restore`` - Restore OS
+     - Yes
+   * - Recovery
+     - POST
+     - ``/api/v1/ota/recovery/factory`` - Factory reset
+     - Yes
+   * - Recovery
+     - POST
+     - ``/api/v1/ota/recovery/upload`` - Upload recovery image
+     - Yes
+   * - Safety
+     - GET
+     - ``/api/v1/ota/safety`` - Safety status
+     - Yes
+   * - Safety
+     - POST
+     - ``/api/v1/ota/safety/override`` - Safety override
+     - Yes
+   * - Monitor
+     - GET
+     - ``/api/v1/ota/progress`` - Update progress
+     - Yes
+   * - Monitor
+     - POST
+     - ``/api/v1/ota/install`` - Install update
+     - Yes
+   * - Monitor
+     - GET
+     - ``/api/v1/ota/logs`` - System logs
+     - Yes
+   * - Monitor
+     - GET
+     - ``/api/v1/ota/monitor`` - Monitor status
+     - Yes
+   * - Monitor
+     - POST
+     - ``/api/v1/ota/cancel`` - Cancel operation
+     - Yes
+   * - Real-time
+     - WS
+     - ``/api/v1/ota/ws`` - WebSocket for real-time updates
+     - Yes
+
+Complete User Flow
+------------------
+
+1. **User goes to page**: ``GET /ota-system-updates``
+   - Server renders HTML with embedded system and update data
+   - All 7 sections populated with current data
+
+2. **User views system information** (SECTION 1):
+   - Gateway model, OS version, kernel, uptime
+   - Partition status (A/B partitions)
+   - "Snapshot" button → ``POST /api/v1/ota/snapshot``
+   - "Debug Bundle" button → ``POST /api/v1/ota/debug-bundle``
+
+3. **User checks available updates** (SECTION 2):
+   - Available updates table with versions and types
+   - "Check for Updates" button → ``POST /api/v1/ota/check-updates``
+   - "Auto-Update: On/Off" toggle → ``POST /api/v1/ota/auto-update``
+   - "Install Now" buttons → ``POST /api/v1/ota/download``
+
+4. **User manages manual uploads** (SECTION 3):
+   - File upload area for custom firmware
+   - "Verify & Prepare Deployment" → ``POST /api/v1/ota/upload/verify``
+   - "Deploy to Partition B" → ``POST /api/v1/ota/upload/deploy``
+
+5. **User configures update settings** (SECTION 4):
+   - Auto-update settings checkboxes
+   - Maintenance window schedule
+   - Update strategy selection
+   - "Save Settings" → ``POST /api/v1/ota/settings``
+
+6. **User performs recovery operations** (SECTION 5):
+   - "Execute Rollback" → ``POST /api/v1/ota/recovery/rollback``
+   - "Start Restore" → ``POST /api/v1/ota/recovery/restore``
+   - "Factory Reset" → ``POST /api/v1/ota/recovery/factory``
+   - "Upload" recovery image → ``POST /api/v1/ota/recovery/upload``
+
+7. **User monitors safety constraints** (SECTION 6):
+   - Safety constraint status (crane motion, ACS, UPS battery)
+   - "Force Override" toggle → ``POST /api/v1/ota/safety/override``
+
+8. **User monitors live updates** (SECTION 7):
+   - Progress bar for ongoing operations → ``GET /api/v1/ota/progress``
+   - "Install" button after download → ``POST /api/v1/ota/install``
+   - Update activity logs → ``GET /api/v1/ota/logs``
+   - Real-time monitoring → ``GET /api/v1/ota/monitor``
+   - "Cancel" button → ``POST /api/v1/ota/cancel``
+   - WebSocket connection for real-time updates → ``/api/v1/ota/ws``
+
 Error Codes
 -----------
 
@@ -1056,103 +1278,80 @@ Error Codes
 
    * - Error Code
      - Description
-   * - **OTA_INVALID_IMAGE**
+   * - OTA_INVALID_IMAGE
      - Invalid firmware image
-   * - **OTA_SIGNATURE_FAILED**
+   * - OTA_SIGNATURE_FAILED
      - Signature verification failed
-   * - **OTA_INSUFFICIENT_SPACE**
+   * - OTA_INSUFFICIENT_SPACE
      - Insufficient disk space for update
-   * - **OTA_UPDATE_BLOCKED**
+   * - OTA_UPDATE_BLOCKED
      - Update blocked by safety constraints
-   * - **OTA_DOWNLOAD_FAILED**
+   * - OTA_DOWNLOAD_FAILED
      - Download failed
-   * - **OTA_INSTALL_FAILED**
+   * - OTA_INSTALL_FAILED
      - Installation failed
-   * - **OTA_ROLLBACK_FAILED**
+   * - OTA_ROLLBACK_FAILED
      - Rollback operation failed
-   * - **OTA_RECOVERY_FAILED**
+   * - OTA_RECOVERY_FAILED
      - Recovery operation failed
-   * - **OTA_INVALID_PIN**
+   * - OTA_INVALID_PIN
      - Invalid PIN for operation
-   * - **OTA_OPERATION_IN_PROGRESS**
+   * - OTA_OPERATION_IN_PROGRESS
      - Another operation is in progress
 
-Authentication
---------------
+Authentication & Context
+------------------------
 
-All endpoints require:
+All endpoints require gateway context identification::
 
-.. code-block:: http
-
-   Authorization: Bearer <jwt_token>
+   Cookie: session_token=<token>
    X-Gateway-ID: GW-3920A9
 
-Rate Limiting
--------------
+**Important**: This API only manages OTA updates for the current gateway specified in `X-Gateway-ID` header.
 
-* 60 requests per minute per user
-* Rate limit headers included in responses
+Update Types
+------------
 
-Response Format
----------------
+### Update Severity Levels
+- **Critical**: Security patches, critical bug fixes
+- **High**: Important feature updates
+- **Medium**: Minor improvements and optimizations
+- **Low**: Optional feature enhancements
 
-All responses:
+### Update Strategies
+1. **Seamless Update**: Download to inactive partition, switch on reboot
+2. **In-place Update**: Update current partition directly
+3. **Rolling Update**: Update one component at a time
 
-.. code-block:: json
+Safety Constraints
+------------------
 
-   {
-     "data": { ... },
-     "success": true,
-     "message": "Operation successful"
-   }
+### Constraint Types
+1. **Crane Motion**: Blocks updates if crane is in motion
+2. **ACS (Anti-Collision System)**: Blocks updates if collision risk detected
+3. **UPS Battery**: Blocks updates if battery below threshold (typically 30%)
+4. **Network Connectivity**: Requires stable network connection
+5. **System Load**: Blocks updates during high system load
 
-Error responses:
+### Override Process
+1. User provides PIN for verification
+2. Specify reason for override
+3. Select constraints to override
+4. Override expires after 15 minutes or operation completion
 
-.. code-block:: json
+Best Practices
+--------------
 
-   {
-     "data": null,
-     "success": false,
-     "error": {
-       "code": "OTA_UPDATE_BLOCKED",
-       "message": "Update blocked by safety constraints"
-     }
-   }
+1. **Create Snapshots**: Always create snapshot before major updates
+2. **Check Safety Constraints**: Verify all safety constraints are clear
+3. **Schedule During Maintenance**: Use maintenance windows for updates
+4. **Monitor Progress**: Watch update progress in real-time
+5. **Test After Update**: Verify system functionality post-update
+6. **Enable Auto-rollback**: Keep auto-rollback enabled for safety
+7. **Keep Recovery Images**: Maintain current recovery images
+8. **Verify Signatures**: Always verify update signatures
 
-UI-API Mapping Summary
-----------------------
-
-.. list-table:: OTA UI to API Mapping
-   :widths: 25 35 40
-   :header-rows: 1
-
-   * - UI Section
-     - GET Endpoints
-     - POST Endpoints
-   * - **System Info**
-     - ``/ota/status``
-     - ``/ota/snapshot``
-   * - **Available Updates**
-     - ``/ota/updates``
-     - ``/ota/auto-update``, ``/ota/download``
-   * - **Update Progress**
-     - ``/ota/progress``
-     - ``/ota/install``
-   * - **Manual Upload**
-     - -
-     - ``/ota/upload/verify``, ``/ota/upload/deploy``
-   * - **Update Settings**
-     - ``/ota/settings``
-     - ``/ota/settings`` (POST)
-   * - **Recovery**
-     - -
-     - ``/ota/recovery/rollback``, ``/ota/recovery/restore``, ``/ota/recovery/factory``, ``/ota/recovery/upload``
-   * - **Safety**
-     - ``/ota/safety``
-     - ``/ota/safety/override``
-   * - **Monitor**
-     - ``/ota/logs``, ``/ota/monitor``
-     - ``/ota/cancel``
-   * - **Real-time**
-     - WebSocket ``/ota/ws``
-     - -
+---
+*Document last updated: March 15, 2025*
+*API Version: 1.0.0*
+*Gateway OTA Version: 3.2.1*

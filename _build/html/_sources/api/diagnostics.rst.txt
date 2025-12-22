@@ -1,5 +1,5 @@
 Diagnostics & Terminal API
-========================================
+==========================
 
 APIs for system monitoring, real-time terminal access, diagnostic tools, and packet capture capabilities.
 
@@ -26,7 +26,7 @@ All endpoints require JWT authentication via the ``Authorization`` header:
 
 .. note::
 
-   Terminal access requires admin-level privileges.
+   Terminal access and diagnostic tools require admin-level privileges.
 
 System Logs API
 ---------------
@@ -69,7 +69,6 @@ Get Real-Time Logs
             "category": "System",
             "message": "Boot sequence completed successfully.",
             "source": "kernel",
-            "process_id": 1234,
             "tags": ["boot", "startup"]
           },
           {
@@ -77,8 +76,6 @@ Get Real-Time Logs
             "level": "INFO",
             "category": "NetManager",
             "message": "eth0 link up, IP 192.168.1.105",
-            "source": "networkd",
-            "process_id": 2345,
             "tags": ["network", "interface"]
           },
           {
@@ -86,8 +83,6 @@ Get Real-Time Logs
             "level": "INFO",
             "category": "ModbusEngine",
             "message": "Polling device ID 3, address 40001",
-            "source": "modbus-daemon",
-            "process_id": 3456,
             "tags": ["modbus", "polling"]
           }
         ],
@@ -95,46 +90,6 @@ Get Real-Time Logs
         "filtered": 3,
         "has_more": true
       }
-
-WebSocket Log Stream
-~~~~~~~~~~~~~~~~~~~~
-
-Connection Endpoint
-^^^^^^^^^^^^^^^^^^^
-
-::
-
-   wss://univa-gateway/api/v1/diagnostics/logs/ws?token=<jwt_token>
-
-Client Messages
-^^^^^^^^^^^^^^^
-
-.. code-block:: json
-
-   {
-     "action": "subscribe",
-     "filters": {
-       "levels": ["ERROR", "WARN"],
-       "categories": ["CraneIQ", "ACS"]
-     }
-   }
-
-Server Messages
-^^^^^^^^^^^^^^^
-
-.. code-block:: json
-
-   {
-     "type": "log_entry",
-     "data": {
-       "timestamp": "2025-03-12T09:44:14Z",
-       "level": "ERROR",
-       "category": "CraneIQ",
-       "message": "Brake slip detected on Hoist Motor",
-       "source": "crane-safety",
-       "process_id": 4567
-     }
-   }
 
 Export Logs
 ~~~~~~~~~~~
@@ -166,8 +121,7 @@ Export Logs
         "filters": {
           "levels": ["ERROR", "WARN"],
           "categories": ["CraneIQ", "ACS"]
-        },
-        "include_metadata": true
+        }
       }
 
    **Response**:
@@ -180,11 +134,8 @@ Export Logs
       {
         "success": true,
         "export_id": "logs_export_20250312_143000",
-        "status": "processing",
-        "estimated_size_mb": 45,
-        "estimated_records": 125000,
         "download_url": "/api/v1/diagnostics/logs/export/download/logs_export_20250312_143000",
-        "estimated_completion": "2025-03-12T14:35:00Z"
+        "estimated_size_mb": 45
       }
 
 Terminal API
@@ -245,46 +196,6 @@ Establish SSH Session
         "session_expires": "2025-03-12T15:30:00Z"
       }
 
-WebSocket Terminal Access
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Connection Endpoint
-^^^^^^^^^^^^^^^^^^^
-
-::
-
-   wss://univa-gateway/api/v1/diagnostics/terminal/ws/{session_id}
-
-Client Messages
-^^^^^^^^^^^^^^^
-
-.. code-block:: json
-
-   {
-     "type": "command",
-     "command": "uname -a",
-     "working_directory": "/root"
-   }
-
-Server Messages
-^^^^^^^^^^^^^^^
-
-.. code-block:: json
-
-   {
-     "type": "output",
-     "data": "Linux univa-gw 5.10.0-21-arm64 #1 SMP Debian 5.10.162-1 (2023-01-21) aarch64 GNU/Linux\n",
-     "timestamp": "2025-03-12T15:01:00Z"
-   }
-
-.. code-block:: json
-
-   {
-     "type": "exit",
-     "exit_code": 0,
-     "duration_ms": 150
-   }
-
 Execute Command Directly
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -311,10 +222,7 @@ Execute Command Directly
         "command": "rf-test-tool --scan",
         "working_directory": "/root",
         "timeout_seconds": 30,
-        "capture_output": true,
-        "environment": {
-          "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-        }
+        "capture_output": true
       }
 
    **Response**:
@@ -423,21 +331,13 @@ Get System Metrics
             "usage_percent": 34.2,
             "cores": 4,
             "load_average": [0.45, 0.32, 0.28],
-            "process_count": 112,
-            "history": [
-              {"timestamp": "2025-03-12T15:00:00Z", "value": 32.1},
-              {"timestamp": "2025-03-12T15:00:01Z", "value": 34.5},
-              {"timestamp": "2025-03-12T15:00:02Z", "value": 31.8}
-            ]
+            "process_count": 112
           },
           "memory": {
             "total_mb": 3920,
             "used_mb": 824.5,
             "free_mb": 1452.2,
-            "buffer_cache_mb": 1643.3,
-            "usage_percent": 68.5,
-            "swap_total_mb": 0,
-            "swap_used_mb": 0
+            "usage_percent": 68.5
           },
           "storage": {
             "root": {
@@ -467,43 +367,6 @@ Get System Metrics
         },
         "timestamp": "2025-03-12T15:00:02Z"
       }
-
-WebSocket Metrics Stream
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Connection Endpoint
-^^^^^^^^^^^^^^^^^^^
-
-::
-
-   wss://univa-gateway/api/v1/diagnostics/metrics/ws
-
-Client Messages
-^^^^^^^^^^^^^^^
-
-.. code-block:: json
-
-   {
-     "action": "subscribe",
-     "metrics": ["cpu", "memory", "network"],
-     "interval_ms": 1000
-   }
-
-Server Messages
-^^^^^^^^^^^^^^^
-
-.. code-block:: json
-
-   {
-     "type": "metrics_update",
-     "timestamp": "2025-03-12T15:01:00Z",
-     "data": {
-       "cpu_usage": 35.2,
-       "memory_usage": 68.7,
-       "network_rx": 245120,
-       "network_tx": 123450
-     }
-   }
 
 RF Signal Monitoring
 ~~~~~~~~~~~~~~~~~~~~
@@ -558,8 +421,6 @@ RF Signal Monitoring
               "occupied": true
             }
           ],
-          "transmitter_power_dbm": 20,
-          "receiver_sensitivity_dbm": -120,
           "last_scan": "2025-03-12T15:00:00Z"
         },
         "health": {
@@ -600,11 +461,9 @@ Packet Capture
         "filters": {
           "protocols": ["modbus", "mqtt"],
           "ports": [502, 1883],
-          "ip_addresses": [],
           "promiscuous": true
         },
-        "output_format": "pcap", // "pcap", "json", "text"
-        "store_to_file": true
+        "output_format": "pcap" // "pcap", "json", "text"
       }
 
    **Response**:
@@ -620,7 +479,6 @@ Packet Capture
         "status": "running",
         "interface": "eth0",
         "estimated_size_mb": 120,
-        "websocket_url": "wss://univa-gateway/api/v1/diagnostics/tools/packet-capture/ws/pcap_20250312_151500",
         "stop_url": "/api/v1/diagnostics/tools/packet-capture/stop/pcap_20250312_151500",
         "download_url": "/api/v1/diagnostics/tools/packet-capture/download/pcap_20250312_151500"
       }
@@ -688,9 +546,7 @@ Serial Port Monitor
         "data_bits": 8,
         "parity": "none", // "none", "odd", "even"
         "stop_bits": 1,
-        "flow_control": "none", // "none", "rts_cts", "xon_xoff"
-        "mode": "monitor", // "monitor", "interactive", "sniffer"
-        "log_to_file": true
+        "flow_control": "none" // "none", "rts_cts", "xon_xoff"
       }
 
    **Response**:
@@ -734,12 +590,10 @@ RF Spectrum Scanner
       
       {
         "frequency_range_mhz": [433.0, 434.0],
-        "step_size_mhz": 0.1,
+        "step_size_mhz": 0.2,
         "sensitivity_dbm": -80,
         "duration_seconds": 10,
-        "output_format": "json", // "json", "csv", "text"
-        "visualization": true,
-        "detect_modulation": true
+        "output_format": "json" // "json", "csv", "text"
       }
 
    **Response**:
@@ -758,8 +612,7 @@ RF Spectrum Scanner
           "steps": 10,
           "duration": "10 seconds"
         },
-        "results_url": "/api/v1/diagnostics/tools/rf-scanner/results/rfscan_20250312_153000",
-        "estimated_completion": "2025-03-12T15:30:10Z"
+        "results_url": "/api/v1/diagnostics/tools/rf-scanner/results/rfscan_20250312_153000"
       }
 
 Get RF Scan Results
@@ -798,9 +651,7 @@ Get RF Scan Results
             "noise_floor_dbm": -95.2,
             "snr_db": 2.7,
             "status": "Clear",
-            "modulation": "unknown",
-            "bandwidth_khz": 200,
-            "peak_power_dbm": -92.5
+            "bandwidth_khz": 200
           },
           {
             "frequency_mhz": 433.3,
@@ -808,11 +659,8 @@ Get RF Scan Results
             "noise_floor_dbm": -95.1,
             "snr_db": 49.9,
             "status": "BUSY",
-            "modulation": "FSK",
             "bandwidth_khz": 200,
-            "peak_power_dbm": -45.2,
-            "occupied": true,
-            "signal_source": "known_transmitter_01"
+            "occupied": true
           }
         ],
         "summary": {
@@ -821,10 +669,6 @@ Get RF Scan Results
           "max_signal_dbm": -45.2,
           "min_signal_dbm": -95.1,
           "average_noise_dbm": -95.2
-        },
-        "visualization_data": {
-          "frequencies": [433.1, 433.2, 433.3, 433.4, 433.5],
-          "rssi_values": [-92.5, -88.3, -45.2, -78.1, -85.7]
         }
       }
 
@@ -857,14 +701,9 @@ Run System Diagnostics
         "checks": [
           "hardware",
           "network",
-          "rf_system",
-          "modbus",
-          "storage",
-          "security"
+          "rf_system"
         ],
-        "verbose": true,
-        "fix_issues": false,
-        "generate_report": true
+        "verbose": true
       }
 
    **Response**:
@@ -891,8 +730,7 @@ Run System Diagnostics
             "progress": 0
           }
         ],
-        "results_url": "/api/v1/diagnostics/results/diag_full_20250312_154500",
-        "websocket_url": "wss://univa-gateway/api/v1/diagnostics/ws/diag_full_20250312_154500"
+        "results_url": "/api/v1/diagnostics/results/diag_full_20250312_154500"
       }
 
 Get Diagnostic Results
@@ -930,24 +768,15 @@ Get Diagnostic Results
             "status": "healthy",
             "checks": [
               {"name": "cpu_temperature", "status": "pass", "value": "45°C", "threshold": "80°C"},
-              {"name": "memory_integrity", "status": "pass", "value": "OK", "threshold": "N/A"},
-              {"name": "storage_health", "status": "warning", "value": "85% used", "threshold": "90%", "recommendation": "Consider cleanup"}
+              {"name": "memory_integrity", "status": "pass", "value": "OK"},
+              {"name": "storage_health", "status": "warning", "value": "85% used", "threshold": "90%"}
             ]
           },
           "network": {
             "status": "healthy",
             "checks": [
               {"name": "internet_connectivity", "status": "pass", "value": "Connected", "latency_ms": 45},
-              {"name": "dns_resolution", "status": "pass", "value": "OK", "response_time_ms": 12},
-              {"name": "firewall_status", "status": "pass", "value": "Active", "rules": 24}
-            ]
-          },
-          "rf_system": {
-            "status": "warning",
-            "checks": [
-              {"name": "rf_radio_health", "status": "pass", "value": "Operational"},
-              {"name": "signal_strength", "status": "warning", "value": "-45 dBm", "threshold": "-65 dBm", "recommendation": "High noise on 433.3MHz"},
-              {"name": "antenna_connection", "status": "pass", "value": "OK", "vswr": 1.2}
+              {"name": "dns_resolution", "status": "pass", "value": "OK", "response_time_ms": 12}
             ]
           }
         },
@@ -956,13 +785,8 @@ Get Diagnostic Results
           "passed": 22,
           "warnings": 2,
           "failed": 0,
-          "overall_status": "healthy",
-          "recommendations": [
-            "Monitor storage usage (currently 85%)",
-            "Investigate RF noise on 433.3MHz"
-          ]
-        },
-        "report_url": "/api/v1/diagnostics/report/diag_full_20250312_154500.pdf"
+          "overall_status": "healthy"
+        }
       }
 
 Configuration Management API
@@ -994,35 +818,24 @@ Get Diagnostics Configuration
           "log_settings": {
             "retention_days": 30,
             "max_size_mb": 1024,
-            "compression": "daily",
             "levels_enabled": ["ERROR", "WARN", "INFO", "DEBUG"],
             "categories_enabled": ["System", "Network", "ModbusEngine", "ACS", "CraneIQ"]
           },
           "terminal_settings": {
             "session_timeout_minutes": 30,
             "max_sessions": 3,
-            "allowed_commands": ["*"],
             "history_size": 1000
           },
           "monitoring_settings": {
             "metrics_interval_seconds": 1,
-            "rf_scan_interval_minutes": 5,
-            "alert_thresholds": {
-              "cpu_percent": 90,
-              "memory_percent": 85,
-              "storage_percent": 90,
-              "rssi_dbm": -65
-            }
+            "rf_scan_interval_minutes": 5
           },
           "capture_settings": {
             "max_capture_size_mb": 100,
             "default_duration_seconds": 30,
-            "allowed_interfaces": ["eth0", "wlan0"],
-            "auto_delete_days": 7
+            "allowed_interfaces": ["eth0", "wlan0"]
           }
-        },
-        "last_modified": "2025-03-12T14:30:00Z",
-        "modified_by": "admin"
+        }
       }
 
 Update Diagnostics Configuration
@@ -1055,8 +868,7 @@ Update Diagnostics Configuration
         "terminal_settings": {
           "session_timeout_minutes": 45,
           "max_sessions": 5
-        },
-        "apply_immediately": true
+        }
       }
 
    **Response**:
@@ -1069,12 +881,6 @@ Update Diagnostics Configuration
       {
         "success": true,
         "message": "Diagnostics configuration updated successfully",
-        "applied_changes": [
-          "log_settings.retention_days: 30 → 45",
-          "log_settings.levels_enabled: Added DEBUG",
-          "terminal_settings.session_timeout_minutes: 30 → 45",
-          "terminal_settings.max_sessions: 3 → 5"
-        ],
         "requires_restart": false
       }
 
@@ -1110,9 +916,7 @@ Export All Diagnostics Data
         "include_diagnostics": true,
         "date_from": "2025-03-10T00:00:00Z",
         "date_to": "2025-03-12T23:59:59Z",
-        "compression": "zip",
-        "password_protect": true,
-        "password": "optional_encryption_password"
+        "compression": "zip"
       }
 
    **Response**:
@@ -1133,8 +937,7 @@ Export All Diagnostics Data
           "captures_mb": 150,
           "diagnostics_mb": 5
         },
-        "download_url": "/api/v1/diagnostics/export/download/export_full_20250312_160000",
-        "estimated_completion": "2025-03-12T16:15:00Z"
+        "download_url": "/api/v1/diagnostics/export/download/export_full_20250312_160000"
       }
 
 Clear Diagnostic Data
@@ -1161,15 +964,9 @@ Clear Diagnostic Data
       
       {
         "clear_logs": true,
-        "clear_metrics": false,
         "clear_captures": true,
-        "clear_terminal_history": false,
         "older_than_days": 7,
-        "confirmation": {
-          "user": "admin",
-          "timestamp": "2025-03-12T16:30:00Z",
-          "reason": "Storage cleanup before maintenance"
-        }
+        "reason": "Storage cleanup"
       }
 
    **Response**:
@@ -1219,11 +1016,7 @@ Reboot Gateway
       
       {
         "delay_seconds": 10,
-        "reason": "Diagnostics maintenance",
-        "confirmation": {
-          "user": "admin",
-          "password": "encrypted_admin_password"
-        }
+        "reason": "Diagnostics maintenance"
       }
 
    **Response**:
@@ -1237,8 +1030,7 @@ Reboot Gateway
         "success": true,
         "message": "System reboot scheduled",
         "reboot_time": "2025-03-12T16:35:10Z",
-        "estimated_downtime": "00:01:30",
-        "warning": "All active connections will be terminated"
+        "estimated_downtime": "00:01:30"
       }
 
 Reset to Factory Defaults
@@ -1264,12 +1056,7 @@ Reset to Factory Defaults
       Content-Type: application/json
       
       {
-        "preserve_logs": true,
-        "preserve_captures": false,
-        "confirmation": {
-          "user": "admin",
-          "emergency_code": "RESET_DIAGNOSTICS_2025"
-        }
+        "preserve_logs": true
       }
 
    **Response**:
@@ -1290,101 +1077,37 @@ Reset to Factory Defaults
         "preserved_components": [
           "logs",
           "diagnostic_history"
-        ],
-        "requires_restart": true,
-        "restart_scheduled": "2025-03-12T16:40:00Z"
+        ]
       }
 
-Audit & Security API
---------------------
+WebSocket API
+-------------
 
-Get Audit Log
-~~~~~~~~~~~~~
+Log Stream WebSocket
+~~~~~~~~~~~~~~~~~~~~
 
-.. http:get:: /diagnostics/audit
-
-   Retrieve diagnostics system audit log.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Query Parameters**:
-
-   * **action** (optional): Filter by action type
-   * **user** (optional): Filter by user
-   * **date_from** (optional): ISO timestamp
-   * **limit** (optional): Number of records (default: 100)
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "audit_log": [
-          {
-            "timestamp": "2025-03-12T15:30:00Z",
-            "user": "admin",
-            "action": "terminal_command",
-            "details": {
-              "command": "rf-test-tool --scan",
-              "session_id": "term_session_20250312_150000",
-              "duration_ms": 2450
-            },
-            "ip_address": "192.168.1.100"
-          },
-          {
-            "timestamp": "2025-03-12T15:15:00Z",
-            "user": "admin",
-            "action": "packet_capture_started",
-            "details": {
-              "capture_id": "pcap_20250312_151500",
-              "interface": "eth0",
-              "duration": "30 seconds"
-            },
-            "ip_address": "192.168.1.100"
-          },
-          {
-            "timestamp": "2025-03-12T14:45:00Z",
-            "user": "system",
-            "action": "diagnostics_completed",
-            "details": {
-              "diagnostic_id": "diag_full_20250312_144500",
-              "status": "completed",
-              "checks_passed": 22,
-              "checks_failed": 0
-            },
-            "ip_address": "127.0.0.1"
-          }
-        ],
-        "total_records": 2450,
-        "pagination": {
-          "limit": 100,
-          "offset": 0,
-          "has_more": true
-        }
-      }
-
-WebSocket Events
-----------------
-
-Base Connection Endpoint
-~~~~~~~~~~~~~~~~~~~~~~~~
+Connection Endpoint
+^^^^^^^^^^^^^^^^^^^
 
 ::
 
-   wss://univa-gateway/api/v1/diagnostics/ws?token=<jwt_token>
+   wss://univa-gateway/api/v1/diagnostics/logs/ws?token=<jwt_token>
 
-Event Types
-~~~~~~~~~~~
+Subscribe Message
+^^^^^^^^^^^^^^^^^
 
-**Log Entry**:
+.. code-block:: json
+
+   {
+     "action": "subscribe",
+     "filters": {
+       "levels": ["ERROR", "WARN"],
+       "categories": ["CraneIQ", "ACS"]
+     }
+   }
+
+Log Message
+^^^^^^^^^^^
 
 .. code-block:: json
 
@@ -1398,32 +1121,98 @@ Event Types
      }
    }
 
-**Metrics Update**:
+Terminal WebSocket
+~~~~~~~~~~~~~~~~~~
+
+Connection Endpoint
+^^^^^^^^^^^^^^^^^^^
+
+::
+
+   wss://univa-gateway/api/v1/diagnostics/terminal/ws/{session_id}
+
+Send Command
+^^^^^^^^^^^^
 
 .. code-block:: json
 
    {
-     "event": "metrics_update",
-     "data": {
-       "cpu_usage": 34.2,
-       "memory_usage": 68.5,
-       "network_rx_kbps": 245,
-       "network_tx_kbps": 123
-     }
+     "type": "command",
+     "command": "uname -a",
+     "working_directory": "/root"
    }
 
-**Terminal Output**:
+Terminal Output
+^^^^^^^^^^^^^^^
 
 .. code-block:: json
 
    {
-     "event": "terminal_output",
+     "type": "output",
+     "data": "Linux univa-gw 5.10.0-21-arm64...",
+     "timestamp": "2025-03-12T15:01:00Z"
+   }
+
+Exit Notification
+^^^^^^^^^^^^^^^^^
+
+.. code-block:: json
+
+   {
+     "type": "exit",
+     "exit_code": 0,
+     "duration_ms": 150
+   }
+
+Metrics WebSocket
+~~~~~~~~~~~~~~~~~
+
+Connection Endpoint
+^^^^^^^^^^^^^^^^^^^
+
+::
+
+   wss://univa-gateway/api/v1/diagnostics/metrics/ws?token=<jwt_token>
+
+Subscribe Message
+^^^^^^^^^^^^^^^^^
+
+.. code-block:: json
+
+   {
+     "action": "subscribe",
+     "metrics": ["cpu", "memory", "network"],
+     "interval_ms": 1000
+   }
+
+Metrics Update
+^^^^^^^^^^^^^^
+
+.. code-block:: json
+
+   {
+     "type": "metrics_update",
+     "timestamp": "2025-03-12T15:01:00Z",
      "data": {
-       "session_id": "term_session_20250312_150000",
-       "output": "Linux univa-gw 5.10.0-21-arm64...",
-       "timestamp": "2025-03-12T15:01:00Z"
+       "cpu_usage": 35.2,
+       "memory_usage": 68.7,
+       "network_rx": 245120,
+       "network_tx": 123450
      }
    }
+
+General WebSocket Events
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Connection Endpoint
+^^^^^^^^^^^^^^^^^^^
+
+::
+
+   wss://univa-gateway/api/v1/diagnostics/ws?token=<jwt_token>
+
+Event Types
+^^^^^^^^^^^
 
 **Capture Progress**:
 
@@ -1516,89 +1305,49 @@ Python - System Monitoring
 .. code-block:: python
 
    import requests
-   import time
+   import json
+   
+   # Configuration
+   BASE_URL = "https://univa-gateway/api/v1/diagnostics"
+   TOKEN = "your_jwt_token_here"
+   
+   headers = {
+       "Authorization": f"Bearer {TOKEN}",
+       "Content-Type": "application/json"
+   }
    
    # Get system metrics
-   headers = {"Authorization": "Bearer your_token"}
-   
-   metrics_response = requests.get(
-       "https://univa-gateway/api/v1/diagnostics/metrics/system",
+   response = requests.get(
+       f"{BASE_URL}/metrics/system",
        headers=headers,
        params={"interval": 5, "duration": 60}
    )
    
-   metrics = metrics_response.json()
-   print(f"CPU Usage: {metrics['metrics']['cpu']['usage_percent']}%")
-   print(f"Memory Usage: {metrics['metrics']['memory']['usage_percent']}%")
-   print(f"Storage Usage: {metrics['metrics']['storage']['root']['usage_percent']}%")
+   if response.status_code == 200:
+       metrics = response.json()
+       print(f"CPU Usage: {metrics['metrics']['cpu']['usage_percent']}%")
+       print(f"Memory Usage: {metrics['metrics']['memory']['usage_percent']}%")
    
-   # Monitor RF signals
-   rf_response = requests.get(
-       "https://univa-gateway/api/v1/diagnostics/metrics/rf",
-       headers=headers,
-       params={"scan": True, "frequency_range": "433,434"}
-   )
-   
-   rf_metrics = rf_response.json()
-   for channel in rf_metrics['rf_metrics']['scan_results']:
-       print(f"{channel['frequency_mhz']}MHz: {channel['rssi_dbm']}dBm ({channel['status']})")
-   
-   # Get real-time logs
-   logs_response = requests.get(
-       "https://univa-gateway/api/v1/diagnostics/logs/stream",
-       headers=headers,
-       params={"levels": "ERROR,WARN", "tail": 10}
-   )
-   
-   logs = logs_response.json()
-   for log in logs['logs']:
-       print(f"{log['timestamp']} [{log['level']}] {log['category']}: {log['message']}")
-
-Python - Terminal Operations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: python
-
-   # Execute command directly
-   import requests
-   
-   execute_request = {
-       "command": "rf-test-tool --scan --detailed",
+   # Execute terminal command
+   command_data = {
+       "command": "rf-test-tool --scan",
        "working_directory": "/opt/univa/rf-tools",
        "timeout_seconds": 30,
        "capture_output": True
    }
    
-   execute_response = requests.post(
-       "https://univa-gateway/api/v1/diagnostics/terminal/execute",
-       json=execute_request,
-       headers={"Authorization": "Bearer your_token"}
+   response = requests.post(
+       f"{BASE_URL}/terminal/execute",
+       json=command_data,
+       headers=headers
    )
    
-   result = execute_response.json()
-   print(f"Command: {result['command']}")
-   print(f"Exit Code: {result['exit_code']}")
-   print(f"Output:\n{result['output']}")
-   print(f"Duration: {result['duration_ms']}ms")
+   if response.status_code == 200:
+       result = response.json()
+       print(f"Command Output:\n{result['output']}")
    
-   # Get command history
-   history_response = requests.get(
-       "https://univa-gateway/api/v1/diagnostics/terminal/history",
-       headers={"Authorization": "Bearer your_token"},
-       params={"limit": 10, "user": "admin"}
-   )
-   
-   history = history_response.json()
-   for cmd in history['history']:
-       print(f"{cmd['timestamp']}: {cmd['command']} (Exit: {cmd['exit_code']})")
-
-Python - Diagnostic Tools
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: python
-
    # Start packet capture
-   capture_request = {
+   capture_data = {
        "interface": "eth0",
        "duration_seconds": 30,
        "buffer_size_mb": 50,
@@ -1607,241 +1356,292 @@ Python - Diagnostic Tools
            "ports": [502],
            "promiscuous": True
        },
-       "output_format": "pcap",
-       "store_to_file": True
+       "output_format": "pcap"
    }
    
-   capture_response = requests.post(
-       "https://univa-gateway/api/v1/diagnostics/tools/packet-capture/start",
-       json=capture_request,
-       headers={"Authorization": "Bearer your_token"}
+   response = requests.post(
+       f"{BASE_URL}/tools/packet-capture/start",
+       json=capture_data,
+       headers=headers
    )
    
-   capture_result = capture_response.json()
-   capture_id = capture_result['capture_id']
-   print(f"Capture started: {capture_id}")
-   
-   # Run system diagnostics
-   diagnostic_request = {
-       "checks": ["hardware", "network", "rf_system"],
-       "verbose": True,
-       "generate_report": True
-   }
-   
-   diagnostic_response = requests.post(
-       "https://univa-gateway/api/v1/diagnostics/run",
-       json=diagnostic_request,
-       headers={"Authorization": "Bearer your_token"}
-   )
-   
-   diagnostic_result = diagnostic_response.json()
-   diagnostic_id = diagnostic_result['diagnostic_id']
-   print(f"Diagnostic started: {diagnostic_id}")
-   
-   # Wait and get results
-   import time
-   time.sleep(45)  # Wait for completion
-   
-   results_response = requests.get(
-       f"https://univa-gateway/api/v1/diagnostics/results/{diagnostic_id}",
-       headers={"Authorization": "Bearer your_token"}
-   )
-   
-   results = results_response.json()
-   print(f"Overall Status: {results['summary']['overall_status']}")
-   print(f"Passed: {results['summary']['passed']}/{results['summary']['total_checks']}")
+   if response.status_code == 200:
+       capture = response.json()
+       print(f"Capture started: {capture['capture_id']}")
 
-JavaScript - Real-time Diagnostics
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: javascript
-
-   // WebSocket connection for real-time diagnostics
-   const ws = new WebSocket('wss://univa-gateway/api/v1/diagnostics/ws?token=' + token);
-   
-   ws.onopen = function() {
-       console.log('Connected to Diagnostics WebSocket');
-       
-       // Subscribe to log events
-       ws.send(JSON.stringify({
-           action: 'subscribe',
-           events: ['log_entry', 'metrics_update']
-       }));
-   };
-   
-   ws.onmessage = function(event) {
-       const message = JSON.parse(event.data);
-       
-       switch(message.event) {
-           case 'log_entry':
-               displayLogEntry(message.data);
-               break;
-               
-           case 'metrics_update':
-               updateMetricsDashboard(message.data);
-               break;
-               
-           case 'terminal_output':
-               displayTerminalOutput(message.data);
-               break;
-               
-           case 'capture_progress':
-               updateCaptureProgress(message.data);
-               break;
-               
-           case 'diagnostic_progress':
-               updateDiagnosticProgress(message.data);
-               break;
-       }
-   };
-   
-   ws.onerror = function(error) {
-       console.error('WebSocket error:', error);
-   };
-   
-   ws.onclose = function() {
-       console.log('WebSocket connection closed');
-   };
-   
-   // UI update functions
-   function displayLogEntry(log) {
-       const logEntry = document.createElement('div');
-       logEntry.className = `log-entry level-${log.level.toLowerCase()}`;
-       logEntry.innerHTML = `
-           <span class="timestamp">${new Date(log.timestamp).toLocaleTimeString()}</span>
-           <span class="level">${log.level}</span>
-           <span class="category">${log.category}</span>
-           <span class="message">${log.message}</span>
-       `;
-       document.getElementById('log-container').appendChild(logEntry);
-   }
-   
-   function updateMetricsDashboard(metrics) {
-       document.getElementById('cpu-usage').textContent = metrics.cpu_usage.toFixed(1) + '%';
-       document.getElementById('memory-usage').textContent = metrics.memory_usage.toFixed(1) + '%';
-       document.getElementById('network-rx').textContent = formatBytes(metrics.network_rx);
-       document.getElementById('network-tx').textContent = formatBytes(metrics.network_tx);
-       
-       // Update progress bars
-       updateProgressBar('cpu-bar', metrics.cpu_usage);
-       updateProgressBar('memory-bar', metrics.memory_usage);
-   }
-
-JavaScript - Diagnostic Dashboard
+JavaScript - Real-time Monitoring
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: javascript
 
-   // Run system diagnostics
-   async function runSystemDiagnostics() {
-       const token = localStorage.getItem('token');
+   // WebSocket connection for real-time logs
+   const logSocket = new WebSocket(
+       `wss://univa-gateway/api/v1/diagnostics/logs/ws?token=${token}`
+   );
+   
+   logSocket.onopen = function() {
+       console.log('Connected to log stream');
        
-       const diagnosticConfig = {
-           checks: getSelectedDiagnosticChecks(),
-           verbose: true,
-           generate_report: true
-       };
+       // Subscribe to error and warning logs
+       logSocket.send(JSON.stringify({
+           action: 'subscribe',
+           filters: {
+               levels: ['ERROR', 'WARN'],
+               categories: ['CraneIQ', 'ACS', 'RF_Radio']
+           }
+       }));
+   };
+   
+   logSocket.onmessage = function(event) {
+       const message = JSON.parse(event.data);
        
-       try {
-           const response = await fetch('/api/v1/diagnostics/run', {
-               method: 'POST',
-               headers: {
-                   'Authorization': `Bearer ${token}`,
-                   'Content-Type': 'application/json'
-               },
-               body: JSON.stringify(diagnosticConfig)
+       if (message.event === 'log_entry') {
+           displayLog(message.data);
+       }
+   };
+   
+   // Real-time metrics
+   const metricsSocket = new WebSocket(
+       `wss://univa-gateway/api/v1/diagnostics/metrics/ws?token=${token}`
+   );
+   
+   metricsSocket.onopen = function() {
+       metricsSocket.send(JSON.stringify({
+           action: 'subscribe',
+           metrics: ['cpu', 'memory', 'network'],
+           interval_ms: 1000
+       }));
+   };
+   
+   metricsSocket.onmessage = function(event) {
+       const message = JSON.parse(event.data);
+       
+       if (message.type === 'metrics_update') {
+           updateDashboard(message.data);
+       }
+   };
+
+Python - Complete Diagnostics Workflow
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+   import requests
+   import time
+   
+   class DiagnosticsClient:
+       def __init__(self, base_url, token):
+           self.base_url = base_url
+           self.headers = {
+               "Authorization": f"Bearer {token}",
+               "Content-Type": "application/json"
+           }
+       
+       def run_system_diagnostics(self):
+           """Run comprehensive system diagnostics"""
+           data = {
+               "checks": ["hardware", "network", "rf_system"],
+               "verbose": True
+           }
+           
+           response = requests.post(
+               f"{self.base_url}/run",
+               json=data,
+               headers=self.headers
+           )
+           
+           if response.status_code == 200:
+               result = response.json()
+               diagnostic_id = result['diagnostic_id']
+               
+               # Wait for completion
+               return self.wait_for_diagnostics(diagnostic_id)
+           
+           return None
+       
+       def wait_for_diagnostics(self, diagnostic_id):
+           """Poll for diagnostic results"""
+           max_attempts = 60  # 30 seconds max
+           
+           for attempt in range(max_attempts):
+               response = requests.get(
+                   f"{self.base_url}/results/{diagnostic_id}",
+                   headers=self.headers
+               )
+               
+               if response.status_code == 200:
+                   result = response.json()
+                   
+                   if result['status'] == 'completed':
+                       return result
+                   
+               time.sleep(0.5)  # Wait 500ms between checks
+           
+           return None
+       
+       def export_diagnostics_data(self, days=7):
+           """Export recent diagnostics data"""
+           import datetime
+           
+           end_date = datetime.datetime.utcnow()
+           start_date = end_date - datetime.timedelta(days=days)
+           
+           data = {
+               "include_logs": True,
+               "include_metrics": True,
+               "include_diagnostics": True,
+               "date_from": start_date.isoformat() + "Z",
+               "date_to": end_date.isoformat() + "Z",
+               "compression": "zip"
+           }
+           
+           response = requests.post(
+               f"{self.base_url}/export/all",
+               json=data,
+               headers=self.headers
+           )
+           
+           return response.json()
+   
+   # Usage
+   client = DiagnosticsClient(
+       base_url="https://univa-gateway/api/v1/diagnostics",
+       token="your_token_here"
+   )
+   
+   # Run diagnostics
+   results = client.run_system_diagnostics()
+   
+   if results:
+       print(f"Overall Status: {results['summary']['overall_status']}")
+       print(f"Checks Passed: {results['summary']['passed']}/{results['summary']['total_checks']}")
+   
+   # Export data
+   export_result = client.export_diagnostics_data(days=30)
+   print(f"Export ID: {export_result['export_id']}")
+   print(f"Download URL: {export_result['download_url']}")
+
+JavaScript - Dashboard Integration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: javascript
+
+   class DiagnosticsDashboard {
+       constructor(baseUrl, token) {
+           this.baseUrl = baseUrl;
+           this.token = token;
+           this.headers = {
+               'Authorization': `Bearer ${token}`,
+               'Content-Type': 'application/json'
+           };
+       }
+       
+       async getSystemMetrics() {
+           const response = await fetch(`${this.baseUrl}/metrics/system`, {
+               headers: this.headers
            });
            
-           const result = await response.json();
-           
-           if (result.success) {
-               startDiagnosticMonitoring(result.diagnostic_id);
-               return result;
-           } else {
-               throw new Error(result.message || 'Diagnostic failed to start');
+           if (!response.ok) {
+               throw new Error(`Failed to fetch metrics: ${response.status}`);
            }
-       } catch (error) {
-           console.error('Error running diagnostics:', error);
-           showError('Failed to start diagnostic checks');
+           
+           return await response.json();
+       }
+       
+       async executeCommand(command, options = {}) {
+           const data = {
+               command: command,
+               working_directory: options.workingDirectory || '/root',
+               timeout_seconds: options.timeout || 30,
+               capture_output: true
+           };
+           
+           const response = await fetch(`${this.baseUrl}/terminal/execute`, {
+               method: 'POST',
+               headers: this.headers,
+               body: JSON.stringify(data)
+           });
+           
+           if (!response.ok) {
+               throw new Error(`Command execution failed: ${response.status}`);
+           }
+           
+           return await response.json();
+       }
+       
+       async startPacketCapture(interface, options = {}) {
+           const data = {
+               interface: interface,
+               duration_seconds: options.duration || 30,
+               buffer_size_mb: options.bufferSize || 50,
+               filters: {
+                   protocols: options.protocols || ['modbus', 'mqtt'],
+                   ports: options.ports || [502, 1883],
+                   promiscuous: options.promiscuous || true
+               },
+               output_format: options.format || 'pcap'
+           };
+           
+           const response = await fetch(`${this.baseUrl}/tools/packet-capture/start`, {
+               method: 'POST',
+               headers: this.headers,
+               body: JSON.stringify(data)
+           });
+           
+           if (!response.ok) {
+               throw new Error(`Capture failed to start: ${response.status}`);
+           }
+           
+           return await response.json();
+       }
+       
+       async getLogs(filterOptions = {}) {
+           const params = new URLSearchParams();
+           
+           if (filterOptions.levels) {
+               params.append('levels', filterOptions.levels.join(','));
+           }
+           
+           if (filterOptions.categories) {
+               params.append('categories', filterOptions.categories.join(','));
+           }
+           
+           if (filterOptions.search) {
+               params.append('search', filterOptions.search);
+           }
+           
+           if (filterOptions.limit) {
+               params.append('limit', filterOptions.limit);
+           }
+           
+           const response = await fetch(
+               `${this.baseUrl}/logs/stream?${params.toString()}`,
+               { headers: this.headers }
+           );
+           
+           if (!response.ok) {
+               throw new Error(`Failed to fetch logs: ${response.status}`);
+           }
+           
+           return await response.json();
        }
    }
    
-   // Start packet capture
-   async function startPacketCapture(interface, filters) {
-       const token = localStorage.getItem('token');
-       
-       const captureConfig = {
-           interface: interface,
-           duration_seconds: 30,
-           buffer_size_mb: 50,
-           filters: filters,
-           output_format: 'pcap',
-           store_to_file: true
-       };
-       
-       try {
-           const response = await fetch('/api/v1/diagnostics/tools/packet-capture/start', {
-               method: 'POST',
-               headers: {
-                   'Authorization': `Bearer ${token}`,
-                   'Content-Type': 'application/json'
-               },
-               body: JSON.stringify(captureConfig)
-           });
-           
-           const result = await response.json();
-           
-           if (result.success) {
-               startCaptureMonitoring(result.capture_id);
-               return result;
-           } else {
-               throw new Error(result.message || 'Capture failed to start');
-           }
-       } catch (error) {
-           console.error('Error starting packet capture:', error);
-           showError('Failed to start packet capture');
-       }
-   }
+   // Usage in dashboard
+   const dashboard = new DiagnosticsDashboard(
+       'https://univa-gateway/api/v1/diagnostics',
+       localStorage.getItem('token')
+   );
    
-   // Export diagnostics data
-   async function exportDiagnosticsData(options) {
-       const token = localStorage.getItem('token');
-       
-       const exportConfig = {
-           include_logs: options.includeLogs || true,
-           include_metrics: options.includeMetrics || true,
-           include_captures: options.includeCaptures || false,
-           include_diagnostics: options.includeDiagnostics || true,
-           date_from: options.dateFrom || null,
-           date_to: options.dateTo || null,
-           compression: 'zip',
-           password_protect: options.passwordProtect || false,
-           password: options.password || null
-       };
-       
+   // Update metrics every 5 seconds
+   setInterval(async () => {
        try {
-           const response = await fetch('/api/v1/diagnostics/export/all', {
-               method: 'POST',
-               headers: {
-                   'Authorization': `Bearer ${token}`,
-                   'Content-Type': 'application/json'
-               },
-               body: JSON.stringify(exportConfig)
-           });
-           
-           const result = await response.json();
-           
-           if (result.success) {
-               monitorExportProgress(result.export_id);
-               return result;
-           } else {
-               throw new Error(result.message || 'Export failed to start');
-           }
+           const metrics = await dashboard.getSystemMetrics();
+           updateMetricsUI(metrics);
        } catch (error) {
-           console.error('Error exporting data:', error);
-           showError('Failed to export diagnostics data');
+           console.error('Failed to update metrics:', error);
        }
-   }
+   }, 5000);
 
 Best Practices
 --------------
@@ -1849,220 +1649,55 @@ Best Practices
 System Monitoring
 ~~~~~~~~~~~~~~~~~
 
-1. **Regular Monitoring**
-   - Monitor system metrics daily
-   - Set up threshold alerts
-   - Review logs for critical errors
+1. **Real-time Monitoring**
+   - Use WebSockets for live metrics updates
+   - Set appropriate update intervals (1-5 seconds)
+   - Implement connection recovery
 
-2. **Performance Baseline**
-   - Establish normal performance baselines
-   - Track metrics over time
-   - Identify trends and patterns
+2. **Log Management**
+   - Apply filters to reduce network traffic
+   - Use search parameters for specific issues
+   - Export logs regularly for archiving
 
-3. **Proactive Diagnostics**
-   - Run diagnostics before issues occur
-   - Schedule regular system checks
-   - Maintain diagnostic history
-
-Terminal Operations
-~~~~~~~~~~~~~~~~~~~
-
-1. **Command Safety**
-   - Test commands in non-production first
-   - Use dry-run options when available
-   - Keep command history for audit
-
-2. **Session Management**
-   - Close unused terminal sessions
-   - Set appropriate timeouts
-   - Monitor active sessions
-
-3. **Security Considerations**
-   - Restrict command execution
-   - Log all terminal activities
-   - Use role-based access control
+3. **Terminal Operations**
+   - Always specify timeout for commands
+   - Use working directory appropriately
+   - Review command history regularly
 
 Diagnostic Tools
 ~~~~~~~~~~~~~~~~
 
 1. **Packet Capture**
-   - Use appropriate filters
-   - Limit capture duration
-   - Secure captured data
+   - Start with short durations (10-30 seconds)
+   - Use protocol filters to reduce capture size
+   - Stop captures when troubleshooting is complete
 
-2. **RF Analysis**
-   - Schedule scans during off-peak
+2. **RF Scanning**
+   - Scan during maintenance windows
    - Document interference sources
-   - Maintain spectrum usage logs
+   - Compare scans over time for trends
 
 3. **Serial Monitoring**
-   - Configure correct port settings
-   - Log serial communications
-   - Monitor for anomalies
+   - Verify port settings before connecting
+   - Monitor for communication errors
+   - Log serial traffic for debugging
 
 Security Considerations
 -----------------------
 
-Authentication & Authorization
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Authentication
+~~~~~~~~~~~~~~
 
-1. **Terminal Access Control**
-   - Admin-level permissions required
-   - Session timeout enforcement
-   - Command whitelisting
+- **Terminal Access**: Requires admin privileges
+- **Command Execution**: Commands are logged and audited
+- **Data Export**: Export data is secured and encrypted
 
-2. **Data Protection**
-   - Encrypt diagnostic exports
-   - Secure packet capture files
-   - Protect audit logs
+Data Protection
+~~~~~~~~~~~~~~~
 
-3. **Access Monitoring**
-   - Log all diagnostic operations
-   - Track user actions
-   - Monitor for unauthorized access
-
-Data Privacy
-~~~~~~~~~~~~
-
-1. **Sensitive Data Handling**
-   - Anonymize logs when needed
-   - Secure packet capture data
-   - Protect user credentials
-
-2. **Export Security**
-   - Password protect exports
-   - Encrypt sensitive data
-   - Secure download links
-
-3. **Compliance**
-   - Follow data retention policies
-   - Maintain audit trails
-   - Secure diagnostic data
-
-Audit & Compliance
-~~~~~~~~~~~~~~~~~~
-
-1. **Logging Requirements**
-   - Terminal command logs: 90 days
-   - Diagnostic operation logs: 180 days
-   - Security audit logs: 365 days
-
-2. **Reporting**
-   - Generate compliance reports
-   - Track security incidents
-   - Document diagnostic findings
-
-3. **Documentation**
-   - Document diagnostic procedures
-   - Maintain security policies
-   - Update compliance documentation
-
-System Requirements
--------------------
-
-Minimum Requirements
-~~~~~~~~~~~~~~~~~~~~
-
-.. list-table:: System Requirements
-   :widths: 40 60
-   :header-rows: 1
-
-   * - Component
-     - Requirement
-   * - **Storage**
-     - 2GB for diagnostics data
-   * - **Memory**
-     - 1GB for monitoring tools
-   * - **CPU**
-     - Multi-core for parallel diagnostics
-   * - **Network**
-     - Stable for WebSocket connections
-   * - **RF Hardware**
-     - Supported RF modules for scanning
-
-Performance Considerations
---------------------------
-
-1. **Monitoring Impact**
-   - Metrics collection: <5% CPU
-   - Log streaming: <10% network
-   - RF scanning: <15% CPU
-
-2. **Diagnostic Operations**
-   - Full diagnostics: 30-60 seconds
-   - Packet capture: 10-100 MB/min
-   - RF spectrum scan: 10-30 seconds
-
-3. **Resource Usage**
-   - Terminal sessions: 50MB each
-   - WebSocket connections: 5-10MB each
-   - Diagnostic tools: 100-500MB
-
-Support & Troubleshooting
--------------------------
-
-Getting Help
-~~~~~~~~~~~~
-
-1. **Documentation**
-   - API reference
-   - User guides
-   - Troubleshooting guides
-
-2. **Support Channels**
-   - Email: diagnostics-support@univagateway.com
-   - Phone: +1-800-DIAGNOSTIC
-   - Online portal
-
-3. **Debug Information**
-   - Generate diagnostic reports
-   - Share system logs
-   - Provide error codes
-
-Common Solutions
-~~~~~~~~~~~~~~~~
-
-1. **Terminal Connection Issues**
-   - Check user permissions
-   - Verify network connectivity
-   - Restart terminal service
-
-2. **Diagnostic Failures**
-   - Check system resources
-   - Verify hardware connectivity
-   - Review error logs
-
-3. **Performance Issues**
-   - Reduce monitoring frequency
-   - Limit concurrent operations
-   - Optimize capture settings
-
-Notes
------
-
-.. warning::
-
-   **Terminal Access**: Terminal operations can modify system configuration. Use with caution.
-
-.. warning::
-
-   **Packet Capture**: May capture sensitive network data. Follow security policies.
-
-.. important::
-
-   **RF Operations**: RF scanning may interfere with other RF devices. Schedule appropriately.
-
-.. note::
-
-   **Monitoring**: Set up alerts for critical system metrics.
-
-.. note::
-
-   **Export Security**: Always password protect diagnostic exports containing sensitive data.
-
-.. note::
-
-   **Audit Trail**: All diagnostic operations are logged for compliance and troubleshooting.
+- **Packet Capture**: May contain sensitive data - handle with care
+- **Log Export**: Password protect archives containing sensitive information
+- **Session Management**: Terminal sessions expire automatically
 
 Rate Limiting
 -------------
@@ -2090,35 +1725,77 @@ Rate Limiting
      - 5 per user
      - Concurrent connections
 
-Compliance Notes
-----------------
+System Requirements
+-------------------
 
-1. **Security Regulations**
-   - Terminal access requires multi-factor authentication
-   - All commands are logged for audit
-   - Export data must be encrypted
+Minimum Requirements
+~~~~~~~~~~~~~~~~~~~~
 
-2. **Data Protection**
-   - Follow data retention policies
-   - Secure diagnostic data storage
-   - Protect user privacy
+.. list-table:: System Requirements
+   :widths: 40 60
+   :header-rows: 1
 
-3. **Audit Requirements**
-   - Maintain comprehensive audit trails
-   - Regular security reviews
-   - Compliance reporting
+   * - Component
+     - Requirement
+   * - **Storage**
+     - 2GB for diagnostics data
+   * - **Memory**
+     - 1GB for monitoring tools
+   * - **CPU**
+     - Multi-core for parallel diagnostics
+   * - **Network**
+     - Stable for WebSocket connections
+
+Performance Impact
+~~~~~~~~~~~~~~~~~~
+
+- **Metrics Collection**: <5% CPU usage
+- **Log Streaming**: <10% network bandwidth
+- **Packet Capture**: 10-100 MB/min depending on traffic
+- **RF Scanning**: <15% CPU during active scans
+
+Troubleshooting
+---------------
+
+Common Issues
+~~~~~~~~~~~~~
+
+1. **Terminal Connection Failed**
+   - Verify user has admin privileges
+   - Check SSH service is running
+   - Confirm network connectivity
+
+2. **Logs Not Streaming**
+   - Check WebSocket connection
+   - Verify filters are not too restrictive
+   - Check log service status
+
+3. **Metrics Not Updating**
+   - Verify monitoring service is running
+   - Check system resources
+   - Review error logs
+
+Getting Help
+~~~~~~~~~~~~
+
+- **API Documentation**: https://docs.univagateway.com/api/diagnostics
+- **Support Email**: diagnostics-support@univagateway.com
+- **Emergency Contact**: +1-800-DIAGNOSTIC (342-4667)
+- **Status Page**: https://status.univagateway.com
 
 Versioning
 ----------
 
 API version is included in the URL path (``/api/v1/``). Breaking changes will result in a new version number.
 
-Support
--------
+Changelog
+---------
 
-For API support, contact:
+**v1.0.0** (2025-03-12)
+~~~~~~~~~~~~~~~~~~~~~~~
 
-- **Email**: diagnostics-support@univagateway.com
-- **Documentation**: https://docs.univagateway.com/api/diagnostics
-- **Emergency**: +1-800-DIAGNOSTIC (342-4667)
-- **API Status**: https://status.univagateway.com/api
+- Initial release of Diagnostics & Terminal API
+- Complete system monitoring capabilities
+- Real-time terminal access
+- Comprehensive diagnostic tools
+- WebSocket support for live updates

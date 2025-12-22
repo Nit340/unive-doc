@@ -1,282 +1,121 @@
 Cloud Integration API
 =====================
 
-APIs for configuring and managing cloud service connections.
+This document describes the cloud integration page and its related API endpoints for managing cloud service connections and data publishing.
 
-Overview
---------
+Page Route (Frontend)
+---------------------
 
-The Cloud Integration API allows you to connect your IoT gateway to various cloud services and platforms for data publishing, remote monitoring, and analytics. Supports MQTT, HTTP, and other protocols.
+.. http:get:: /cloud-integration
 
-Endpoints
----------
-
-Get All Cloud Connections
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:get:: /cloud-connections
-
-   List all configured cloud connections.
-
+   **Description**: Renders the complete cloud integration management page with all connections, statistics, and configuration embedded in the HTML.
+   
+   **UI Layout**:
+   
+   1. **Left Column**: Active Connections list with real-time status
+   2. **Right Column**: Configuration panel with 4 tabs:
+      - Connection settings
+      - Topics & Format
+      - Tag Publishing
+      - Advanced settings
+   
+   **UI Flow**:
+   
+   1. Page loads with embedded initial data
+   2. User sees connection list on left
+   3. Clicking any connection shows its configuration on right
+   4. "Add Connection" button opens type selection modal
+   5. Selecting a type loads that protocol's configuration form
+   6. Form filled and saved → new connection appears in list
+   
    **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
+   
+   .. sourcecode:: http
+   
+      Cookie: session_token=<token>
+   
    **Response**:
-
+   
    .. sourcecode:: http
-
+   
       HTTP/1.1 200 OK
-      Content-Type: application/json
+      Content-Type: text/html
       
-      {
-        "connections": [
-          {
-            "id": "mqtt-123",
-            "type": "mqtt",
-            "name": "Production MQTT",
-            "enabled": true,
-            "status": "connected",
-            "lastActive": "2 minutes ago",
-            "messageCount": 1250,
-            "lastError": null
-          },
-          {
-            "id": "http-456",
-            "type": "http",
-            "name": "Analytics API",
-            "enabled": false,
-            "status": "disconnected",
-            "lastActive": "5 hours ago",
-            "messageCount": 340,
-            "lastError": "Connection timeout"
-          }
-        ],
-        "summary": {
-          "total": 2,
-          "enabled": 1,
-          "connected": 1,
-          "error": 1
-        }
-      }
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Cloud Integration - Univa Gateway</title>
+      </head>
+      <body>
+        <div id="app" data-connections='[...]' data-statistics='{...}' data-templates='{...}'>
+          <!-- Embedded data includes:
+               - All configured connections with status
+               - Overall statistics
+               - Connection type templates
+          -->
+        </div>
+      </body>
+      </html>
+   
+   **How it works**:
+   - Server renders the HTML page with embedded data
+   - JavaScript renders the two-column layout
+   - Left column shows active connections
+   - Right column shows configuration when a connection is selected
+   - No initial API call needed
 
-Get Connection Types
-~~~~~~~~~~~~~~~~~~~~
-
-.. http:get:: /cloud-connections/types
-
-   Get available connection types with metadata.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Response**:
-
+   **Error Response**:
+   
    .. sourcecode:: http
+   
+      HTTP/1.1 302 Found
+      Location: /login
 
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "types": [
-          {
-            "id": "mqtt",
-            "name": "MQTT Broker",
-            "description": "Publish data to MQTT broker",
-            "icon": "fa-cloud",
-            "protocols": ["mqtt", "mqtts", "ws", "wss"],
-            "supports": ["publish", "subscribe", "retain", "qos"],
-            "defaultPort": 1883
-          },
-          {
-            "id": "http",
-            "name": "HTTP Endpoint",
-            "description": "Send data to HTTP REST API",
-            "icon": "fa-globe",
-            "protocols": ["http", "https"],
-            "supports": ["post", "put", "get", "delete"],
-            "defaultPort": 443
-          },
-          {
-            "id": "aws-iot",
-            "name": "AWS IoT Core",
-            "description": "Amazon Web Services IoT Core",
-            "icon": "fa-aws",
-            "protocols": ["mqtts"],
-            "supports": ["publish", "subscribe", "shadows"],
-            "defaultPort": 8883
-          },
-          {
-            "id": "azure-iot",
-            "name": "Azure IoT Hub",
-            "description": "Microsoft Azure IoT Hub",
-            "icon": "fa-microsoft",
-            "protocols": ["mqtts", "amqps"],
-            "supports": ["publish", "deviceTwins", "directMethods"],
-            "defaultPort": 8883
-          }
-        ]
-      }
+API Endpoints (Backend)
+-----------------------
 
-Get Connection Template
-~~~~~~~~~~~~~~~~~~~~~~~
+These endpoints handle all cloud integration operations triggered from the page.
 
-.. http:get:: /cloud-connections/templates/{type}
+Connection CRUD Operations
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   Get form template and defaults for a connection type.
+.. http:post:: /api/cloud-integration/connections
 
-   **Path Parameters**:
-
-   * **type** (string): Connection type (mqtt, http, aws-iot, azure-iot)
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Response** (MQTT Example):
-
+   **UI Trigger**: Clicking "Add Connection" → selecting connection type → filling form → clicking "Add Connection" in modal
+   
+   **UI Flow**:
+   
+   1. Click "Add Connection" button in header
+   2. Modal opens showing connection types (MQTT, HTTP, AWS, Azure, etc.)
+   3. User selects a type (e.g., MQTT)
+   4. Modal loads MQTT configuration form
+   5. User fills form with broker details
+   6. Click "Add Connection" → sends ``POST /api/cloud-integration/connections``
+   
+   **Request**:
+   
    .. sourcecode:: http
-
-      HTTP/1.1 200 OK
+   
+      POST /api/cloud-integration/connections HTTP/1.1
+      Cookie: session_token=<token>
       Content-Type: application/json
       
       {
         "type": "mqtt",
-        "defaults": {
-          "name": "New MQTT Connection",
-          "enabled": true,
-          "connection": {
-            "protocol": "mqtts",
-            "host": "",
-            "port": 8883,
-            "username": "",
-            "password": "",
-            "clientId": "gateway_${timestamp}",
-            "cleanSession": true
-          },
-          "topics": {
-            "baseTopic": "factory/device/${deviceId}",
-            "dataTopic": "${baseTopic}/data",
-            "eventTopic": "${baseTopic}/events",
-            "commandTopic": "${baseTopic}/commands",
-            "retainMessages": false
-          },
-          "format": {
-            "payloadFormat": "json",
-            "jsonTemplate": "{\"timestamp\":\"${timestamp}\",\"device\":\"${deviceId}\",\"data\":${data}}",
-            "timestampFormat": "iso8601",
-            "includeMetadata": true
-          },
-          "publishing": {
-            "tags": [],
-            "publishMode": "onChange",
-            "changeThreshold": 0.1,
-            "maxPublishRate": 1000,
-            "batchSize": 10,
-            "batchInterval": 1000
-          },
-          "advanced": {
-            "autoReconnect": true,
-            "reconnectInterval": 5000,
-            "keepAlive": 60,
-            "qos": 1,
-            "timeout": 30
-          }
-        },
-        "validation": {
-          "host": {
-            "required": true,
-            "pattern": "^([a-zA-Z0-9\\-\\.]+)$"
-          },
-          "port": {
-            "required": true,
-            "min": 1,
-            "max": 65535
-          },
-          "clientId": {
-            "required": false,
-            "maxLength": 23
-          }
-        },
-        "variables": {
-          "deviceId": "Gateway device ID",
-          "timestamp": "Current timestamp",
-          "random": "Random number"
-        }
-      }
-
-Create Cloud Connection
-~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:post:: /cloud-connections
-
-   Create a new cloud connection.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request** (MQTT Example):
-
-   .. sourcecode:: http
-
-      POST /cloud-connections HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "type": "mqtt",
-        "name": "My MQTT Broker",
+        "name": "Production MQTT Broker",
         "enabled": true,
         "connection": {
           "host": "broker.example.com",
           "port": 1883,
-          "protocol": "mqtt",
           "username": "gateway_user",
-          "password": "secure_password_123",
-          "clientId": "gateway_001",
-          "cleanSession": true
-        },
-        "topics": {
-          "baseTopic": "factory/line1/gateway001",
-          "dataTopic": "${baseTopic}/telemetry",
-          "eventTopic": "${baseTopic}/events",
-          "retainMessages": false
-        },
-        "format": {
-          "payloadFormat": "json",
-          "jsonTemplate": "{\"timestamp\":\"${timestamp}\",\"device\":\"${deviceId}\",\"data\":${data}}",
-          "timestampFormat": "iso8601"
-        },
-        "publishing": {
-          "tags": ["Hoist_Load", "Boom_Angle", "Temperature_Cell"],
-          "publishMode": "onChange",
-          "changeThreshold": 0.5,
-          "maxPublishRate": 100
-        },
-        "advanced": {
-          "autoReconnect": true,
-          "reconnectInterval": 5000,
-          "keepAlive": 60,
-          "qos": 1,
-          "timeout": 30
+          "password": "secure_password"
         }
       }
-
-   **Response**:
-
+   
+   **Success Response**:
+   
    .. sourcecode:: http
-
+   
       HTTP/1.1 201 Created
       Content-Type: application/json
       
@@ -286,35 +125,95 @@ Create Cloud Connection
         "connection": {
           "id": "mqtt-456",
           "type": "mqtt",
-          "name": "My MQTT Broker",
+          "name": "Production MQTT Broker",
           "enabled": true,
-          "status": "connecting",
-          "createdAt": "2025-03-12T10:30:00Z"
-        },
-        "message": "Connection created successfully"
+          "status": "connecting"
+        }
       }
+   
+   **UI Response**: 
+   - Modal closes
+   - New connection appears in left column list
+   - Connection automatically selected and shows in right panel
 
-Get Connection Details
-~~~~~~~~~~~~~~~~~~~~~~
+.. http:put:: /api/cloud-integration/connections/{id}
 
-.. http:get:: /cloud-connections/{id}
-
-   Get detailed information for a specific connection.
-
-   **Path Parameters**:
-
-   * **id** (string): Connection ID
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Response**:
-
+   **UI Trigger**: Editing connection in right panel and clicking "Save Changes"
+   
+   **UI Flow**:
+   
+   1. User clicks on connection in left list
+   2. Configuration loads in right panel
+   3. User edits fields in any of the 4 tabs
+   4. Click "Save Changes" → sends ``PUT /api/cloud-integration/connections/{id}``
+   
+   **Success Response**:
+   
    .. sourcecode:: http
+   
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "success": true,
+        "message": "Connection updated successfully",
+        "connection": {
+          "id": "mqtt-123",
+          "name": "Updated MQTT Broker"
+        }
+      }
+   
+   **UI Response**: 
+   - Connection name updates in left list
+   - Success notification appears
+   - Connection status updates if needed
 
+.. http:delete:: /api/cloud-integration/connections/{id}
+
+   **UI Trigger**: Clicking "Delete" button in connection configuration
+   
+   **UI Flow**:
+   
+   1. User selects connection
+   2. Clicks "Delete" button in configuration panel
+   3. Confirmation dialog appears
+   4. User confirms → sends ``DELETE /api/cloud-integration/connections/{id}``
+   
+   **Success Response**:
+   
+   .. sourcecode:: http
+   
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "success": true,
+        "message": "Connection deleted successfully",
+        "deletedId": "mqtt-123"
+      }
+   
+   **UI Response**: 
+   - Connection removed from left list
+   - Right panel shows "No Connection Selected" state
+   - Success notification appears
+
+Connection Information & Selection
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:get:: /api/cloud-integration/connections/{id}
+
+   **UI Trigger**: Clicking on any connection in the left list
+   
+   **UI Flow**:
+   
+   1. User clicks connection in left list
+   2. JavaScript sends ``GET /api/cloud-integration/connections/{id}``
+   3. Right panel loads with connection details and 4 configuration tabs
+   
+   **Success Response**:
+   
+   .. sourcecode:: http
+   
       HTTP/1.1 200 OK
       Content-Type: application/json
       
@@ -324,104 +223,110 @@ Get Connection Details
         "name": "Production MQTT",
         "enabled": true,
         "status": "connected",
-        "connection": {
+        "config": {
           "host": "broker.example.com",
-          "port": 1883,
-          "protocol": "mqtt",
-          "username": "gateway_user",
-          "clientId": "gateway_001",
-          "cleanSession": true
-        },
-        "topics": {
-          "baseTopic": "factory/line1/gateway001",
-          "dataTopic": "factory/line1/gateway001/telemetry",
-          "eventTopic": "factory/line1/gateway001/events",
-          "commandTopic": "factory/line1/gateway001/commands",
-          "retainMessages": false
-        },
-        "format": {
-          "payloadFormat": "json",
-          "jsonTemplate": "{\"timestamp\":\"${timestamp}\",\"device\":\"${deviceId}\",\"data\":${data}}",
-          "timestampFormat": "iso8601",
-          "includeMetadata": true
-        },
-        "publishing": {
-          "tags": [
-            {
-              "name": "Hoist_Load",
-              "published": true,
-              "lastValue": 145.2,
-              "lastPublished": "2025-03-12T10:29:58Z"
-            },
-            {
-              "name": "Boom_Angle",
-              "published": true,
-              "lastValue": 45.6,
-              "lastPublished": "2025-03-12T10:29:58Z"
-            }
-          ],
-          "publishMode": "onChange",
-          "changeThreshold": 0.5,
-          "maxPublishRate": 100,
-          "batchSize": 10,
-          "totalMessages": 1250,
-          "failedMessages": 3
-        },
-        "advanced": {
-          "autoReconnect": true,
-          "reconnectInterval": 5000,
-          "keepAlive": 60,
-          "qos": 1,
-          "timeout": 30,
-          "ssl": false,
-          "certificate": null
+          "port": 1883
         },
         "statistics": {
-          "createdAt": "2025-03-01T09:00:00Z",
-          "lastConnected": "2025-03-12T10:29:00Z",
-          "lastDisconnected": null,
-          "uptimeSeconds": 95040,
-          "totalMessages": 1250,
-          "failedMessages": 3,
-          "averageLatency": 124
+          "messages": 1250,
+          "errors": 3
         }
       }
+   
+   **UI Response**: 
+   - Right panel shows connection name and status
+   - Statistics update in quick stats section
+   - Configuration tabs populated with saved values
 
-Test Connection
-~~~~~~~~~~~~~~~
+Connection Types & Templates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:post:: /cloud-connections/{id}/test
+.. http:get:: /api/cloud-integration/connection-types
 
-   Test connectivity to cloud service.
-
-   **Path Parameters**:
-
-   * **id** (string): Connection ID
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Request** (Optional):
-
+   **UI Trigger**: Clicking "Add Connection" button (loads connection type cards)
+   
+   **UI Flow**:
+   
+   1. User clicks "Add Connection"
+   2. Modal opens and immediately calls ``GET /api/cloud-integration/connection-types``
+   3. Modal displays 8 connection type cards (MQTT, HTTP, AWS, Azure, Grafana, WebSocket, FTP, UDP)
+   
+   **Success Response**:
+   
    .. sourcecode:: http
-
-      POST /cloud-connections/mqtt-123/test HTTP/1.1
-      Authorization: Bearer <token>
+   
+      HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "testType": "connectivity",
-        "testMessage": "Test message from gateway",
-        "timeout": 5000
+        "types": [
+          {
+            "id": "mqtt",
+            "name": "MQTT Broker",
+            "description": "Standard IoT messaging protocol",
+            "icon": "fa-solid fa-cloud",
+            "color": "blue"
+          }
+        ]
       }
+   
+   **UI Response**: 
+   - Modal shows grid of connection type cards with icons and descriptions
+   - User clicks a card to proceed to configuration
 
-   **Response**:
+.. http:get:: /api/cloud-integration/templates/{type}
 
+   **UI Trigger**: Selecting a connection type card in "Add Connection" modal
+   
+   **UI Flow**:
+   
+   1. User clicks on a connection type card (e.g., MQTT)
+   2. Modal loads specific form template via ``GET /api/cloud-integration/templates/mqtt``
+   3. Modal shows protocol-specific configuration form
+   
+   **Success Response**:
+   
    .. sourcecode:: http
+   
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "type": "mqtt",
+        "defaults": {
+          "host": "",
+          "port": 1883,
+          "protocol": "mqtt"
+        },
+        "validation": {
+          "host": {"required": true}
+        }
+      }
+   
+   **UI Response**: 
+   - Modal title changes to "Configure MQTT Broker"
+   - Form fields appear with protocol-specific inputs
+   - User fills form and clicks "Add Connection"
 
+Connection Testing
+~~~~~~~~~~~~~~~~~~
+
+.. http:post:: /api/cloud-integration/connections/{id}/test
+
+   **UI Trigger**: Clicking "Test Connection" button in configuration panel
+   
+   **UI Flow**:
+   
+   1. User selects a connection
+   2. Clicks "Test Connection" button in configuration panel
+   3. Button shows "Testing..." with spinner
+   4. API call tests connectivity
+   5. Results shown in modal
+   
+   **Success Response**:
+   
+   .. sourcecode:: http
+   
       HTTP/1.1 200 OK
       Content-Type: application/json
       
@@ -429,101 +334,65 @@ Test Connection
         "success": true,
         "connected": true,
         "latency": 124,
-        "message": "Connected successfully to broker.example.com:1883",
-        "details": {
-          "brokerVersion": "2.0.0",
-          "sessionPresent": false,
-          "testTimestamp": "2025-03-12T10:30:45Z",
-          "testMessageId": "test_123456"
-        }
+        "message": "Connected successfully"
       }
+   
+   **UI Response**: 
+   - "Test Results" modal opens showing status, latency, authentication
+   - Statistics update in quick stats
+   - Success notification appears
 
-Update Connection
-~~~~~~~~~~~~~~~~~
+Connection Status Toggle
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:put:: /cloud-connections/{id}
+.. http:post:: /api/cloud-integration/connections/{id}/toggle
 
-   Update an existing cloud connection.
-
-   **Path Parameters**:
-
-   * **id** (string): Connection ID
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
+   **UI Trigger**: Toggling the "Enabled" switch in connection header
+   
+   **UI Flow**:
+   
+   1. User toggles the switch next to connection name
+   2. Switch changes state immediately
+   3. API call updates backend status
+   
+   **Success Response**:
+   
    .. sourcecode:: http
-
-      PUT /cloud-connections/mqtt-123 HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "name": "Updated MQTT Broker",
-        "enabled": true,
-        "connection": {
-          "host": "new-broker.example.com",
-          "port": 8883,
-          "protocol": "mqtts",
-          "username": "new_user",
-          "password": "new_password"
-        },
-        "topics": {
-          "baseTopic": "factory/updated/gateway001"
-        },
-        "publishing": {
-          "publishMode": "interval",
-          "interval": 1000
-        }
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
+   
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
         "success": true,
-        "message": "Connection updated successfully",
-        "restartRequired": true,
+        "message": "Connection enabled",
         "connection": {
           "id": "mqtt-123",
-          "name": "Updated MQTT Broker",
-          "status": "restarting"
+          "enabled": true
         }
       }
+   
+   **UI Response**: 
+   - Connection status updates in left list (Active/Inactive badge)
+   - Connection status indicator changes (online/offline)
 
-Get Available Tags
-~~~~~~~~~~~~~~~~~~
+Tag Management
+~~~~~~~~~~~~~~
 
-.. http:get:: /cloud-connections/available-tags
+.. http:get:: /api/cloud-integration/available-tags
 
-   Get list of available tags for publishing.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Query Parameters**:
-
-   * **search** (optional): Search term for tag names
-   * **limit** (optional): Maximum results (default: 100)
-   * **category** (optional): Filter by tag category
-
-   **Response**:
-
+   **UI Trigger**: Opening tag selection in "Tag Publishing" tab
+   
+   **UI Flow**:
+   
+   1. User selects connection
+   2. Clicks "Tag Publishing" tab
+   3. Clicks "Add Tags" button
+   4. Modal opens and loads available tags via API
+   
+   **Success Response**:
+   
    .. sourcecode:: http
-
+   
       HTTP/1.1 200 OK
       Content-Type: application/json
       
@@ -533,724 +402,305 @@ Get Available Tags
             "name": "Hoist_Load",
             "displayName": "Hoist Load",
             "unit": "tons",
-            "dataType": "FLOAT32",
             "category": "Load Monitoring",
-            "device": "LoadCell_1",
-            "description": "Main hoist load measurement",
-            "currentValue": 145.2,
-            "lastUpdate": "2025-03-12T10:29:58Z"
-          },
-          {
-            "name": "Boom_Angle",
-            "displayName": "Boom Angle",
-            "unit": "degrees",
-            "dataType": "FLOAT32",
-            "category": "Position Tracking",
-            "device": "Inclin_Arm",
-            "description": "Boom angle measurement",
-            "currentValue": 45.6,
-            "lastUpdate": "2025-03-12T10:29:58Z"
-          },
-          {
-            "name": "Temperature_Cell",
-            "displayName": "Cell Temperature",
-            "unit": "°C",
-            "dataType": "FLOAT32",
-            "category": "Temperature",
-            "device": "LoadCell_1",
-            "description": "Load cell temperature",
-            "currentValue": 32.1,
-            "lastUpdate": "2025-03-12T10:29:58Z"
+            "device": "LoadCell_1"
           }
         ],
-        "total": 45,
-        "categories": ["Load Monitoring", "Position Tracking", "Temperature", "Pressure", "Safety"],
-        "selectedCount": 0
+        "total": 45
       }
+   
+   **UI Response**: 
+   - Modal shows list of available tags with checkboxes
+   - User selects tags and clicks "Add Selected Tags"
 
-Delete Connection
-~~~~~~~~~~~~~~~~~
+.. http:post:: /api/cloud-integration/connections/{id}/tags
 
-.. http:delete:: /cloud-connections/{id}
-
-   Delete a cloud connection.
-
-   **Path Parameters**:
-
-   * **id** (string): Connection ID
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Query Parameters**:
-
-   * **keepData** (optional): Keep historical data (default: false)
-
-   **Response**:
-
+   **UI Trigger**: Adding tags to connection in "Tag Publishing" tab
+   
+   **UI Flow**:
+   
+   1. User selects tags in modal
+   2. Clicks "Add Selected Tags"
+   3. Tags assigned to connection
+   
+   **Request**:
+   
    .. sourcecode:: http
-
+   
+      POST /api/cloud-integration/connections/mqtt-123/tags HTTP/1.1
+      Cookie: session_token=<token>
+      Content-Type: application/json
+      
+      {
+        "tags": ["Hoist_Load", "Boom_Angle"],
+        "publishMode": "onChange",
+        "changeThreshold": 0.1
+      }
+   
+   **Success Response**:
+   
+   .. sourcecode:: http
+   
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
         "success": true,
-        "message": "Connection deleted successfully",
-        "deletedId": "mqtt-123",
-        "statistics": {
-          "totalMessages": 1250,
-          "dataRetained": false,
-          "cleanupComplete": true
-        }
+        "message": "Tags assigned successfully",
+        "assignedCount": 2
       }
 
-Additional Endpoints
---------------------
-
-Get Connection Statistics
+Statistics and Monitoring
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:get:: /cloud-connections/{id}/statistics
+.. http:get:: /api/cloud-integration/connections/{id}/statistics
 
-   Get detailed statistics for a connection.
-
-   **Path Parameters**:
-
-   * **id** (string): Connection ID
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Query Parameters**:
-
-   * **timeRange** (optional): Time range (1h, 24h, 7d, 30d)
-
-   **Response**:
-
+   **UI Trigger**: Loading connection details (automatically fetched when connection selected)
+   
+   **UI Flow**:
+   
+   1. User clicks connection in left list
+   2. API fetches statistics along with connection details
+   3. Statistics displayed in quick stats section
+   
+   **Success Response**:
+   
    .. sourcecode:: http
-
+   
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
         "connectionId": "mqtt-123",
-        "timeRange": "24h",
         "messages": {
           "total": 1250,
           "successful": 1247,
-          "failed": 3,
-          "ratePerMinute": 0.87
+          "failed": 3
         },
         "latency": {
-          "average": 124,
-          "min": 89,
-          "max": 245,
-          "percentile95": 189
-        },
-        "bandwidth": {
-          "totalBytes": 1250000,
-          "averageBytesPerMessage": 1000,
-          "bytesPerSecond": 14.5
-        },
-        "uptime": {
-          "percentage": 99.8,
-          "downtimeSeconds": 172,
-          "lastDowntime": "2025-03-11T15:30:00Z"
-        },
-        "topTags": [
-          {"tag": "Hoist_Load", "count": 450},
-          {"tag": "Boom_Angle", "count": 400},
-          {"tag": "Temperature_Cell", "count": 200}
-        ]
+          "average": 124
+        }
       }
+   
+   **UI Response**: 
+   - Quick stats update (Messages, Errors, Last Sent, Latency)
+   - Diagnostics section updates
 
-Toggle Connection State
-~~~~~~~~~~~~~~~~~~~~~~~
+Configuration Management
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:post:: /cloud-connections/{id}/toggle
+.. http:put:: /api/cloud-integration/save-config
 
-   Enable or disable a connection.
-
-   **Path Parameters**:
-
-   * **id** (string): Connection ID
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Request**:
-
+   **UI Trigger**: Clicking "Save" button in header
+   
+   **UI Flow**:
+   
+   1. User makes changes to one or more connections
+   2. Clicks "Save" button in header
+   3. All connection configurations saved
+   
+   **Success Response**:
+   
    .. sourcecode:: http
-
-      POST /cloud-connections/mqtt-123/toggle HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "enabled": false
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
+   
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
         "success": true,
-        "message": "Connection disabled",
-        "connection": {
-          "id": "mqtt-123",
-          "enabled": false,
-          "status": "disconnected"
-        }
+        "message": "Configuration saved successfully"
       }
+   
+   **UI Response**: 
+   - Button shows "Saving..." with spinner
+   - Success notification appears
+   - Button returns to normal state
 
-Connection Types Reference
---------------------------
+Route Summary
+-------------
 
-### MQTT Configuration
-
-.. list-table:: MQTT Connection Options
-   :widths: 30 70
+.. list-table:: Cloud Integration Routes
    :header-rows: 1
+   :widths: 20 20 50 10
+   
+   * - Type
+     - Method
+     - Route & Purpose
+     - Auth
+   * - Page
+     - GET
+     - ``/cloud-integration`` - Main cloud integration page
+     - Yes
+   * - API
+     - POST
+     - ``/api/cloud-integration/connections`` - Create connection
+     - Yes
+   * - API
+     - PUT
+     - ``/api/cloud-integration/connections/{id}`` - Update connection
+     - Yes
+   * - API
+     - DELETE
+     - ``/api/cloud-integration/connections/{id}`` - Delete connection
+     - Yes
+   * - API
+     - GET
+     - ``/api/cloud-integration/connections/{id}`` - Get connection details
+     - Yes
+   * - API
+     - GET
+     - ``/api/cloud-integration/connection-types`` - Get available types
+     - Yes
+   * - API
+     - GET
+     - ``/api/cloud-integration/templates/{type}`` - Get type template
+     - Yes
+   * - API
+     - POST
+     - ``/api/cloud-integration/connections/{id}/test`` - Test connection
+     - Yes
+   * - API
+     - POST
+     - ``/api/cloud-integration/connections/{id}/toggle`` - Enable/disable
+     - Yes
+   * - API
+     - GET
+     - ``/api/cloud-integration/available-tags`` - Get available tags
+     - Yes
+   * - API
+     - POST
+     - ``/api/cloud-integration/connections/{id}/tags`` - Assign tags
+     - Yes
+   * - API
+     - GET
+     - ``/api/cloud-integration/statistics`` - Get overall statistics
+     - Yes
+   * - API
+     - PUT
+     - ``/api/cloud-integration/save-config`` - Save configuration
+     - Yes
 
-   * - Field
-     - Description
-   * - **host**
-     - MQTT broker hostname or IP
-   * - **port**
-     - Port number (1883 for MQTT, 8883 for MQTTS)
-   * - **protocol**
-     - mqtt, mqtts, ws, wss
-   * - **username/password**
-     - Authentication credentials
-   * - **clientId**
-     - Unique client identifier
-   * - **cleanSession**
-     - Start with clean session
-   * - **qos**
-     - Quality of Service (0, 1, 2)
-   * - **keepAlive**
-     - Keep-alive interval in seconds
+Complete User Flow
+------------------
 
-### HTTP Configuration
+1. **User visits page**: ``GET /cloud-integration``
+   - Page loads with embedded connections data
+   - Left column shows active connections
+   - Right column shows "No Connection Selected"
 
-.. list-table:: HTTP Connection Options
-   :widths: 30 70
-   :header-rows: 1
+2. **User adds new connection**:
+   - Clicks "Add Connection" → opens modal
+   - Sees 8 connection type cards (MQTT, HTTP, AWS, Azure, Grafana, WebSocket, FTP, UDP)
+   - Selects "MQTT Broker" card
+   - Modal loads MQTT configuration form
+   - Fills form with broker details
+   - Clicks "Add Connection" → ``POST /api/cloud-integration/connections``
+   - New connection appears in left list and is automatically selected
 
-   * - Field
-     - Description
-   * - **url**
-     - Complete endpoint URL
-   * - **method**
-     - HTTP method (POST, PUT, GET)
-   * - **headers**
-     - Custom HTTP headers
-   * - **authType**
-     - none, basic, bearer, apiKey
-   * - **contentType**
-     - application/json, application/xml
-   * - **timeout**
-     - Request timeout in milliseconds
+3. **User edits connection**:
+   - Clicks connection in left list → loads in right panel
+   - Makes changes in any of 4 tabs:
+     * Connection: Basic settings
+     * Topics & Format: Protocol-specific formatting
+     * Tag Publishing: Which tags to send
+     * Advanced: TLS, timeouts, retries
+   - Clicks "Save Changes" → ``PUT /api/cloud-integration/connections/{id}``
+   - Changes saved, notification appears
 
-### AWS IoT Core
+4. **User tests connection**:
+   - With connection selected, clicks "Test Connection"
+   - Button shows spinner, API tests connectivity
+   - "Test Results" modal opens with success/failure
+   - Statistics update in quick stats
 
-.. list-table:: AWS IoT Configuration
-   :widths: 30 70
-   :header-rows: 1
+5. **User manages tags**:
+   - Selects connection, clicks "Tag Publishing" tab
+   - Clicks "Add Tags" → opens modal with available tags
+   - Selects tags to publish
+   - Clicks "Add Selected Tags" → ``POST /api/cloud-integration/connections/{id}/tags``
+   - Tags assigned to connection
 
-   * - Field
-     - Description
-   * - **endpoint**
-     - AWS IoT endpoint
-   * - **thingName**
-     - IoT Thing name
-   * - **certificate**
-     - Client certificate
-   * - **privateKey**
-     - Private key
-   * - **rootCA**
-     - Root CA certificate
-   * - **region**
-     - AWS region
+6. **User deletes connection**:
+   - Selects connection in left list
+   - Clicks "Delete" button in configuration panel
+   - Confirms deletion → ``DELETE /api/cloud-integration/connections/{id}``
+   - Connection removed from list
 
-Publishing Modes
-----------------
+7. **User saves all changes**:
+   - After making multiple edits
+   - Clicks "Save" button in header → ``PUT /api/cloud-integration/save-config``
+   - All connection configurations saved
 
-.. list-table:: Publishing Modes
-   :widths: 40 60
-   :header-rows: 1
+UI Component Details
+--------------------
 
-   * - Mode
-     - Description
-   * - **onChange**
-     - Publish when value changes beyond threshold
-   * - **interval**
-     - Publish at fixed intervals
-   * - **onEvent**
-     - Publish on specific events
-   * - **conditional**
-     - Publish based on conditions
-   * - **manual**
-     - Manual publishing only
+### Left Column (Connections List)
+- Each connection shows: Name, Type icon, Status, Last active, Message count
+- Active connections have green "Active" badge
+- Inactive connections have gray "Inactive" badge
+- Clicking any connection selects it and loads details in right panel
+
+### Right Column (Configuration Panel)
+- **Header**: Connection name, description, enabled toggle
+- **Quick Stats**: Messages, Errors, Last Sent, Latency (updates in real-time)
+- **Configuration Tabs**:
+  1. **Connection**: Protocol-specific settings
+  2. **Topics & Format**: Message formatting and topics
+  3. **Tag Publishing**: Which data tags to publish
+  4. **Advanced**: Advanced protocol settings
+- **Diagnostics**: Real-time connection monitoring
+- **Downlink Commands**: Recent commands from cloud
+
+### Connection Type Cards (Modal)
+- 8 cards displayed in 2x4 grid on desktop
+- Each card has: Icon, Name, Description
+- Cards are color-coded by protocol type
+- Hover effect with slight elevation
+
+### Test Results Modal
+- Shows: Connection status, Latency, Authentication result
+- Green success message or red error message
+- Detailed technical information if needed
 
 Error Codes
 -----------
 
-.. list-table:: Cloud Integration Errors
+.. list-table:: Cloud Integration Error Codes
    :widths: 25 75
    :header-rows: 1
 
    * - Error Code
      - Description
-   * - **CLOUD_001**
+   * - CLOUD_001
      - Connection failed - host unreachable
-   * - **CLOUD_002**
+   * - CLOUD_002
      - Authentication failed
-   * - **CLOUD_003**
+   * - CLOUD_003
      - Invalid certificate
-   * - **CLOUD_004**
+   * - CLOUD_004
      - Topic format error
-   * - **CLOUD_005**
-     - Paytoo large
-   * - **CLOUD_006**
+   * - CLOUD_005
+     - Payload too large
+   * - CLOUD_006
      - Rate limit exceeded
-   * - **CLOUD_007**
+   * - CLOUD_007
      - Connection timeout
-   * - **CLOUD_008**
-     - SSL/TLS handshake failed
-   * - **CLOUD_009**
-     - Invalid JSON template
 
-Examples
---------
+Supported Protocols
+-------------------
 
-Python - Create MQTT Connection
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### Connection Types Available:
+1. **MQTT Broker** - Standard IoT messaging
+2. **HTTP Endpoint** - REST API integration
+3. **AWS IoT Core** - Amazon Web Services
+4. **Azure IoT Hub** - Microsoft Azure
+5. **Grafana Cloud** - Monitoring & dashboards
+6. **WebSocket Server** - Real-time bidirectional
+7. **FTP Server** - File transfer for logs
+8. **UDP Stream** - Low-latency streaming
 
-.. code-block:: python
-
-   import requests
-   
-   # Create MQTT connection
-   headers = {"Authorization": "Bearer your_token"}
-   
-   mqtt_config = {
-       "type": "mqtt",
-       "name": "Production MQTT Broker",
-       "enabled": True,
-       "connection": {
-           "host": "mqtt.example.com",
-           "port": 1883,
-           "protocol": "mqtt",
-           "username": "gateway",
-           "password": "password123",
-           "clientId": "gateway_001",
-           "cleanSession": True
-       },
-       "topics": {
-           "baseTopic": "factory/area1/gateway001",
-           "dataTopic": "${baseTopic}/data",
-           "eventTopic": "${baseTopic}/events"
-       },
-       "format": {
-           "payloadFormat": "json",
-           "jsonTemplate": '''{
-               "timestamp": "${timestamp}",
-               "device": "${deviceId}",
-               "values": ${data},
-               "metadata": {
-                   "gateway": "Univa-GW-01",
-                   "location": "Chennai Port"
-               }
-           }'''
-       },
-       "publishing": {
-           "tags": ["Hoist_Load", "Boom_Angle"],
-           "publishMode": "onChange",
-           "changeThreshold": 0.1,
-           "maxPublishRate": 100
-       }
-   }
-   
-   response = requests.post(
-       "https://api.example.com/v1/cloud-connections",
-       json=mqtt_config,
-       headers=headers
-   )
-   
-   if response.status_code == 201:
-       connection = response.json()["connection"]
-       print(f"Created connection: {connection['name']} (ID: {connection['id']})")
-
-Python - Test Connection
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: python
-
-   # Test existing connection
-   connection_id = "mqtt-123"
-   
-   test_response = requests.post(
-       f"https://api.example.com/v1/cloud-connections/{connection_id}/test",
-       headers=headers
-   )
-   
-   test_result = test_response.json()
-   
-   if test_result["success"]:
-       print(f"Connection successful! Latency: {test_result['latency']}ms")
-   else:
-       print(f"Connection failed: {test_result.get('message', 'Unknown error')}")
-
-JavaScript - Dynamic Connection Form
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: javascript
-
-   // Load connection types
-   async function loadConnectionTypes() {
-       const token = localStorage.getItem('token');
-       
-       const response = await fetch('/cloud-connections/types', {
-           headers: {
-               'Authorization': `Bearer ${token}`
-           }
-       });
-       
-       const data = await response.json();
-       const typeSelect = document.getElementById('connection-type');
-       
-       data.types.forEach(type => {
-           const option = document.createElement('option');
-           option.value = type.id;
-           option.textContent = type.name;
-           typeSelect.appendChild(option);
-       });
-       
-       // Add change listener
-       typeSelect.addEventListener('change', async (event) => {
-           const type = event.target.value;
-           await loadConnectionTemplate(type);
-       });
-   }
-   
-   // Load template for selected type
-   async function loadConnectionTemplate(type) {
-       const token = localStorage.getItem('token');
-       
-       const response = await fetch(`/cloud-connections/templates/${type}`, {
-           headers: {
-               'Authorization': `Bearer ${token}`
-           }
-       });
-       
-       const template = await response.json();
-       renderConnectionForm(template);
-   }
-   
-   // Render dynamic form
-   function renderConnectionForm(template) {
-       const formContainer = document.getElementById('connection-form');
-       formContainer.innerHTML = '';
-       
-       // Render form based on template
-       renderSection('Connection', template.defaults.connection);
-       renderSection('Topics', template.defaults.topics);
-       renderSection('Format', template.defaults.format);
-       renderSection('Publishing', template.defaults.publishing);
-       renderSection('Advanced', template.defaults.advanced);
-   }
-   
-   function renderSection(title, fields) {
-       const section = document.createElement('div');
-       section.className = 'form-section';
-       
-       const heading = document.createElement('h3');
-       heading.textContent = title;
-       section.appendChild(heading);
-       
-       Object.entries(fields).forEach(([key, value]) => {
-           const fieldDiv = document.createElement('div');
-           fieldDiv.className = 'form-field';
-           
-           const label = document.createElement('label');
-           label.textContent = key;
-           label.htmlFor = key;
-           
-           let input;
-           
-           if (typeof value === 'boolean') {
-               input = document.createElement('input');
-               input.type = 'checkbox';
-               input.id = key;
-               input.name = key;
-               input.checked = value;
-           } else if (typeof value === 'number') {
-               input = document.createElement('input');
-               input.type = 'number';
-               input.id = key;
-               input.name = key;
-               input.value = value;
-           } else {
-               input = document.createElement('input');
-               input.type = 'text';
-               input.id = key;
-               input.name = key;
-               input.value = value || '';
-               input.placeholder = `Enter ${key}`;
-           }
-           
-           fieldDiv.appendChild(label);
-           fieldDiv.appendChild(input);
-           section.appendChild(fieldDiv);
-       });
-       
-       document.getElementById('connection-form').appendChild(section);
-   }
-
-JavaScript - Manage Tags for Publishing
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: javascript
-
-   // Load available tags
-   async function loadAvailableTags() {
-       const token = localStorage.getItem('token');
-       
-       const response = await fetch('/cloud-connections/available-tags', {
-           headers: {
-               'Authorization': `Bearer ${token}`
-           }
-       });
-       
-       const data = await response.json();
-       const tagList = document.getElementById('available-tags');
-       
-       data.tags.forEach(tag => {
-           const li = document.createElement('li');
-           li.className = 'tag-item';
-           
-           const checkbox = document.createElement('input');
-           checkbox.type = 'checkbox';
-           checkbox.id = `tag-${tag.name}`;
-           checkbox.value = tag.name;
-           
-           const label = document.createElement('label');
-           label.htmlFor = `tag-${tag.name}`;
-           label.innerHTML = `
-               <strong>${tag.displayName}</strong>
-               <span class="tag-info">${tag.device} • ${tag.unit}</span>
-               <br>
-               <small>${tag.description}</small>
-           `;
-           
-           li.appendChild(checkbox);
-           li.appendChild(label);
-           tagList.appendChild(li);
-       });
-   }
-   
-   // Get selected tags
-   function getSelectedTags() {
-       const checkboxes = document.querySelectorAll('#available-tags input[type="checkbox"]:checked');
-       return Array.from(checkboxes).map(cb => cb.value);
-   }
-
-Workflow Example
-----------------
-
-### Complete Cloud Connection Setup
-
-1. **Page Load** - List existing connections
-   
-   .. code-block:: javascript
-   
-      // Initial load
-      async function loadCloudConnections() {
-          const connections = await getConnections();
-          renderConnectionList(connections);
-      }
-
-2. **Add New Connection** - Show type selection
-   
-   .. code-block:: javascript
-   
-      function showAddConnection() {
-          document.getElementById('connection-modal').style.display = 'block';
-          loadConnectionTypes();
-      }
-
-3. **Select Connection Type** - Load template
-   
-   .. code-block:: javascript
-   
-      async function onTypeSelect(type) {
-          const template = await getConnectionTemplate(type);
-          renderConnectionForm(template);
-      }
-
-4. **Configure Connection** - Fill form
-   
-   .. code-block:: javascript
-   
-      async function configureConnection() {
-          const config = collectFormData();
-          
-          // Test before saving
-          const testResult = await testConnectionConfig(config);
-          
-          if (testResult.success) {
-              await saveConnection(config);
-          }
-      }
-
-5. **Save and Enable** - Create connection
-   
-   .. code-block:: javascript
-   
-      async function saveConnection(config) {
-          const result = await createConnection(config);
-          
-          if (result.success) {
-              // Enable publishing
-              await enableConnection(result.id);
-              
-              // Load tags for publishing
-              const tags = await getAvailableTags();
-              await selectTagsForPublishing(result.id, tags);
-          }
-      }
-
-Security Considerations
------------------------
-
-### Credential Management
-
-1. **Password Storage**
-   - Encrypted at rest
-   - Never logged in plaintext
-   - Rotate regularly
-
-2. **Certificate Handling**
-   - Secure certificate upload
-   - Private key protection
-   - Certificate expiration monitoring
-
-3. **Network Security**
-   - Use TLS/SSL where available
-   - Validate certificates
-   - Use VPN for sensitive connections
-
-### Data Privacy
-
-1. **Data Minimization**
-   - Only publish necessary tags
-   - Consider data aggregation
-   - Implement data masking if needed
-
-2. **Compliance**
-   - GDPR considerations
-   - Industry-specific regulations
-   - Data retention policies
-
-Monitoring and Alerts
----------------------
-
-### Connection Health Monitoring
-
-- **Heartbeat**: Regular connectivity checks
-- **Latency Monitoring**: Track response times
-- **Error Rate**: Monitor failed messages
-- **Bandwidth Usage**: Track data volume
-
-### Alert Configuration
-
-.. code-block:: json
-
-   {
-     "alerts": {
-       "connectionLost": {
-         "enabled": true,
-         "timeout": 300,
-         "notifications": ["email", "sms"]
-       },
-       "highLatency": {
-         "enabled": true,
-         "threshold": 1000,
-         "duration": 60
-       },
-       "errorRate": {
-         "enabled": true,
-         "threshold": 0.05,
-         "window": 300
-       }
-     }
-   }
-
-Best Practices
---------------
-
-1. **Connection Configuration**
-   - Use descriptive names
-   - Document connection purposes
-   - Test before production use
-
-2. **Data Publishing**
-   - Start with few tags, add gradually
-   - Use appropriate publish modes
-   - Monitor bandwidth usage
-
-3. **Error Handling**
-   - Implement retry logic
-   - Log connection issues
-   - Set up alerts for critical failures
-
-4. **Performance**
-   - Batch messages where possible
-   - Use compression for large payloads
-   - Optimize publish intervals
-
-Troubleshooting
----------------
-
-### Common Issues
-
-1. **Connection Fails**
-   - Check network connectivity
-   - Verify credentials
-   - Check firewall settings
-
-2. **Authentication Errors**
-   - Verify username/password
-   - Check certificate validity
-   - Ensure proper permissions
-
-3. **High Latency**
-   - Check network bandwidth
-   - Reduce publish frequency
-   - Consider message batching
-
-4. **Message Loss**
-   - Increase QoS level
-   - Check broker configuration
-   - Verify topic permissions
-
-### Debug Tools
-
-1. **Test Connection** - Verify connectivity
-2. **Message Logs** - View sent messages
-3. **Network Capture** - Analyze traffic
-4. **Broker Tools** - Use MQTT client for testing
+### Protocol-Specific Features:
+- **MQTT**: QoS 0/1/2, Retained messages, Last Will & Testament
+- **HTTP**: Multiple methods (POST, PUT), Custom headers, Authentication
+- **WebSocket**: Real-time bidirectional, Low latency
+- **UDP**: High-speed unidirectional, Connectionless

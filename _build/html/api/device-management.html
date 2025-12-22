@@ -51,266 +51,96 @@
 <li class="toctree-l2"><a class="reference internal" href="../about.html#usage">Usage</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../authentication.html#register-user">Register User</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../authentication.html#login-user">Login User</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../authentication.html#get-current-user">Get Current User</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../authentication.html#logout">Logout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authentication.html">Authentication System Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../authentication.html#page-routes-frontend">Page Routes (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../authentication.html#api-endpoints-backend">API Endpoints (Backend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../authentication.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../authentication.html#flow-examples">Flow Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../authentication.html#user-registration-flow">User Registration Flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../authentication.html#user-login-flow">User Login Flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../authentication.html#password-change-flow">Password Change Flow</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Core APIs</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="general-configuration.html">General Configuration API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#get-configuration">Get Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#update-configuration">Update Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#scan-wifi-networks">Scan WiFi Networks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#sync-time">Sync Time</a></li>
-<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#error-codes">Error Codes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#examples">Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="general-configuration.html#python-example">Python Example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="general-configuration.html#javascript-example">JavaScript Example</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#api-endpoints-backend">API Endpoints (Backend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#complete-user-flow">Complete User Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general-configuration.html#advantages-of-this-approach">Advantages of This Approach</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Device Management API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#endpoints">Endpoints</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#get-device-management-page">Get Device Management Page</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#create-new-device">Create New Device</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#update-device">Update Device</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#delete-device">Delete Device</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#get-device-details">Get Device Details</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#test-device-connection">Test Device Connection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#disable-enable-device">Disable/Enable Device</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#duplicate-device">Duplicate Device</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scan-for-devices">Scan for Devices</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#check-scan-status">Check Scan Status</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scan-wireless-devices">Scan Wireless Devices</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#get-device-groups">Get Device Groups</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#create-device-group">Create Device Group</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#update-device-group">Update Device Group</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#delete-device-group">Delete Device Group</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#assign-devices-to-group">Assign Devices to Group</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#import-devices-from-csv">Import Devices from CSV</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#export-devices-to-csv">Export Devices to CSV</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pair-wireless-device">Pair Wireless Device</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#get-device-packets">Get Device Packets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#device-operations">Device Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#device-actions">Device Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scanning-operations">Scanning Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#group-management">Group Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#import-export-operations">Import/Export Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wireless-operations">Wireless Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diagnostics">Diagnostics</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#complete-user-flow">Complete User Flow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#error-codes">Error Codes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#python-create-device">Python - Create Device</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#python-scan-for-devices">Python - Scan for Devices</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#javascript-get-device-details">JavaScript - Get Device Details</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#javascript-manage-device-groups">JavaScript - Manage Device Groups</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-features">Key Features</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tag-mapping.html">Tag Mapping API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#endpoints">Endpoints</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#get-all-tag-mappings">Get All Tag Mappings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#get-available-devices">Get Available Devices</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#get-protocol-form-configuration">Get Protocol Form Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#create-tag-mapping">Create Tag Mapping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#update-tag-mapping">Update Tag Mapping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#delete-tag-mapping">Delete Tag Mapping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#import-mappings-from-csv">Import Mappings from CSV</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#export-mappings-to-csv">Export Mappings to CSV</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#get-single-tag-mapping">Get Single Tag Mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#tag-mapping-crud-operations">Tag Mapping CRUD Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#device-and-protocol-information">Device and Protocol Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#import-export-operations">Import/Export Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#filtering-and-search">Filtering and Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#device-testing-and-validation">Device Testing and Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#configuration-management">Configuration Management</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#data-types-and-protocols">Data Types and Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#complete-user-flow">Complete User Flow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#error-codes">Error Codes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#examples">Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#python-create-tag-mapping">Python - Create Tag Mapping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#python-import-from-csv">Python - Import from CSV</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#javascript-dynamic-form-generation">JavaScript - Dynamic Form Generation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tag-mapping.html#javascript-create-tag-mapping">JavaScript - Create Tag Mapping</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#workflow-example">Workflow Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#notes">Notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#key-features">Key Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#data-types-and-protocols">Data Types and Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag-mapping.html#validation-rules">Validation Rules</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cloud-integration.html">Cloud Integration API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#endpoints">Endpoints</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#get-all-cloud-connections">Get All Cloud Connections</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#get-connection-types">Get Connection Types</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#get-connection-template">Get Connection Template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#create-cloud-connection">Create Cloud Connection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#get-connection-details">Get Connection Details</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#test-connection">Test Connection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#update-connection">Update Connection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#get-available-tags">Get Available Tags</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#delete-connection">Delete Connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#connection-crud-operations">Connection CRUD Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#connection-information-selection">Connection Information &amp; Selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#connection-types-templates">Connection Types &amp; Templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#connection-testing">Connection Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#connection-status-toggle">Connection Status Toggle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#tag-management">Tag Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#statistics-and-monitoring">Statistics and Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#configuration-management">Configuration Management</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#additional-endpoints">Additional Endpoints</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#get-connection-statistics">Get Connection Statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#toggle-connection-state">Toggle Connection State</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#connection-types-reference">Connection Types Reference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#publishing-modes">Publishing Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#complete-user-flow">Complete User Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#ui-component-details">UI Component Details</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#error-codes">Error Codes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#examples">Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#python-create-mqtt-connection">Python - Create MQTT Connection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#python-test-connection">Python - Test Connection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#javascript-dynamic-connection-form">JavaScript - Dynamic Connection Form</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cloud-integration.html#javascript-manage-tags-for-publishing">JavaScript - Manage Tags for Publishing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#supported-protocols">Supported Protocols</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#workflow-example">Workflow Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#security-considerations">Security Considerations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#monitoring-and-alerts">Monitoring and Alerts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#best-practices">Best Practices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cloud-integration.html#troubleshooting">Troubleshooting</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="license.html">Licensing &amp; Subscriptions API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="license.html#overview">Overview</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="license.html#license-overview">License Overview</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="license.html#get-license-overview">Get License Overview</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#sync-with-cloud">Sync with Cloud</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#deactivate-license">Deactivate License</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="license.html#feature-access-matrix">Feature Access Matrix</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="license.html#get-features">Get Features</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#toggle-feature">Toggle Feature</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="license.html#license-key-management">License Key Management</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="license.html#validate-license-key">Validate License Key</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#get-current-license-info">Get Current License Info</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#generate-demo-key">Generate Demo Key</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#export-license">Export License</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#import-license">Import License</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="license.html#cloud-subscription">Cloud Subscription</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="license.html#get-cloud-status">Get Cloud Status</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#unlink-cloud">Unlink Cloud</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#get-sync-settings">Get Sync Settings</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#update-sync-settings">Update Sync Settings</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="license.html#trials-management">Trials Management</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="license.html#get-active-trials">Get Active Trials</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#get-available-trials">Get Available Trials</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#start-trial">Start Trial</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#extend-trial">Extend Trial</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#upgrade-trial">Upgrade Trial</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#cancel-trial">Cancel Trial</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="license.html#license-logs">License Logs</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="license.html#get-license-logs">Get License Logs</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="license.html#footer-actions">Footer Actions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="license.html#validate-all-licenses">Validate All Licenses</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#create-backup">Create Backup</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#reset-trials">Reset Trials</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#save-settings">Save Settings</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="license.html#modal-actions">Modal Actions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="license.html#get-renewal-options">Get Renewal Options</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#initiate-transfer">Initiate Transfer</a></li>
-<li class="toctree-l4"><a class="reference internal" href="license.html#get-help">Get Help</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="license.html#error-codes">Error Codes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="license.html#authentication">Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="license.html#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="license.html#response-format">Response Format</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security &amp; Access Control API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="security.html#overview">Overview</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="security.html#security-status">Security Status</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="security.html#get-security-status">Get Security Status</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#identity-access-management-section-a">Identity &amp; Access Management (Section A)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#authentication-policies-section-b">Authentication Policies (Section B)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#api-keys-tokens-section-c">API Keys &amp; Tokens (Section C)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#ssh-access-control-section-d">SSH Access Control (Section D)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#firewall-network-security-section-e">Firewall &amp; Network Security (Section E)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#certificate-management-section-f">Certificate Management (Section F)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#security-audit-log-section-g">Security Audit Log (Section G)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#security-operations">Security Operations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#error-codes">Error Codes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#authentication">Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="security.html#response-format">Response Format</a></li>
-</ul>
-</li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">UNDER VALIDATION</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="ota-re.html">Gateway OTA &amp; System Update API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ota-re.html#overview">Overview</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="ota-re.html#system-information">System Information</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="ota-re.html#get-gateway-status">Get Gateway Status</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ota-re.html#create-system-snapshot">Create System Snapshot</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="ota-re.html#available-updates">Available Updates</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="ota-re.html#check-available-updates">Check Available Updates</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ota-re.html#toggle-auto-update">Toggle Auto-Update</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="ota-re.html#download-installation">Download &amp; Installation</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="ota-re.html#start-update-download">Start Update Download</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ota-re.html#get-update-progress">Get Update Progress</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ota-re.html#install-downloaded-update">Install Downloaded Update</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="ota-re.html#manual-upload-management">Manual Upload Management</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="ota-re.html#verify-uploaded-image">Verify Uploaded Image</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ota-re.html#deploy-manual-image">Deploy Manual Image</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="ota-re.html#update-settings-management">Update Settings Management</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="ota-re.html#get-update-settings">Get Update Settings</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ota-re.html#update-settings">Update Settings</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="ota-re.html#recovery-operations">Recovery Operations</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="ota-re.html#execute-rollback">Execute Rollback</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ota-re.html#restore-previous-os">Restore Previous OS</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ota-re.html#factory-reset">Factory Reset</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ota-re.html#upload-recovery-image">Upload Recovery Image</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="ota-re.html#safety-management">Safety Management</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="ota-re.html#get-safety-status">Get Safety Status</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ota-re.html#safety-override">Safety Override</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="ota-re.html#monitor-logs">Monitor &amp; Logs</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="ota-re.html#get-system-logs">Get System Logs</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ota-re.html#get-monitor-status">Get Monitor Status</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="ota-re.html#cancel-operation">Cancel Operation</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="ota-re.html#cancel-update-operation">Cancel Update Operation</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="ota-re.html">Gateway OTA &amp; System API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ota-re.html#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ota-re.html#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ota-re.html#system-information-section-1">System Information (SECTION 1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ota-re.html#available-updates-section-2">Available Updates (SECTION 2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ota-re.html#manual-upload-management-section-3">Manual Upload Management (SECTION 3)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ota-re.html#update-settings-management-section-4">Update Settings Management (SECTION 4)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ota-re.html#recovery-operations-section-5">Recovery Operations (SECTION 5)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ota-re.html#safety-management-section-6">Safety Management (SECTION 6)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ota-re.html#monitor-live-updates-section-7">Monitor &amp; Live Updates (SECTION 7)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ota-re.html#websocket-real-time-updates">WebSocket Real-time Updates</a><ul>
@@ -325,97 +155,118 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="ota-re.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ota-re.html#complete-user-flow">Complete User Flow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ota-re.html#error-codes">Error Codes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ota-re.html#id1">Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ota-re.html#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ota-re.html#response-format">Response Format</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ota-re.html#ui-api-mapping-summary">UI-API Mapping Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ota-re.html#authentication-context">Authentication &amp; Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ota-re.html#update-types">Update Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ota-re.html#safety-constraints">Safety Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ota-re.html#best-practices">Best Practices</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="backup.html">System Backup &amp; Recovery</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#backup-system-status">1. Backup System Status</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#get-backup-status">Get Backup Status</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security &amp; Access Control</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="security.html#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="security.html#security-status-overview">Security Status (Overview)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#identity-access-management-section-a">Identity &amp; Access Management (SECTION A)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#authentication-policies-section-b">Authentication Policies (SECTION B)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#api-keys-tokens-section-c">API Keys &amp; Tokens (SECTION C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#ssh-access-control-section-d">SSH Access Control (SECTION D)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#firewall-network-security-section-e">Firewall &amp; Network Security (SECTION E)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#certificate-management-section-f">Certificate Management (SECTION F)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#security-audit-log-section-g">Security Audit Log (SECTION G)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security.html#security-operations">Security Operations</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#backup-management-section-1">2. Backup Management (SECTION 1)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#get-backup-list">Get Backup List</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#create-backup">Create Backup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#download-backup">Download Backup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#delete-backup">Delete Backup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#get-backup-details">Get Backup Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#complete-user-flow">Complete User Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#authentication-context">Authentication &amp; Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html#support-information">Support Information</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#snapshot-management">3. Snapshot Management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#get-snapshots">Get Snapshots</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#create-snapshot">Create Snapshot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#restore-snapshot">Restore Snapshot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Licensing &amp; Subscriptions API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="license.html#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="license.html#license-overview-section-1">License Overview (SECTION 1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#feature-access-matrix-section-2">Feature Access Matrix (SECTION 2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#license-key-management-section-3">License Key Management (SECTION 3)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#cloud-subscription-section-4">Cloud Subscription (SECTION 4)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#trials-management-section-5">Trials Management (SECTION 5)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#license-renewal-options">License Renewal Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#license-logs-section-6">License Logs (SECTION 6)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#footer-actions">Footer Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="license.html#modal-actions">Modal Actions</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#scheduled-backups-section-2">4. Scheduled Backups (SECTION 2)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#get-schedules">Get Schedules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#update-schedule">Update Schedule</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#toggle-schedule-status">Toggle Schedule Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#complete-user-flow">Complete User Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#authentication-context">Authentication &amp; Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#license-types-features">License Types &amp; Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#trial-management">Trial Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#cloud-integration">Cloud Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#renewal-process">Renewal Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#support-information">Support Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#version-history">Version History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#deprecation-notes">Deprecation Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#rate-limiting">Rate Limiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#data-formats">Data Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#glossary">Glossary</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#disaster-recovery-operations">5. Disaster Recovery Operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#initiate-recovery">Initiate Recovery</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#get-recovery-preview">Get Recovery Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backup.html">Backup &amp; Recovery Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="backup.html#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backup.html#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#backup-system-status-overview">Backup System Status (Overview)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#backup-management-section-1">Backup Management (SECTION 1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#scheduled-backups-section-2">Scheduled Backups (SECTION 2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#snapshot-management-section-3">Snapshot Management (SECTION 3)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#disaster-recovery-section-4">Disaster Recovery (SECTION 4)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#import-export-operations-section-5">Import &amp; Export Operations (SECTION 5)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#storage-management-section-6">Storage Management (SECTION 6)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#cleanup-maintenance-section-7">Cleanup &amp; Maintenance (SECTION 7)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#live-progress-monitor-logs-section-8">Live Progress Monitor &amp; Logs (SECTION 8)</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#import-export-operations">6. Import &amp; Export Operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#import-backup-file">Import Backup File</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#validate-import-file">Validate Import File</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#export-configuration">Export Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backup.html#websocket-real-time-updates">WebSocket Real-time Updates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#connection-endpoint">Connection Endpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#authentication">Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup.html#message-types">Message Types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="backup.html#backup-progress">Backup Progress</a></li>
+<li class="toctree-l4"><a class="reference internal" href="backup.html#restore-progress">Restore Progress</a></li>
+<li class="toctree-l4"><a class="reference internal" href="backup.html#backup-completed">Backup Completed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="backup.html#storage-alert">Storage Alert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="backup.html#schedule-event">Schedule Event</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#storage-management">7. Storage Management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#get-storage-configuration">Get Storage Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#update-storage-configuration">Update Storage Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#sync-to-cloud">Sync to Cloud</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#cleanup-operations">8. Cleanup Operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#run-cleanup">Run Cleanup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#execute-cleanup">Execute Cleanup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backup.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backup.html#complete-user-flow">Complete User Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backup.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backup.html#authentication-context">Authentication &amp; Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backup.html#support-information">Support Information</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#progress-monitoring">9. Progress Monitoring</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#get-backup-progress">Get Backup Progress</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#get-restore-progress">Get Restore Progress</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#cancel-operation">Cancel Operation</a></li>
 </ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#reporting-statistics">10. Reporting &amp; Statistics</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#get-backup-statistics">Get Backup Statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#generate-report">Generate Report</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#websocket-api">11. WebSocket API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#real-time-backup-updates">Real-time Backup Updates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#backup-notifications">Backup Notifications</a></li>
-<li class="toctree-l3"><a class="reference internal" href="backup.html#system-health-updates">System Health Updates</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#missing-websocket-requirements">Missing WebSocket Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#error-responses">Error Responses</a></li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#authentication">Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="backup.html#versioning">Versioning</a></li>
-</ul>
-</li>
+<p class="caption" role="heading"><span class="caption-text">UNDER VALIDATION</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="data-retention.html">Data Retention API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="data-retention.html#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data-retention.html#base-url">Base URL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data-retention.html#authentication">Authentication</a></li>
 <li class="toctree-l2"><a class="reference internal" href="data-retention.html#storage-management-api">Storage Management API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#get-storage-status">Get Storage Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data-retention.html#refresh-storage-status">Refresh Storage Status</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#update-storage-thresholds">Update Storage Thresholds</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="data-retention.html#data-retention-policies-api">Data Retention Policies API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="data-retention.html#get-retention-policies">Get Retention Policies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data-retention.html#get-all-policies">Get All Policies</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#update-retention-policy">Update Retention Policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data-retention.html#get-policy-status">Get Policy Status</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#batch-update-policies">Batch Update Policies</a></li>
 </ul>
 </li>
@@ -428,6 +279,8 @@
 <li class="toctree-l2"><a class="reference internal" href="data-retention.html#purge-operations-api">Purge Operations API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#purge-old-data">Purge Old Data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#get-purge-progress">Get Purge Progress</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data-retention.html#clear-non-critical-data">Clear Non-Critical Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data-retention.html#clear-all-logs">Clear All Logs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#emergency-storage-cleanup">Emergency Storage Cleanup</a></li>
 </ul>
 </li>
@@ -438,11 +291,11 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="data-retention.html#export-diagnostics-api">Export &amp; Diagnostics API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#export-stored-data">Export Stored Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data-retention.html#export-logs">Export Logs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#run-storage-diagnostics">Run Storage Diagnostics</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="data-retention.html#manual-actions-api">Manual Actions API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="data-retention.html#clear-non-critical-data">Clear Non-Critical Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data-retention.html#system-actions-api">System Actions API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#full-storage-reset">Full Storage Reset</a></li>
 </ul>
 </li>
@@ -453,6 +306,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="data-retention.html#websocket-events">WebSocket Events</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#connection-endpoint">Connection Endpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data-retention.html#connection-status">Connection Status</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#message-types">Message Types</a></li>
 </ul>
 </li>
@@ -466,7 +320,7 @@
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#python-data-purge-operation">Python - Data Purge Operation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#python-export-data">Python - Export Data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="data-retention.html#javascript-real-time-monitoring">JavaScript - Real-time Monitoring</a></li>
-<li class="toctree-l3"><a class="reference internal" href="data-retention.html#javascript-retention-dashboard">JavaScript - Retention Dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="data-retention.html#javascript-retention-dashboard-integration">JavaScript - Retention Dashboard Integration</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="data-retention.html#best-practices">Best Practices</a><ul>
@@ -504,35 +358,17 @@
 <li class="toctree-l2"><a class="reference internal" href="diagnostics.html#authentication">Authentication</a></li>
 <li class="toctree-l2"><a class="reference internal" href="diagnostics.html#system-logs-api">System Logs API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#get-real-time-logs">Get Real-Time Logs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#websocket-log-stream">WebSocket Log Stream</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#connection-endpoint">Connection Endpoint</a></li>
-<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#client-messages">Client Messages</a></li>
-<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#server-messages">Server Messages</a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#export-logs">Export Logs</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="diagnostics.html#terminal-api">Terminal API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#establish-ssh-session">Establish SSH Session</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#websocket-terminal-access">WebSocket Terminal Access</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#id1">Connection Endpoint</a></li>
-<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#id2">Client Messages</a></li>
-<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#id3">Server Messages</a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#execute-command-directly">Execute Command Directly</a></li>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#command-history">Command History</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="diagnostics.html#system-monitoring-api">System Monitoring API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#get-system-metrics">Get System Metrics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#websocket-metrics-stream">WebSocket Metrics Stream</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#id4">Connection Endpoint</a></li>
-<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#id5">Client Messages</a></li>
-<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#id6">Server Messages</a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#rf-signal-monitoring">RF Signal Monitoring</a></li>
 </ul>
 </li>
@@ -564,13 +400,31 @@
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#reset-to-factory-defaults">Reset to Factory Defaults</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#audit-security-api">Audit &amp; Security API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#get-audit-log">Get Audit Log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#websocket-api">WebSocket API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#log-stream-websocket">Log Stream WebSocket</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#connection-endpoint">Connection Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#subscribe-message">Subscribe Message</a></li>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#log-message">Log Message</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#websocket-events">WebSocket Events</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#base-connection-endpoint">Base Connection Endpoint</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#event-types">Event Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#terminal-websocket">Terminal WebSocket</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#id1">Connection Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#send-command">Send Command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#terminal-output">Terminal Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#exit-notification">Exit Notification</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#metrics-websocket">Metrics WebSocket</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#id2">Connection Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#id3">Subscribe Message</a></li>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#metrics-update">Metrics Update</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#general-websocket-events">General WebSocket Events</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#id4">Connection Endpoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="diagnostics.html#event-types">Event Types</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="diagnostics.html#error-handling">Error Handling</a><ul>
@@ -580,39 +434,37 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="diagnostics.html#examples">Examples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#python-system-monitoring">Python - System Monitoring</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#python-terminal-operations">Python - Terminal Operations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#python-diagnostic-tools">Python - Diagnostic Tools</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#javascript-real-time-diagnostics">JavaScript - Real-time Diagnostics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#javascript-diagnostic-dashboard">JavaScript - Diagnostic Dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#javascript-real-time-monitoring">JavaScript - Real-time Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#python-complete-diagnostics-workflow">Python - Complete Diagnostics Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#javascript-dashboard-integration">JavaScript - Dashboard Integration</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="diagnostics.html#best-practices">Best Practices</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#system-monitoring">System Monitoring</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#terminal-operations">Terminal Operations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#diagnostic-tools">Diagnostic Tools</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="diagnostics.html#security-considerations">Security Considerations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#authentication-authorization">Authentication &amp; Authorization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#data-privacy">Data Privacy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#audit-compliance">Audit &amp; Compliance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#id5">Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#data-protection">Data Protection</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#rate-limiting">Rate Limiting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="diagnostics.html#system-requirements">System Requirements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#minimum-requirements">Minimum Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#performance-impact">Performance Impact</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#performance-considerations">Performance Considerations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#support-troubleshooting">Support &amp; Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#common-issues">Common Issues</a></li>
 <li class="toctree-l3"><a class="reference internal" href="diagnostics.html#getting-help">Getting Help</a></li>
-<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#common-solutions">Common Solutions</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#notes">Notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#compliance-notes">Compliance Notes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="diagnostics.html#versioning">Versioning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#support">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagnostics.html#changelog">Changelog</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="diagnostics.html#v1-0-0-2025-03-12"><strong>v1.0.0</strong> (2025-03-12)</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="loggar.html">Device-Level Logging API</a><ul>
@@ -622,66 +474,46 @@
 <li class="toctree-l2"><a class="reference internal" href="loggar.html#master-configuration-api">Master Configuration API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="loggar.html#get-global-logging-status">Get Global Logging Status</a></li>
 <li class="toctree-l3"><a class="reference internal" href="loggar.html#update-global-settings">Update Global Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-global-dashboard-data">Get Global Dashboard Data</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="loggar.html#category-management-api">Category Management API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#list-log-categories">List Log Categories</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-category-configuration">Get Category Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#update-category-configuration">Update Category Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#batch-update-categories">Batch Update Categories</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#enable-disable-category">Enable/Disable Category</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#category-specific-configuration">Category-Specific Configuration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#system-logs-configuration">System Logs Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#network-logs-configuration">Network Logs Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#can-bus-logs-configuration">CAN Bus Logs Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#modbus-logs-configuration">Modbus Logs Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#mqtt-logs-configuration">MQTT Logs Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#security-logs-configuration">Security Logs Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#list-log-categories-with-ui-data">List Log Categories with UI Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-category-configuration-for-ui">Get Category Configuration for UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#update-category-configuration-ui-format">Update Category Configuration (UI Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#batch-toggle-categories">Batch Toggle Categories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#apply-global-level-to-all-categories">Apply Global Level to All Categories</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="loggar.html#output-destinations-api">Output Destinations API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-output-destinations">Get Output Destinations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#configure-output-destination">Configure Output Destination</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#test-destination-connection">Test Destination Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-output-destinations-for-ui">Get Output Destinations for UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#configure-output-destination-ui-format">Configure Output Destination (UI Format)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="loggar.html#log-rotation-api">Log Rotation API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-rotation-configuration">Get Rotation Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#update-rotation-settings">Update Rotation Settings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#trigger-manual-rotation">Trigger Manual Rotation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-rotation-progress">Get Rotation Progress</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#log-statistics-api">Log Statistics API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-real-time-statistics">Get Real-Time Statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-historical-statistics">Get Historical Statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-error-statistics">Get Error Statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-rotation-configuration-for-ui">Get Rotation Configuration for UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#update-rotation-settings-ui-format">Update Rotation Settings (UI Format)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="loggar.html#log-operations-api">Log Operations API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#test-logging-configuration">Test Logging Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#restart-logging-service">Restart Logging Service</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#clear-log-files">Clear Log Files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#export-log-configuration">Export Log Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#import-log-configuration">Import Log Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#test-logging-configuration-ui-format">Test Logging Configuration (UI Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#trigger-manual-rotation-ui-format">Trigger Manual Rotation (UI Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#restart-logging-service-ui-format">Restart Logging Service (UI Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#save-all-configurations">Save All Configurations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#reset-to-default-configuration">Reset to Default Configuration</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#real-time-monitoring-api">Real-Time Monitoring API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#websocket-log-stream">WebSocket Log Stream</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="loggar.html#connection-endpoint">Connection Endpoint</a></li>
-<li class="toctree-l4"><a class="reference internal" href="loggar.html#connection-parameters">Connection Parameters</a></li>
-<li class="toctree-l4"><a class="reference internal" href="loggar.html#client-messages">Client Messages</a></li>
-<li class="toctree-l4"><a class="reference internal" href="loggar.html#server-messages">Server Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#gateway-management-api">Gateway Management API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#switch-gateway-context">Switch Gateway Context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-available-gateways">Get Available Gateways</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-active-log-streams">Get Active Log Streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#category-specific-configuration-api">Category-Specific Configuration API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-category-ui-configuration-template">Get Category UI Configuration Template</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#health-diagnostics-api">Health &amp; Diagnostics API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#get-logging-health-status">Get Logging Health Status</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#run-logging-diagnostics">Run Logging Diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#real-time-updates-api">Real-Time Updates API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#subscribe-to-configuration-updates">Subscribe to Configuration Updates</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="loggar.html#error-handling">Error Handling</a><ul>
@@ -690,135 +522,62 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="loggar.html#examples">Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#python-logging-configuration">Python - Logging Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#python-log-operations">Python - Log Operations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#javascript-real-time-log-monitoring">JavaScript - Real-time Log Monitoring</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#javascript-logging-dashboard">JavaScript - Logging Dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#javascript-complete-ui-integration">JavaScript - Complete UI Integration</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#best-practices">Best Practices</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#category-configuration">Category Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#destination-management">Destination Management</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#rotation-retention">Rotation &amp; Retention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#best-practices-for-ui-integration">Best Practices for UI Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#data-loading-strategy">Data Loading Strategy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#real-time-updates">Real-time Updates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#validation">Validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#performance-optimization">Performance Optimization</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#security-considerations">Security Considerations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#authentication-authorization">Authentication &amp; Authorization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#data-protection">Data Protection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#audit-compliance">Audit &amp; Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#security-considerations">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#common-issues">Common Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loggar.html#debugging-tools">Debugging Tools</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#system-requirements">System Requirements</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#minimum-requirements">Minimum Requirements</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#performance-considerations">Performance Considerations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#support-troubleshooting">Support &amp; Troubleshooting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#getting-help">Getting Help</a></li>
-<li class="toctree-l3"><a class="reference internal" href="loggar.html#common-solutions">Common Solutions</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#notes">Notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#compliance-notes">Compliance Notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="loggar.html#versioning">Versioning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="loggar.html#support">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#version-history">Version History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#compliance">Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#deprecation-policy">Deprecation Policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#rate-limiting">Rate Limiting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggar.html#license">License</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="automation.html">Scheduler &amp; Automation API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#base-url">Base URL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#authentication">Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#quick-reference">Quick Reference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#jobs-management-api">Jobs Management API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-all-jobs">Get All Jobs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#create-new-job">Create New Job</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-job-details">Get Job Details</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#update-job">Update Job</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#delete-job">Delete Job</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#toggle-job-status">Toggle Job Status</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-job-execution-history">Get Job Execution History</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-job-execution-logs">Get Job Execution Logs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="automation.html">Scheduler &amp; Automation Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="automation.html#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automation.html#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#system-status-overview">System Status (Overview)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#job-management-section-1">Job Management (SECTION 1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#job-configuration-section-2">Job Configuration (SECTION 2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#gateway-management-section-3">Gateway Management (SECTION 3)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#schedule-types-section-4">Schedule Types (SECTION 4)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#conflict-detection-section-5">Conflict Detection (SECTION 5)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#bulk-operations-section-6">Bulk Operations (SECTION 6)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#execution-history-section-7">Execution History (SECTION 7)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#live-monitoring-section-8">Live Monitoring (SECTION 8)</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#job-execution-api">Job Execution API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#run-job-immediately">Run Job Immediately</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-execution-status">Get Execution Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automation.html#websocket-real-time-updates">WebSocket Real-time Updates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#connection-endpoint">Connection Endpoint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#authentication">Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="automation.html#message-types">Message Types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="automation.html#job-started-event">Job Started Event</a></li>
+<li class="toctree-l4"><a class="reference internal" href="automation.html#job-completed-event">Job Completed Event</a></li>
+<li class="toctree-l4"><a class="reference internal" href="automation.html#job-failed-event">Job Failed Event</a></li>
+<li class="toctree-l4"><a class="reference internal" href="automation.html#schedule-execution-event">Schedule Execution Event</a></li>
+<li class="toctree-l4"><a class="reference internal" href="automation.html#resource-alert-event">Resource Alert Event</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#gateway-management-api">Gateway Management API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-available-gateways">Get Available Gateways</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-gateway-jobs">Get Gateway Jobs</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#conflict-detection-api">Conflict Detection API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#check-for-conflicts">Check for Conflicts</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-system-resource-usage">Get System Resource Usage</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#bulk-operations-api">Bulk Operations API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#run-all-jobs">Run All Jobs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#disable-all-jobs">Disable All Jobs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#reset-all-jobs">Reset All Jobs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#export-jobs-configuration">Export Jobs Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#import-jobs-configuration">Import Jobs Configuration</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#monitoring-analytics-api">Monitoring &amp; Analytics API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-scheduler-statistics">Get Scheduler Statistics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-job-performance-metrics">Get Job Performance Metrics</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#tag-management-api">Tag Management API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-all-tags">Get All Tags</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#get-jobs-by-tag">Get Jobs by Tag</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#websocket-events-api">WebSocket Events API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#job-started-event">Job Started Event</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#job-completed-event">Job Completed Event</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#job-failed-event">Job Failed Event</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#schedule-types-configuration">Schedule Types Configuration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#interval-schedule">Interval Schedule</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#daily-schedule">Daily Schedule</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#weekly-schedule">Weekly Schedule</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#monthly-schedule">Monthly Schedule</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#cron-schedule">Cron Schedule</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#sunrise-sunset-schedule">Sunrise/Sunset Schedule</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#action-types-configuration">Action Types Configuration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#publish-action">Publish Action</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#log-action">Log Action</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#output-action">Output Action</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#system-action">System Action</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#file-action">File Action</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#rule-action">Rule Action</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#error-handling">Error Handling</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#common-error-codes">Common Error Codes</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#performance-limits">Performance Limits</a></li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#examples">Examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#python-create-daily-job">Python - Create Daily Job</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#javascript-websocket-monitoring">JavaScript - WebSocket Monitoring</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#python-bulk-operations">Python - Bulk Operations</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#api-versioning">API Versioning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#deprecation-policy">Deprecation Policy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#changelog">Changelog</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#v1-2-0-2025-03-15">v1.2.0 (2025-03-15)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#v1-1-0-2025-02-28">v1.1.0 (2025-02-28)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#v1-0-0-2025-01-15">v1.0.0 (2025-01-15)</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="automation.html#support">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automation.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automation.html#complete-user-flow">Complete User Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automation.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automation.html#authentication-context">Authentication &amp; Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automation.html#support-information">Support Information</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="alerts.html">Alert Messages API</a><ul>
@@ -1118,79 +877,75 @@
              
   <section id="device-management-api">
 <h1>Device Management API<a class="headerlink" href="#device-management-api" title="Link to this heading">¶</a></h1>
-<p>APIs for managing devices, groups, and device operations.</p>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<p>This API handles all device management operations including device CRUD, scanning, grouping, and device diagnostics.</p>
-</section>
-<section id="endpoints">
-<h2>Endpoints<a class="headerlink" href="#endpoints" title="Link to this heading">¶</a></h2>
-<section id="get-device-management-page">
-<h3>Get Device Management Page<a class="headerlink" href="#get-device-management-page" title="Link to this heading">¶</a></h3>
+<p>This document describes the device management page and its related API endpoints for managing industrial devices, groups, and operations.</p>
+<section id="page-route-frontend">
+<h2>Page Route (Frontend)<a class="headerlink" href="#page-route-frontend" title="Link to this heading">¶</a></h2>
 <dl class="http get">
 <dt class="sig sig-object http" id="get--device-management">
 <span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/device-management</span></span><a class="headerlink" href="#get--device-management" title="Link to this definition">¶</a></dt>
-<dd><p>Load entire device management page with devices, groups, and statistics.</p>
+<dd><p><strong>Description</strong>: Renders the complete device management page with all devices, groups, and statistics embedded in the HTML.</p>
 <p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Cookie: session_token=&lt;token&gt;</span>
 </pre></div>
 </div>
 <p><strong>Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">text/html</span>
 
-<span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;devices&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;loadcell-001&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;LoadCell-Front&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Modbus RTU&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Slave 01&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Online&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;last_poll&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2 sec ago&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;firmware&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.2.4&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;group_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;group_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Crane-01&quot;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">],</span>
-<span class="w">  </span><span class="nt">&quot;groups&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Crane-01&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;device_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;device_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;loadcell-001&quot;</span><span class="p">]</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">],</span>
-<span class="w">  </span><span class="nt">&quot;statistics&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;total_devices&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;online&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;offline&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Device Management<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;app&quot;</span> <span class="na">data-devices</span><span class="o">=</span><span class="s">&#39;[...]&#39;</span> <span class="na">data-groups</span><span class="o">=</span><span class="s">&#39;[...]&#39;</span> <span class="na">data-statistics</span><span class="o">=</span><span class="s">&#39;{...}&#39;</span><span class="p">&gt;</span>
+    <span class="cm">&lt;!-- Device management page with:</span>
+<span class="cm">         - Device list table</span>
+<span class="cm">         - Group management panel</span>
+<span class="cm">         - Device actions (add, edit, delete, test)</span>
+<span class="cm">         - Scanning interface</span>
+<span class="cm">         - Import/export options</span>
+<span class="cm">         - Wireless device pairing</span>
+<span class="cm">    --&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p><strong>How it works</strong>:
+- Server renders the HTML page
+- All device data, groups, and statistics are embedded in the page
+- JavaScript reads this data and renders the device management interface
+- No separate API call needed on initial page load</p>
+<p><strong>Error Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Found</span>
+<span class="na">Location</span><span class="o">:</span> <span class="l">/login</span>
 </pre></div>
 </div>
 </dd></dl>
 
 </section>
-<section id="create-new-device">
-<h3>Create New Device<a class="headerlink" href="#create-new-device" title="Link to this heading">¶</a></h3>
+<section id="api-endpoints-backend">
+<h2>API Endpoints (Backend)<a class="headerlink" href="#api-endpoints-backend" title="Link to this heading">¶</a></h2>
+<p>These endpoints handle all device operations triggered from the page.</p>
+<section id="device-operations">
+<h3>Device Operations<a class="headerlink" href="#device-operations" title="Link to this heading">¶</a></h3>
 <dl class="http post">
-<dt class="sig sig-object http" id="post--device-management-devices">
-<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/devices</span></span><a class="headerlink" href="#post--device-management-devices" title="Link to this definition">¶</a></dt>
-<dd><p>Add new device (Add Device button).</p>
+<dt class="sig sig-object http" id="post--api-device-management-devices">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/device-management/devices</span></span><a class="headerlink" href="#post--api-device-management-devices" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Add new device (when user clicks “Add Device”).</p>
 <p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Cookie: session_token=&lt;token&gt;</span>
 <span class="err">Content-Type: application/json</span>
 </pre></div>
 </div>
 <p><strong>Request</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/device-management/devices</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/api/device-management/devices</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">session_token=&lt;token&gt;</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
 <span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;New Device&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;New Load Cell&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;modbus-rtu&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;group_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -1198,13 +953,12 @@
 <span class="w">    </span><span class="nt">&quot;baud_rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9600</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;parity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;None&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;stop_bits&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;polling_interval&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span>
+<span class="w">    </span><span class="nt">&quot;polling_interval&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Response</strong>:</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1212,51 +966,30 @@
 <span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;device-123&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;New Device&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;New Load Cell&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Modbus RTU&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Slave 01&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Online&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;last_poll&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Just now&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;group_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Online&quot;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </dd></dl>
 
-</section>
-<section id="update-device">
-<h3>Update Device<a class="headerlink" href="#update-device" title="Link to this heading">¶</a></h3>
 <dl class="http put">
-<dt class="sig sig-object http" id="put--device-management-devices-device_id">
-<span class="sig-name descname"><span class="pre">PUT</span> </span><span class="sig-name descname"><span class="pre">/device-management/devices/{device_id}</span></span><a class="headerlink" href="#put--device-management-devices-device_id" title="Link to this definition">¶</a></dt>
-<dd><p>Edit device configuration (Edit Device button).</p>
+<dt class="sig sig-object http" id="put--api-device-management-devices-device_id">
+<span class="sig-name descname"><span class="pre">PUT</span> </span><span class="sig-name descname"><span class="pre">/api/device-management/devices/{device_id}</span></span><a class="headerlink" href="#put--api-device-management-devices-device_id" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Edit device configuration (when user clicks “Edit” on a device).</p>
 <p><strong>Path Parameters</strong>:</p>
 <ul class="simple">
 <li><p><strong>device_id</strong> (string): Device identifier</p></li>
 </ul>
 <p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Cookie: session_token=&lt;token&gt;</span>
 <span class="err">Content-Type: application/json</span>
 </pre></div>
 </div>
-<p><strong>Request</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">PUT</span> <span class="nn">/device-management/devices/loadcell-001</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-
-<span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Updated Device&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;modbus-rtu&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;group_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;slave_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;baud_rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">19200</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p><strong>Response</strong>:</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1265,31 +998,26 @@
 <span class="w">  </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;loadcell-001&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Updated Device&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Modbus RTU&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Slave 02&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Online&quot;</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Modbus RTU&quot;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </dd></dl>
 
-</section>
-<section id="delete-device">
-<h3>Delete Device<a class="headerlink" href="#delete-device" title="Link to this heading">¶</a></h3>
 <dl class="http delete">
-<dt class="sig sig-object http" id="delete--device-management-devices-device_id">
-<span class="sig-name descname"><span class="pre">DELETE</span> </span><span class="sig-name descname"><span class="pre">/device-management/devices/{device_id}</span></span><a class="headerlink" href="#delete--device-management-devices-device_id" title="Link to this definition">¶</a></dt>
-<dd><p>Remove device (Delete Device button).</p>
+<dt class="sig sig-object http" id="delete--api-device-management-devices-device_id">
+<span class="sig-name descname"><span class="pre">DELETE</span> </span><span class="sig-name descname"><span class="pre">/api/device-management/devices/{device_id}</span></span><a class="headerlink" href="#delete--api-device-management-devices-device_id" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Remove device (when user clicks “Delete” on a device).</p>
 <p><strong>Path Parameters</strong>:</p>
 <ul class="simple">
 <li><p><strong>device_id</strong> (string): Device identifier</p></li>
 </ul>
 <p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Cookie: session_token=&lt;token&gt;</span>
 </pre></div>
 </div>
-<p><strong>Response</strong>:</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1302,21 +1030,17 @@
 </dd></dl>
 
 </section>
-<section id="get-device-details">
-<h3>Get Device Details<a class="headerlink" href="#get-device-details" title="Link to this heading">¶</a></h3>
+<section id="device-actions">
+<h3>Device Actions<a class="headerlink" href="#device-actions" title="Link to this heading">¶</a></h3>
 <dl class="http get">
-<dt class="sig sig-object http" id="get--device-management-devices-device_id-details">
-<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/device-management/devices/{device_id}/details</span></span><a class="headerlink" href="#get--device-management-devices-device_id-details" title="Link to this definition">¶</a></dt>
-<dd><p>View detailed device information (View Details button).</p>
+<dt class="sig sig-object http" id="get--api-device-management-devices-device_id-details">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/device-management/devices/{device_id}/details</span></span><a class="headerlink" href="#get--api-device-management-devices-device_id-details" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Get detailed device information (when user clicks “View Details”).</p>
 <p><strong>Path Parameters</strong>:</p>
 <ul class="simple">
 <li><p><strong>device_id</strong> (string): Device identifier</p></li>
 </ul>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-</pre></div>
-</div>
-<p><strong>Response</strong>:</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1324,39 +1048,22 @@
 <span class="w">  </span><span class="nt">&quot;device_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;loadcell-001&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;LoadCell-Front&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Modbus RTU&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Slave 01&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Online&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;last_response&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2 sec ago&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;retries&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;signal_strength&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;N/A (Wired)&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;firmware_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.2.4&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;group&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Crane-01&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;calibration&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;scale_factor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.000</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;zero_offset&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;test_reading&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.34 tons&quot;</span>
-<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nt">&quot;last_response&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2 sec ago&quot;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </dd></dl>
 
-</section>
-<section id="test-device-connection">
-<h3>Test Device Connection<a class="headerlink" href="#test-device-connection" title="Link to this heading">¶</a></h3>
 <dl class="http post">
-<dt class="sig sig-object http" id="post--device-management-devices-device_id-test">
-<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/devices/{device_id}/test</span></span><a class="headerlink" href="#post--device-management-devices-device_id-test" title="Link to this definition">¶</a></dt>
-<dd><p>Ping device to test connectivity (Ping Device button).</p>
+<dt class="sig sig-object http" id="post--api-device-management-devices-device_id-test">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/device-management/devices/{device_id}/test</span></span><a class="headerlink" href="#post--api-device-management-devices-device_id-test" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Ping device to test connectivity (when user clicks “Ping Device”).</p>
 <p><strong>Path Parameters</strong>:</p>
 <ul class="simple">
 <li><p><strong>device_id</strong> (string): Device identifier</p></li>
 </ul>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-</pre></div>
-</div>
-<p><strong>Response</strong>:</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1369,25 +1076,17 @@
 </div>
 </dd></dl>
 
-</section>
-<section id="disable-enable-device">
-<h3>Disable/Enable Device<a class="headerlink" href="#disable-enable-device" title="Link to this heading">¶</a></h3>
 <dl class="http post">
-<dt class="sig sig-object http" id="post--device-management-devices-device_id-disable">
-<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/devices/{device_id}/disable</span></span><a class="headerlink" href="#post--device-management-devices-device_id-disable" title="Link to this definition">¶</a></dt>
-<dd><p>Disable or enable a device (Disable Device button).</p>
+<dt class="sig sig-object http" id="post--api-device-management-devices-device_id-disable">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/device-management/devices/{device_id}/disable</span></span><a class="headerlink" href="#post--api-device-management-devices-device_id-disable" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Disable or enable a device (when user toggles device status).</p>
 <p><strong>Path Parameters</strong>:</p>
 <ul class="simple">
 <li><p><strong>device_id</strong> (string): Device identifier</p></li>
 </ul>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-<span class="err">Content-Type: application/json</span>
-</pre></div>
-</div>
 <p><strong>Request</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/device-management/devices/loadcell-001/disable</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/api/device-management/devices/loadcell-001/disable</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">session_token=&lt;token&gt;</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
 <span class="p">{</span>
@@ -1395,7 +1094,7 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Response</strong>:</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1407,22 +1106,15 @@
 </div>
 </dd></dl>
 
-</section>
-<section id="duplicate-device">
-<h3>Duplicate Device<a class="headerlink" href="#duplicate-device" title="Link to this heading">¶</a></h3>
 <dl class="http post">
-<dt class="sig sig-object http" id="post--device-management-devices-device_id-duplicate">
-<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/devices/{device_id}/duplicate</span></span><a class="headerlink" href="#post--device-management-devices-device_id-duplicate" title="Link to this definition">¶</a></dt>
-<dd><p>Create a copy of device configuration (Duplicate button).</p>
+<dt class="sig sig-object http" id="post--api-device-management-devices-device_id-duplicate">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/device-management/devices/{device_id}/duplicate</span></span><a class="headerlink" href="#post--api-device-management-devices-device_id-duplicate" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Create a copy of device configuration (when user clicks “Duplicate”).</p>
 <p><strong>Path Parameters</strong>:</p>
 <ul class="simple">
 <li><p><strong>device_id</strong> (string): Device identifier</p></li>
 </ul>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-</pre></div>
-</div>
-<p><strong>Response</strong>:</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1432,9 +1124,7 @@
 <span class="w">  </span><span class="nt">&quot;new_device&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;device-copy-123&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;LoadCell-Front (Copy)&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Modbus RTU&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Slave 02&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Online&quot;</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Modbus RTU&quot;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1442,31 +1132,24 @@
 </dd></dl>
 
 </section>
-<section id="scan-for-devices">
-<h3>Scan for Devices<a class="headerlink" href="#scan-for-devices" title="Link to this heading">¶</a></h3>
+<section id="scanning-operations">
+<h3>Scanning Operations<a class="headerlink" href="#scanning-operations" title="Link to this heading">¶</a></h3>
 <dl class="http post">
-<dt class="sig sig-object http" id="post--device-management-scan">
-<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/scan</span></span><a class="headerlink" href="#post--device-management-scan" title="Link to this definition">¶</a></dt>
-<dd><p>Scan network for devices (Scan Networks button).</p>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-<span class="err">Content-Type: application/json</span>
-</pre></div>
-</div>
+<dt class="sig sig-object http" id="post--api-device-management-scan">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/device-management/scan</span></span><a class="headerlink" href="#post--api-device-management-scan" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Scan network for devices (when user clicks “Scan Networks”).</p>
 <p><strong>Request</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/device-management/scan</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/api/device-management/scan</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">session_token=&lt;token&gt;</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
 <span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;scan_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;modbus-rtu&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;auto_add&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;overwrite&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;scan_range&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Default&quot;</span>
+<span class="w">  </span><span class="nt">&quot;auto_add&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Response</strong>:</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1475,8 +1158,7 @@
 <span class="w">  </span><span class="nt">&quot;devices_found&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">      </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Slave 01&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Modbus RTU&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;name_suggestion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Load Cell&quot;</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Modbus RTU&quot;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
@@ -1484,22 +1166,15 @@
 </div>
 </dd></dl>
 
-</section>
-<section id="check-scan-status">
-<h3>Check Scan Status<a class="headerlink" href="#check-scan-status" title="Link to this heading">¶</a></h3>
 <dl class="http get">
-<dt class="sig sig-object http" id="get--device-management-scan-scan_id-status">
-<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/device-management/scan/{scan_id}/status</span></span><a class="headerlink" href="#get--device-management-scan-scan_id-status" title="Link to this definition">¶</a></dt>
-<dd><p>Monitor scan progress.</p>
+<dt class="sig sig-object http" id="get--api-device-management-scan-scan_id-status">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/device-management/scan/{scan_id}/status</span></span><a class="headerlink" href="#get--api-device-management-scan-scan_id-status" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Monitor scan progress (polled by JavaScript while scanning).</p>
 <p><strong>Path Parameters</strong>:</p>
 <ul class="simple">
 <li><p><strong>scan_id</strong> (string): Scan job identifier</p></li>
 </ul>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-</pre></div>
-</div>
-<p><strong>Response</strong>:</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1507,25 +1182,17 @@
 <span class="w">  </span><span class="nt">&quot;scan_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;scan-123&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;completed&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;progress&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;devices_found&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;devices_added&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">  </span><span class="nt">&quot;devices_found&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </dd></dl>
 
-</section>
-<section id="scan-wireless-devices">
-<h3>Scan Wireless Devices<a class="headerlink" href="#scan-wireless-devices" title="Link to this heading">¶</a></h3>
 <dl class="http post">
-<dt class="sig sig-object http" id="post--device-management-wireless-scan">
-<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/wireless/scan</span></span><a class="headerlink" href="#post--device-management-wireless-scan" title="Link to this definition">¶</a></dt>
-<dd><p>Scan for wireless devices (Scan button in Wireless config).</p>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-</pre></div>
-</div>
-<p><strong>Response</strong>:</p>
+<dt class="sig sig-object http" id="post--api-device-management-wireless-scan">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/device-management/wireless/scan</span></span><a class="headerlink" href="#post--api-device-management-wireless-scan" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Scan for wireless devices (when user clicks “Scan” in Wireless section).</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1543,17 +1210,13 @@
 </dd></dl>
 
 </section>
-<section id="get-device-groups">
-<h3>Get Device Groups<a class="headerlink" href="#get-device-groups" title="Link to this heading">¶</a></h3>
+<section id="group-management">
+<h3>Group Management<a class="headerlink" href="#group-management" title="Link to this heading">¶</a></h3>
 <dl class="http get">
-<dt class="sig sig-object http" id="get--device-management-groups">
-<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/device-management/groups</span></span><a class="headerlink" href="#get--device-management-groups" title="Link to this definition">¶</a></dt>
-<dd><p>Retrieve all device groups.</p>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-</pre></div>
-</div>
-<p><strong>Response</strong>:</p>
+<dt class="sig sig-object http" id="get--api-device-management-groups">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/device-management/groups</span></span><a class="headerlink" href="#get--api-device-management-groups" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Get all device groups (for dropdowns and group management).</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1571,21 +1234,13 @@
 </div>
 </dd></dl>
 
-</section>
-<section id="create-device-group">
-<h3>Create Device Group<a class="headerlink" href="#create-device-group" title="Link to this heading">¶</a></h3>
 <dl class="http post">
-<dt class="sig sig-object http" id="post--device-management-groups">
-<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/groups</span></span><a class="headerlink" href="#post--device-management-groups" title="Link to this definition">¶</a></dt>
-<dd><p>Add new device group (Add New Group button).</p>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-<span class="err">Content-Type: application/json</span>
-</pre></div>
-</div>
+<dt class="sig sig-object http" id="post--api-device-management-groups">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/device-management/groups</span></span><a class="headerlink" href="#post--api-device-management-groups" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Add new device group (when user clicks “Add New Group”).</p>
 <p><strong>Request</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/device-management/groups</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/api/device-management/groups</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">session_token=&lt;token&gt;</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
 <span class="p">{</span>
@@ -1594,7 +1249,7 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Response</strong>:</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1612,34 +1267,15 @@
 </div>
 </dd></dl>
 
-</section>
-<section id="update-device-group">
-<h3>Update Device Group<a class="headerlink" href="#update-device-group" title="Link to this heading">¶</a></h3>
 <dl class="http put">
-<dt class="sig sig-object http" id="put--device-management-groups-group_id">
-<span class="sig-name descname"><span class="pre">PUT</span> </span><span class="sig-name descname"><span class="pre">/device-management/groups/{group_id}</span></span><a class="headerlink" href="#put--device-management-groups-group_id" title="Link to this definition">¶</a></dt>
-<dd><p>Edit device group.</p>
+<dt class="sig sig-object http" id="put--api-device-management-groups-group_id">
+<span class="sig-name descname"><span class="pre">PUT</span> </span><span class="sig-name descname"><span class="pre">/api/device-management/groups/{group_id}</span></span><a class="headerlink" href="#put--api-device-management-groups-group_id" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Edit device group.</p>
 <p><strong>Path Parameters</strong>:</p>
 <ul class="simple">
 <li><p><strong>group_id</strong> (integer): Group identifier</p></li>
 </ul>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-<span class="err">Content-Type: application/json</span>
-</pre></div>
-</div>
-<p><strong>Request</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">PUT</span> <span class="nn">/device-management/groups/1</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-
-<span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Crane-01 Updated&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;darkblue&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p><strong>Response</strong>:</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1651,22 +1287,15 @@
 </div>
 </dd></dl>
 
-</section>
-<section id="delete-device-group">
-<h3>Delete Device Group<a class="headerlink" href="#delete-device-group" title="Link to this heading">¶</a></h3>
 <dl class="http delete">
-<dt class="sig sig-object http" id="delete--device-management-groups-group_id">
-<span class="sig-name descname"><span class="pre">DELETE</span> </span><span class="sig-name descname"><span class="pre">/device-management/groups/{group_id}</span></span><a class="headerlink" href="#delete--device-management-groups-group_id" title="Link to this definition">¶</a></dt>
-<dd><p>Remove device group.</p>
+<dt class="sig sig-object http" id="delete--api-device-management-groups-group_id">
+<span class="sig-name descname"><span class="pre">DELETE</span> </span><span class="sig-name descname"><span class="pre">/api/device-management/groups/{group_id}</span></span><a class="headerlink" href="#delete--api-device-management-groups-group_id" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Remove device group.</p>
 <p><strong>Path Parameters</strong>:</p>
 <ul class="simple">
 <li><p><strong>group_id</strong> (integer): Group identifier</p></li>
 </ul>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-</pre></div>
-</div>
-<p><strong>Response</strong>:</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1678,25 +1307,17 @@
 </div>
 </dd></dl>
 
-</section>
-<section id="assign-devices-to-group">
-<h3>Assign Devices to Group<a class="headerlink" href="#assign-devices-to-group" title="Link to this heading">¶</a></h3>
 <dl class="http post">
-<dt class="sig sig-object http" id="post--device-management-groups-group_id-assign-devices">
-<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/groups/{group_id}/assign-devices</span></span><a class="headerlink" href="#post--device-management-groups-group_id-assign-devices" title="Link to this definition">¶</a></dt>
-<dd><p>Assign multiple devices to a group (Assign Devices modal).</p>
+<dt class="sig sig-object http" id="post--api-device-management-groups-group_id-assign-devices">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/device-management/groups/{group_id}/assign-devices</span></span><a class="headerlink" href="#post--api-device-management-groups-group_id-assign-devices" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Assign multiple devices to a group (when user uses “Assign Devices” modal).</p>
 <p><strong>Path Parameters</strong>:</p>
 <ul class="simple">
 <li><p><strong>group_id</strong> (integer): Group identifier</p></li>
 </ul>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-<span class="err">Content-Type: application/json</span>
-</pre></div>
-</div>
 <p><strong>Request</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/device-management/groups/1/assign-devices</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/api/device-management/groups/1/assign-devices</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">session_token=&lt;token&gt;</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
 <span class="p">{</span>
@@ -1704,7 +1325,7 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Response</strong>:</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1718,94 +1339,58 @@
 </dd></dl>
 
 </section>
-<section id="import-devices-from-csv">
-<h3>Import Devices from CSV<a class="headerlink" href="#import-devices-from-csv" title="Link to this heading">¶</a></h3>
+<section id="import-export-operations">
+<h3>Import/Export Operations<a class="headerlink" href="#import-export-operations" title="Link to this heading">¶</a></h3>
 <dl class="http post">
-<dt class="sig sig-object http" id="post--device-management-import">
-<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/import</span></span><a class="headerlink" href="#post--device-management-import" title="Link to this definition">¶</a></dt>
-<dd><p>Import devices from CSV file.</p>
+<dt class="sig sig-object http" id="post--api-device-management-import">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/device-management/import</span></span><a class="headerlink" href="#post--api-device-management-import" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Import devices from CSV file (when user uploads CSV).</p>
 <p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Cookie: session_token=&lt;token&gt;</span>
 <span class="err">Content-Type: multipart/form-data</span>
 </pre></div>
 </div>
-<p><strong>Request</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/device-management/import</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">multipart/form-data</span>
-<span class="na">Content-Disposition</span><span class="o">:</span> <span class="l">form-data; name=&quot;file&quot;; filename=&quot;devices.csv&quot;</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">text/csv</span>
-</pre></div>
-</div>
-<p><strong>Response</strong>:</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
 <span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;devices_added&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;imported_devices&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;device-123&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Imported Device&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Modbus RTU&quot;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">]</span>
+<span class="w">  </span><span class="nt">&quot;devices_added&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </dd></dl>
 
-</section>
-<section id="export-devices-to-csv">
-<h3>Export Devices to CSV<a class="headerlink" href="#export-devices-to-csv" title="Link to this heading">¶</a></h3>
 <dl class="http post">
-<dt class="sig sig-object http" id="post--device-management-export">
-<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/export</span></span><a class="headerlink" href="#post--device-management-export" title="Link to this definition">¶</a></dt>
-<dd><p>Export devices to CSV file (Export to CSV button).</p>
+<dt class="sig sig-object http" id="post--api-device-management-export">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/device-management/export</span></span><a class="headerlink" href="#post--api-device-management-export" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Export devices to CSV file (when user clicks “Export to CSV”).</p>
 <p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-<span class="err">Content-Type: application/json</span>
-</pre></div>
-</div>
-<p><strong>Request</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/device-management/export</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-
-<span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;include_config&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;include_timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
-<span class="p">}</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Cookie: session_token=&lt;token&gt;</span>
 </pre></div>
 </div>
 <p><strong>Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">text/csv</span>
-<span class="na">Content-Disposition</span><span class="o">:</span> <span class="l">attachment; filename=&quot;devices_export_20250312.csv&quot;</span>
+<span class="na">Content-Disposition</span><span class="o">:</span> <span class="l">attachment; filename=&quot;devices_export.csv&quot;</span>
 
 id,name,type,address,status
 loadcell-001,LoadCell-Front,Modbus RTU,Slave 01,Online
-...
 </pre></div>
 </div>
 </dd></dl>
 
 </section>
-<section id="pair-wireless-device">
-<h3>Pair Wireless Device<a class="headerlink" href="#pair-wireless-device" title="Link to this heading">¶</a></h3>
+<section id="wireless-operations">
+<h3>Wireless Operations<a class="headerlink" href="#wireless-operations" title="Link to this heading">¶</a></h3>
 <dl class="http post">
-<dt class="sig sig-object http" id="post--device-management-wireless-pair">
-<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/device-management/wireless/pair</span></span><a class="headerlink" href="#post--device-management-wireless-pair" title="Link to this definition">¶</a></dt>
-<dd><p>Pair with wireless device (Start Pairing button).</p>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-<span class="err">Content-Type: application/json</span>
-</pre></div>
-</div>
+<dt class="sig sig-object http" id="post--api-device-management-wireless-pair">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/device-management/wireless/pair</span></span><a class="headerlink" href="#post--api-device-management-wireless-pair" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Pair with wireless device (when user clicks “Start Pairing”).</p>
 <p><strong>Request</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/device-management/wireless/pair</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;token&gt;</span>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/api/device-management/wireless/pair</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">session_token=&lt;token&gt;</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
 <span class="p">{</span>
@@ -1813,7 +1398,7 @@ loadcell-001,LoadCell-Front,Modbus RTU,Slave 01,Online
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Response</strong>:</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1827,21 +1412,17 @@ loadcell-001,LoadCell-Front,Modbus RTU,Slave 01,Online
 </dd></dl>
 
 </section>
-<section id="get-device-packets">
-<h3>Get Device Packets<a class="headerlink" href="#get-device-packets" title="Link to this heading">¶</a></h3>
+<section id="diagnostics">
+<h3>Diagnostics<a class="headerlink" href="#diagnostics" title="Link to this heading">¶</a></h3>
 <dl class="http get">
-<dt class="sig sig-object http" id="get--device-management-devices-device_id-packets">
-<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/device-management/devices/{device_id}/packets</span></span><a class="headerlink" href="#get--device-management-devices-device_id-packets" title="Link to this definition">¶</a></dt>
-<dd><p>View last 10 communication packets (View Last 10 Packets button).</p>
+<dt class="sig sig-object http" id="get--api-device-management-devices-device_id-packets">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/device-management/devices/{device_id}/packets</span></span><a class="headerlink" href="#get--api-device-management-devices-device_id-packets" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: View last 10 communication packets (when user clicks “View Last 10 Packets”).</p>
 <p><strong>Path Parameters</strong>:</p>
 <ul class="simple">
 <li><p><strong>device_id</strong> (string): Device identifier</p></li>
 </ul>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-</pre></div>
-</div>
-<p><strong>Response</strong>:</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1851,11 +1432,6 @@ loadcell-001,LoadCell-Front,Modbus RTU,Slave 01,Online
 <span class="w">      </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-03-12T10:02:01Z&quot;</span><span class="p">,</span>
 <span class="w">      </span><span class="nt">&quot;direction&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tx&quot;</span><span class="p">,</span>
 <span class="w">      </span><span class="nt">&quot;data_hex&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01 03 00 10 00 02 C4 0B&quot;</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-03-12T10:02:01Z&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;direction&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rx&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;data_hex&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01 03 04 00 12 01 1A 69 85&quot;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
@@ -1865,10 +1441,103 @@ loadcell-001,LoadCell-Front,Modbus RTU,Slave 01,Online
 
 </section>
 </section>
+<section id="route-summary">
+<h2>Route Summary<a class="headerlink" href="#route-summary" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Device Management Routes</span><a class="headerlink" href="#id1" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 50.0%" />
+<col style="width: 10.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Method</p></th>
+<th class="head"><p>Route &amp; Purpose</p></th>
+<th class="head"><p>Auth</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Page</p></td>
+<td><p>GET</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/device-management</span></code> - Main device management page</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>API</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/device-management/devices</span></code> - Add device</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>API</p></td>
+<td><p>PUT</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/device-management/devices/{id}</span></code> - Edit device</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>API</p></td>
+<td><p>DELETE</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/device-management/devices/{id}</span></code> - Delete device</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>API</p></td>
+<td><p>GET</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/device-management/devices/{id}/details</span></code> - View details</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>API</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/device-management/devices/{id}/test</span></code> - Ping device</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>API</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/device-management/scan</span></code> - Scan for devices</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>API</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/device-management/groups</span></code> - Add group</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>API</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/device-management/import</span></code> - Import CSV</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>API</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/device-management/export</span></code> - Export CSV</p></td>
+<td><p>Yes</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="complete-user-flow">
+<h2>Complete User Flow<a class="headerlink" href="#complete-user-flow" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>User goes to page</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/device-management</span></code>
+- Server renders HTML with embedded device data
+- Page shows device table, groups panel, action buttons</p></li>
+<li><p><strong>User adds device</strong>:
+- Clicks “Add Device” → opens modal
+- Fills form → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/device-management/devices</span></code>
+- New device appears in table</p></li>
+<li><p><strong>User scans for devices</strong>:
+- Clicks “Scan Networks” → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/device-management/scan</span></code>
+- Page polls <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/device-management/scan/{id}/status</span></code>
+- Shows found devices in results panel</p></li>
+<li><p><strong>User manages groups</strong>:
+- Clicks “Add Group” → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/device-management/groups</span></code>
+- Drags devices to group → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/device-management/groups/{id}/assign-devices</span></code></p></li>
+<li><p><strong>User exports data</strong>:
+- Clicks “Export CSV” → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/device-management/export</span></code>
+- Browser downloads CSV file</p></li>
+</ol>
+</section>
 <section id="error-codes">
 <h2>Error Codes<a class="headerlink" href="#error-codes" title="Link to this heading">¶</a></h2>
-<table class="docutils align-default" id="id1">
-<caption><span class="caption-text">Device Management Errors</span><a class="headerlink" href="#id1" title="Link to this table">¶</a></caption>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Device Management Error Codes</span><a class="headerlink" href="#id2" title="Link to this table">¶</a></caption>
 <colgroup>
 <col style="width: 25.0%" />
 <col style="width: 75.0%" />
@@ -1906,203 +1575,16 @@ loadcell-001,LoadCell-Front,Modbus RTU,Slave 01,Online
 </tbody>
 </table>
 </section>
-<section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h2>
-<section id="python-create-device">
-<h3>Python - Create Device<a class="headerlink" href="#python-create-device" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
-
-<span class="c1"># Create new Modbus device</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer your_token&quot;</span><span class="p">}</span>
-
-<span class="n">device_config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;New Load Cell&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;modbus-rtu&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;group_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;slave_address&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="s2">&quot;baud_rate&quot;</span><span class="p">:</span> <span class="mi">9600</span><span class="p">,</span>
-        <span class="s2">&quot;parity&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;stop_bits&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;polling_interval&quot;</span><span class="p">:</span> <span class="mi">1000</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
-    <span class="s2">&quot;https://api.example.com/v1/device-management/devices&quot;</span><span class="p">,</span>
-    <span class="n">json</span><span class="o">=</span><span class="n">device_config</span><span class="p">,</span>
-    <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
-<span class="p">)</span>
-
-<span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span><span class="p">:</span>
-    <span class="n">device</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;device&quot;</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Created device: </span><span class="si">{</span><span class="n">device</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="python-scan-for-devices">
-<h3>Python - Scan for Devices<a class="headerlink" href="#python-scan-for-devices" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start device scan</span>
-<span class="n">scan_config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;scan_type&quot;</span><span class="p">:</span> <span class="s2">&quot;modbus-rtu&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;auto_add&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s2">&quot;overwrite&quot;</span><span class="p">:</span> <span class="kc">False</span>
-<span class="p">}</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
-    <span class="s2">&quot;https://api.example.com/v1/device-management/scan&quot;</span><span class="p">,</span>
-    <span class="n">json</span><span class="o">=</span><span class="n">scan_config</span><span class="p">,</span>
-    <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
-<span class="p">)</span>
-
-<span class="n">scan_id</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;scan_id&quot;</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Scan started: </span><span class="si">{</span><span class="n">scan_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># Check scan status</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-    <span class="n">status_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;https://api.example.com/v1/device-management/scan/</span><span class="si">{</span><span class="n">scan_id</span><span class="si">}</span><span class="s2">/status&quot;</span><span class="p">,</span>
-        <span class="n">headers</span><span class="o">=</span><span class="n">headers</span>
-    <span class="p">)</span>
-
-    <span class="n">status</span> <span class="o">=</span> <span class="n">status_response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Progress: </span><span class="si">{</span><span class="n">status</span><span class="p">[</span><span class="s1">&#39;progress&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">status</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;completed&quot;</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="n">status</span><span class="p">[</span><span class="s1">&#39;devices_found&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> devices&quot;</span><span class="p">)</span>
-        <span class="k">break</span>
-
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="javascript-get-device-details">
-<h3>JavaScript - Get Device Details<a class="headerlink" href="#javascript-get-device-details" title="Link to this heading">¶</a></h3>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Get device details</span>
-<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">getDeviceDetails</span><span class="p">(</span><span class="nx">deviceId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">);</span>
-
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`/device-management/devices/</span><span class="si">${</span><span class="nx">deviceId</span><span class="si">}</span><span class="sb">/details`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="s1">&#39;Authorization&#39;</span><span class="o">:</span><span class="w"> </span><span class="sb">`Bearer </span><span class="si">${</span><span class="nx">token</span><span class="si">}</span><span class="sb">`</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">});</span>
-
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Device details:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">);</span>
-
-<span class="w">    </span><span class="c1">// Display device info</span>
-<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;device-name&#39;</span><span class="p">).</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
-<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;device-status&#39;</span><span class="p">).</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">status</span><span class="p">;</span>
-<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;device-type&#39;</span><span class="p">).</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">type</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">data</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="c1">// Test device connection</span>
-<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">pingDevice</span><span class="p">(</span><span class="nx">deviceId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">);</span>
-
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`/device-management/devices/</span><span class="si">${</span><span class="nx">deviceId</span><span class="si">}</span><span class="sb">/test`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="s1">&#39;Authorization&#39;</span><span class="o">:</span><span class="w"> </span><span class="sb">`Bearer </span><span class="si">${</span><span class="nx">token</span><span class="si">}</span><span class="sb">`</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">});</span>
-
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">alert</span><span class="p">(</span><span class="sb">`Ping successful! Response time: </span><span class="si">${</span><span class="nx">result</span><span class="p">.</span><span class="nx">ping_time_ms</span><span class="si">}</span><span class="sb">ms`</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Device is offline or unreachable&#39;</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">result</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="javascript-manage-device-groups">
-<h3>JavaScript - Manage Device Groups<a class="headerlink" href="#javascript-manage-device-groups" title="Link to this heading">¶</a></h3>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create new group</span>
-<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">createGroup</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span><span class="w"> </span><span class="nx">color</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">);</span>
-
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/device-management/groups&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="s1">&#39;Authorization&#39;</span><span class="o">:</span><span class="w"> </span><span class="sb">`Bearer </span><span class="si">${</span><span class="nx">token</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
-<span class="w">            </span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;application/json&#39;</span>
-<span class="w">        </span><span class="p">},</span>
-<span class="w">        </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-<span class="w">            </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="nx">groupName</span><span class="p">,</span>
-<span class="w">            </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="nx">color</span>
-<span class="w">        </span><span class="p">})</span>
-<span class="w">    </span><span class="p">});</span>
-
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Created group: </span><span class="si">${</span><span class="nx">result</span><span class="p">.</span><span class="nx">group</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb"> (ID: </span><span class="si">${</span><span class="nx">result</span><span class="p">.</span><span class="nx">group_id</span><span class="si">}</span><span class="sb">)`</span><span class="p">);</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">result</span><span class="p">.</span><span class="nx">group</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// Assign devices to group</span>
-<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">assignToGroup</span><span class="p">(</span><span class="nx">groupId</span><span class="p">,</span><span class="w"> </span><span class="nx">deviceIds</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">);</span>
-
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`/device-management/groups/</span><span class="si">${</span><span class="nx">groupId</span><span class="si">}</span><span class="sb">/assign-devices`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="s1">&#39;Authorization&#39;</span><span class="o">:</span><span class="w"> </span><span class="sb">`Bearer </span><span class="si">${</span><span class="nx">token</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
-<span class="w">            </span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;application/json&#39;</span>
-<span class="w">        </span><span class="p">},</span>
-<span class="w">        </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-<span class="w">            </span><span class="nx">device_ids</span><span class="o">:</span><span class="w"> </span><span class="nx">deviceIds</span>
-<span class="w">        </span><span class="p">})</span>
-<span class="w">    </span><span class="p">});</span>
-
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Assigned </span><span class="si">${</span><span class="nx">result</span><span class="p">.</span><span class="nx">assigned_count</span><span class="si">}</span><span class="sb"> devices to group`</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">result</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="notes">
-<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading">¶</a></h2>
+<section id="key-features">
+<h2>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><strong>Device Status</strong>: Online, Offline, Disabled, Error</p></li>
-<li><p><strong>Device Types</strong>: Modbus RTU, Modbus TCP, Wireless RF, Ethernet</p></li>
-<li><p><strong>Scan Types</strong>: modbus-rtu, modbus-tcp, wireless, auto</p></li>
-<li><p><strong>File Upload</strong>: CSV import supports .csv files with specific columns</p></li>
-<li><p><strong>Real-time Updates</strong>: Consider WebSocket for real-time device status updates</p></li>
+<li><p><strong>Single page</strong> with embedded initial data</p></li>
+<li><p><strong>Real-time updates</strong> via WebSocket for device status</p></li>
+<li><p><strong>Batch operations</strong> for device grouping</p></li>
+<li><p><strong>File operations</strong> for import/export</p></li>
+<li><p><strong>Wireless support</strong> for RF devices</p></li>
+<li><p><strong>Diagnostic tools</strong> for troubleshooting</p></li>
 </ul>
-</section>
-<section id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
-<ol class="arabic simple">
-<li><p><strong>Device Not Responding</strong>:
-- Check physical connection
-- Verify device address
-- Test with ping function</p></li>
-<li><p><strong>Scan Not Finding Devices</strong>:
-- Verify network configuration
-- Check firewall settings
-- Ensure correct scan type</p></li>
-<li><p><strong>Import/Export Issues</strong>:
-- Verify CSV format
-- Check file encoding (UTF-8 recommended)
-- Ensure required columns are present</p></li>
-</ol>
 </section>
 </section>
 

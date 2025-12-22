@@ -20,16 +20,6 @@ All endpoints follow RESTful conventions and are organized into logical categori
 - Configuration management
 - Real-time monitoring
 
-**Data Collection API**
-- Telemetry data ingestion
-- Historical data queries
-- Real-time data streams
-
-**Configuration API**
-- System settings
-- Gateway parameters
-- Network configuration
-
 Base URL
 --------
 

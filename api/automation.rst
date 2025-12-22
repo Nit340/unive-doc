@@ -1,129 +1,86 @@
-Scheduler & Automation API
-==========================
+Scheduler & Automation Management
+=================================
 
-Overview
---------
+This document describes the scheduler and automation management page and its related API endpoints for managing scheduled jobs, automation tasks, and timed operations.
 
-The Scheduler & Automation API provides comprehensive scheduling capabilities for the Univa Gateway platform. It enables automated job execution based on time, intervals, events, or cron expressions, allowing for autonomous gateway behavior without manual intervention.
+Page Route (Frontend)
+---------------------
 
-Base URL
---------
+.. http:get:: /scheduler-automation
 
-.. code-block:: text
-
-   https://univa-gateway/api/v1/scheduler
-
-Authentication
---------------
-
-All endpoints require JWT authentication via the ``Authorization`` header:
-
-.. code-block:: http
-
-   Authorization: Bearer <jwt_token>
-
-Quick Reference
----------------
-
-.. list-table:: API Endpoints Quick Reference
-   :widths: 30 40 30
-   :header-rows: 1
-
-   * - Endpoint
-     - Method
-     - Description
-   * - ``/jobs``
-     - GET
-     - List all jobs with filtering
-   * - ``/jobs``
-     - POST
-     - Create new job
-   * - ``/jobs/{id}``
-     - GET
-     - Get job details
-   * - ``/jobs/{id}``
-     - PUT
-     - Update job
-   * - ``/jobs/{id}``
-     - DELETE
-     - Delete job
-   * - ``/jobs/{id}/toggle``
-     - POST
-     - Enable/disable job
-   * - ``/jobs/{id}/run``
-     - POST
-     - Run job immediately
-   * - ``/jobs/{id}/history``
-     - GET
-     - Get job execution history
-   * - ``/jobs/{id}/logs``
-     - GET
-     - Get job execution logs
-   * - ``/jobs/{id}/metrics``
-     - GET
-     - Get job performance metrics
-   * - ``/executions/{id}``
-     - GET
-     - Get execution status
-   * - ``/gateways``
-     - GET
-     - List available gateways
-   * - ``/conflicts/check``
-     - POST
-     - Check for scheduling conflicts
-   * - ``/resources/usage``
-     - GET
-     - Get system resource usage
-   * - ``/jobs/run/all``
-     - POST
-     - Run all enabled jobs
-   * - ``/jobs/disable/all``
-     - POST
-     - Disable all jobs
-   * - ``/jobs/reset/all``
-     - POST
-     - Reset all jobs to defaults
-   * - ``/jobs/export``
-     - POST
-     - Export job configurations
-   * - ``/jobs/import``
-     - POST
-     - Import job configurations
-   * - ``/statistics``
-     - GET
-     - Get scheduler statistics
-   * - ``/tags``
-     - GET
-     - Get available tags
-   * - ``/ws``
-     - WebSocket
-     - Real-time job events
-
-Jobs Management API
--------------------
-
-Get All Jobs
-~~~~~~~~~~~~
-
-.. http:get:: /jobs
-
-   Retrieve list of all scheduled jobs with filtering options.
+   **Description**: Renders the complete scheduler and automation management page with all jobs, schedules, gateways, and monitoring data embedded in the HTML.
 
    **Headers**:
 
    .. code-block:: http
 
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: text/html
+      
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Scheduler & Automation - Univa Gateway</title>
+      </head>
+      <body>
+        <div id="app" data-scheduler='{...}' data-jobs='[...]' data-gateways='[...]' data-metrics='{...}'>
+          <!-- Scheduler & Automation page with:
+               SECTION 1: Job Management & Status Overview
+               SECTION 2: Job Creation & Configuration
+               SECTION 3: Gateway Management
+               SECTION 4: Schedule Types & Templates
+               SECTION 5: Conflict Detection & Resource Monitoring
+               SECTION 6: Bulk Operations & Import/Export
+               SECTION 7: Execution History & Analytics
+               SECTION 8: Live Monitoring & WebSocket Events
+          -->
+        </div>
+      </body>
+      </html>
+
+   **How it works**:
+   - Server renders the HTML page with embedded scheduler and job data
+   - All jobs, gateways, schedules, and monitoring data are embedded
+   - JavaScript reads this data and renders the complete scheduler management interface
+   - No separate API calls needed on initial page load
+   - Gateway context is provided via X-Gateway-ID header
+
+   **Error Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 302 Found
+      Location: /login
+
+API Endpoints (Backend)
+-----------------------
+
+These endpoints handle all scheduler and automation operations triggered from the page. All endpoints operate on the current gateway context identified by the `X-Gateway-ID` header.
+
+Base Path: ``/api/v1/scheduler``
+
+System Status (Overview)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:get:: /api/v1/scheduler/status
+
+   **Description**: Get overall scheduler system status and statistics.
+   
+   **UI Element**: Status overview dashboard
+   
+   **Headers**:
+
+   .. code-block:: http
+
       Authorization: Bearer <token>
-
-   **Query Parameters**:
-
-   * **status** (optional, string): Filter by status (``active``, ``inactive``, ``error``)
-   * **type** (optional, string): Filter by job type (``interval``, ``daily``, ``weekly``, ``monthly``, ``cron``, ``sunrise``)
-   * **tags** (optional, string): Comma-separated list of tags
-   * **enabled** (optional, boolean): Filter by enabled/disabled state
-   * **gateway_id** (optional, string): Filter by gateway
-   * **limit** (optional, integer): Number of jobs to return (default: 50, max: 100)
-   * **offset** (optional, integer): Pagination offset
+      X-Gateway-ID: GW-3920A9
 
    **Response**:
 
@@ -133,7 +90,57 @@ Get All Jobs
       Content-Type: application/json
       
       {
+        "data": {
+          "system_status": "healthy",
+          "total_jobs": 45,
+          "active_jobs": 38,
+          "failed_jobs": 2,
+          "success_rate": 96.7,
+          "last_execution": "2025-03-15T10:25:30Z",
+          "next_scheduled": "2025-03-15T10:30:00Z",
+          "resource_usage": {
+            "cpu": 24.5,
+            "memory": "1.2 GB",
+            "concurrent_jobs": 3
+          }
+        },
         "success": true,
+        "message": "Scheduler status retrieved successfully"
+      }
+
+Job Management (SECTION 1)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:get:: /api/v1/scheduler/jobs
+
+   **Description**: Retrieve list of all scheduled jobs with filtering options.
+   
+   **UI Element**: SECTION 1 - Jobs table
+   
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+
+   **Query Parameters**:
+
+   * **status** (string): Filter by status (active, inactive, error) *(optional)*
+   * **type** (string): Filter by job type (interval, daily, weekly, monthly, cron, sunrise) *(optional)*
+   * **tags** (string): Comma-separated list of tags *(optional)*
+   * **enabled** (boolean): Filter by enabled/disabled state *(optional)*
+   * **limit** (integer): Number of jobs to return (default: 50, max: 100) *(optional)*
+   * **offset** (integer): Pagination offset *(optional)*
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
         "data": {
           "total_jobs": 4,
           "active_jobs": 3,
@@ -161,35 +168,28 @@ Get All Jobs
             }
           ]
         },
-        "pagination": {
-          "limit": 50,
-          "offset": 0,
-          "has_more": false
-        }
+        "success": true,
+        "message": "Jobs retrieved successfully"
       }
 
-Create New Job
-~~~~~~~~~~~~~~
+.. http:post:: /api/v1/scheduler/jobs
 
-.. http:post:: /jobs
-
-   Create a new scheduled job.
-
+   **Description**: Create a new scheduled job.
+   
+   **UI Element**: SECTION 1 - "Create New Job" button
+   
    **Headers**:
 
    .. code-block:: http
 
       Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
 
    **Request**:
 
-   .. sourcecode:: http
+   .. sourcecode:: json
 
-      POST /jobs HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
       {
         "name": "Health Check",
         "description": "Run system health diagnostics",
@@ -207,12 +207,6 @@ Create New Job
         "tags": ["health", "diagnostics", "maintenance"]
       }
 
-   **Required Fields**:
-
-   * ``name`` (string): Job name (1-100 characters)
-   * ``type`` (string): Job type (interval, daily, weekly, monthly, cron, sunrise)
-   * ``action.type`` (string): Action type (publish, log, output, system, file, rule)
-
    **Response**:
 
    .. sourcecode:: http
@@ -221,31 +215,31 @@ Create New Job
       Content-Type: application/json
       
       {
-        "success": true,
         "data": {
           "job_id": "job_003",
           "name": "Health Check",
-          "message": "Job created successfully",
           "next_execution": "2025-03-13T01:00:00Z"
-        }
+        },
+        "success": true,
+        "message": "Job created successfully"
       }
 
-Get Job Details
-~~~~~~~~~~~~~~~
+.. http:get:: /api/v1/scheduler/jobs/{job_id}
 
-.. http:get:: /jobs/{id}
-
-   Retrieve detailed information about a specific job.
-
+   **Description**: Retrieve detailed information about a specific job.
+   
+   **UI Element**: SECTION 1 - Job details modal
+   
    **Path Parameters**:
 
-   * **id** (string, required): Job ID
+   * **job_id** (string): Job identifier
 
    **Headers**:
 
    .. code-block:: http
 
       Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
 
    **Response**:
 
@@ -255,7 +249,6 @@ Get Job Details
       Content-Type: application/json
       
       {
-        "success": true,
         "data": {
           "job": {
             "id": "job_001",
@@ -289,35 +282,33 @@ Get Job Details
               "tags": ["modbus", "polling", "telemetry"]
             }
           }
-        }
+        },
+        "success": true,
+        "message": "Job details retrieved successfully"
       }
 
-Update Job
-~~~~~~~~~~
+.. http:put:: /api/v1/scheduler/jobs/{job_id}
 
-.. http:put:: /jobs/{id}
-
-   Update an existing job configuration.
-
+   **Description**: Update an existing job configuration.
+   
+   **UI Element**: SECTION 1 - "Edit Job" button
+   
    **Path Parameters**:
 
-   * **id** (string, required): Job ID
+   * **job_id** (string): Job identifier
 
    **Headers**:
 
    .. code-block:: http
 
       Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
 
    **Request**:
 
-   .. sourcecode:: http
+   .. sourcecode:: json
 
-      PUT /jobs/job_001 HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
       {
         "enabled": true,
         "schedule": {
@@ -337,30 +328,30 @@ Update Job
       Content-Type: application/json
       
       {
-        "success": true,
         "data": {
-          "message": "Job updated successfully",
           "job_id": "job_001",
           "next_execution": "2025-03-12T15:11:00Z"
-        }
+        },
+        "success": true,
+        "message": "Job updated successfully"
       }
 
-Delete Job
-~~~~~~~~~~
+.. http:delete:: /api/v1/scheduler/jobs/{job_id}
 
-.. http:delete:: /jobs/{id}
-
-   Permanently delete a scheduled job.
-
+   **Description**: Permanently delete a scheduled job.
+   
+   **UI Element**: SECTION 1 - "Delete Job" button
+   
    **Path Parameters**:
 
-   * **id** (string, required): Job ID
+   * **job_id** (string): Job identifier
 
    **Headers**:
 
    .. code-block:: http
 
       Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
 
    **Response**:
 
@@ -370,42 +361,38 @@ Delete Job
       Content-Type: application/json
       
       {
-        "success": true,
         "data": {
-          "message": "Job deleted successfully",
           "deleted_job": "job_001",
           "statistics": {
             "total_executions": 1205
           }
-        }
+        },
+        "success": true,
+        "message": "Job deleted successfully"
       }
 
-Toggle Job Status
-~~~~~~~~~~~~~~~~~
+.. http:post:: /api/v1/scheduler/jobs/{job_id}/toggle
 
-.. http:post:: /jobs/{id}/toggle
-
-   Enable or disable a job without deleting it.
-
+   **Description**: Enable or disable a job without deleting it.
+   
+   **UI Element**: SECTION 1 - Job toggle switch
+   
    **Path Parameters**:
 
-   * **id** (string, required): Job ID
+   * **job_id** (string): Job identifier
 
    **Headers**:
 
    .. code-block:: http
 
       Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
 
    **Request**:
 
-   .. sourcecode:: http
+   .. sourcecode:: json
 
-      POST /jobs/job_001/toggle HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
       {
         "enabled": false,
         "reason": "Temporarily disabled for maintenance"
@@ -419,38 +406,29 @@ Toggle Job Status
       Content-Type: application/json
       
       {
-        "success": true,
         "data": {
-          "message": "Job disabled successfully",
           "job_id": "job_001",
           "enabled": false
-        }
+        },
+        "success": true,
+        "message": "Job disabled successfully"
       }
 
-Get Job Execution History
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Job Configuration (SECTION 2)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:get:: /jobs/{id}/history
+.. http:get:: /api/v1/scheduler/templates
 
-   Retrieve history of job executions.
-
-   **Path Parameters**:
-
-   * **id** (string, required): Job ID
-
+   **Description**: Get job configuration templates and action types.
+   
+   **UI Element**: SECTION 2 - Job creation form templates
+   
    **Headers**:
 
    .. code-block:: http
 
       Authorization: Bearer <token>
-
-   **Query Parameters**:
-
-   * **start_date** (optional, string): ISO date string
-   * **end_date** (optional, string): ISO date string
-   * **status** (optional, string): Filter by status (``success``, ``failed``, ``timeout``)
-   * **limit** (optional, integer): Number of records (default: 50)
-   * **offset** (optional, integer): Pagination offset
+      X-Gateway-ID: GW-3920A9
 
    **Response**:
 
@@ -460,53 +438,103 @@ Get Job Execution History
       Content-Type: application/json
       
       {
-        "success": true,
         "data": {
-          "job_id": "job_001",
-          "job_name": "Modbus Poll",
-          "total_executions": 1205,
-          "success_rate": 99.4,
-          "history": [
+          "schedule_types": {
+            "interval": {
+              "description": "Execute at fixed time intervals",
+              "parameters": ["interval_seconds", "jitter_percentage"]
+            },
+            "daily": {
+              "description": "Execute once per day at specific time",
+              "parameters": ["time", "timezone", "skip_weekends"]
+            },
+            "cron": {
+              "description": "Execute based on cron expression",
+              "parameters": ["cron_expression", "timezone"]
+            }
+          },
+          "action_types": {
+            "publish": {
+              "description": "Publish data to MQTT topic",
+              "parameters": ["topic", "payload_template", "qos"]
+            },
+            "system": {
+              "description": "Execute system operations",
+              "parameters": ["operation", "parameters"]
+            },
+            "file": {
+              "description": "Perform file operations",
+              "parameters": ["operation", "pattern", "retain_days"]
+            }
+          }
+        },
+        "success": true,
+        "message": "Job templates retrieved successfully"
+      }
+
+.. http:get:: /api/v1/scheduler/tags
+
+   **Description**: Retrieve all tags used across jobs.
+   
+   **UI Element**: SECTION 2 - Tag selection dropdown
+   
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+
+   **Query Parameters**:
+
+   * **limit** (integer): Number of tags to return *(optional)*
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "data": {
+          "tags": [
             {
-              "execution_id": "exec_20250312151030123",
-              "timestamp": "2025-03-12T15:10:30Z",
-              "trigger": "scheduled",
-              "duration_ms": 120,
-              "status": "success",
-              "message": "Modbus data collected successfully"
+              "name": "modbus",
+              "job_count": 2,
+              "last_used": "2025-03-12T15:10:30Z"
+            },
+            {
+              "name": "health",
+              "job_count": 1,
+              "last_used": "2025-03-12T01:00:00Z"
             }
           ]
         },
-        "pagination": {
-          "limit": 50,
-          "offset": 0,
-          "has_more": true
-        }
+        "success": true,
+        "message": "Tags retrieved successfully"
       }
 
-Get Job Execution Logs
-~~~~~~~~~~~~~~~~~~~~~~
+Gateway Management (SECTION 3)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:get:: /jobs/{id}/logs
+.. http:get:: /api/v1/scheduler/gateways
 
-   Retrieve detailed execution logs for a job.
-
-   **Path Parameters**:
-
-   * **id** (string, required): Job ID
-
+   **Description**: Retrieve list of available gateways.
+   
+   **UI Element**: SECTION 3 - Gateway selection and management
+   
    **Headers**:
 
    .. code-block:: http
 
       Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
 
    **Query Parameters**:
 
-   * **execution_id** (optional, string): Specific execution ID
-   * **level** (optional, string): Log level filter (info, warning, error, debug)
-   * **limit** (optional, integer): Number of log entries (default: 100)
-   * **offset** (optional, integer): Pagination offset
+   * **status** (string): Filter by gateway status *(optional)*
+   * **online** (boolean): Filter by online/offline state *(optional)*
 
    **Response**:
 
@@ -516,155 +544,6 @@ Get Job Execution Logs
       Content-Type: application/json
       
       {
-        "success": true,
-        "data": {
-          "job_id": "job_001",
-          "job_name": "Modbus Poll",
-          "logs": [
-            {
-              "timestamp": "2025-03-12T15:10:30.123Z",
-              "level": "info",
-              "message": "Starting Modbus poll",
-              "execution_id": "exec_20250312151030123"
-            },
-            {
-              "timestamp": "2025-03-12T15:10:30.456Z",
-              "level": "info",
-              "message": "Connected to Modbus device",
-              "execution_id": "exec_20250312151030123"
-            }
-          ]
-        }
-      }
-
-Job Execution API
------------------
-
-Run Job Immediately
-~~~~~~~~~~~~~~~~~~~
-
-.. http:post:: /jobs/{id}/run
-
-   Manually trigger job execution.
-
-   **Path Parameters**:
-
-   * **id** (string, required): Job ID
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /jobs/job_001/run HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "force": true,
-        "parameters": {
-          "debug": true
-        }
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "data": {
-          "execution_id": "exec_20250312151030123",
-          "job_id": "job_001",
-          "status": "started",
-          "trigger": "manual",
-          "start_time": "2025-03-12T15:10:30Z"
-        }
-      }
-
-Get Execution Status
-~~~~~~~~~~~~~~~~~~~~
-
-.. http:get:: /executions/{id}
-
-   Check status of a job execution.
-
-   **Path Parameters**:
-
-   * **id** (string, required): Execution ID
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "data": {
-          "execution": {
-            "id": "exec_20250312151030123",
-            "job_id": "job_001",
-            "job_name": "Modbus Poll",
-            "status": "completed",
-            "trigger": "manual",
-            "start_time": "2025-03-12T15:10:30Z",
-            "end_time": "2025-03-12T15:10:32Z",
-            "duration_ms": 120,
-            "result": {
-              "status": "success",
-              "message": "Modbus data collected successfully"
-            }
-          }
-        }
-      }
-
-Gateway Management API
-----------------------
-
-Get Available Gateways
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:get:: /gateways
-
-   Retrieve list of available gateways.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Query Parameters**:
-
-   * **status** (optional, string): Filter by gateway status
-   * **online** (optional, boolean): Filter by online/offline state
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
         "data": {
           "gateways": [
             {
@@ -686,25 +565,27 @@ Get Available Gateways
               "active_jobs": 1
             }
           ]
-        }
+        },
+        "success": true,
+        "message": "Gateways retrieved successfully"
       }
 
-Get Gateway Jobs
-~~~~~~~~~~~~~~~~
+.. http:get:: /api/v1/scheduler/gateways/{gateway_id}/jobs
 
-.. http:get:: /gateways/{id}/jobs
-
-   Get all jobs for a specific gateway.
-
+   **Description**: Get all jobs for a specific gateway.
+   
+   **UI Element**: SECTION 3 - Gateway job list
+   
    **Path Parameters**:
 
-   * **id** (string, required): Gateway ID
+   * **gateway_id** (string): Gateway identifier
 
    **Headers**:
 
    .. code-block:: http
 
       Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
 
    **Response**:
 
@@ -714,7 +595,6 @@ Get Gateway Jobs
       Content-Type: application/json
       
       {
-        "success": true,
         "data": {
           "gateway_id": "univa-gw-01",
           "gateway_name": "Univa-GW-01",
@@ -729,34 +609,79 @@ Get Gateway Jobs
               "next_execution": "2025-03-12T15:10:30Z"
             }
           ]
-        }
+        },
+        "success": true,
+        "message": "Gateway jobs retrieved successfully"
       }
 
-Conflict Detection API
-----------------------
+Schedule Types (SECTION 4)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Check for Conflicts
-~~~~~~~~~~~~~~~~~~~
+.. http:post:: /api/v1/scheduler/schedules/validate
 
-.. http:post:: /conflicts/check
-
-   Detect scheduling conflicts between jobs.
-
+   **Description**: Validate schedule configuration.
+   
+   **UI Element**: SECTION 4 - Schedule configuration validation
+   
    **Headers**:
 
    .. code-block:: http
 
       Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
 
    **Request**:
 
+   .. sourcecode:: json
+
+      {
+        "type": "cron",
+        "cron_expression": "0 9-17 * * 1-5",
+        "timezone": "America/New_York"
+      }
+
+   **Response**:
+
    .. sourcecode:: http
 
-      POST /conflicts/check HTTP/1.1
-      Authorization: Bearer <token>
+      HTTP/1.1 200 OK
       Content-Type: application/json
       
+      {
+        "data": {
+          "valid": true,
+          "next_executions": [
+            "2025-03-16T09:00:00Z",
+            "2025-03-16T10:00:00Z"
+          ],
+          "description": "Every hour from 9 AM to 5 PM on weekdays"
+        },
+        "success": true,
+        "message": "Schedule validation completed"
+      }
+
+Conflict Detection (SECTION 5)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:post:: /api/v1/scheduler/conflicts/check
+
+   **Description**: Detect scheduling conflicts between jobs.
+   
+   **UI Element**: SECTION 5 - Conflict detection analysis
+   
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+
+   **Request**:
+
+   .. sourcecode:: json
+
       {
         "job_id": "job_new",
         "gateway_id": "univa-gw-01",
@@ -775,7 +700,6 @@ Check for Conflicts
       Content-Type: application/json
       
       {
-        "success": true,
         "data": {
           "has_conflicts": true,
           "conflicts": [
@@ -790,25 +714,27 @@ Check for Conflicts
           "recommendations": [
             "Schedule at 02:10 to avoid conflict"
           ]
-        }
+        },
+        "success": true,
+        "message": "Conflict check completed"
       }
 
-Get System Resource Usage
-~~~~~~~~~~~~~~~~~~~~~~~~~
+.. http:get:: /api/v1/scheduler/resources/usage
 
-.. http:get:: /resources/usage
-
-   Check system resource utilization by jobs.
-
+   **Description**: Check system resource utilization by jobs.
+   
+   **UI Element**: SECTION 5 - Resource monitoring dashboard
+   
    **Headers**:
 
    .. code-block:: http
 
       Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
 
    **Query Parameters**:
 
-   * **gateway_id** (optional, string): Specific gateway ID
+   * **gateway_id** (string): Specific gateway ID *(optional)*
 
    **Response**:
 
@@ -818,7 +744,6 @@ Get System Resource Usage
       Content-Type: application/json
       
       {
-        "success": true,
         "data": {
           "resource_usage": {
             "gateway_id": "univa-gw-01",
@@ -829,34 +754,32 @@ Get System Resource Usage
             "storage_usage_mb": 45.2,
             "network_usage_kbps": 125.6
           }
-        }
+        },
+        "success": true,
+        "message": "Resource usage retrieved successfully"
       }
 
-Bulk Operations API
--------------------
+Bulk Operations (SECTION 6)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Run All Jobs
-~~~~~~~~~~~~
+.. http:post:: /api/v1/scheduler/jobs/run/all
 
-.. http:post:: /jobs/run/all
-
-   Manually trigger all enabled jobs.
-
+   **Description**: Manually trigger all enabled jobs.
+   
+   **UI Element**: SECTION 6 - "Run All Jobs" button
+   
    **Headers**:
 
    .. code-block:: http
 
       Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
 
    **Request**:
 
-   .. sourcecode:: http
+   .. sourcecode:: json
 
-      POST /jobs/run/all HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
       {
         "gateway_id": "univa-gw-01",
         "exclude_tags": ["maintenance"],
@@ -871,38 +794,35 @@ Run All Jobs
       Content-Type: application/json
       
       {
-        "success": true,
         "data": {
           "execution_group_id": "group_20250312151500",
           "gateway_id": "univa-gw-01",
           "total_jobs": 3,
           "started_jobs": 3,
           "status": "started"
-        }
+        },
+        "success": true,
+        "message": "All jobs execution started"
       }
 
-Disable All Jobs
-~~~~~~~~~~~~~~~~
+.. http:post:: /api/v1/scheduler/jobs/disable/all
 
-.. http:post:: /jobs/disable/all
-
-   Disable all scheduled jobs.
-
+   **Description**: Disable all scheduled jobs.
+   
+   **UI Element**: SECTION 6 - "Disable All Jobs" button
+   
    **Headers**:
 
    .. code-block:: http
 
       Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
 
    **Request**:
 
-   .. sourcecode:: http
+   .. sourcecode:: json
 
-      POST /jobs/disable/all HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
       {
         "gateway_id": "univa-gw-01",
         "reason": "System maintenance",
@@ -917,37 +837,33 @@ Disable All Jobs
       Content-Type: application/json
       
       {
-        "success": true,
         "data": {
-          "message": "All jobs disabled",
           "gateway_id": "univa-gw-01",
           "disabled_count": 12,
           "disabled_until": "2025-03-12T16:00:00Z"
-        }
+        },
+        "success": true,
+        "message": "All jobs disabled successfully"
       }
 
-Reset All Jobs
-~~~~~~~~~~~~~~
+.. http:post:: /api/v1/scheduler/jobs/reset/all
 
-.. http:post:: /jobs/reset/all
-
-   Reset all jobs to their default configurations.
-
+   **Description**: Reset all jobs to their default configurations.
+   
+   **UI Element**: SECTION 6 - "Reset All Jobs" button
+   
    **Headers**:
 
    .. code-block:: http
 
       Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
 
    **Request**:
 
-   .. sourcecode:: http
+   .. sourcecode:: json
 
-      POST /jobs/reset/all HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
       {
         "gateway_id": "univa-gw-01",
         "keep_data": true
@@ -961,37 +877,33 @@ Reset All Jobs
       Content-Type: application/json
       
       {
-        "success": true,
         "data": {
-          "message": "All jobs reset to defaults",
           "gateway_id": "univa-gw-01",
           "reset_count": 12,
           "kept_execution_history": true
-        }
+        },
+        "success": true,
+        "message": "All jobs reset to defaults"
       }
 
-Export Jobs Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~
+.. http:post:: /api/v1/scheduler/jobs/export
 
-.. http:post:: /jobs/export
-
-   Export all job configurations.
-
+   **Description**: Export all job configurations.
+   
+   **UI Element**: SECTION 6 - "Export Configurations" button
+   
    **Headers**:
 
    .. code-block:: http
 
       Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
 
    **Request**:
 
-   .. sourcecode:: http
+   .. sourcecode:: json
 
-      POST /jobs/export HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
       {
         "gateway_id": "univa-gw-01",
         "format": "json",
@@ -999,49 +911,41 @@ Export Jobs Configuration
         "include_statistics": true
       }
 
-   **Response**: 
+   **Response**:
 
-   File download with Content-Type: ``application/json``
+   .. sourcecode:: http
 
-   **Response Headers**:
-
-   .. code-block:: http
-
+      HTTP/1.1 200 OK
       Content-Type: application/json
       Content-Disposition: attachment; filename="jobs_export_20250312.json"
+      
+      {
+        "export_type": "jobs_configuration",
+        "timestamp": "2025-03-15T10:30:00Z",
+        "gateway_id": "univa-gw-01",
+        "jobs": [...],
+        "statistics": {...}
+      }
 
-Import Jobs Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~
+.. http:post:: /api/v1/scheduler/jobs/import
 
-.. http:post:: /jobs/import
-
-   Import jobs from configuration file.
-
+   **Description**: Import jobs from configuration file.
+   
+   **UI Element**: SECTION 6 - "Import Configurations" button
+   
    **Headers**:
 
    .. code-block:: http
 
       Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: multipart/form-data
 
-   **Request**:
+   **Form Parameters**:
 
-   .. sourcecode:: http
-
-      POST /jobs/import HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: multipart/form-data
-      Content-Disposition: form-data; name="configFile"; filename="jobs.json"
-      
-      --boundary
-      Content-Disposition: form-data; name="gateway_id"
-      
-      univa-gw-01
-      --boundary
-      Content-Disposition: form-data; name="strategy"
-      
-      merge
-      --boundary--
+   * **configFile** (required): Configuration file
+   * **gateway_id** (string): Target gateway ID
+   * **strategy** (string): Import strategy (merge, replace) *(optional)*
 
    **Response**:
 
@@ -1051,7 +955,6 @@ Import Jobs Configuration
       Content-Type: application/json
       
       {
-        "success": true,
         "data": {
           "import_id": "import_20250312152000",
           "gateway_id": "univa-gw-01",
@@ -1059,77 +962,38 @@ Import Jobs Configuration
           "imported": 6,
           "skipped": 2,
           "errors": 0
-        }
-      }
-
-Monitoring & Analytics API
---------------------------
-
-Get Scheduler Statistics
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:get:: /statistics
-
-   Get overall scheduler statistics.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Query Parameters**:
-
-   * **gateway_id** (optional, string): Specific gateway ID
-   * **time_range** (optional, string): ``24h``, ``7d``, ``30d``, ``90d``
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
+        },
         "success": true,
-        "data": {
-          "statistics": {
-            "gateway_id": "univa-gw-01",
-            "time_range": "24h",
-            "total_jobs": 12,
-            "active_jobs": 8,
-            "total_executions": 1250,
-            "successful_executions": 1235,
-            "failed_executions": 15,
-            "success_rate": 98.8,
-            "average_execution_time_ms": 142,
-            "peak_concurrent_jobs": 3
-          }
-        }
+        "message": "Jobs imported successfully"
       }
 
-Get Job Performance Metrics
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Execution History (SECTION 7)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:get:: /jobs/{id}/metrics
+.. http:get:: /api/v1/scheduler/jobs/{job_id}/history
 
-   Get performance metrics for a specific job.
-
+   **Description**: Retrieve history of job executions.
+   
+   **UI Element**: SECTION 7 - Job execution history table
+   
    **Path Parameters**:
 
-   * **id** (string, required): Job ID
+   * **job_id** (string): Job identifier
 
    **Headers**:
 
    .. code-block:: http
 
       Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
 
    **Query Parameters**:
 
-   * **granularity** (optional, string): ``hourly``, ``daily``, ``weekly``
-   * **start_date** (optional, string): ISO date string
-   * **end_date** (optional, string): ISO date string
+   * **start_date** (string): ISO date string *(optional)*
+   * **end_date** (string): ISO date string *(optional)*
+   * **status** (string): Filter by status (success, failed, timeout) *(optional)*
+   * **limit** (integer): Number of records (default: 50) *(optional)*
+   * **offset** (integer): Pagination offset *(optional)*
 
    **Response**:
 
@@ -1139,7 +1003,111 @@ Get Job Performance Metrics
       Content-Type: application/json
       
       {
+        "data": {
+          "job_id": "job_001",
+          "job_name": "Modbus Poll",
+          "total_executions": 1205,
+          "success_rate": 99.4,
+          "history": [
+            {
+              "execution_id": "exec_20250312151030123",
+              "timestamp": "2025-03-12T15:10:30Z",
+              "trigger": "scheduled",
+              "duration_ms": 120,
+              "status": "success",
+              "message": "Modbus data collected successfully"
+            }
+          ]
+        },
         "success": true,
+        "message": "Job execution history retrieved successfully"
+      }
+
+.. http:get:: /api/v1/scheduler/jobs/{job_id}/logs
+
+   **Description**: Retrieve detailed execution logs for a job.
+   
+   **UI Element**: SECTION 7 - Job execution logs viewer
+   
+   **Path Parameters**:
+
+   * **job_id** (string): Job identifier
+
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+
+   **Query Parameters**:
+
+   * **execution_id** (string): Specific execution ID *(optional)*
+   * **level** (string): Log level filter (info, warning, error, debug) *(optional)*
+   * **limit** (integer): Number of log entries (default: 100) *(optional)*
+   * **offset** (integer): Pagination offset *(optional)*
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "data": {
+          "job_id": "job_001",
+          "job_name": "Modbus Poll",
+          "logs": [
+            {
+              "timestamp": "2025-03-12T15:10:30.123Z",
+              "level": "info",
+              "message": "Starting Modbus poll",
+              "execution_id": "exec_20250312151030123"
+            },
+            {
+              "timestamp": "2025-03-12T15:10:30.456Z",
+              "level": "info",
+              "message": "Connected to Modbus device",
+              "execution_id": "exec_20250312151030123"
+            }
+          ]
+        },
+        "success": true,
+        "message": "Job logs retrieved successfully"
+      }
+
+.. http:get:: /api/v1/scheduler/jobs/{job_id}/metrics
+
+   **Description**: Get performance metrics for a specific job.
+   
+   **UI Element**: SECTION 7 - Job performance metrics
+   
+   **Path Parameters**:
+
+   * **job_id** (string): Job identifier
+
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+
+   **Query Parameters**:
+
+   * **granularity** (string): hourly, daily, weekly *(optional)*
+   * **start_date** (string): ISO date string *(optional)*
+   * **end_date** (string): ISO date string *(optional)*
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
         "data": {
           "job_id": "job_001",
           "job_name": "Modbus Poll",
@@ -1156,75 +1124,39 @@ Get Job Performance Metrics
               "average_memory_mb": 15.2
             }
           }
-        }
-      }
-
-Tag Management API
-------------------
-
-Get All Tags
-~~~~~~~~~~~~
-
-.. http:get:: /tags
-
-   Retrieve all tags used across jobs.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Query Parameters**:
-
-   * **gateway_id** (optional, string): Specific gateway ID
-   * **limit** (optional, integer): Number of tags to return
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
+        },
         "success": true,
-        "data": {
-          "tags": [
-            {
-              "name": "modbus",
-              "job_count": 2,
-              "last_used": "2025-03-12T15:10:30Z"
-            },
-            {
-              "name": "health",
-              "job_count": 1,
-              "last_used": "2025-03-12T01:00:00Z"
-            }
-          ]
-        }
+        "message": "Job metrics retrieved successfully"
       }
 
-Get Jobs by Tag
-~~~~~~~~~~~~~~~
+.. http:post:: /api/v1/scheduler/jobs/{job_id}/run
 
-.. http:get:: /tags/{tag}/jobs
-
-   Get all jobs with a specific tag.
-
+   **Description**: Manually trigger job execution.
+   
+   **UI Element**: SECTION 7 - "Run Job Now" button
+   
    **Path Parameters**:
 
-   * **tag** (string, required): Tag name
+   * **job_id** (string): Job identifier
 
    **Headers**:
 
    .. code-block:: http
 
       Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
 
-   **Query Parameters**:
+   **Request**:
 
-   * **gateway_id** (optional, string): Specific gateway ID
+   .. sourcecode:: json
+
+      {
+        "force": true,
+        "parameters": {
+          "debug": true
+        }
+      }
 
    **Response**:
 
@@ -1234,53 +1166,179 @@ Get Jobs by Tag
       Content-Type: application/json
       
       {
-        "success": true,
         "data": {
-          "tag": "modbus",
-          "jobs": [
-            {
-              "id": "job_001",
-              "name": "Modbus Poll",
-              "type": "interval",
-              "enabled": true,
-              "next_execution": "2025-03-12T15:10:30Z"
-            }
-          ]
-        }
+          "execution_id": "exec_20250312151030123",
+          "job_id": "job_001",
+          "status": "started",
+          "trigger": "manual",
+          "start_time": "2025-03-12T15:10:30Z"
+        },
+        "success": true,
+        "message": "Job execution started"
       }
 
-WebSocket Events API
---------------------
+.. http:get:: /api/v1/scheduler/executions/{execution_id}
 
-For real-time job execution monitoring:
+   **Description**: Check status of a job execution.
+   
+   **UI Element**: SECTION 7 - Execution status modal
+   
+   **Path Parameters**:
 
-**Endpoint**: ``wss://univa-gateway/api/v1/scheduler/ws``
+   * **execution_id** (string): Execution identifier
 
-**Connection Headers**:
+   **Headers**:
 
-.. code-block:: http
+   .. code-block:: http
 
-   Authorization: Bearer <token>
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
 
-**Connection Parameters**:
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "data": {
+          "execution": {
+            "id": "exec_20250312151030123",
+            "job_id": "job_001",
+            "job_name": "Modbus Poll",
+            "status": "completed",
+            "trigger": "manual",
+            "start_time": "2025-03-12T15:10:30Z",
+            "end_time": "2025-03-12T15:10:32Z",
+            "duration_ms": 120,
+            "result": {
+              "status": "success",
+              "message": "Modbus data collected successfully"
+            }
+          }
+        },
+        "success": true,
+        "message": "Execution status retrieved successfully"
+      }
+
+.. http:get:: /api/v1/scheduler/statistics
+
+   **Description**: Get overall scheduler statistics.
+   
+   **UI Element**: SECTION 7 - Statistics dashboard
+   
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+
+   **Query Parameters**:
+
+   * **gateway_id** (string): Specific gateway ID *(optional)*
+   * **time_range** (string): 24h, 7d, 30d, 90d *(optional)*
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "data": {
+          "statistics": {
+            "gateway_id": "univa-gw-01",
+            "time_range": "24h",
+            "total_jobs": 12,
+            "active_jobs": 8,
+            "total_executions": 1250,
+            "successful_executions": 1235,
+            "failed_executions": 15,
+            "success_rate": 98.8,
+            "average_execution_time_ms": 142,
+            "peak_concurrent_jobs": 3
+          }
+        },
+        "success": true,
+        "message": "Scheduler statistics retrieved successfully"
+      }
+
+Live Monitoring (SECTION 8)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:get:: /api/v1/scheduler/monitor/active
+
+   **Description**: Get currently active job executions.
+   
+   **UI Element**: SECTION 8 - Active executions monitor
+   
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      X-Gateway-ID: GW-3920A9
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "data": {
+          "active_executions": [
+            {
+              "execution_id": "exec_20250312151030123",
+              "job_id": "job_001",
+              "job_name": "Modbus Poll",
+              "start_time": "2025-03-12T15:10:30Z",
+              "duration_ms": 15000,
+              "progress": 65,
+              "status": "running"
+            }
+          ],
+          "total_active": 3,
+          "peak_today": 5
+        },
+        "success": true,
+        "message": "Active executions retrieved successfully"
+      }
+
+WebSocket Real-time Updates
+---------------------------
+
+Connection Endpoint
+~~~~~~~~~~~~~~~~~~~
+::
+
+   ws://{gateway-ip}/api/v1/scheduler/ws
+   wss://{gateway-ip}/api/v1/scheduler/ws (secure)
+
+Authentication
+~~~~~~~~~~~~~~
+Connect with authentication token:
 
 .. code-block:: json
 
    {
-     "type": "subscribe",
-     "gateway_id": "univa-gw-01",
-     "events": ["job_started", "job_completed", "job_failed"]
+     "type": "auth",
+     "token": "your_jwt_token"
    }
 
-**Events**:
+Message Types
+~~~~~~~~~~~~~
 
 Job Started Event
-~~~~~~~~~~~~~~~~~
-
+^^^^^^^^^^^^^^^^^
 .. code-block:: json
 
    {
-     "event": "job_started",
+     "type": "job_started",
      "timestamp": "2025-03-12T15:10:30Z",
      "data": {
        "job_id": "job_001",
@@ -1291,12 +1349,11 @@ Job Started Event
    }
 
 Job Completed Event
-~~~~~~~~~~~~~~~~~~~
-
+^^^^^^^^^^^^^^^^^^^
 .. code-block:: json
 
    {
-     "event": "job_completed",
+     "type": "job_completed",
      "timestamp": "2025-03-12T15:10:32Z",
      "data": {
        "job_id": "job_001",
@@ -1308,12 +1365,11 @@ Job Completed Event
    }
 
 Job Failed Event
-~~~~~~~~~~~~~~~~
-
+^^^^^^^^^^^^^^^^
 .. code-block:: json
 
    {
-     "event": "job_failed",
+     "type": "job_failed",
      "timestamp": "2025-03-12T15:10:35Z",
      "data": {
        "job_id": "job_002",
@@ -1324,416 +1380,264 @@ Job Failed Event
      }
    }
 
-Schedule Types Configuration
-----------------------------
-
-The following schedule types are supported:
-
-Interval Schedule
-~~~~~~~~~~~~~~~~~
-
+Schedule Execution Event
+^^^^^^^^^^^^^^^^^^^^^^^^
 .. code-block:: json
 
    {
-     "type": "interval",
-     "interval_seconds": 60,
-     "jitter_percentage": 10,
-     "start_immediately": true
-   }
-
-Daily Schedule
-~~~~~~~~~~~~~~
-
-.. code-block:: json
-
-   {
-     "type": "daily",
-     "time": "06:00",
-     "timezone": "UTC",
-     "skip_weekends": false
-   }
-
-Weekly Schedule
-~~~~~~~~~~~~~~~
-
-.. code-block:: json
-
-   {
-     "type": "weekly",
-     "days_of_week": ["mon", "wed", "fri"],
-     "time": "09:00",
-     "timezone": "America/New_York"
-   }
-
-Monthly Schedule
-~~~~~~~~~~~~~~~~
-
-.. code-block:: json
-
-   {
-     "type": "monthly",
-     "day_of_month": 15,
-     "time": "00:00",
-     "timezone": "UTC"
-   }
-
-Cron Schedule
-~~~~~~~~~~~~~
-
-.. code-block:: json
-
-   {
-     "type": "cron",
-     "cron_expression": "0 9-17 * * 1-5",
-     "timezone": "America/New_York"
-   }
-
-Sunrise/Sunset Schedule
-~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: json
-
-   {
-     "type": "sunrise",
-     "mode": "sunset",
-     "offset_minutes": -30,
-     "latitude": 40.7128,
-     "longitude": -74.0060
-   }
-
-Action Types Configuration
---------------------------
-
-Publish Action
-~~~~~~~~~~~~~~
-
-Publish data to MQTT topic.
-
-.. code-block:: json
-
-   {
-     "type": "publish",
-     "topic": "device/data",
-     "payload_template": "{\"value\": ${DATA}}",
-     "qos": 1,
-     "retain": false
-   }
-
-Log Action
-~~~~~~~~~~
-
-Write log messages.
-
-.. code-block:: json
-
-   {
-     "type": "log",
-     "message": "Job executed successfully",
-     "level": "info"
-   }
-
-Output Action
-~~~~~~~~~~~~~
-
-Control GPIO or relays.
-
-.. code-block:: json
-
-   {
-     "type": "output",
-     "relay": "relay_1",
-     "value": "on",
-     "duration_ms": 5000
-   }
-
-System Action
-~~~~~~~~~~~~~
-
-Execute system operations.
-
-.. code-block:: json
-
-   {
-     "type": "system",
-     "operation": "health_check",
-     "parameters": {
-       "check_services": true
+     "type": "schedule_event",
+     "timestamp": "2025-03-12T02:00:00Z",
+     "data": {
+       "schedule_id": "schedule_nightly",
+       "job_count": 3,
+       "status": "started"
      }
    }
 
-File Action
-~~~~~~~~~~~
-
-Perform file operations.
-
+Resource Alert Event
+^^^^^^^^^^^^^^^^^^^^
 .. code-block:: json
 
    {
-     "type": "file",
-     "operation": "rotate",
-     "pattern": "*.log",
-     "retain_days": 7
-   }
-
-Rule Action
-~~~~~~~~~~~
-
-Trigger rule engine.
-
-.. code-block:: json
-
-   {
-     "type": "rule",
-     "rule_node": "alert_generator",
-     "parameters": {
-       "severity": "high"
+     "type": "resource_alert",
+     "timestamp": "2025-03-12T15:15:00Z",
+     "data": {
+       "level": "warning",
+       "resource": "cpu",
+       "usage_percent": 85,
+       "message": "High CPU usage detected"
      }
    }
 
-Error Handling
---------------
+Route Summary
+-------------
 
-All error responses follow this format:
-
-.. sourcecode:: http
-
-   HTTP/1.1 400 Bad Request
-   Content-Type: application/json
+.. list-table:: Scheduler & Automation Routes
+   :header-rows: 1
+   :widths: 15 15 50 20
    
-   {
-     "success": false,
-     "error": "INVALID_REQUEST",
-     "message": "Human-readable error message",
-     "code": "ERROR_CODE",
-     "timestamp": "2025-03-12T15:10:30Z"
-   }
+   * - Type
+     - Method
+     - Route & Purpose
+     - Auth
+   * - Page
+     - GET
+     - ``/scheduler-automation`` - Main scheduler page
+     - Yes
+   * - Status
+     - GET
+     - ``/api/v1/scheduler/status`` - System status
+     - Yes
+   * - Jobs
+     - GET
+     - ``/api/v1/scheduler/jobs`` - List all jobs
+     - Yes
+   * - Jobs
+     - POST
+     - ``/api/v1/scheduler/jobs`` - Create job
+     - Yes
+   * - Jobs
+     - GET
+     - ``/api/v1/scheduler/jobs/{id}`` - Get job details
+     - Yes
+   * - Jobs
+     - PUT
+     - ``/api/v1/scheduler/jobs/{id}`` - Update job
+     - Yes
+   * - Jobs
+     - DELETE
+     - ``/api/v1/scheduler/jobs/{id}`` - Delete job
+     - Yes
+   * - Jobs
+     - POST
+     - ``/api/v1/scheduler/jobs/{id}/toggle`` - Toggle job
+     - Yes
+   * - Templates
+     - GET
+     - ``/api/v1/scheduler/templates`` - Get templates
+     - Yes
+   * - Tags
+     - GET
+     - ``/api/v1/scheduler/tags`` - Get tags
+     - Yes
+   * - Gateways
+     - GET
+     - ``/api/v1/scheduler/gateways`` - Get gateways
+     - Yes
+   * - Gateways
+     - GET
+     - ``/api/v1/scheduler/gateways/{id}/jobs`` - Get gateway jobs
+     - Yes
+   * - Schedules
+     - POST
+     - ``/api/v1/scheduler/schedules/validate`` - Validate schedule
+     - Yes
+   * - Conflicts
+     - POST
+     - ``/api/v1/scheduler/conflicts/check`` - Check conflicts
+     - Yes
+   * - Resources
+     - GET
+     - ``/api/v1/scheduler/resources/usage`` - Get resource usage
+     - Yes
+   * - Bulk Ops
+     - POST
+     - ``/api/v1/scheduler/jobs/run/all`` - Run all jobs
+     - Yes
+   * - Bulk Ops
+     - POST
+     - ``/api/v1/scheduler/jobs/disable/all`` - Disable all jobs
+     - Yes
+   * - Bulk Ops
+     - POST
+     - ``/api/v1/scheduler/jobs/reset/all`` - Reset all jobs
+     - Yes
+   * - Bulk Ops
+     - POST
+     - ``/api/v1/scheduler/jobs/export`` - Export jobs
+     - Yes
+   * - Bulk Ops
+     - POST
+     - ``/api/v1/scheduler/jobs/import`` - Import jobs
+     - Yes
+   * - History
+     - GET
+     - ``/api/v1/scheduler/jobs/{id}/history`` - Get job history
+     - Yes
+   * - History
+     - GET
+     - ``/api/v1/scheduler/jobs/{id}/logs`` - Get job logs
+     - Yes
+   * - History
+     - GET
+     - ``/api/v1/scheduler/jobs/{id}/metrics`` - Get job metrics
+     - Yes
+   * - History
+     - POST
+     - ``/api/v1/scheduler/jobs/{id}/run`` - Run job manually
+     - Yes
+   * - History
+     - GET
+     - ``/api/v1/scheduler/executions/{id}`` - Get execution status
+     - Yes
+   * - History
+     - GET
+     - ``/api/v1/scheduler/statistics`` - Get statistics
+     - Yes
+   * - Monitor
+     - GET
+     - ``/api/v1/scheduler/monitor/active`` - Get active executions
+     - Yes
+   * - Real-time
+     - WS
+     - ``/api/v1/scheduler/ws`` - WebSocket for real-time updates
+     - Yes
 
-Common Error Codes
-~~~~~~~~~~~~~~~~~~
+Complete User Flow
+------------------
 
-.. list-table:: Error Codes
+1. **User goes to page**: ``GET /scheduler-automation``
+   - Server renders HTML with embedded scheduler and job data
+   - All 8 sections populated with current data
+
+2. **User views system status**:
+   - Scheduler health and statistics
+   - Active jobs and success rates
+   - Resource usage monitoring
+
+3. **User manages jobs** (SECTION 1):
+   - View all jobs in table with filtering
+   - "Create New Job" → ``POST /api/v1/scheduler/jobs``
+   - "Edit Job" → ``PUT /api/v1/scheduler/jobs/{id}``
+   - "Delete Job" → ``DELETE /api/v1/scheduler/jobs/{id}``
+   - Toggle job status → ``POST /api/v1/scheduler/jobs/{id}/toggle``
+
+4. **User configures jobs** (SECTION 2):
+   - Select from job templates → ``GET /api/v1/scheduler/templates``
+   - Manage tags → ``GET /api/v1/scheduler/tags``
+   - Validate schedule → ``POST /api/v1/scheduler/schedules/validate``
+
+5. **User manages gateways** (SECTION 3):
+   - View available gateways → ``GET /api/v1/scheduler/gateways``
+   - View gateway jobs → ``GET /api/v1/scheduler/gateways/{id}/jobs``
+
+6. **User checks conflicts** (SECTION 5):
+   - Detect scheduling conflicts → ``POST /api/v1/scheduler/conflicts/check``
+   - Monitor resources → ``GET /api/v1/scheduler/resources/usage``
+
+7. **User performs bulk operations** (SECTION 6):
+   - "Run All Jobs" → ``POST /api/v1/scheduler/jobs/run/all``
+   - "Disable All Jobs" → ``POST /api/v1/scheduler/jobs/disable/all``
+   - "Reset All Jobs" → ``POST /api/v1/scheduler/jobs/reset/all``
+   - "Export Configurations" → ``POST /api/v1/scheduler/jobs/export``
+   - "Import Configurations" → ``POST /api/v1/scheduler/jobs/import``
+
+8. **User reviews history** (SECTION 7):
+   - View execution history → ``GET /api/v1/scheduler/jobs/{id}/history``
+   - Check job logs → ``GET /api/v1/scheduler/jobs/{id}/logs``
+   - View metrics → ``GET /api/v1/scheduler/jobs/{id}/metrics``
+   - "Run Job Now" → ``POST /api/v1/scheduler/jobs/{id}/run``
+   - Check execution status → ``GET /api/v1/scheduler/executions/{id}``
+   - View statistics → ``GET /api/v1/scheduler/statistics``
+
+9. **User monitors live** (SECTION 8):
+   - Active executions → ``GET /api/v1/scheduler/monitor/active``
+   - WebSocket connection → ``/api/v1/scheduler/ws``
+
+Error Codes
+-----------
+
+.. list-table:: Scheduler Error Codes
    :widths: 30 70
    :header-rows: 1
 
    * - Error Code
      - Description
-   * - **JOB_NOT_FOUND**
+   * - JOB_NOT_FOUND
      - Specified job does not exist
-   * - **SCHEDULE_CONFLICT**
+   * - SCHEDULE_CONFLICT
      - Job schedule conflicts with existing job
-   * - **INVALID_CRON_EXPRESSION**
+   * - INVALID_CRON_EXPRESSION
      - Invalid cron expression format
-   * - **MAX_JOBS_EXCEEDED**
+   * - MAX_JOBS_EXCEEDED
      - Maximum number of jobs exceeded
-   * - **RESOURCE_LIMIT_EXCEEDED**
+   * - RESOURCE_LIMIT_EXCEEDED
      - Job would exceed system resource limits
-   * - **ACTION_NOT_SUPPORTED**
+   * - ACTION_NOT_SUPPORTED
      - Requested action type not supported
-   * - **GATEWAY_OFFLINE**
+   * - GATEWAY_OFFLINE
      - Target gateway is offline
-   * - **EXECUTION_TIMEOUT**
+   * - EXECUTION_TIMEOUT
      - Job execution timed out
-   * - **VALIDATION_ERROR**
+   * - VALIDATION_ERROR
      - Request validation failed
-   * - **UNAUTHORIZED**
-     - Insufficient permissions
+   * - IMPORT_FAILED
+     - Job import failed
+   * - EXPORT_FAILED
+     - Job export failed
+   * - OPERATION_IN_PROGRESS
+     - Another operation is in progress
 
-Rate Limiting
--------------
+Authentication & Context
+------------------------
 
-.. list-table:: Rate Limits
-   :widths: 30 40 30
-   :header-rows: 1
+All endpoints require gateway context identification::
 
-   * - Endpoint Type
-     - Limit
-     - Window
-   * - **GET endpoints**
-     - 100 requests
-     - per minute
-   * - **POST/PUT endpoints**
-     - 20 requests
-     - per minute
-   * - **Job executions**
-     - 50 concurrent
-     - per gateway
-   * - **WebSocket connections**
-     - 5
-     - per client
+   Authorization: Bearer <token>
+   X-Gateway-ID: GW-3920A9
 
-Performance Limits
-------------------
+**Important**: This API only manages scheduler for the current gateway specified in `X-Gateway-ID` header.
 
-.. list-table:: Performance Limits
-   :widths: 30 40 30
-   :header-rows: 1
+Support Information
+-------------------
 
-   * - Parameter
-     - Default Limit
-     - Configurable
-   * - **Minimum interval**
-     - 1 second
-     - No
-   * - **Maximum concurrent jobs**
-     - 10
-     - Yes
-   * - **Maximum jobs per gateway**
-     - 100
-     - Yes
-   * - **Memory per job**
-     - 50MB
-     - Yes
-   * - **Execution timeout**
-     - 300 seconds
-     - Yes
+- **Scheduler Support**: scheduler-support@univa.com
+- **Automation Help**: +1 (555) 789-0999
+- **Support Hours**: 24/7 for critical automation failures
+- **Documentation**: https://docs.univa.com/scheduler
+- **Status Page**: https://status.univa.com/scheduler
 
-Examples
---------
-
-Python - Create Daily Job
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: python
-
-   import requests
-   
-   headers = {
-       "Authorization": "Bearer your_token",
-       "Content-Type": "application/json"
-   }
-   
-   job_config = {
-       "name": "Temperature Poll",
-       "type": "interval",
-       "enabled": True,
-       "gateway_id": "univa-gw-01",
-       "schedule": {
-           "interval_seconds": 30
-       },
-       "action": {
-           "type": "publish",
-           "topic": "sensors/temperature",
-           "payload_template": "{\"temp\": ${TEMP}}"
-       },
-       "tags": ["sensors", "polling"]
-   }
-   
-   response = requests.post(
-       "https://univa-gateway/api/v1/scheduler/jobs",
-       json=job_config,
-       headers=headers
-   )
-   
-   if response.status_code == 201:
-       result = response.json()
-       print(f"Job created: {result['data']['job_id']}")
-
-JavaScript - WebSocket Monitoring
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: javascript
-
-   const token = "your_jwt_token";
-   const ws = new WebSocket(`wss://univa-gateway/api/v1/scheduler/ws`);
-   
-   ws.onopen = () => {
-       console.log("Connected to scheduler WebSocket");
-       ws.send(JSON.stringify({
-           "type": "subscribe",
-           "gateway_id": "univa-gw-01",
-           "events": ["job_started", "job_completed", "job_failed"]
-       }));
-   };
-   
-   ws.onmessage = (event) => {
-       const data = JSON.parse(event.data);
-       
-       switch(data.event) {
-           case "job_started":
-               console.log(`Job ${data.data.job_name} started`);
-               break;
-           case "job_completed":
-               console.log(`Job ${data.data.job_name} completed: ${data.data.status}`);
-               break;
-           case "job_failed":
-               console.error(`Job ${data.data.job_name} failed: ${data.data.error}`);
-               break;
-       }
-   };
-
-Python - Bulk Operations
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: python
-
-   # Run all jobs on a gateway
-   run_response = requests.post(
-       "https://univa-gateway/api/v1/scheduler/jobs/run/all",
-       json={"gateway_id": "univa-gw-01", "sequential": True},
-       headers={"Authorization": "Bearer your_token"}
-   )
-   
-   # Get statistics
-   stats_response = requests.get(
-       "https://univa-gateway/api/v1/scheduler/statistics",
-       params={"gateway_id": "univa-gw-01", "time_range": "24h"},
-       headers={"Authorization": "Bearer your_token"}
-   )
-   
-   stats = stats_response.json()
-   print(f"Success rate: {stats['data']['statistics']['success_rate']}%")
-
-API Versioning
---------------
-
-The API uses URL versioning. The current version is v1.
-
-- Base URL: ``/api/v1/scheduler``
-- Breaking changes will increment the version number
-- Version is required in the URL path
-
-Deprecation Policy
-------------------
-
-- Deprecated endpoints will be marked in documentation
-- Deprecated endpoints will return ``X-API-Deprecated`` header
-- Minimum 6 months notice before removal
-- Alternative endpoints will be provided
-
-Changelog
----------
-
-v1.2.0 (2025-03-15)
-~~~~~~~~~~~~~~~~~~~~
-
-- Added gateway management endpoints
-- Added job execution logs endpoint
-- Added tag management API
-- Added reset all jobs endpoint
-- Enhanced conflict detection
-- Improved WebSocket events
-
-v1.1.0 (2025-02-28)
-~~~~~~~~~~~~~~~~~~~~
-
-- Added bulk operations API
-- Added resource monitoring endpoints
-- Enhanced error handling
-- Added rate limiting headers
-
-v1.0.0 (2025-01-15)
-~~~~~~~~~~~~~~~~~~~~
-
-- Initial release
-- Basic job management
-- Schedule types support
-- Action types configuration
-- WebSocket monitoring
-
-Support
--------
-
-- **Documentation**: https://docs.univagateway.com/api/scheduler
-- **API Status**: https://status.univagateway.com/scheduler
-- **Support Email**: scheduler-support@univagateway.com
-- **Issue Tracker**: https://github.com/univagateway/scheduler-api/issues
+---
+*Document last updated: March 15, 2025*
+*API Version: 1.0.0*
+*Scheduler Module Version: 2.5.0*

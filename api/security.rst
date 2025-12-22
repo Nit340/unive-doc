@@ -1,28 +1,76 @@
-Security & Access Control API
-==============================
+Security & Access Control
+=========================
 
-API for managing system security, user access control, authentication policies, and network security.
+This document describes the security and access control management page and its related API endpoints for managing user access, authentication policies, network security, and system protection.
 
-Base Path: /api/v1/security
+Page Route (Frontend)
+---------------------
 
-.. contents:: Table of Contents
-   :depth: 3
-   :local:
+.. http:get:: /security-access-control
 
-Overview
---------
+   **Description**: Renders the complete security and access control management page with all security information, user data, authentication settings, and network security embedded in the HTML.
 
-This API handles all security and access control operations for the current gateway. All endpoints operate on the current gateway context identified by the `X-Gateway-ID` header.
+   **Headers**:
 
-Security Status
-~~~~~~~~~~~~~~~
+   .. code-block:: http
 
-Get Security Status
-^^^^^^^^^^^^^^^^^^^
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: text/html
+      
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Security & Access Control - Univa Gateway</title>
+      </head>
+      <body>
+        <div id="app" data-security='{...}' data-users='[...]' data-settings='{...}' data-firewall='{...}'>
+          <!-- Security management page with:
+               SECTION A: Identity & Access Management
+               SECTION B: Authentication Policies
+               SECTION C: API Keys & Tokens
+               SECTION D: SSH Access Control
+               SECTION E: Firewall & Network Security
+               SECTION F: Certificate Management
+               SECTION G: Security Audit Log
+          -->
+        </div>
+      </body>
+      </html>
+
+   **How it works**:
+   - Server renders the HTML page with embedded security and user data
+   - All security status, user information, firewall rules, and audit logs are embedded
+   - JavaScript reads this data and renders the complete security management interface
+   - No separate API calls needed on initial page load
+   - Gateway context is provided via X-Gateway-ID header
+
+   **Error Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 302 Found
+      Location: /login
+
+API Endpoints (Backend)
+-----------------------
+
+These endpoints handle all security and access control operations triggered from the page. All endpoints operate on the current gateway context identified by the `X-Gateway-ID` header.
+
+Base Path: ``/api/v1/security``
+
+Security Status (Overview)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. http:get:: /api/v1/security/status
 
-   Get overall security status and component health.
+   **Description**: Get overall security status and component health.
    
    **UI Element**: Security status badge at top of page
    
@@ -41,27 +89,28 @@ Get Security Status
       Content-Type: application/json
       
       {
-        "security_level": "secure",
-        "security_score": 92,
-        "last_scan": "2025-03-15T10:30:00Z",
-        "issues_found": 0,
-        "components": {
-          "authentication": {"status": "good", "issues": 0},
-          "firewall": {"status": "good", "rules_active": 15},
-          "ssh": {"status": "good", "active_sessions": 1},
-          "certificates": {"status": "warning", "expiring_soon": 1}
-        }
+        "data": {
+          "security_level": "secure",
+          "security_score": 92,
+          "last_scan": "2025-03-15T10:30:00Z",
+          "issues_found": 0,
+          "components": {
+            "authentication": {"status": "good", "issues": 0},
+            "firewall": {"status": "good", "rules_active": 15},
+            "ssh": {"status": "good", "active_sessions": 1},
+            "certificates": {"status": "warning", "expiring_soon": 1}
+          }
+        },
+        "success": true,
+        "message": "Security status retrieved successfully"
       }
 
-Identity & Access Management (Section A)
------------------------------------------
-
-Get Users
-^^^^^^^^^
+Identity & Access Management (SECTION A)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. http:get:: /api/v1/security/users
 
-   Retrieve all system users for user table.
+   **Description**: Get all system users for user table.
    
    **UI Element**: SECTION A - User management table
    
@@ -80,30 +129,31 @@ Get Users
       Content-Type: application/json
       
       {
-        "users": [
-          {
-            "id": 1,
-            "username": "admin",
-            "full_name": "System Admin",
-            "email": "admin@innospace.com",
-            "role": "admin",
-            "status": "online",
-            "last_login": "2025-03-15T10:15:00Z",
-            "login_count": 127,
-            "two_factor_enabled": true,
-            "created_at": "2024-01-15T09:00:00Z"
-          }
-        ],
-        "total": 8,
-        "active": 7
+        "data": {
+          "users": [
+            {
+              "id": 1,
+              "username": "admin",
+              "full_name": "System Admin",
+              "email": "admin@innospace.com",
+              "role": "admin",
+              "status": "online",
+              "last_login": "2025-03-15T10:15:00Z",
+              "login_count": 127,
+              "two_factor_enabled": true,
+              "created_at": "2024-01-15T09:00:00Z"
+            }
+          ],
+          "total": 8,
+          "active": 7
+        },
+        "success": true,
+        "message": "Users retrieved successfully"
       }
-
-Create User
-^^^^^^^^^^^
 
 .. http:post:: /api/v1/security/users
 
-   Create new user from "Add User" modal.
+   **Description**: Create new user from "Add User" modal.
    
    **UI Element**: SECTION A - "Add User" button modal
    
@@ -136,17 +186,17 @@ Create User
       Content-Type: application/json
       
       {
-        "created": true,
-        "user_id": 9,
+        "data": {
+          "created": true,
+          "user_id": 9
+        },
+        "success": true,
         "message": "User created successfully"
       }
 
-Update User
-^^^^^^^^^^^
-
 .. http:put:: /api/v1/security/users/{user_id}
 
-   Update user from "Edit User" modal.
+   **Description**: Update user from "Edit User" modal.
    
    **UI Element**: SECTION A - "Edit" button in user table
    
@@ -181,16 +231,16 @@ Update User
       Content-Type: application/json
       
       {
-        "updated": true,
+        "data": {
+          "updated": true
+        },
+        "success": true,
         "message": "User updated successfully"
       }
 
-Delete User
-^^^^^^^^^^^
-
 .. http:delete:: /api/v1/security/users/{user_id}
 
-   Delete user from "Edit User" modal.
+   **Description**: Delete user from "Edit User" modal.
    
    **UI Element**: SECTION A - "Delete" button in user table
    
@@ -213,16 +263,16 @@ Delete User
       Content-Type: application/json
       
       {
-        "deleted": true,
+        "data": {
+          "deleted": true
+        },
+        "success": true,
         "message": "User deleted successfully"
       }
 
-Get Roles
-^^^^^^^^^
-
 .. http:get:: /api/v1/security/roles
 
-   Get all roles for sidebar display.
+   **Description**: Get all roles for sidebar display.
    
    **UI Element**: SECTION A - Role list sidebar
    
@@ -241,27 +291,28 @@ Get Roles
       Content-Type: application/json
       
       {
-        "roles": [
-          {
-            "name": "Admin",
-            "description": "Full system access",
-            "permissions": ["*"],
-            "user_count": 1,
-            "default": false,
-            "protected": true
-          }
-        ]
+        "data": {
+          "roles": [
+            {
+              "name": "Admin",
+              "description": "Full system access",
+              "permissions": ["*"],
+              "user_count": 1,
+              "default": false,
+              "protected": true
+            }
+          ]
+        },
+        "success": true,
+        "message": "Roles retrieved successfully"
       }
 
-Authentication Policies (Section B)
------------------------------------
-
-Get Authentication Settings
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Authentication Policies (SECTION B)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. http:get:: /api/v1/security/authentication/settings
 
-   Get all authentication policy settings.
+   **Description**: Get all authentication policy settings.
    
    **UI Element**: SECTION B - Authentication policies form
    
@@ -280,34 +331,35 @@ Get Authentication Settings
       Content-Type: application/json
       
       {
-        "password_policy": {
-          "min_length": 8,
-          "expiry_days": 90,
-          "require_special_chars": true,
-          "require_numbers": true,
-          "require_uppercase": true,
-          "prevent_reuse": false
+        "data": {
+          "password_policy": {
+            "min_length": 8,
+            "expiry_days": 90,
+            "require_special_chars": true,
+            "require_numbers": true,
+            "require_uppercase": true,
+            "prevent_reuse": false
+          },
+          "account_protection": {
+            "lockout_attempts": 5,
+            "lockout_duration": 15,
+            "captcha_enabled": false
+          },
+          "session_settings": {
+            "timeout_minutes": 15,
+            "max_concurrent_sessions": 3
+          },
+          "two_factor": {
+            "mode": "optional"
+          }
         },
-        "account_protection": {
-          "lockout_attempts": 5,
-          "lockout_duration": 15,
-          "captcha_enabled": false
-        },
-        "session_settings": {
-          "timeout_minutes": 15,
-          "max_concurrent_sessions": 3
-        },
-        "two_factor": {
-          "mode": "optional"
-        }
+        "success": true,
+        "message": "Authentication settings retrieved successfully"
       }
-
-Update Authentication Settings
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. http:post:: /api/v1/security/authentication/settings
 
-   Save authentication policy changes.
+   **Description**: Save authentication policy changes.
    
    **UI Element**: SECTION B - "Save Settings" button
    
@@ -346,16 +398,16 @@ Update Authentication Settings
       Content-Type: application/json
       
       {
-        "updated": true,
+        "data": {
+          "updated": true
+        },
+        "success": true,
         "message": "Authentication settings updated successfully"
       }
 
-Test Password Strength
-^^^^^^^^^^^^^^^^^^^^^^
-
 .. http:post:: /api/v1/security/authentication/test-password
 
-   Test password strength.
+   **Description**: Test password strength.
    
    **UI Element**: SECTION A - Password strength indicator
    
@@ -383,21 +435,22 @@ Test Password Strength
       Content-Type: application/json
       
       {
-        "strength": "strong",
-        "score": 92,
-        "meets_policy": true,
-        "issues": []
+        "data": {
+          "strength": "strong",
+          "score": 92,
+          "meets_policy": true,
+          "issues": []
+        },
+        "success": true,
+        "message": "Password test completed"
       }
 
-API Keys & Tokens (Section C)
------------------------------
-
-Get API Keys
-^^^^^^^^^^^^
+API Keys & Tokens (SECTION C)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. http:get:: /api/v1/security/api-keys
 
-   Get all API keys for table display.
+   **Description**: Get all API keys for table display.
    
    **UI Element**: SECTION C - API key table (left panel)
    
@@ -416,29 +469,30 @@ Get API Keys
       Content-Type: application/json
       
       {
-        "api_keys": [
-          {
-            "id": 1,
-            "name": "CI Pipeline",
-            "key_prefix": "AK-001",
-            "scope": ["telemetry:write"],
-            "user": "admin",
-            "created": "2025-01-15T10:30:00Z",
-            "last_used": "2025-03-15T09:45:00Z",
-            "expires": "2026-06-01T00:00:00Z",
-            "status": "active"
-          }
-        ],
-        "total": 8,
-        "active": 5
+        "data": {
+          "api_keys": [
+            {
+              "id": 1,
+              "name": "CI Pipeline",
+              "key_prefix": "AK-001",
+              "scope": ["telemetry:write"],
+              "user": "admin",
+              "created": "2025-01-15T10:30:00Z",
+              "last_used": "2025-03-15T09:45:00Z",
+              "expires": "2026-06-01T00:00:00Z",
+              "status": "active"
+            }
+          ],
+          "total": 8,
+          "active": 5
+        },
+        "success": true,
+        "message": "API keys retrieved successfully"
       }
-
-Generate API Key
-^^^^^^^^^^^^^^^^
 
 .. http:post:: /api/v1/security/api-keys
 
-   Generate new API key from modal.
+   **Description**: Generate new API key from modal.
    
    **UI Element**: SECTION C - "Generate New API Key" button
    
@@ -468,22 +522,22 @@ Generate API Key
       Content-Type: application/json
       
       {
-        "generated": true,
-        "api_key": {
-          "id": 9,
-          "name": "Webhook Integration",
-          "full_key": "sk_9b3e7c2a1d8f5e6c4b9a2d7e1c3f8a5b",
-          "key_prefix": "AK-009"
+        "data": {
+          "generated": true,
+          "api_key": {
+            "id": 9,
+            "name": "Webhook Integration",
+            "full_key": "sk_9b3e7c2a1d8f5e6c4b9a2d7e1c3f8a5b",
+            "key_prefix": "AK-009"
+          }
         },
-        "warning": "Store this key securely"
+        "success": true,
+        "message": "API key generated successfully"
       }
-
-Revoke API Key
-^^^^^^^^^^^^^^
 
 .. http:post:: /api/v1/security/api-keys/{key_id}/revoke
 
-   Revoke API key from table actions.
+   **Description**: Revoke API key from table actions.
    
    **UI Element**: SECTION C - "Revoke" button in API key table
    
@@ -515,16 +569,16 @@ Revoke API Key
       Content-Type: application/json
       
       {
-        "revoked": true,
+        "data": {
+          "revoked": true
+        },
+        "success": true,
         "message": "API key revoked successfully"
       }
 
-Get Token Settings
-^^^^^^^^^^^^^^^^^^
-
 .. http:get:: /api/v1/security/tokens/settings
 
-   Get token settings for form.
+   **Description**: Get token settings for form.
    
    **UI Element**: SECTION C - Token settings form (right panel)
    
@@ -543,24 +597,25 @@ Get Token Settings
       Content-Type: application/json
       
       {
-        "token_expiry_days": 30,
-        "permissions": {
-          "read_data": true,
-          "write_config": true,
-          "ota_access": false,
-          "terminal_access": false,
-          "alert_management": true,
-          "user_management": false
+        "data": {
+          "token_expiry_days": 30,
+          "permissions": {
+            "read_data": true,
+            "write_config": true,
+            "ota_access": false,
+            "terminal_access": false,
+            "alert_management": true,
+            "user_management": false
+          },
+          "webhook_secret": "whsec_abc123def456"
         },
-        "webhook_secret": "whsec_abc123def456"
+        "success": true,
+        "message": "Token settings retrieved successfully"
       }
-
-Update Token Settings
-^^^^^^^^^^^^^^^^^^^^^
 
 .. http:post:: /api/v1/security/tokens/settings
 
-   Update token settings.
+   **Description**: Update token settings.
    
    **UI Element**: SECTION C - "Update Token Settings" button
    
@@ -591,16 +646,16 @@ Update Token Settings
       Content-Type: application/json
       
       {
-        "updated": true,
+        "data": {
+          "updated": true
+        },
+        "success": true,
         "message": "Token settings updated successfully"
       }
 
-Regenerate Webhook Secret
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
 .. http:post:: /api/v1/security/tokens/regenerate-secret
 
-   Regenerate webhook signing secret.
+   **Description**: Regenerate webhook signing secret.
    
    **UI Element**: SECTION C - "Regenerate Secret" button
    
@@ -628,20 +683,20 @@ Regenerate Webhook Secret
       Content-Type: application/json
       
       {
-        "regenerated": true,
-        "new_secret": "whsec_xyz789uvw012",
-        "message": "Webhook secret regenerated"
+        "data": {
+          "regenerated": true,
+          "new_secret": "whsec_xyz789uvw012"
+        },
+        "success": true,
+        "message": "Webhook secret regenerated successfully"
       }
 
-SSH Access Control (Section D)
-------------------------------
-
-Get SSH Settings
-^^^^^^^^^^^^^^^^
+SSH Access Control (SECTION D)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. http:get:: /api/v1/security/ssh/settings
 
-   Get SSH configuration for form.
+   **Description**: Get SSH configuration for form.
    
    **UI Element**: SECTION D - SSH configuration form
    
@@ -660,21 +715,22 @@ Get SSH Settings
       Content-Type: application/json
       
       {
-        "enabled": true,
-        "port": 22,
-        "login_method": "key",
-        "restricted_shell": true,
-        "session_timeout": 30,
-        "max_sessions_per_user": 3,
-        "allowed_commands": ["ls", "cat", "ifconfig", "ping"]
+        "data": {
+          "enabled": true,
+          "port": 22,
+          "login_method": "key",
+          "restricted_shell": true,
+          "session_timeout": 30,
+          "max_sessions_per_user": 3,
+          "allowed_commands": ["ls", "cat", "ifconfig", "ping"]
+        },
+        "success": true,
+        "message": "SSH settings retrieved successfully"
       }
-
-Update SSH Settings
-^^^^^^^^^^^^^^^^^^^
 
 .. http:post:: /api/v1/security/ssh/settings
 
-   Save SSH configuration changes.
+   **Description**: Save SSH configuration changes.
    
    **UI Element**: SECTION D - "Save SSH Settings" button
    
@@ -707,16 +763,16 @@ Update SSH Settings
       Content-Type: application/json
       
       {
-        "updated": true,
+        "data": {
+          "updated": true
+        },
+        "success": true,
         "message": "SSH settings updated successfully"
       }
 
-Upload SSH Public Key
-^^^^^^^^^^^^^^^^^^^^^
-
 .. http:post:: /api/v1/security/ssh/keys
 
-   Upload SSH public key for authentication.
+   **Description**: Upload SSH public key for authentication.
    
    **UI Element**: SECTION D - "Upload SSH Key" button
    
@@ -728,15 +784,9 @@ Upload SSH Public Key
       X-Gateway-ID: GW-3920A9
       Content-Type: multipart/form-data
 
-   **Request**:
+   **Form Parameters**:
 
-   .. sourcecode:: http
-
-      POST /api/v1/security/ssh/keys HTTP/1.1
-      Authorization: Bearer <token>
-      X-Gateway-ID: GW-3920A9
-      Content-Type: multipart/form-data
-      Content-Disposition: form-data; name="file"; filename="id_rsa.pub"
+   * **file** (required): SSH public key file
 
    **Response**:
 
@@ -746,17 +796,17 @@ Upload SSH Public Key
       Content-Type: application/json
       
       {
-        "uploaded": true,
-        "fingerprint": "SHA256:AbCdEfGhIjKlMnOpQrStUvWxYz1234567890",
-        "message": "SSH public key uploaded"
+        "data": {
+          "uploaded": true,
+          "fingerprint": "SHA256:AbCdEfGhIjKlMnOpQrStUvWxYz1234567890"
+        },
+        "success": true,
+        "message": "SSH public key uploaded successfully"
       }
-
-Get SSH Sessions
-^^^^^^^^^^^^^^^^
 
 .. http:get:: /api/v1/security/ssh/sessions
 
-   Get active SSH sessions for monitoring.
+   **Description**: Get active SSH sessions for monitoring.
    
    **UI Element**: SECTION D - Active SSH sessions monitoring
    
@@ -775,27 +825,28 @@ Get SSH Sessions
       Content-Type: application/json
       
       {
-        "active_sessions": [
-          {
-            "session_id": "ssh-001",
-            "username": "admin",
-            "client_ip": "192.168.1.100",
-            "started": "2025-03-15T09:30:00Z",
-            "duration": "00:45:30"
-          }
-        ],
-        "total_sessions_today": 5
+        "data": {
+          "active_sessions": [
+            {
+              "session_id": "ssh-001",
+              "username": "admin",
+              "client_ip": "192.168.1.100",
+              "started": "2025-03-15T09:30:00Z",
+              "duration": "00:45:30"
+            }
+          ],
+          "total_sessions_today": 5
+        },
+        "success": true,
+        "message": "SSH sessions retrieved successfully"
       }
 
-Firewall & Network Security (Section E)
----------------------------------------
-
-Get Firewall Status
-^^^^^^^^^^^^^^^^^^^
+Firewall & Network Security (SECTION E)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. http:get:: /api/v1/security/firewall
 
-   Get firewall status and rules.
+   **Description**: Get firewall status and rules.
    
    **UI Element**: SECTION E - Firewall rules table
    
@@ -814,32 +865,33 @@ Get Firewall Status
       Content-Type: application/json
       
       {
-        "enabled": true,
-        "rules": [
-          {
-            "id": 1,
-            "name": "SSH Management Access",
-            "port": "22",
-            "protocol": "TCP",
-            "source": "192.168.1.0/24",
-            "action": "allow"
+        "data": {
+          "enabled": true,
+          "rules": [
+            {
+              "id": 1,
+              "name": "SSH Management Access",
+              "port": "22",
+              "protocol": "TCP",
+              "source": "192.168.1.0/24",
+              "action": "allow"
+            }
+          ],
+          "ip_whitelist": ["192.168.0.0/24", "10.0.0.5"],
+          "blocked_ports": [23, 21, 8000],
+          "security_features": {
+            "rate_limiting": {"enabled": true, "requests_per_second": 20},
+            "dos_protection": true,
+            "vpn_enabled": false
           }
-        ],
-        "ip_whitelist": ["192.168.0.0/24", "10.0.0.5"],
-        "blocked_ports": [23, 21, 8000],
-        "security_features": {
-          "rate_limiting": {"enabled": true, "requests_per_second": 20},
-          "dos_protection": true,
-          "vpn_enabled": false
-        }
+        },
+        "success": true,
+        "message": "Firewall status retrieved successfully"
       }
-
-Add Firewall Rule
-^^^^^^^^^^^^^^^^^
 
 .. http:post:: /api/v1/security/firewall/rules
 
-   Add new firewall rule from modal.
+   **Description**: Add new firewall rule from modal.
    
    **UI Element**: SECTION E - "Add Firewall Rule" button
    
@@ -871,17 +923,17 @@ Add Firewall Rule
       Content-Type: application/json
       
       {
-        "added": true,
-        "rule_id": 16,
+        "data": {
+          "added": true,
+          "rule_id": 16
+        },
+        "success": true,
         "message": "Firewall rule added successfully"
       }
 
-Remove Firewall Rule
-^^^^^^^^^^^^^^^^^^^^
-
 .. http:delete:: /api/v1/security/firewall/rules/{rule_id}
 
-   Remove firewall rule from table.
+   **Description**: Remove firewall rule from table.
    
    **UI Element**: SECTION E - "Delete" button in firewall rules table
    
@@ -904,16 +956,16 @@ Remove Firewall Rule
       Content-Type: application/json
       
       {
-        "removed": true,
+        "data": {
+          "removed": true
+        },
+        "success": true,
         "message": "Firewall rule removed successfully"
       }
 
-Manage IP Whitelist
-^^^^^^^^^^^^^^^^^^^
-
 .. http:post:: /api/v1/security/firewall/whitelist
 
-   Add or remove IP addresses from whitelist.
+   **Description**: Add or remove IP addresses from whitelist.
    
    **UI Element**: SECTION E - IP whitelist management sidebar
    
@@ -942,18 +994,18 @@ Manage IP Whitelist
       Content-Type: application/json
       
       {
-        "updated": true,
-        "action": "added",
-        "ip_address": "10.0.1.0/24",
+        "data": {
+          "updated": true,
+          "action": "added",
+          "ip_address": "10.0.1.0/24"
+        },
+        "success": true,
         "message": "IP address added to whitelist"
       }
 
-Manage Blocked Ports
-^^^^^^^^^^^^^^^^^^^^
-
 .. http:post:: /api/v1/security/firewall/ports
 
-   Block or unblock network ports.
+   **Description**: Block or unblock network ports.
    
    **UI Element**: SECTION E - Blocked ports management sidebar
    
@@ -983,18 +1035,18 @@ Manage Blocked Ports
       Content-Type: application/json
       
       {
-        "updated": true,
-        "action": "blocked",
-        "port": 8080,
+        "data": {
+          "updated": true,
+          "action": "blocked",
+          "port": 8080
+        },
+        "success": true,
         "message": "Port blocked successfully"
       }
 
-Update Firewall Settings
-^^^^^^^^^^^^^^^^^^^^^^^^
-
 .. http:post:: /api/v1/security/firewall/settings
 
-   Update firewall configuration.
+   **Description**: Update firewall configuration.
    
    **UI Element**: SECTION E - "Update Firewall Settings" button
    
@@ -1028,19 +1080,19 @@ Update Firewall Settings
       Content-Type: application/json
       
       {
-        "updated": true,
+        "data": {
+          "updated": true
+        },
+        "success": true,
         "message": "Firewall settings updated successfully"
       }
 
-Certificate Management (Section F)
-----------------------------------
-
-Get Certificates Status
-^^^^^^^^^^^^^^^^^^^^^^^
+Certificate Management (SECTION F)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. http:get:: /api/v1/security/certificates/status
 
-   Get status of all certificates.
+   **Description**: Get status of all certificates.
    
    **UI Element**: SECTION F - Certificate status display
    
@@ -1059,29 +1111,30 @@ Get Certificates Status
       Content-Type: application/json
       
       {
-        "https_certificate": {
-          "present": true,
-          "valid_to": "2028-01-01T00:00:00Z",
-          "days_remaining": 1020,
-          "status": "valid"
+        "data": {
+          "https_certificate": {
+            "present": true,
+            "valid_to": "2028-01-01T00:00:00Z",
+            "days_remaining": 1020,
+            "status": "valid"
+          },
+          "mqtt_certificate": {
+            "present": true,
+            "valid_to": "2025-03-29T00:00:00Z",
+            "days_remaining": 14,
+            "status": "expiring"
+          },
+          "settings": {
+            "auto_renew": false
+          }
         },
-        "mqtt_certificate": {
-          "present": true,
-          "valid_to": "2025-03-29T00:00:00Z",
-          "days_remaining": 14,
-          "status": "expiring"
-        },
-        "settings": {
-          "auto_renew": false
-        }
+        "success": true,
+        "message": "Certificate status retrieved successfully"
       }
-
-Upload Certificate
-^^^^^^^^^^^^^^^^^^
 
 .. http:post:: /api/v1/security/certificates/upload
 
-   Upload SSL/TLS certificate files.
+   **Description**: Upload SSL/TLS certificate files.
    
    **UI Element**: SECTION F - "Upload Certificate" button
    
@@ -1093,17 +1146,11 @@ Upload Certificate
       X-Gateway-ID: GW-3920A9
       Content-Type: multipart/form-data
 
-   **Request**:
+   **Form Parameters**:
 
-   .. sourcecode:: http
-
-      POST /api/v1/security/certificates/upload HTTP/1.1
-      Authorization: Bearer <token>
-      X-Gateway-ID: GW-3920A9
-      Content-Type: multipart/form-data
-      Content-Disposition: form-data; name="certificate"; filename="server.crt"
-      Content-Disposition: form-data; name="private_key"; filename="server.key"
-      Content-Disposition: form-data; name="type"; filename="https"
+   * **certificate** (required): Certificate file (.crt, .pem)
+   * **private_key** (required): Private key file (.key)
+   * **type** (required): Certificate type (https, mqtt)
 
    **Response**:
 
@@ -1113,20 +1160,20 @@ Upload Certificate
       Content-Type: application/json
       
       {
-        "uploaded": true,
-        "certificate_info": {
-          "subject": "CN=gateway.example.com",
-          "valid_to": "2025-06-13T00:00:00Z"
+        "data": {
+          "uploaded": true,
+          "certificate_info": {
+            "subject": "CN=gateway.example.com",
+            "valid_to": "2025-06-13T00:00:00Z"
+          }
         },
+        "success": true,
         "message": "Certificate uploaded successfully"
       }
 
-Update Certificate Settings
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
 .. http:post:: /api/v1/security/certificates/settings
 
-   Update certificate management settings.
+   **Description**: Update certificate management settings.
    
    **UI Element**: SECTION F - Certificate settings section
    
@@ -1156,19 +1203,19 @@ Update Certificate Settings
       Content-Type: application/json
       
       {
-        "updated": true,
+        "data": {
+          "updated": true
+        },
+        "success": true,
         "message": "Certificate settings updated successfully"
       }
 
-Security Audit Log (Section G)
-------------------------------
-
-Get Audit Log
-^^^^^^^^^^^^^
+Security Audit Log (SECTION G)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. http:get:: /api/v1/security/audit/logs
 
-   Get security audit logs for table.
+   **Description**: Get security audit logs for table.
    
    **UI Element**: SECTION G - Audit log table
    
@@ -1187,26 +1234,27 @@ Get Audit Log
       Content-Type: application/json
       
       {
-        "logs": [
-          {
-            "timestamp": "2025-03-15T10:15:00Z",
-            "user": "admin",
-            "event": "Login",
-            "resource": "/api/auth/login",
-            "ip_address": "192.168.1.100",
-            "status": "success"
-          }
-        ],
-        "total": 125,
-        "filtered": 1
+        "data": {
+          "logs": [
+            {
+              "timestamp": "2025-03-15T10:15:00Z",
+              "user": "admin",
+              "event": "Login",
+              "resource": "/api/auth/login",
+              "ip_address": "192.168.1.100",
+              "status": "success"
+            }
+          ],
+          "total": 125,
+          "filtered": 1
+        },
+        "success": true,
+        "message": "Audit logs retrieved successfully"
       }
-
-Export Audit Log
-^^^^^^^^^^^^^^^^
 
 .. http:get:: /api/v1/security/audit/export
 
-   Export audit logs to CSV file.
+   **Description**: Export audit logs to CSV file.
    
    **UI Element**: SECTION G - "Export CSV" button
    
@@ -1228,12 +1276,9 @@ Export Audit Log
       timestamp,user,event,resource,ip_address,status
       2025-03-15T10:15:00Z,admin,Login,/api/auth/login,192.168.1.100,success
 
-Get Audit Statistics
-^^^^^^^^^^^^^^^^^^^^
-
 .. http:get:: /api/v1/security/audit/stats
 
-   Get audit log statistics.
+   **Description**: Get audit log statistics.
    
    **UI Element**: SECTION G - Statistics summary
    
@@ -1252,30 +1297,31 @@ Get Audit Statistics
       Content-Type: application/json
       
       {
-        "last_24_hours": {
-          "total_events": 45,
-          "successful": 42,
-          "failed": 3,
-          "login_attempts": 15,
-          "ssh_sessions": 8
+        "data": {
+          "last_24_hours": {
+            "total_events": 45,
+            "successful": 42,
+            "failed": 3,
+            "login_attempts": 15,
+            "ssh_sessions": 8
+          },
+          "top_users": [
+            {"username": "admin", "events": 25}
+          ],
+          "top_ips": [
+            {"ip": "192.168.1.100", "events": 30}
+          ]
         },
-        "top_users": [
-          {"username": "admin", "events": 25}
-        ],
-        "top_ips": [
-          {"ip": "192.168.1.100", "events": 30}
-        ]
+        "success": true,
+        "message": "Audit statistics retrieved successfully"
       }
 
 Security Operations
--------------------
-
-Run Security Scan
-^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~
 
 .. http:post:: /api/v1/security/scan
 
-   Run security vulnerability scan.
+   **Description**: Run security vulnerability scan.
    
    **UI Element**: Footer - "Run Security Scan" button
    
@@ -1304,18 +1350,19 @@ Run Security Scan
       Content-Type: application/json
       
       {
-        "started": true,
-        "scan_id": "scan-20250315-001",
-        "started_at": "2025-03-15T10:30:00Z",
-        "estimated_completion": "2025-03-15T10:35:00Z"
+        "data": {
+          "started": true,
+          "scan_id": "scan-20250315-001",
+          "started_at": "2025-03-15T10:30:00Z",
+          "estimated_completion": "2025-03-15T10:35:00Z"
+        },
+        "success": true,
+        "message": "Security scan started"
       }
-
-Get Scan Results
-^^^^^^^^^^^^^^^^
 
 .. http:get:: /api/v1/security/scan/results
 
-   Get security scan results.
+   **Description**: Get security scan results.
    
    **UI Element**: Footer - Security scan results display
    
@@ -1334,30 +1381,31 @@ Get Scan Results
       Content-Type: application/json
       
       {
-        "scan_id": "scan-20250315-001",
-        "results": {
-          "authentication": {
-            "status": "pass",
-            "score": 95,
-            "issues": 0
+        "data": {
+          "scan_id": "scan-20250315-001",
+          "results": {
+            "authentication": {
+              "status": "pass",
+              "score": 95,
+              "issues": 0
+            },
+            "firewall": {
+              "status": "warning",
+              "score": 80,
+              "issues": 2
+            }
           },
-          "firewall": {
-            "status": "warning",
-            "score": 80,
-            "issues": 2
-          }
+          "total_issues": 4,
+          "security_score": 84,
+          "recommendations": ["Enable 2FA for all users"]
         },
-        "total_issues": 4,
-        "security_score": 84,
-        "recommendations": ["Enable 2FA for all users"]
+        "success": true,
+        "message": "Security scan results retrieved"
       }
-
-Lock System
-^^^^^^^^^^^
 
 .. http:post:: /api/v1/security/lock
 
-   Lock system access (emergency).
+   **Description**: Lock system access (emergency).
    
    **UI Element**: Footer - "Lock System" button
    
@@ -1386,17 +1434,17 @@ Lock System
       Content-Type: application/json
       
       {
-        "locked": true,
-        "locked_until": "2025-03-15T11:00:00Z",
+        "data": {
+          "locked": true,
+          "locked_until": "2025-03-15T11:00:00Z"
+        },
+        "success": true,
         "message": "System locked successfully"
       }
 
-Reset Security Settings
-^^^^^^^^^^^^^^^^^^^^^^^
-
 .. http:post:: /api/v1/security/reset
 
-   Reset security settings to defaults.
+   **Description**: Reset security settings to defaults.
    
    **UI Element**: Footer - "Reset to Default" button
    
@@ -1425,16 +1473,16 @@ Reset Security Settings
       Content-Type: application/json
       
       {
-        "reset": true,
+        "data": {
+          "reset": true
+        },
+        "success": true,
         "message": "Security settings reset to defaults"
       }
 
-Save All Security Settings
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
 .. http:post:: /api/v1/security/settings/save-all
 
-   Save all security settings at once.
+   **Description**: Save all security settings at once.
    
    **UI Element**: Footer - "Save Security Settings" button
    
@@ -1476,17 +1524,17 @@ Save All Security Settings
       Content-Type: application/json
       
       {
-        "saved": true,
-        "timestamp": "2025-03-15T10:30:00Z",
+        "data": {
+          "saved": true,
+          "timestamp": "2025-03-15T10:30:00Z"
+        },
+        "success": true,
         "message": "All security settings saved"
       }
 
-Backup Security Configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
 .. http:get:: /api/v1/security/backup
 
-   Backup security configuration.
+   **Description**: Backup security configuration.
    
    **UI Element**: Footer - "Backup Configuration" button
    
@@ -1505,16 +1553,239 @@ Backup Security Configuration
       Content-Type: application/json
       
       {
-        "backup_id": "backup-20250315-001",
-        "filename": "security_backup_20250315.tar.gz",
-        "download_url": "/api/v1/security/backup/download/backup-20250315-001",
-        "size": "1.5 MB"
+        "data": {
+          "backup_id": "backup-20250315-001",
+          "filename": "security_backup_20250315.tar.gz",
+          "download_url": "/api/v1/security/backup/download/backup-20250315-001",
+          "size": "1.5 MB"
+        },
+        "success": true,
+        "message": "Security configuration backup created"
       }
+
+Route Summary
+-------------
+
+.. list-table:: Security & Access Control Routes
+   :header-rows: 1
+   :widths: 15 15 50 20
+   
+   * - Type
+     - Method
+     - Route & Purpose
+     - Auth
+   * - Page
+     - GET
+     - ``/security-access-control`` - Main security page
+     - Yes
+   * - Security Status
+     - GET
+     - ``/api/v1/security/status`` - Security overview
+     - Yes
+   * - Users
+     - GET
+     - ``/api/v1/security/users`` - Get all users
+     - Yes
+   * - Users
+     - POST
+     - ``/api/v1/security/users`` - Create user
+     - Yes
+   * - Users
+     - PUT
+     - ``/api/v1/security/users/{id}`` - Update user
+     - Yes
+   * - Users
+     - DELETE
+     - ``/api/v1/security/users/{id}`` - Delete user
+     - Yes
+   * - Roles
+     - GET
+     - ``/api/v1/security/roles`` - Get roles
+     - Yes
+   * - Authentication
+     - GET
+     - ``/api/v1/security/authentication/settings`` - Get auth settings
+     - Yes
+   * - Authentication
+     - POST
+     - ``/api/v1/security/authentication/settings`` - Update auth settings
+     - Yes
+   * - Authentication
+     - POST
+     - ``/api/v1/security/authentication/test-password`` - Test password
+     - Yes
+   * - API Keys
+     - GET
+     - ``/api/v1/security/api-keys`` - Get API keys
+     - Yes
+   * - API Keys
+     - POST
+     - ``/api/v1/security/api-keys`` - Generate API key
+     - Yes
+   * - API Keys
+     - POST
+     - ``/api/v1/security/api-keys/{id}/revoke`` - Revoke API key
+     - Yes
+   * - Tokens
+     - GET
+     - ``/api/v1/security/tokens/settings`` - Get token settings
+     - Yes
+   * - Tokens
+     - POST
+     - ``/api/v1/security/tokens/settings`` - Update token settings
+     - Yes
+   * - Tokens
+     - POST
+     - ``/api/v1/security/tokens/regenerate-secret`` - Regenerate webhook secret
+     - Yes
+   * - SSH
+     - GET
+     - ``/api/v1/security/ssh/settings`` - Get SSH settings
+     - Yes
+   * - SSH
+     - POST
+     - ``/api/v1/security/ssh/settings`` - Update SSH settings
+     - Yes
+   * - SSH
+     - POST
+     - ``/api/v1/security/ssh/keys`` - Upload SSH key
+     - Yes
+   * - SSH
+     - GET
+     - ``/api/v1/security/ssh/sessions`` - Get SSH sessions
+     - Yes
+   * - Firewall
+     - GET
+     - ``/api/v1/security/firewall`` - Get firewall status
+     - Yes
+   * - Firewall
+     - POST
+     - ``/api/v1/security/firewall/rules`` - Add firewall rule
+     - Yes
+   * - Firewall
+     - DELETE
+     - ``/api/v1/security/firewall/rules/{id}`` - Remove firewall rule
+     - Yes
+   * - Firewall
+     - POST
+     - ``/api/v1/security/firewall/whitelist`` - Manage IP whitelist
+     - Yes
+   * - Firewall
+     - POST
+     - ``/api/v1/security/firewall/ports`` - Manage blocked ports
+     - Yes
+   * - Firewall
+     - POST
+     - ``/api/v1/security/firewall/settings`` - Update firewall settings
+     - Yes
+   * - Certificates
+     - GET
+     - ``/api/v1/security/certificates/status`` - Get certificate status
+     - Yes
+   * - Certificates
+     - POST
+     - ``/api/v1/security/certificates/upload`` - Upload certificate
+     - Yes
+   * - Certificates
+     - POST
+     - ``/api/v1/security/certificates/settings`` - Update certificate settings
+     - Yes
+   * - Audit Log
+     - GET
+     - ``/api/v1/security/audit/logs`` - Get audit logs
+     - Yes
+   * - Audit Log
+     - GET
+     - ``/api/v1/security/audit/export`` - Export audit logs
+     - Yes
+   * - Audit Log
+     - GET
+     - ``/api/v1/security/audit/stats`` - Get audit statistics
+     - Yes
+   * - Security Ops
+     - POST
+     - ``/api/v1/security/scan`` - Run security scan
+     - Yes
+   * - Security Ops
+     - GET
+     - ``/api/v1/security/scan/results`` - Get scan results
+     - Yes
+   * - Security Ops
+     - POST
+     - ``/api/v1/security/lock`` - Lock system
+     - Yes
+   * - Security Ops
+     - POST
+     - ``/api/v1/security/reset`` - Reset settings
+     - Yes
+   * - Security Ops
+     - POST
+     - ``/api/v1/security/settings/save-all`` - Save all settings
+     - Yes
+   * - Security Ops
+     - GET
+     - ``/api/v1/security/backup`` - Backup configuration
+     - Yes
+
+Complete User Flow
+------------------
+
+1. **User goes to page**: ``GET /security-access-control``
+   - Server renders HTML with embedded security and user data
+   - All 7 sections populated with current data
+
+2. **User views security overview**:
+   - Security score and status badges
+   - Component health indicators
+
+3. **User manages identity & access** (SECTION A):
+   - User management table with create/edit/delete
+   - Role definitions and permissions
+   - Password strength testing
+
+4. **User configures authentication** (SECTION B):
+   - Password policy settings
+   - Account protection (lockout, captcha)
+   - Two-factor authentication settings
+   - Session management
+
+5. **User manages API keys & tokens** (SECTION C):
+   - API key generation and revocation
+   - Token permission settings
+   - Webhook secret management
+
+6. **User controls SSH access** (SECTION D):
+   - SSH configuration (port, login methods)
+   - SSH key upload and management
+   - Active session monitoring
+
+7. **User configures firewall** (SECTION E):
+   - Firewall rule management
+   - IP whitelist management
+   - Port blocking configuration
+   - Security features (rate limiting, DDoS protection)
+
+8. **User manages certificates** (SECTION F):
+   - Certificate status monitoring
+   - Certificate upload and renewal
+   - SSL/TLS configuration
+
+9. **User monitors audit logs** (SECTION G):
+   - Security event auditing
+   - Export capabilities
+   - Statistics and reporting
+
+10. **User performs security operations**:
+    - Run security vulnerability scans
+    - Lock system for maintenance
+    - Reset security settings
+    - Backup security configuration
+    - Save all security settings
 
 Error Codes
 -----------
 
-.. list-table:: Simplified Error Codes
+.. list-table:: Security Error Codes
    :widths: 30 70
    :header-rows: 1
 
@@ -1549,46 +1820,26 @@ Error Codes
    * - SCAN_IN_PROGRESS
      - Security scan already running
 
-Authentication
---------------
+Authentication & Context
+------------------------
 
-All endpoints require:
+All endpoints require gateway context identification::
 
-.. code-block:: http
-
-   Authorization: Bearer <jwt_token>
+   Authorization: Bearer <token>
    X-Gateway-ID: GW-3920A9
 
-Rate Limiting
--------------
+**Important**: This API only manages security for the current gateway specified in `X-Gateway-ID` header.
 
-* 100 requests per minute per user
-* Authentication endpoints: 10 requests per minute per IP
-* File Uploads: 10MB max file size, 5 concurrent uploads
-* Rate limit headers included in responses
+Support Information
+-------------------
 
-Response Format
----------------
+- **Security Support**: security-support@univa.com
+- **Emergency Response**: +1 (555) 789-0456
+- **Support Hours**: 24/7 for security incidents
+- **Documentation**: https://docs.univa.com/security
+- **Security Status**: https://status.univa.com/security
 
-All successful responses:
-
-.. code-block:: json
-
-   {
-     "data": { ... },
-     "error": null,
-     "success": true
-   }
-
-Error responses:
-
-.. code-block:: json
-
-   {
-     "data": null,
-     "error": {
-       "code": "SECURITY_ACCESS_DENIED",
-       "message": "Insufficient permissions"
-     },
-     "success": false
-   }
+---
+*Document last updated: March 15, 2025*
+*API Version: 1.0.0*
+*Security Module Version: 2.1.0*
