@@ -1,4 +1,4 @@
-Gateway OTA & System Update API Documentation
+Gateway OTA & System Update API 
 ===============================================
 
 API for managing Over-the-Air (OTA) updates, system recovery, and maintenance operations for Univa IoT Gateway.

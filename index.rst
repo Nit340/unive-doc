@@ -16,14 +16,14 @@ IoT Gateway API Documentation
    api/device-management
    api/tag-mapping
    api/cloud-integration
+   api/license
+   api/security
 
 .. toctree::
    :maxdepth: 2
    :caption: UNDER VALIDATION
 
-   api/license
    api/ota-re
-   api/security
    api/backup
    api/data-retention
    api/diagnostics

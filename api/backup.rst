@@ -1,4 +1,4 @@
-System Backup & Recovery API Documentation
+System Backup & Recovery 
 ==========================================
 
 Overview
