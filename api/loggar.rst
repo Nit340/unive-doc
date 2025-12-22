@@ -134,15 +134,12 @@ Update Global Settings
         "requires_restart": false
       }
 
-Category Management API
------------------------
+Get Global Dashboard Data
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-List Log Categories
-~~~~~~~~~~~~~~~~~~~
+.. http:get:: /logging/dashboard
 
-.. http:get:: /logging/categories
-
-   Get all available log categories and their status.
+   Get dashboard data including storage usage, recent errors, and rotation info.
 
    **Headers**:
 
@@ -150,10 +147,56 @@ List Log Categories
 
       Authorization: Bearer <token>
 
-   **Query Parameters**:
+   **Response**:
 
-   * **enabled_only** (optional): Show only enabled categories (true/false)
-   * **level_filter** (optional): Filter by minimum log level
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "success": true,
+        "dashboard": {
+          "storage": {
+            "used_mb": 156,
+            "total_mb": 300,
+            "available_mb": 144,
+            "usage_percentage": 52
+          },
+          "files": {
+            "active": 8,
+            "compressed": 12,
+            "total_lines_today": 42156
+          },
+          "errors_24h": {
+            "critical": 0,
+            "error": 12,
+            "warning": 47
+          },
+          "rotation": {
+            "last_rotation_ago": "2 hours",
+            "next_rotation_in": "~22 hours",
+            "oldest_log_days": 14
+          }
+        },
+        "timestamp": "2025-03-12T15:00:00Z"
+      }
+
+Category Management API
+-----------------------
+
+List Log Categories with UI Data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:get:: /logging/categories/ui
+
+   Get all log categories formatted for UI display.
+
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
 
    **Response**:
 
@@ -176,7 +219,10 @@ List Log Categories
             "max_file_size_mb": 10,
             "retention_days": 30,
             "last_activity": "2025-03-12T14:55:00Z",
-            "lines_today": 12500
+            "lines_today": 12500,
+            "ui_badge": "INFO",
+            "ui_badge_color": "blue",
+            "ui_interval_display": "1s"
           },
           {
             "id": "network",
@@ -189,33 +235,20 @@ List Log Categories
             "max_file_size_mb": 15,
             "retention_days": 14,
             "last_activity": "2025-03-12T14:56:00Z",
-            "lines_today": 8500
-          },
-          {
-            "id": "can",
-            "name": "CAN Bus Logs",
-            "description": "RX/TX errors, invalid frames",
-            "enabled": true,
-            "log_level": "WARN",
-            "log_format": "TIMESTAMP CAN_ID DIRECTION DATA LENGTH",
-            "interval_ms": 100,
-            "max_file_size_mb": 20,
-            "retention_days": 7,
-            "last_activity": "2025-03-12T14:57:00Z",
-            "lines_today": 32000
+            "lines_today": 8500,
+            "ui_badge": "DEBUG",
+            "ui_badge_color": "green",
+            "ui_interval_display": "5s"
           }
-        ],
-        "total_categories": 9,
-        "enabled_categories": 6,
-        "disabled_categories": 3
+        ]
       }
 
-Get Category Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Get Category Configuration for UI
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:get:: /logging/categories/{category_id}
+.. http:get:: /logging/categories/{category_id}/ui
 
-   Get detailed configuration for a specific log category.
+   Get detailed configuration for a specific log category formatted for UI.
 
    **Headers**:
 
@@ -225,7 +258,7 @@ Get Category Configuration
 
    **Path Parameters**:
 
-   * **category_id** (required): One of ``system``, ``network``, ``can``, ``modbus``, ``mqtt``, ``security``, ``sensor``, ``ruleEngine``, ``debug``
+   * **category_id** (required): Category ID
 
    **Response**:
 
@@ -253,32 +286,39 @@ Get Category Configuration
             "include_process_id": true,
             "include_thread_id": false,
             "file_path": "/var/log/system.log",
-            "compression": "gzip",
-            "rotation_strategy": "size_and_time"
+            "compression": "gzip"
           },
-          "advanced_settings": {
-            "enable_stack_traces": false,
-            "enable_memory_tracking": false,
-            "max_message_length": 2048,
-            "queue_size": 1000
-          },
-          "statistics": {
-            "current_file_size_mb": 2.5,
-            "lines_written_today": 12500,
-            "avg_lines_per_hour": 520,
-            "last_write": "2025-03-12T15:00:00Z",
-            "errors_today": 12,
-            "warnings_today": 45
+          "ui_config": {
+            "format_options": [
+              {"value": "TIMESTAMP LEVEL MODULE MESSAGE", "label": "Standard (Timestamp + Level + Module + Message)"},
+              {"value": "TIMESTAMP LEVEL MESSAGE", "label": "Basic (Timestamp + Level + Message)"},
+              {"value": "TIMESTAMP MESSAGE", "label": "Simple (Timestamp + Message)"},
+              {"value": "LEVEL MODULE MESSAGE", "label": "Compact (Level + Module + Message - No Timestamp)"},
+              {"value": "MODULE MESSAGE", "label": "Minimal (Module + Message)"}
+            ],
+            "level_options": ["CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG", "TRACE"],
+            "advanced_fields": {
+              "include_detailed_data": {
+                "label": "Include Process Info",
+                "description": "Include process ID and thread information",
+                "value": true
+              },
+              "include_debug_info": {
+                "label": "Include Thread IDs",
+                "description": "Include thread identification in logs",
+                "value": false
+              }
+            }
           }
         }
       }
 
-Update Category Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Update Category Configuration (UI Format)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:put:: /logging/categories/{category_id}
+.. http:put:: /logging/categories/{category_id}/ui
 
-   Update configuration for a specific log category.
+   Update configuration for a specific log category from UI.
 
    **Headers**:
 
@@ -289,13 +329,13 @@ Update Category Configuration
 
    **Path Parameters**:
 
-   * **category_id** (required): Category ID as listed above
+   * **category_id** (required): Category ID
 
    **Request**:
 
    .. sourcecode:: http
 
-      PUT /logging/categories/system HTTP/1.1
+      PUT /logging/categories/system/ui HTTP/1.1
       Authorization: Bearer <token>
       Content-Type: application/json
       
@@ -308,15 +348,9 @@ Update Category Configuration
         "retention_days": 30,
         "buffer_size_kb": 1024,
         "flush_interval_ms": 5000,
-        "advanced": {
-          "include_timestamps": true,
-          "include_process_id": true,
-          "include_thread_id": false,
-          "enable_stack_traces": false
-        },
-        "category_specific": {
-          "include_packet_data": false,
-          "include_interface_stats": true
+        "advanced_settings": {
+          "include_detailed_data": true,
+          "include_debug_info": false
         }
       }
 
@@ -334,22 +368,20 @@ Update Category Configuration
           "id": "system",
           "enabled": true,
           "log_level": "INFO",
+          "ui_badge": "INFO",
+          "ui_badge_color": "blue",
+          "ui_interval_display": "1s",
           "estimated_storage_mb_per_day": 25,
-          "restart_required": false,
-          "validation": {
-            "format_valid": true,
-            "storage_available": true,
-            "permissions_ok": true
-          }
+          "restart_required": false
         }
       }
 
-Batch Update Categories
+Batch Toggle Categories
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:put:: /logging/categories/batch
+.. http:post:: /logging/categories/batch-toggle
 
-   Update multiple log categories at once.
+   Toggle multiple log categories at once.
 
    **Headers**:
 
@@ -362,79 +394,14 @@ Batch Update Categories
 
    .. sourcecode:: http
 
-      PUT /logging/categories/batch HTTP/1.1
+      POST /logging/categories/batch-toggle HTTP/1.1
       Authorization: Bearer <token>
       Content-Type: application/json
       
       {
-        "updates": [
-          {
-            "category_id": "system",
-            "log_level": "INFO",
-            "enabled": true
-          },
-          {
-            "category_id": "network",
-            "log_level": "DEBUG",
-            "interval_ms": 2000
-          },
-          {
-            "category_id": "modbus",
-            "retention_days": 30
-          }
-        ],
-        "apply_immediately": true
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "updated": 3,
-        "failed": 0,
-        "results": {
-          "system": "success",
-          "network": "success",
-          "modbus": "success"
-        },
-        "restart_required": false
-      }
-
-Enable/Disable Category
-~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:post:: /logging/categories/{category_id}/toggle
-
-   Quickly enable or disable a log category.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Path Parameters**:
-
-   * **category_id** (required): Category ID as listed above
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /logging/categories/system/toggle HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
+        "categories": ["system", "network", "can", "modbus", "mqtt", "security", "sensor", "ruleEngine", "debug"],
         "enabled": true,
-        "reason": "Enabling for troubleshooting",
-        "apply_global_level": true
+        "apply_global_level": false
       }
 
    **Response**:
@@ -446,25 +413,26 @@ Enable/Disable Category
       
       {
         "success": true,
-        "message": "System logs enabled",
-        "category": {
-          "id": "system",
-          "enabled": true,
-          "log_level": "INFO",
-          "estimated_daily_volume_mb": 25,
-          "next_rotation": "2025-03-13T02:00:00Z"
+        "updated": 9,
+        "results": {
+          "system": {"enabled": true, "log_level": "INFO"},
+          "network": {"enabled": true, "log_level": "DEBUG"},
+          "can": {"enabled": true, "log_level": "WARN"},
+          "modbus": {"enabled": true, "log_level": "ERROR"},
+          "mqtt": {"enabled": true, "log_level": "INFO"},
+          "security": {"enabled": true, "log_level": "CRITICAL"},
+          "sensor": {"enabled": false, "log_level": "INFO"},
+          "ruleEngine": {"enabled": false, "log_level": "DEBUG"},
+          "debug": {"enabled": false, "log_level": "TRACE"}
         }
       }
 
-Category-Specific Configuration
--------------------------------
+Apply Global Level to All Categories
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-System Logs Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~
+.. http:post:: /logging/categories/apply-global
 
-.. http:put:: /logging/categories/system/config
-
-   Configure kernel, watchdog, and system-level logging.
+   Apply global log level to all enabled categories.
 
    **Headers**:
 
@@ -477,216 +445,39 @@ System Logs Configuration
 
    .. sourcecode:: http
 
-      PUT /logging/categories/system/config HTTP/1.1
+      POST /logging/categories/apply-global HTTP/1.1
       Authorization: Bearer <token>
       Content-Type: application/json
       
       {
-        "log_level": "INFO",
-        "log_format": "TIMESTAMP LEVEL MODULE MESSAGE",
-        "interval_ms": 1000,
-        "include_process_id": true,
-        "include_thread_id": false,
-        "enable_kernel_logging": true,
-        "enable_watchdog_logging": true,
-        "enable_crash_reports": true,
-        "max_stack_trace_depth": 10,
-        "buffer_size_kb": 1024
+        "global_level": "INFO",
+        "exclude_categories": ["security", "debug"]
       }
 
-Network Logs Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:put:: /logging/categories/network/config
-
-   Configure network interface and packet logging.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
+   **Response**:
 
    .. sourcecode:: http
 
-      PUT /logging/categories/network/config HTTP/1.1
-      Authorization: Bearer <token>
+      HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "log_level": "DEBUG",
-        "log_format": "TIMESTAMP INTERFACE PROTOCOL SOURCE DESTINATION",
-        "interval_ms": 5000,
-        "interfaces": ["eth0", "wlan0", "wwan0"],
-        "protocols": ["tcp", "udp", "icmp"],
-        "include_packet_data": false,
-        "include_interface_stats": true,
-        "log_packet_drops": true,
-        "log_connection_errors": true,
-        "log_dhcp_events": true,
-        "max_packet_log_size": 1500
-      }
-
-CAN Bus Logs Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:put:: /logging/categories/can/config
-
-   Configure CAN bus communication logging.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      PUT /logging/categories/can/config HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "log_level": "WARN",
-        "log_format": "TIMESTAMP CAN_ID DIRECTION DATA LENGTH",
-        "interval_ms": 100,
-        "can_interfaces": ["can0", "can1"],
-        "baud_rates": [500000, 250000],
-        "include_raw_data": false,
-        "include_error_frames": true,
-        "log_tx_errors": true,
-        "log_rx_errors": true,
-        "log_bus_errors": true,
-        "filter_can_ids": ["0x100-0x1FF"],
-        "max_frame_log_size": 64
-      }
-
-Modbus Logs Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:put:: /logging/categories/modbus/config
-
-   Configure Modbus protocol logging.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      PUT /logging/categories/modbus/config HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "log_level": "ERROR",
-        "log_format": "TIMESTAMP DEVICE FUNCTION REGISTER VALUE",
-        "interval_ms": 500,
-        "protocols": ["rtu", "tcp"],
-        "include_raw_bytes": false,
-        "include_slave_responses": true,
-        "log_read_errors": true,
-        "log_write_errors": true,
-        "log_timeout_errors": true,
-        "log_parity_errors": true,
-        "device_ids": [1, 2, 3],
-        "register_ranges": ["40001-49999"]
-      }
-
-MQTT Logs Configuration
-~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:put:: /logging/categories/mqtt/config
-
-   Configure MQTT broker logging.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      PUT /logging/categories/mqtt/config HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "log_level": "INFO",
-        "log_format": "TIMESTAMP TOPIC QOS PAYLOAD",
-        "interval_ms": 2000,
-        "brokers": ["mqtt://localhost:1883", "mqtts://cloud.example.com:8883"],
-        "include_payload": false,
-        "include_qos_details": true,
-        "log_connection_events": true,
-        "log_publish_events": true,
-        "log_subscribe_events": true,
-        "log_message_delivery": true,
-        "topics": ["iot/device/#", "telemetry/#"],
-        "max_payload_log_size": 256
-      }
-
-Security Logs Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:put:: /logging/categories/security/config
-
-   Configure security and authentication logging.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      PUT /logging/categories/security/config HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "log_level": "CRITICAL",
-        "log_format": "TIMESTAMP SOURCE EVENT USER RESULT",
-        "interval_ms": 0,
-        "include_ip_address": true,
-        "include_user_agent": false,
-        "log_authentication_attempts": true,
-        "log_failed_logins": true,
-        "log_access_violations": true,
-        "log_configuration_changes": true,
-        "log_firewall_events": true,
-        "alert_on_critical": true,
-        "retention_days": 90
+        "success": true,
+        "message": "Global level applied to 7 categories",
+        "applied_categories": ["system", "network", "can", "modbus", "mqtt", "sensor", "ruleEngine"],
+        "excluded_categories": ["security", "debug"],
+        "new_level": "INFO"
       }
 
 Output Destinations API
 -----------------------
 
-Get Output Destinations
-~~~~~~~~~~~~~~~~~~~~~~~
+Get Output Destinations for UI
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:get:: /logging/destinations
+.. http:get:: /logging/destinations/ui
 
-   Get all configured logging output destinations.
+   Get all configured logging output destinations formatted for UI.
 
    **Headers**:
 
@@ -709,111 +500,65 @@ Get Output Destinations
             "path": "/var/log",
             "available_mb": 144,
             "status": "healthy",
-            "files_count": 20
+            "files_count": 20,
+            "ui_label": "Local Storage",
+            "ui_description": "Default debugging location (/var/log)"
           },
           "usb": {
             "enabled": false,
             "path": "/media/usb/logs",
             "available_mb": 0,
             "status": "not_connected",
-            "files_count": 0
+            "files_count": 0,
+            "ui_label": "External USB Storage",
+            "ui_description": "Field engineers onsite collection"
           },
           "cloud": {
             "enabled": true,
             "endpoint": "https://logs.yourcloud.com/api/v1/logs",
             "status": "connected",
             "last_sync": "2025-03-12T14:30:00Z",
-            "pending_uploads": 0
+            "pending_uploads": 0,
+            "ui_label": "Cloud Upload Endpoint",
+            "ui_description": "For cloud dashboards and remote monitoring",
+            "placeholder": "https://logs.yourcloud.com/api/v1/logs"
           },
           "syslog": {
             "enabled": true,
             "server": "192.168.1.100:514",
             "protocol": "udp",
             "status": "connected",
-            "facility": "local7"
+            "facility": "local7",
+            "ui_label": "Syslog Server",
+            "ui_description": "Industrial IT environments (IP:Port)",
+            "placeholder": "192.168.1.100:514"
           },
           "mqtt": {
             "enabled": true,
             "topic": "iot/device/logs",
             "broker": "mqtt://localhost:1883",
             "status": "connected",
-            "qos": 1
+            "qos": 1,
+            "ui_label": "MQTT Topic Output",
+            "ui_description": "Pipe logs to external monitoring systems",
+            "placeholder": "iot/device/logs"
           },
           "websocket": {
             "enabled": true,
             "clients_connected": 3,
-            "status": "active"
+            "status": "active",
+            "ui_label": "WebSocket Streaming",
+            "ui_description": "Enable live log viewer in Web UI"
           }
         }
       }
 
-Configure Output Destination
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Configure Output Destination (UI Format)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:put:: /logging/destinations/{destination_type}
+.. http:put:: /logging/destinations/{destination_type}/ui
 
-   Configure a specific output destination.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Path Parameters**:
-
-   * **destination_type** (required): One of ``local``, ``usb``, ``cloud``, ``syslog``, ``mqtt``, ``websocket``
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      PUT /logging/destinations/cloud HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "enabled": true,
-        "endpoint": "https://logs.yourcloud.com/api/v1/logs",
-        "api_key": "encrypted_api_key_here",
-        "batch_size": 100,
-        "batch_interval_ms": 10000,
-        "compression": "gzip",
-        "encryption": true,
-        "categories": ["system", "security", "error"],
-        "retry_policy": {
-          "max_attempts": 3,
-          "retry_delay_ms": 5000,
-          "exponential_backoff": true
-        }
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "destination": {
-          "type": "cloud",
-          "enabled": true,
-          "endpoint": "https://logs.yourcloud.com/api/v1/logs",
-          "status": "configured",
-          "test_connection": "success",
-          "estimated_latency_ms": 45
-        }
-      }
-
-Test Destination Connection
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:post:: /logging/destinations/{destination_type}/test
-
-   Test connectivity to a logging destination.
+   Configure a specific output destination from UI.
 
    **Headers**:
 
@@ -830,13 +575,13 @@ Test Destination Connection
 
    .. sourcecode:: http
 
-      POST /logging/destinations/cloud/test HTTP/1.1
+      PUT /logging/destinations/cloud/ui HTTP/1.1
       Authorization: Bearer <token>
       Content-Type: application/json
       
       {
-        "test_data": "Test log entry from Univa Gateway",
-        "timeout_ms": 5000
+        "enabled": true,
+        "endpoint": "https://logs.yourcloud.com/api/v1/logs"
       }
 
    **Response**:
@@ -848,23 +593,25 @@ Test Destination Connection
       
       {
         "success": true,
-        "destination": "cloud",
-        "status": "connected",
-        "latency_ms": 42,
-        "bandwidth_kbps": 1250,
-        "authentication": "valid",
-        "recommendations": []
+        "destination": {
+          "type": "cloud",
+          "enabled": true,
+          "endpoint": "https://logs.yourcloud.com/api/v1/logs",
+          "status": "configured",
+          "ui_label": "Cloud Upload Endpoint",
+          "ui_description": "For cloud dashboards and remote monitoring"
+        }
       }
 
 Log Rotation API
 ----------------
 
-Get Rotation Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Get Rotation Configuration for UI
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:get:: /logging/rotation
+.. http:get:: /logging/rotation/ui
 
-   Get log rotation settings.
+   Get log rotation settings formatted for UI.
 
    **Headers**:
 
@@ -896,22 +643,41 @@ Get Rotation Configuration
             "algorithm": "gzip",
             "level": 6,
             "remove_original": true
+          },
+          "ui_settings": {
+            "max_file_size": {
+              "label": "Max Log File Size",
+              "description": "Individual log file size limit",
+              "unit": "MB",
+              "min": 1,
+              "max": 100
+            },
+            "max_log_files": {
+              "label": "Max Log Files",
+              "description": "Number of log files to keep",
+              "min": 1,
+              "max": 100
+            },
+            "compress_logs": {
+              "label": "Compress Older Files",
+              "description": "Gzip compress logs older than 7 days",
+              "value": true
+            },
+            "delete_oldest": {
+              "label": "Delete Oldest When Full",
+              "description": "Automatically delete oldest logs when storage is full",
+              "value": true
+            }
           }
-        },
-        "statistics": {
-          "files_rotated_today": 2,
-          "compressed_files": 12,
-          "total_saved_mb": 245,
-          "compression_ratio": 0.35
         }
       }
 
-Update Rotation Settings
-~~~~~~~~~~~~~~~~~~~~~~~~
+Update Rotation Settings (UI Format)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:put:: /logging/rotation
+.. http:put:: /logging/rotation/ui
 
-   Update log rotation configuration.
+   Update log rotation configuration from UI.
 
    **Headers**:
 
@@ -924,25 +690,15 @@ Update Rotation Settings
 
    .. sourcecode:: http
 
-      PUT /logging/rotation HTTP/1.1
+      PUT /logging/rotation/ui HTTP/1.1
       Authorization: Bearer <token>
       Content-Type: application/json
       
       {
-        "enabled": true,
-        "mode": "fifo-compress",
         "max_file_size_mb": 20,
         "max_log_files": 10,
         "compress_older_days": 7,
-        "delete_oldest": true,
-        "schedule": "daily",
-        "time": "02:00",
-        "compression": {
-          "algorithm": "gzip",
-          "level": 6,
-          "remove_original": true
-        },
-        "notify_on_rotation": true
+        "delete_oldest": true
       }
 
    **Response**:
@@ -956,319 +712,21 @@ Update Rotation Settings
         "success": true,
         "message": "Rotation settings updated",
         "rotation": {
-          "mode": "fifo-compress",
-          "estimated_daily_rotation": 2,
-          "estimated_storage_savings_mb": 50,
+          "max_file_size_mb": 20,
+          "max_log_files": 10,
+          "compress_older_days": 7,
+          "delete_oldest": true,
           "next_rotation": "2025-03-13T02:00:00Z"
-        }
-      }
-
-Trigger Manual Rotation
-~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:post:: /logging/rotation/manual
-
-   Manually trigger log rotation.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /logging/rotation/manual HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "reason": "Manual rotation before maintenance",
-        "categories": ["all"], // or specific categories
-        "compress_immediately": true,
-        "archive_name": "logs_pre_maintenance_20250312"
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "rotation_id": "rotation_manual_20250312_160000",
-        "status": "in_progress",
-        "files_to_rotate": 8,
-        "estimated_size_mb": 156,
-        "archive_path": "/var/log/archives/logs_pre_maintenance_20250312.tar.gz",
-        "progress_url": "/api/v1/logging/rotation/progress/rotation_manual_20250312_160000"
-      }
-
-Get Rotation Progress
-~~~~~~~~~~~~~~~~~~~~~
-
-.. http:get:: /logging/rotation/progress/{rotation_id}
-
-   Check status of rotation operation.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Path Parameters**:
-
-   * **rotation_id** (required): ID of the rotation operation
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "rotation_id": "rotation_manual_20250312_160000",
-        "status": "completed",
-        "progress": 100,
-        "files_rotated": 8,
-        "files_compressed": 8,
-        "original_size_mb": 156,
-        "compressed_size_mb": 52,
-        "compression_ratio": 0.33,
-        "duration_seconds": 12,
-        "archive_path": "/var/log/archives/logs_pre_maintenance_20250312.tar.gz",
-        "archive_size_mb": 52
-      }
-
-Log Statistics API
-------------------
-
-Get Real-Time Statistics
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:get:: /logging/statistics/realtime
-
-   Get real-time logging statistics.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Query Parameters**:
-
-   * **time_window** (optional): Time window in minutes (default: 5)
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "statistics": {
-          "timestamp": "2025-03-12T15:00:00Z",
-          "time_window_minutes": 5,
-          "overall": {
-            "lines_per_second": 8.5,
-            "bytes_per_second": 5120,
-            "active_categories": 6,
-            "total_lines": 42156,
-            "storage_used_mb": 156
-          },
-          "by_category": {
-            "system": {
-              "lines_per_second": 1.2,
-              "bytes_per_second": 850,
-              "lines_total": 12500,
-              "current_file_size_mb": 2.5
-            },
-            "network": {
-              "lines_per_second": 0.8,
-              "bytes_per_second": 1200,
-              "lines_total": 8500,
-              "current_file_size_mb": 3.2
-            },
-            "can": {
-              "lines_per_second": 5.0,
-              "bytes_per_second": 2500,
-              "lines_total": 32000,
-              "current_file_size_mb": 8.5
-            }
-          },
-          "by_level": {
-            "critical": 0,
-            "error": 12,
-            "warning": 47,
-            "info": 32500,
-            "debug": 9500,
-            "trace": 97
-          }
-        }
-      }
-
-Get Historical Statistics
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:get:: /logging/statistics/historical
-
-   Get historical logging statistics.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Query Parameters**:
-
-   * **start_date** (required): ISO start date
-   * **end_date** (required): ISO end date
-   * **interval** (optional): "hourly", "daily", "weekly" (default: "daily")
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "statistics": {
-          "time_range": {
-            "start": "2025-03-10T00:00:00Z",
-            "end": "2025-03-12T23:59:59Z"
-          },
-          "interval": "daily",
-          "data": [
-            {
-              "date": "2025-03-10",
-              "total_lines": 38500,
-              "storage_used_mb": 145,
-              "top_categories": [
-                {"category": "can", "lines": 21000},
-                {"category": "system", "lines": 9500},
-                {"category": "network", "lines": 8000}
-              ],
-              "errors": 15,
-              "warnings": 42
-            },
-            {
-              "date": "2025-03-11",
-              "total_lines": 39500,
-              "storage_used_mb": 150,
-              "top_categories": [
-                {"category": "can", "lines": 22000},
-                {"category": "modbus", "lines": 10000},
-                {"category": "system", "lines": 7500}
-              ],
-              "errors": 18,
-              "warnings": 38
-            }
-          ],
-          "summary": {
-            "average_lines_per_day": 40052,
-            "average_errors_per_day": 15,
-            "storage_growth_mb_per_day": 5.5,
-            "busiest_category": "can",
-            "quietest_category": "security"
-          }
-        }
-      }
-
-Get Error Statistics
-~~~~~~~~~~~~~~~~~~~~
-
-.. http:get:: /logging/statistics/errors
-
-   Get detailed error statistics.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Query Parameters**:
-
-   * **severity** (optional): "critical", "error", "warning" (default: all)
-   * **time_window** (optional): Time window in hours (default: 24)
-   * **category** (optional): Filter by category
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "errors": {
-          "time_window_hours": 24,
-          "total_errors": 59,
-          "by_severity": {
-            "critical": 0,
-            "error": 12,
-            "warning": 47
-          },
-          "by_category": {
-            "network": {
-              "total": 8,
-              "error": 5,
-              "warning": 3,
-              "most_common": "Connection timeout"
-            },
-            "modbus": {
-              "total": 25,
-              "error": 7,
-              "warning": 18,
-              "most_common": "CRC check failed"
-            },
-            "system": {
-              "total": 15,
-              "error": 0,
-              "warning": 15,
-              "most_common": "High memory usage"
-            }
-          },
-          "trend": {
-            "last_hour": 3,
-            "last_6_hours": 18,
-            "last_12_hours": 35,
-            "last_24_hours": 59
-          },
-          "recent_errors": [
-            {
-              "timestamp": "2025-03-12T14:58:00Z",
-              "category": "modbus",
-              "severity": "error",
-              "message": "CRC check failed for device 3",
-              "count": 7
-            }
-          ]
         }
       }
 
 Log Operations API
 ------------------
 
-Test Logging Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Test Logging Configuration (UI Format)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:post:: /logging/operations/test
+.. http:post:: /logging/operations/test/ui
 
    Test logging configuration by generating test log entries.
 
@@ -1283,7 +741,7 @@ Test Logging Configuration
 
    .. sourcecode:: http
 
-      POST /logging/operations/test HTTP/1.1
+      POST /logging/operations/test/ui HTTP/1.1
       Authorization: Bearer <token>
       Content-Type: application/json
       
@@ -1291,8 +749,7 @@ Test Logging Configuration
         "categories": ["system", "network", "modbus"],
         "levels": ["INFO", "ERROR", "WARNING"],
         "test_messages_count": 10,
-        "verify_destinations": true,
-        "cleanup_after_test": true
+        "verify_destinations": true
       }
 
    **Response**:
@@ -1325,16 +782,58 @@ Test Logging Configuration
             "mqtt": 42
           }
         },
-        "recommendations": [
-          "Increase buffer size for network logs to improve performance",
-          "Consider compressing cloud uploads to reduce bandwidth usage"
-        ]
+        "message": "Logging configuration test successful! All destinations are reachable."
       }
 
-Restart Logging Service
-~~~~~~~~~~~~~~~~~~~~~~~
+Trigger Manual Rotation (UI Format)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:post:: /logging/operations/restart
+.. http:post:: /logging/rotation/manual/ui
+
+   Manually trigger log rotation.
+
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      Content-Type: application/json
+
+   **Request**:
+
+   .. sourcecode:: http
+
+      POST /logging/rotation/manual/ui HTTP/1.1
+      Authorization: Bearer <token>
+      Content-Type: application/json
+      
+      {
+        "reason": "Manual rotation triggered from UI",
+        "compress_immediately": true
+      }
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "success": true,
+        "rotation_id": "rotation_manual_20250312_160000",
+        "status": "completed",
+        "files_rotated": 8,
+        "files_compressed": 8,
+        "original_size_mb": 156,
+        "compressed_size_mb": 52,
+        "message": "Log rotation complete! Old logs have been archived."
+      }
+
+Restart Logging Service (UI Format)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:post:: /logging/operations/restart/ui
 
    Restart the logging service to apply configuration changes.
 
@@ -1349,18 +848,14 @@ Restart Logging Service
 
    .. sourcecode:: http
 
-      POST /logging/operations/restart HTTP/1.1
+      POST /logging/operations/restart/ui HTTP/1.1
       Authorization: Bearer <token>
       Content-Type: application/json
       
       {
         "graceful": true,
         "timeout_seconds": 30,
-        "backup_config": true,
-        "confirmation": {
-          "user": "admin",
-          "reason": "Applying new logging configuration"
-        }
+        "backup_config": true
       }
 
    **Response**:
@@ -1378,337 +873,16 @@ Restart Logging Service
         "estimated_downtime_seconds": 5,
         "backup_created": true,
         "backup_path": "/var/log/config_backup_20250312_162000.json",
-        "restart_time": "2025-03-12T16:20:05Z"
+        "restart_time": "2025-03-12T16:20:05Z",
+        "message": "Logging service restart scheduled. Changes will take effect after restart."
       }
 
-Clear Log Files
-~~~~~~~~~~~~~~~
-
-.. http:post:: /logging/operations/clear
-
-   Clear log files (with confirmation).
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /logging/operations/clear HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "categories": ["all"], // or specific categories
-        "retain_last_days": 1,
-        "exclude_critical": true,
-        "compress_before_delete": true,
-        "confirmation": {
-          "user": "admin",
-          "password": "encrypted_password",
-          "reason": "Storage cleanup before system update"
-        }
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "clear_id": "clear_20250312_163000",
-        "status": "completed",
-        "files_deleted": 8,
-        "files_compressed": 12,
-        "storage_freed_mb": 85,
-        "remaining_logs_mb": 71,
-        "retained_logs_days": 1,
-        "excluded_categories": ["security", "system"]
-      }
-
-Export Log Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:post:: /logging/operations/export-config
-
-   Export logging configuration for backup or migration.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /logging/operations/export-config HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "format": "json", // "json", "yaml"
-        "include_passwords": false,
-        "encrypt": true,
-        "password": "optional_encryption_password"
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "export_id": "config_export_20250312_163500",
-        "status": "ready",
-        "format": "json",
-        "size_kb": 45,
-        "download_url": "/api/v1/logging/operations/export-config/download/config_export_20250312_163500",
-        "checksum": "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6"
-      }
-
-Import Log Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:post:: /logging/operations/import-config
-
-   Import logging configuration from backup.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /logging/operations/import-config HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "config_data": "base64_encoded_config_file_or_url",
-        "validate_only": false,
-        "backup_current": true,
-        "apply_after_import": true,
-        "confirmation": {
-          "user": "admin",
-          "password": "encrypted_password"
-        }
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "import_id": "config_import_20250312_164000",
-        "status": "validating",
-        "backup_created": true,
-        "backup_path": "/var/log/config_backup_pre_import_20250312_164000.json",
-        "validation_results": {
-          "format_valid": true,
-          "version_compatible": true,
-          "permissions_ok": true,
-          "storage_sufficient": true
-        },
-        "estimated_apply_time": "2025-03-12T16:40:30Z"
-      }
-
-Real-Time Monitoring API
-------------------------
-
-WebSocket Log Stream
-~~~~~~~~~~~~~~~~~~~~
-
-Connection Endpoint
-^^^^^^^^^^^^^^^^^^^
-
-::
-
-   wss://univa-gateway/api/v1/logging/ws?token=<jwt_token>
-
-Connection Parameters
-^^^^^^^^^^^^^^^^^^^^^
-
-* **categories**: Comma-separated categories to subscribe to
-* **levels**: Comma-separated log levels
-* **format**: "json" or "text"
-
-Client Messages
-^^^^^^^^^^^^^^^
-
-.. code-block:: json
-
-   {
-     "action": "subscribe",
-     "categories": ["system", "network", "security"],
-     "levels": ["ERROR", "WARN", "INFO"],
-     "filter": "connection"
-   }
-
-Server Messages
-^^^^^^^^^^^^^^^
-
-.. code-block:: json
-
-   {
-     "event": "log_entry",
-     "timestamp": "2025-03-12T16:00:00Z",
-     "category": "system",
-     "level": "INFO",
-     "message": "Logging service started successfully",
-     "source": "logging-daemon",
-     "process_id": 1234,
-     "tags": ["startup", "service"]
-   }
-
-Get Active Log Streams
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:get:: /logging/streams/active
-
-   Get information about active log streams.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "streams": [
-          {
-            "stream_id": "ws_stream_20250312_150000",
-            "client_ip": "192.168.1.100",
-            "user": "admin",
-            "categories": ["system", "network"],
-            "levels": ["ERROR", "WARN", "INFO"],
-            "connected_since": "2025-03-12T15:00:00Z",
-            "messages_sent": 2450,
-            "bytes_sent_mb": 12.5
-          },
-          {
-            "stream_id": "syslog_stream_1",
-            "destination": "192.168.1.100:514",
-            "protocol": "udp",
-            "categories": ["all"],
-            "connected_since": "2025-03-12T08:00:00Z",
-            "messages_sent": 125000,
-            "bytes_sent_mb": 650
-          }
-        ],
-        "total_streams": 8,
-        "total_throughput_mbps": 1.2
-      }
-
-Health & Diagnostics API
-------------------------
-
-Get Logging Health Status
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:get:: /logging/health
-
-   Get comprehensive health status of logging system.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "health": {
-          "overall": "healthy",
-          "components": {
-            "local_storage": {
-              "status": "healthy",
-              "available_mb": 144,
-              "usage_percentage": 52,
-              "iops": 125
-            },
-            "rotation_service": {
-              "status": "healthy",
-              "last_success": "2025-03-12T02:00:00Z",
-              "next_scheduled": "2025-03-13T02:00:00Z"
-            },
-            "compression": {
-              "status": "healthy",
-              "algorithm": "gzip",
-              "compression_ratio": 0.35
-            },
-            "destinations": {
-              "local": "healthy",
-              "cloud": "connected",
-              "syslog": "connected",
-              "mqtt": "connected",
-              "websocket": "active"
-            }
-          },
-          "performance": {
-            "lines_per_second": 8.5,
-            "avg_latency_ms": 45,
-            "buffer_usage_percentage": 65,
-            "queue_depth": 120
-          },
-          "alerts": [
-            {
-              "level": "warning",
-              "component": "local_storage",
-              "message": "Storage usage at 52%, monitor regularly",
-              "timestamp": "2025-03-12T15:00:00Z"
-            }
-          ],
-          "recommendations": [
-            "Consider increasing storage allocation if logging volume increases",
-            "Review retention periods for optimal storage usage"
-          ]
-        }
-      }
-
-Run Logging Diagnostics
+Save All Configurations
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:post:: /logging/diagnostics/run
+.. http:post:: /logging/operations/save-all
 
-   Run comprehensive diagnostics on logging system.
+   Save all logging configurations at once.
 
    **Headers**:
 
@@ -1721,19 +895,47 @@ Run Logging Diagnostics
 
    .. sourcecode:: http
 
-      POST /logging/diagnostics/run HTTP/1.1
+      POST /logging/operations/save-all HTTP/1.1
       Authorization: Bearer <token>
       Content-Type: application/json
       
       {
-        "tests": [
-          "storage_health",
-          "destination_connectivity",
-          "performance",
-          "configuration_validation"
-        ],
-        "verbose": true,
-        "generate_report": true
+        "global": {
+          "enabled": true,
+          "log_level": "INFO",
+          "max_storage_mb": 300,
+          "rotation_mode": "fifo-compress"
+        },
+        "categories": {
+          "system": {
+            "enabled": true,
+            "log_level": "INFO",
+            "interval_ms": 1000,
+            "max_file_size_mb": 10,
+            "retention_days": 30
+          },
+          "network": {
+            "enabled": true,
+            "log_level": "DEBUG",
+            "interval_ms": 5000,
+            "max_file_size_mb": 15,
+            "retention_days": 14
+          }
+        },
+        "destinations": {
+          "local": true,
+          "usb": false,
+          "cloud": "https://logs.yourcloud.com/api/v1/logs",
+          "syslog": "192.168.1.100:514",
+          "mqtt": "iot/device/logs",
+          "websocket": true
+        },
+        "rotation": {
+          "max_file_size_mb": 20,
+          "max_files": 10,
+          "compress": true,
+          "delete_oldest": true
+        }
       }
 
    **Response**:
@@ -1745,23 +947,359 @@ Run Logging Diagnostics
       
       {
         "success": true,
-        "diagnostic_id": "log_diag_20250312_170000",
-        "status": "running",
-        "tests": [
+        "message": "All logging configurations saved successfully",
+        "saved_sections": ["global", "categories", "destinations", "rotation"],
+        "restart_required": true,
+        "restart_scheduled": true,
+        "restart_time": "2025-03-12T16:30:00Z"
+      }
+
+Reset to Default Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:post:: /logging/operations/reset
+
+   Reset logging configuration to factory defaults.
+
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      Content-Type: application/json
+
+   **Request**:
+
+   .. sourcecode:: http
+
+      POST /logging/operations/reset HTTP/1.1
+      Authorization: Bearer <token>
+      Content-Type: application/json
+      
+      {
+        "confirmation": "I confirm to reset all logging settings to defaults",
+        "backup_current": true
+      }
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "success": true,
+        "message": "Logging configuration reset to factory defaults",
+        "backup_created": true,
+        "backup_path": "/var/log/config_backup_pre_reset_20250312_163000.json",
+        "restart_required": true,
+        "restart_scheduled": true
+      }
+
+Gateway Management API
+----------------------
+
+Switch Gateway Context
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:post:: /logging/gateway/switch
+
+   Switch to a different gateway context.
+
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+      Content-Type: application/json
+
+   **Request**:
+
+   .. sourcecode:: http
+
+      POST /logging/gateway/switch HTTP/1.1
+      Authorization: Bearer <token>
+      Content-Type: application/json
+      
+      {
+        "gateway_id": "Univa-GW-02",
+        "save_current": true
+      }
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "success": true,
+        "message": "Gateway context switched to Univa-GW-02",
+        "gateway": {
+          "id": "Univa-GW-02",
+          "name": "Univa-GW-02",
+          "status": "online",
+          "ip_address": "192.168.1.102",
+          "last_seen": "2025-03-12T15:05:00Z"
+        },
+        "configuration_loaded": true,
+        "requires_reload": true
+      }
+
+Get Available Gateways
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:get:: /logging/gateways/available
+
+   Get list of available gateways for selection.
+
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "success": true,
+        "gateways": [
           {
-            "name": "storage_health",
-            "status": "in_progress",
-            "progress": 45
+            "id": "Univa-GW-01",
+            "name": "Univa-GW-01",
+            "status": "online",
+            "ip_address": "192.168.1.101",
+            "last_seen": "2025-03-12T15:00:00Z",
+            "log_status": {
+              "enabled": true,
+              "storage_used_mb": 156,
+              "storage_total_mb": 300
+            }
           },
           {
-            "name": "destination_connectivity",
-            "status": "pending",
-            "progress": 0
+            "id": "Univa-GW-02",
+            "name": "Univa-GW-02",
+            "status": "online",
+            "ip_address": "192.168.1.102",
+            "last_seen": "2025-03-12T15:02:00Z",
+            "log_status": {
+              "enabled": true,
+              "storage_used_mb": 89,
+              "storage_total_mb": 300
+            }
+          },
+          {
+            "id": "Univa-GW-03",
+            "name": "Univa-GW-03",
+            "status": "offline",
+            "ip_address": "192.168.1.103",
+            "last_seen": "2025-03-12T08:30:00Z",
+            "log_status": {
+              "enabled": false,
+              "storage_used_mb": 0,
+              "storage_total_mb": 300
+            }
           }
-        ],
-        "estimated_completion": "2025-03-12T17:02:00Z",
-        "results_url": "/api/v1/logging/diagnostics/results/log_diag_20250312_170000"
+        ]
       }
+
+Category-Specific Configuration API
+-----------------------------------
+
+Get Category UI Configuration Template
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:get:: /logging/categories/{category_id}/ui-template
+
+   Get UI configuration template for a specific category.
+
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+
+   **Path Parameters**:
+
+   * **category_id** (required): Category ID
+
+   **Response**:
+
+   .. sourcecode:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "success": true,
+        "category": {
+          "id": "system",
+          "name": "System Logs",
+          "description": "Kernel, watchdog, crash reports",
+          "ui_template": {
+            "title": "System Logs Configuration",
+            "subtitle": "Configure kernel, watchdog, crash reports, and system events",
+            "sections": [
+              {
+                "title": "Basic Settings",
+                "fields": [
+                  {
+                    "type": "toggle",
+                    "id": "enabled",
+                    "label": "Enable Logging",
+                    "description": "Turn logging on/off for this category",
+                    "value": true
+                  },
+                  {
+                    "type": "select",
+                    "id": "log_level",
+                    "label": "Log Level",
+                    "description": "Minimum severity level to log",
+                    "options": [
+                      {"value": "CRITICAL", "label": "CRITICAL"},
+                      {"value": "ERROR", "label": "ERROR"},
+                      {"value": "WARNING", "label": "WARNING"},
+                      {"value": "INFO", "label": "INFO"},
+                      {"value": "DEBUG", "label": "DEBUG"},
+                      {"value": "TRACE", "label": "TRACE"}
+                    ],
+                    "value": "INFO"
+                  },
+                  {
+                    "type": "select",
+                    "id": "log_format",
+                    "label": "Log Format",
+                    "description": "Structure of each log entry",
+                    "options": [
+                      {"value": "TIMESTAMP LEVEL MODULE MESSAGE", "label": "Standard (Timestamp + Level + Module + Message)"},
+                      {"value": "TIMESTAMP LEVEL MESSAGE", "label": "Basic (Timestamp + Level + Message)"},
+                      {"value": "TIMESTAMP MESSAGE", "label": "Simple (Timestamp + Message)"},
+                      {"value": "LEVEL MODULE MESSAGE", "label": "Compact (Level + Module + Message - No Timestamp)"},
+                      {"value": "MODULE MESSAGE", "label": "Minimal (Module + Message)"}
+                    ],
+                    "value": "TIMESTAMP LEVEL MODULE MESSAGE"
+                  },
+                  {
+                    "type": "number",
+                    "id": "interval_ms",
+                    "label": "Log Interval (ms)",
+                    "description": "How often to write logs (0 = immediate)",
+                    "min": 0,
+                    "max": 60000,
+                    "unit": "ms",
+                    "value": 1000
+                  }
+                ]
+              },
+              {
+                "title": "Advanced Settings",
+                "fields": [
+                  {
+                    "type": "number",
+                    "id": "max_file_size_mb",
+                    "label": "Max File Size",
+                    "description": "Maximum size of individual log files",
+                    "min": 1,
+                    "max": 100,
+                    "unit": "MB",
+                    "value": 10
+                  },
+                  {
+                    "type": "number",
+                    "id": "retention_days",
+                    "label": "Retention Period",
+                    "description": "How long to keep logs before deletion",
+                    "min": 1,
+                    "max": 365,
+                    "unit": "days",
+                    "value": 30
+                  },
+                  {
+                    "type": "number",
+                    "id": "buffer_size_kb",
+                    "label": "Buffer Size",
+                    "description": "Memory buffer for log entries before writing to disk",
+                    "min": 128,
+                    "max": 16384,
+                    "unit": "KB",
+                    "value": 1024
+                  },
+                  {
+                    "type": "number",
+                    "id": "flush_interval_ms",
+                    "label": "Flush Interval",
+                    "description": "How often to flush buffer to disk",
+                    "min": 100,
+                    "max": 30000,
+                    "unit": "ms",
+                    "value": 5000
+                  }
+                ]
+              },
+              {
+                "title": "Additional Information",
+                "fields": [
+                  {
+                    "type": "toggle",
+                    "id": "include_detailed_data",
+                    "label": "Include Process Info",
+                    "description": "Include process ID and thread information",
+                    "value": true
+                  },
+                  {
+                    "type": "toggle",
+                    "id": "include_debug_info",
+                    "label": "Include Thread IDs",
+                    "description": "Include thread identification in logs",
+                    "value": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+
+Real-Time Updates API
+---------------------
+
+Subscribe to Configuration Updates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:get:: /logging/updates/subscribe
+
+   Subscribe to real-time configuration updates via Server-Sent Events (SSE).
+
+   **Headers**:
+
+   .. code-block:: http
+
+      Authorization: Bearer <token>
+
+   **Response**:
+
+   .. code-block:: http
+
+      HTTP/1.1 200 OK
+      Content-Type: text/event-stream
+      Cache-Control: no-cache
+      Connection: keep-alive
+      
+      event: config_update
+      data: {"type": "category_updated", "category": "system", "enabled": true, "log_level": "INFO"}
+      
+      event: storage_update
+      data: {"used_mb": 157, "total_mb": 300, "usage_percentage": 52.3}
+      
+      event: rotation_update
+      data: {"last_rotation": "2025-03-12T16:00:00Z", "next_rotation": "2025-03-13T02:00:00Z"}
 
 Error Handling
 --------------
@@ -1780,7 +1318,10 @@ Error Response Format
      "message": "Human-readable error message",
      "code": "ERROR_CODE",
      "timestamp": "2025-03-12T16:00:00Z",
-     "request_id": "req_abc123def456"
+     "request_id": "req_abc123def456",
+     "validation_errors": [
+       {"field": "max_storage_mb", "error": "Value must be between 10 and 1000"}
+     ]
    }
 
 Common Error Codes
@@ -1808,247 +1349,92 @@ Common Error Codes
      - Log rotation failed
    * - **BUFFER_OVERFLOW**
      - Log buffer overflow
-   * - **COMPRESSION_FAILED**
-     - Log compression failed
-   * - **ENCRYPTION_FAILED**
-     - Log encryption failed
-   * - **RATE_LIMIT_EXCEEDED**
-     - Log rate limit exceeded
-   * - **CATEGORY_PROTECTED**
-     - Category cannot be modified (e.g., security)
+   * - **GATEWAY_SWITCH_FAILED**
+     - Failed to switch gateway context
+   * - **GATEWAY_OFFLINE**
+     - Target gateway is offline
+   * - **CONFIGURATION_LOCKED**
+     - Configuration is being modified by another user
+   * - **VALIDATION_ERROR**
+     - Configuration validation failed
 
 Examples
 --------
 
-Python - Logging Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: python
-
-   import requests
-   
-   # Get logging status
-   headers = {"Authorization": "Bearer your_token"}
-   
-   status_response = requests.get(
-       "https://univa-gateway/api/v1/logging/status",
-       headers=headers
-   )
-   
-   status = status_response.json()
-   print(f"Logging Enabled: {status['status']['enabled']}")
-   print(f"Storage Used: {status['status']['storage']['used_mb']}MB")
-   print(f"Available: {status['status']['storage']['available_mb']}MB")
-   
-   # List categories
-   categories_response = requests.get(
-       "https://univa-gateway/api/v1/logging/categories",
-       headers=headers,
-       params={"enabled_only": True}
-   )
-   
-   categories = categories_response.json()
-   for category in categories['categories']:
-       print(f"{category['name']}: {category['log_level']} (Lines Today: {category['lines_today']})")
-   
-   # Configure system logs
-   system_config = {
-       "enabled": True,
-       "log_level": "DEBUG",
-       "interval_ms": 500,
-       "max_file_size_mb": 20,
-       "retention_days": 14,
-       "include_process_id": True,
-       "include_thread_id": True
-   }
-   
-   config_response = requests.put(
-       "https://univa-gateway/api/v1/logging/categories/system",
-       json=system_config,
-       headers=headers
-   )
-   
-   print(f"Configuration updated: {config_response.json()['message']}")
-   
-   # Get real-time statistics
-   stats_response = requests.get(
-       "https://univa-gateway/api/v1/logging/statistics/realtime",
-       headers=headers,
-       params={"time_window": 10}
-   )
-   
-   stats = stats_response.json()
-   print(f"Lines per second: {stats['statistics']['overall']['lines_per_second']}")
-   print(f"Active categories: {stats['statistics']['overall']['active_categories']}")
-
-Python - Log Operations
-~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: python
-
-   # Test logging configuration
-   test_request = {
-       "categories": ["system", "network", "modbus"],
-       "levels": ["INFO", "ERROR", "WARNING"],
-       "test_messages_count": 5,
-       "verify_destinations": True,
-       "cleanup_after_test": True
-   }
-   
-   test_response = requests.post(
-       "https://univa-gateway/api/v1/logging/operations/test",
-       json=test_request,
-       headers={"Authorization": "Bearer your_token"}
-   )
-   
-   test_result = test_response.json()
-   print(f"Test ID: {test_result['test_id']}")
-   print(f"Messages Generated: {test_result['messages_generated']}")
-   print(f"Destinations Tested: {test_result['destinations_tested']}")
-   
-   # Run log rotation
-   rotation_request = {
-       "reason": "Monthly log rotation",
-       "categories": ["all"],
-       "compress_immediately": True,
-       "archive_name": "logs_monthly_20250312"
-   }
-   
-   rotation_response = requests.post(
-       "https://univa-gateway/api/v1/logging/rotation/manual",
-       json=rotation_request,
-       headers={"Authorization": "Bearer your_token"}
-   )
-   
-   rotation_result = rotation_response.json()
-   rotation_id = rotation_result['rotation_id']
-   print(f"Rotation started: {rotation_id}")
-   
-   # Monitor rotation progress
-   import time
-   while True:
-       progress_response = requests.get(
-           f"https://univa-gateway/api/v1/logging/rotation/progress/{rotation_id}",
-           headers={"Authorization": "Bearer your_token"}
-       )
-       
-       progress = progress_response.json()
-       print(f"Rotation progress: {progress.get('progress', 0)}%")
-       
-       if progress['status'] == 'completed':
-           print(f"Rotation completed: {progress['files_rotated']} files")
-           print(f"Compressed size: {progress['compressed_size_mb']}MB")
-           break
-       
-       time.sleep(2)
-
-JavaScript - Real-time Log Monitoring
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+JavaScript - Complete UI Integration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: javascript
 
-   // WebSocket connection for real-time log monitoring
-   const ws = new WebSocket('wss://univa-gateway/api/v1/logging/ws?token=' + token);
-   
-   ws.onopen = function() {
-       console.log('Connected to Logging WebSocket');
-       
-       // Subscribe to log events
-       ws.send(JSON.stringify({
-           action: 'subscribe',
-           categories: ['system', 'network', 'security'],
-           levels: ['ERROR', 'WARN', 'INFO'],
-           filter: ''
-       }));
-   };
-   
-   ws.onmessage = function(event) {
-       const message = JSON.parse(event.data);
-       
-       if (message.event === 'log_entry') {
-           displayLogEntry(message);
-           
-           // Update statistics
-           updateLogStatistics(message.category, message.level);
-           
-           // Check for critical errors
-           if (message.level === 'ERROR' || message.level === 'CRITICAL') {
-               showErrorAlert(message);
-           }
-       }
-   };
-   
-   ws.onerror = function(error) {
-       console.error('WebSocket error:', error);
-   };
-   
-   ws.onclose = function() {
-       console.log('WebSocket connection closed');
-   };
-   
-   // UI update functions
-   function displayLogEntry(log) {
-       const logEntry = document.createElement('div');
-       logEntry.className = `log-entry category-${log.category} level-${log.level.toLowerCase()}`;
-       logEntry.innerHTML = `
-           <span class="timestamp">${new Date(log.timestamp).toLocaleTimeString()}</span>
-           <span class="category">${log.category}</span>
-           <span class="level">${log.level}</span>
-           <span class="message">${log.message}</span>
-       `;
-       
-       const container = document.getElementById('log-container');
-       container.appendChild(logEntry);
-       
-       // Auto-scroll to bottom
-       container.scrollTop = container.scrollHeight;
-   }
-   
-   function updateLogStatistics(category, level) {
-       // Update category counters
-       const catCounter = document.getElementById(`counter-${category}`);
-       if (catCounter) {
-           catCounter.textContent = parseInt(catCounter.textContent) + 1;
-       }
-       
-       // Update level counters
-       const levelCounter = document.getElementById(`counter-${level.toLowerCase()}`);
-       if (levelCounter) {
-           levelCounter.textContent = parseInt(levelCounter.textContent) + 1;
-       }
-   }
-
-JavaScript - Logging Dashboard
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: javascript
-
-   // Get logging statistics
-   async function loadLoggingStatistics() {
-       const token = localStorage.getItem('token');
-       
+   // Initialize logging dashboard
+   async function initializeLoggingDashboard() {
        try {
-           const response = await fetch('/api/v1/logging/statistics/realtime?time_window=10', {
-               headers: {
-                   'Authorization': `Bearer ${token}`
-               }
+           // Load dashboard data
+           const dashboardResponse = await fetch('/api/v1/logging/dashboard', {
+               headers: { 'Authorization': `Bearer ${token}` }
            });
+           const dashboardData = await dashboardResponse.json();
+           renderDashboard(dashboardData.dashboard);
            
-           const stats = await response.json();
-           renderStatisticsCharts(stats.statistics);
-           updateStorageUsage(stats.statistics.overall.storage_used_mb);
-           updatePerformanceMetrics(stats.statistics.overall);
+           // Load categories
+           const categoriesResponse = await fetch('/api/v1/logging/categories/ui', {
+               headers: { 'Authorization': `Bearer ${token}` }
+           });
+           const categoriesData = await categoriesResponse.json();
+           renderCategories(categoriesData.categories);
+           
+           // Load destinations
+           const destinationsResponse = await fetch('/api/v1/logging/destinations/ui', {
+               headers: { 'Authorization': `Bearer ${token}` }
+           });
+           const destinationsData = await destinationsResponse.json();
+           renderDestinations(destinationsData.destinations);
+           
+           // Load rotation settings
+           const rotationResponse = await fetch('/api/v1/logging/rotation/ui', {
+               headers: { 'Authorization': `Bearer ${token}` }
+           });
+           const rotationData = await rotationResponse.json();
+           renderRotationSettings(rotationData.rotation);
+           
+           // Load available gateways
+           const gatewaysResponse = await fetch('/api/v1/logging/gateways/available', {
+               headers: { 'Authorization': `Bearer ${token}` }
+           });
+           const gatewaysData = await gatewaysResponse.json();
+           populateGatewaySelector(gatewaysData.gateways);
+           
+           // Subscribe to updates
+           subscribeToUpdates();
+           
        } catch (error) {
-           console.error('Error loading statistics:', error);
+           console.error('Failed to initialize dashboard:', error);
+           showError('Failed to load logging configuration');
        }
    }
    
-   // Update log category configuration
-   async function updateLogCategory(categoryId, config) {
-       const token = localStorage.getItem('token');
-       
+   // Open category configuration modal
+   async function openCategoryConfigModal(categoryId) {
        try {
-           const response = await fetch(`/api/v1/logging/categories/${categoryId}`, {
+           const response = await fetch(`/api/v1/logging/categories/${categoryId}/ui-template`, {
+               headers: { 'Authorization': `Bearer ${token}` }
+           });
+           const data = await response.json();
+           
+           if (data.success) {
+               renderConfigModal(data.category.ui_template);
+               showModal();
+           }
+       } catch (error) {
+           console.error('Failed to load category config:', error);
+           showError('Failed to load configuration template');
+       }
+   }
+   
+   // Save category configuration
+   async function saveCategoryConfig(categoryId, config) {
+       try {
+           const response = await fetch(`/api/v1/logging/categories/${categoryId}/ui`, {
                method: 'PUT',
                headers: {
                    'Authorization': `Bearer ${token}`,
@@ -2060,305 +1446,348 @@ JavaScript - Logging Dashboard
            const result = await response.json();
            
            if (result.success) {
-               showSuccessNotification(`Log category ${categoryId} updated`);
-               return result.category;
-           } else {
-               throw new Error(result.message || 'Category update failed');
-           }
-       } catch (error) {
-           console.error('Error updating log category:', error);
-           showError('Failed to update log category configuration');
-       }
-   }
-   
-   // Configure log rotation
-   async function configureLogRotation(settings) {
-       const token = localStorage.getItem('token');
-       
-       try {
-           const response = await fetch('/api/v1/logging/rotation', {
-               method: 'PUT',
-               headers: {
-                   'Authorization': `Bearer ${token}`,
-                   'Content-Type': 'application/json'
-               },
-               body: JSON.stringify(settings)
-           });
-           
-           const result = await response.json();
-           
-           if (result.success) {
-               showSuccessNotification('Log rotation configuration updated');
-               updateRotationSchedule(result.rotation.next_rotation);
+               showSuccessNotification(`Configuration saved for ${categoryId}`);
+               updateCategoryUI(categoryId, result.category);
                return result;
            } else {
-               throw new Error(result.message || 'Rotation configuration failed');
+               throw new Error(result.message || 'Save failed');
            }
        } catch (error) {
-           console.error('Error configuring log rotation:', error);
-           showError('Failed to update log rotation settings');
+           console.error('Failed to save category config:', error);
+           showError(`Failed to save configuration: ${error.message}`);
        }
    }
    
-   // Run logging diagnostics
-   async function runLoggingDiagnostics() {
-       const token = localStorage.getItem('token');
-       
-       const diagnosticConfig = {
-           tests: [
-               'storage_health',
-               'destination_connectivity',
-               'performance',
-               'configuration_validation'
-           ],
-           verbose: true,
-           generate_report: true
+   // Save all configurations
+   async function saveAllConfigurations() {
+       const allConfig = {
+           global: {
+               enabled: document.getElementById('enableLogging').checked,
+               log_level: document.getElementById('globalLogLevel').value,
+               max_storage_mb: parseInt(document.getElementById('maxStorage').value),
+               rotation_mode: document.getElementById('rotationMode').value
+           },
+           categories: getCategoriesConfig(),
+           destinations: getDestinationsConfig(),
+           rotation: getRotationConfig()
        };
        
        try {
-           const response = await fetch('/api/v1/logging/diagnostics/run', {
+           const response = await fetch('/api/v1/logging/operations/save-all', {
                method: 'POST',
                headers: {
                    'Authorization': `Bearer ${token}`,
                    'Content-Type': 'application/json'
                },
-               body: JSON.stringify(diagnosticConfig)
+               body: JSON.stringify(allConfig)
            });
            
            const result = await response.json();
            
            if (result.success) {
-               startDiagnosticMonitoring(result.diagnostic_id);
+               showSuccessNotification('All configurations saved successfully!');
+               if (result.restart_required) {
+                   showRestartNotification(result.restart_time);
+               }
                return result;
            } else {
-               throw new Error(result.message || 'Diagnostic failed to start');
+               throw new Error(result.message || 'Save failed');
            }
        } catch (error) {
-           console.error('Error running diagnostics:', error);
-           showError('Failed to run logging diagnostics');
+           console.error('Failed to save all configurations:', error);
+           showError(`Failed to save configurations: ${error.message}`);
        }
    }
+   
+   // Test logging configuration
+   async function testLoggingConfig() {
+       try {
+           const response = await fetch('/api/v1/logging/operations/test/ui', {
+               method: 'POST',
+               headers: {
+                   'Authorization': `Bearer ${token}`,
+                   'Content-Type': 'application/json'
+               },
+               body: JSON.stringify({
+                   categories: ['system', 'network', 'modbus'],
+                   levels: ['INFO', 'ERROR', 'WARNING'],
+                   test_messages_count: 10,
+                   verify_destinations: true
+               })
+           });
+           
+           const result = await response.json();
+           
+           if (result.success) {
+               showSuccessNotification(result.message);
+               return result;
+           } else {
+               throw new Error(result.message || 'Test failed');
+           }
+       } catch (error) {
+           console.error('Failed to test logging:', error);
+           showError(`Test failed: ${error.message}`);
+       }
+   }
+   
+   // Rotate logs now
+   async function rotateLogsNow() {
+       try {
+           const response = await fetch('/api/v1/logging/rotation/manual/ui', {
+               method: 'POST',
+               headers: {
+                   'Authorization': `Bearer ${token}`,
+                   'Content-Type': 'application/json'
+               },
+               body: JSON.stringify({
+                   reason: 'Manual rotation triggered from UI',
+                   compress_immediately: true
+               })
+           });
+           
+           const result = await response.json();
+           
+           if (result.success) {
+               showSuccessNotification(result.message);
+               updateStorageDisplay();
+               return result;
+           } else {
+               throw new Error(result.message || 'Rotation failed');
+           }
+       } catch (error) {
+           console.error('Failed to rotate logs:', error);
+           showError(`Rotation failed: ${error.message}`);
+       }
+   }
+   
+   // Switch gateway
+   async function switchGateway(gatewayId) {
+       try {
+           const response = await fetch('/api/v1/logging/gateway/switch', {
+               method: 'POST',
+               headers: {
+                   'Authorization': `Bearer ${token}`,
+                   'Content-Type': 'application/json'
+               },
+               body: JSON.stringify({
+                   gateway_id: gatewayId,
+                   save_current: true
+               })
+           });
+           
+           const result = await response.json();
+           
+           if (result.success) {
+               if (result.requires_reload) {
+                   location.reload();
+               } else {
+                   updateGatewayInfo(result.gateway);
+               }
+               return result;
+           } else {
+               throw new Error(result.message || 'Gateway switch failed');
+           }
+       } catch (error) {
+           console.error('Failed to switch gateway:', error);
+           showError(`Failed to switch gateway: ${error.message}`);
+           // Reset dropdown to current gateway
+           document.getElementById('gateway-select').value = currentGatewayId;
+       }
+   }
+   
+   // Subscribe to real-time updates
+   function subscribeToUpdates() {
+       const eventSource = new EventSource('/api/v1/logging/updates/subscribe?token=' + token);
+       
+       eventSource.addEventListener('config_update', function(event) {
+           const data = JSON.parse(event.data);
+           handleConfigUpdate(data);
+       });
+       
+       eventSource.addEventListener('storage_update', function(event) {
+           const data = JSON.parse(event.data);
+           updateStorageDisplay(data);
+       });
+       
+       eventSource.addEventListener('rotation_update', function(event) {
+           const data = JSON.parse(event.data);
+           updateRotationDisplay(data);
+       });
+       
+       eventSource.addEventListener('error', function(event) {
+           console.error('SSE connection error:', event);
+           // Attempt to reconnect
+           setTimeout(subscribeToUpdates, 5000);
+       });
+   }
 
-Best Practices
---------------
+Best Practices for UI Integration
+---------------------------------
 
-Category Configuration
-~~~~~~~~~~~~~~~~~~~~~~
+Data Loading Strategy
+~~~~~~~~~~~~~~~~~~~~~
 
-1. **Selective Logging**
-   - Enable only necessary categories
-   - Set appropriate log levels per category
-   - Consider performance impact
+1. **Initial Load**:
+   - Load dashboard data first for quick display
+   - Load categories, destinations, and rotation in parallel
+   - Show loading states for each section
 
-2. **Performance Optimization**
-   - Adjust intervals based on importance
-   - Configure appropriate buffer sizes
-   - Use compression for network destinations
+2. **Caching**:
+   - Cache configuration data locally
+   - Use ETag headers for conditional requests
+   - Implement optimistic updates
 
-3. **Storage Management**
-   - Set appropriate retention periods
-   - Configure rotation schedules
-   - Monitor storage usage regularly
+3. **Error Handling**:
+   - Show partial data when some requests fail
+   - Implement retry logic for failed requests
+   - Provide offline fallback options
 
-Destination Management
-~~~~~~~~~~~~~~~~~~~~~~
+Real-time Updates
+~~~~~~~~~~~~~~~~~
 
-1. **Multiple Destinations**
-   - Use local storage for reliability
-   - Configure cloud for backup/analysis
-   - Use syslog for centralized logging
+1. **Server-Sent Events**:
+   - Use SSE for configuration updates
+   - Handle reconnection automatically
+   - Update UI components incrementally
 
-2. **Network Optimization**
-   - Use compression for remote destinations
-   - Configure retry policies
-   - Monitor connection health
+2. **Optimistic Updates**:
+   - Update UI immediately on user action
+   - Show loading states during API calls
+   - Roll back changes on failure
 
-3. **Security Considerations**
-   - Encrypt sensitive log data
-   - Secure destination credentials
-   - Monitor access patterns
+Validation
+~~~~~~~~~~
 
-Rotation & Retention
-~~~~~~~~~~~~~~~~~~~~
+1. **Client-side Validation**:
+   - Validate input formats before submission
+   - Show inline validation errors
+   - Prevent invalid submissions
 
-1. **Rotation Strategy**
-   - Balance frequency vs. performance
-   - Use compression to save space
-   - Maintain appropriate retention
+2. **Server-side Validation**:
+   - Handle validation errors gracefully
+   - Show detailed error messages
+   - Suggest corrections when possible
 
-2. **Storage Optimization**
-   - Delete old logs automatically
-   - Archive important logs
-   - Monitor storage growth
+Performance Optimization
+~~~~~~~~~~~~~~~~~~~~~~~
 
-3. **Compliance Requirements**
-   - Retain security logs per policy
-   - Maintain audit trails
-   - Document rotation policies
+1. **Lazy Loading**:
+   - Load category templates on demand
+   - Paginate large log lists
+   - Defer non-critical data loading
+
+2. **Batching**:
+   - Batch multiple configuration updates
+   - Use compound endpoints for related data
+   - Minimize round trips
 
 Security Considerations
 -----------------------
 
-Authentication & Authorization
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. **Input Sanitization**:
+   - Validate all user inputs
+   - Escape special characters in log messages
+   - Prevent injection attacks
 
-1. **Access Control**
-   - Admin-level for configuration changes
-   - Operator-level for monitoring
-   - Viewer-level for read-only access
-
-2. **Audit Trail**
+2. **Access Control**:
+   - Implement role-based access
    - Log all configuration changes
-   - Track access to log files
-   - Monitor for unauthorized access
+   - Audit user actions
 
-3. **Security Logs**
-   - Special protection for security logs
-   - Cannot be disabled without approval
-   - Extended retention periods
+3. **Data Protection**:
+   - Encrypt sensitive configuration data
+   - Secure API keys and credentials
+   - Implement rate limiting
 
-Data Protection
+Troubleshooting
+---------------
+
+Common Issues
+~~~~~~~~~~~~~
+
+1. **Configuration Not Applying**:
+   - Check if restart is required
+   - Verify permissions
+   - Check for validation errors
+
+2. **Storage Issues**:
+   - Monitor storage usage
+   - Configure rotation properly
+   - Clean up old logs
+
+3. **Connectivity Problems**:
+   - Check network connectivity
+   - Verify destination URLs
+   - Test with minimal configuration
+
+Debugging Tools
 ~~~~~~~~~~~~~~~
 
-1. **Encryption**
-   - Encrypt logs in transit
-   - Encrypt sensitive log data
-   - Secure credential storage
+1. **Test Endpoints**:
+   - Use `/logging/operations/test/ui` to verify configuration
+   - Test individual destinations
+   - Generate test log entries
 
-2. **Access Control**
-   - Restrict log file access
-   - Control destination access
-   - Monitor log exports
+2. **Diagnostic Endpoints**:
+   - Check system health
+   - View error logs
+   - Monitor performance metrics
 
-3. **Compliance**
-   - Follow data retention policies
-   - Secure log storage
-   - Regular security audits
+3. **Log Files**:
+   - Access system logs for debugging
+   - Check API request logs
+   - Review error logs
 
-Audit & Compliance
-~~~~~~~~~~~~~~~~~~
+Support
+-------
 
-1. **Logging Requirements**
-   - Configuration change logs: 90 days
-   - Security event logs: 180 days
-   - System operation logs: 30 days
+For API support, contact:
 
-2. **Reporting**
-   - Regular compliance reports
-   - Security audit logs
-   - Storage usage reports
+- **Email**: logging-support@univagateway.com
+- **Documentation**: https://docs.univagateway.com/api/logging
+- **Emergency**: +1-800-LOGGING (564-4644)
+- **API Status**: https://status.univagateway.com/api
 
-3. **Documentation**
-   - Logging policy documentation
-   - Configuration documentation
-   - Compliance documentation
+Version History
+---------------
 
-System Requirements
--------------------
-
-Minimum Requirements
-~~~~~~~~~~~~~~~~~~~~
-
-.. list-table:: System Requirements
-   :widths: 40 60
+.. list-table:: API Version History
+   :widths: 20 30 50
    :header-rows: 1
 
-   * - Component
-     - Requirement
-   * - **Storage**
-     - 300MB minimum for logs
-   * - **Memory**
-     - 256MB for logging buffers
-   * - **CPU**
-     - Multi-core for compression
-   * - **Network**
-     - Stable for remote destinations
-   * - **Filesystem**
-     - Support for log rotation
+   * - Version
+     - Date
+     - Changes
+   * - **v1.0**
+     - 2025-03-01
+     - Initial release with basic logging API
+   * - **v1.1**
+     - 2025-03-12
+     - Added UI-specific endpoints, real-time updates, and gateway management
+   * - **v1.2**
+     - 2025-03-15
+     - Added batch operations and enhanced error handling
 
-Performance Considerations
---------------------------
+Compliance
+----------
 
-1. **Logging Performance**
-   - Maximum throughput: 1000 lines/sec
-   - Buffer memory: 256MB-1GB
-   - Compression overhead: 5-20% CPU
+This API complies with:
 
-2. **Network Impact**
-   - Local logging: <1% network
-   - Remote logging: 10-100 KB/s
-   - Compression savings: 60-80%
+1. **RESTful Design Principles**
+2. **JSON API Specification**
+3. **OAuth 2.0 / JWT Authentication**
+4. **GDPR Data Protection**
+5. **ISO 27001 Security Standards**
 
-3. **Storage Impact**
-   - Daily growth: 10-100 MB/day
-   - Compression ratio: 0.3-0.5
-   - Rotation overhead: <5% CPU
+Deprecation Policy
+------------------
 
-Support & Troubleshooting
--------------------------
+Endpoints marked as deprecated will:
 
-Getting Help
-~~~~~~~~~~~~
-
-1. **Documentation**
-   - API reference
-   - Configuration guides
-   - Troubleshooting guides
-
-2. **Support Channels**
-   - Email: logging-support@univagateway.com
-   - Phone: +1-800-LOGGING
-   - Online portal
-
-3. **Debug Information**
-   - Generate diagnostic reports
-   - Share configuration files
-   - Provide error codes
-
-Common Solutions
-~~~~~~~~~~~~~~~~
-
-1. **Storage Full**
-   - Increase storage allocation
-   - Adjust retention periods
-   - Run manual rotation
-
-2. **Performance Issues**
-   - Adjust logging intervals
-   - Reduce log verbosity
-   - Increase buffer sizes
-
-3. **Connectivity Issues**
-   - Check network connectivity
-   - Verify destination settings
-   - Review firewall rules
-
-Notes
------
-
-.. warning::
-
-   **Security Logs**: Security logs have special protection and cannot be disabled without admin approval
-
-.. warning::
-
-   **Storage Management**: Monitor log storage regularly to prevent system issues
-
-.. important::
-
-   **Performance Impact**: High-frequency logging can impact system performance
-
-.. note::
-
-   **Configuration Backup**: Always backup logging configuration before changes
-
-.. note::
-
-   **Testing**: Test logging configuration in staging before production deployment
-
-.. note::
-
-   **Monitoring**: Set up alerts for critical logging issues
+1. Remain functional for 6 months
+2. Return deprecation warnings in headers
+3. Have replacement endpoints documented
+4. Be removed after the deprecation period
 
 Rate Limiting
 -------------
@@ -2373,48 +1802,22 @@ Rate Limiting
    * - **Configuration changes**
      - 10
      - PUT/POST endpoints
-   * - **Log queries**
+   * - **Data queries**
      - 100
      - GET endpoints
-   * - **WebSocket connections**
-     - 5 per user
-     - Concurrent connections
-   * - **Log streaming**
-     - 1000 lines/sec
-     - Per client limit
-   * - **Statistics queries**
-     - 30
-     - Historical data
+   * - **UI-specific endpoints**
+     - 60
+     - /ui suffix endpoints
+   * - **Real-time updates**
+     - 5 connections
+     - Per user limit
+   * - **Bulk operations**
+     - 5
+     - Save-all, batch updates
 
-Compliance Notes
-----------------
-
-1. **Security Regulations**
-   - Security logs require extended retention
-   - Configuration changes must be audited
-   - Access to logs must be controlled
-
-2. **Data Protection**
-   - Encrypt logs containing sensitive data
-   - Secure log transmission
-   - Control log exports
-
-3. **Audit Requirements**
-   - Maintain comprehensive audit trails
-   - Regular security reviews
-   - Compliance reporting
-
-Versioning
-----------
-
-API version is included in the URL path (``/api/v1/``). Breaking changes will result in a new version number.
-
-Support
+License
 -------
 
-For API support, contact:
+Copyright © 2025 Univa Gateway. All rights reserved.
 
-- **Email**: logging-support@univagateway.com
-- **Documentation**: https://docs.univagateway.com/api/logging
-- **Emergency**: +1-800-LOGGING (564-4644)
-- **API Status**: https://status.univagateway.com/api
+This API is proprietary and confidential. Unauthorized use, copying, or distribution is prohibited.
