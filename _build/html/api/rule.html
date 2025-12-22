@@ -552,7 +552,6 @@
 <li class="toctree-l3"><a class="reference internal" href="automation.html#system-status-overview">System Status (Overview)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="automation.html#job-management-section-1">Job Management (SECTION 1)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="automation.html#job-configuration-section-2">Job Configuration (SECTION 2)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="automation.html#gateway-management-section-3">Gateway Management (SECTION 3)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="automation.html#schedule-types-section-4">Schedule Types (SECTION 4)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="automation.html#conflict-detection-section-5">Conflict Detection (SECTION 5)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="automation.html#bulk-operations-section-6">Bulk Operations (SECTION 6)</a></li>
@@ -581,196 +580,119 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="alerts.html">Alert Messages API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#purpose">Purpose</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#base-url">Base URL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#authentication">Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#endpoints">Endpoints</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="alerts.html#alert-classes-api">1. Alert Classes API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-alert-classes">GET /alert-classes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-alert-classes-id">GET /alert-classes/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-alert-classes-id-messages">GET /alert-classes/{id}/messages</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#post-alert-classes">POST /alert-classes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#put-alert-classes-id">PUT /alert-classes/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#patch-alert-classes-id">PATCH /alert-classes/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#delete-alert-classes-id">DELETE /alert-classes/{id}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="alerts.html#alert-classes-operations">Alert Classes Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="alerts.html#alert-messages-operations">Alert Messages Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="alerts.html#preview-operations">Preview Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="alerts.html#configuration-operations">Configuration Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="alerts.html#bulk-operations">Bulk Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="alerts.html#live-preview-operations">Live Preview Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="alerts.html#utilities-operations">Utilities Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="alerts.html#save-configuration">Save Configuration</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="alerts.html#id1">2. Alert Messages API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-alert-messages">GET /alert-messages</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-alert-messages-id">GET /alert-messages/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#post-alert-messages">POST /alert-messages</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#put-alert-messages-id">PUT /alert-messages/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#patch-alert-messages-id">PATCH /alert-messages/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#delete-alert-messages-id">DELETE /alert-messages/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#post-alert-messages-bulk-delete">POST /alert-messages/bulk-delete</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="alerts.html#preview-api">3. Preview API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#post-alert-messages-preview">POST /alert-messages/preview</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-alert-messages-id-preview">GET /alert-messages/{id}/preview</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="alerts.html#configuration-api">4. Configuration API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-configuration-alert-settings">GET /configuration/alert-settings</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#post-configuration-alert-settings-import">POST /configuration/alert-settings/import</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#post-configuration-reset">POST /configuration/reset</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="alerts.html#utilities-api">5. Utilities API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-variables">GET /variables</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-channels">GET /channels</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-alert-colors">GET /alert-colors</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-alert-icons">GET /alert-icons</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#post-validate-message">POST /validate/message</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#error-responses">Error Responses</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#versioning">Versioning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#changelog">Changelog</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#sdk-examples">SDK Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#complete-user-flow">Complete User Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#key-features">Key Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#security-notes">Security Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#performance-considerations">Performance Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#browser-compatibility">Browser Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#monitoring">Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="alerts.html#support">Support</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Rules Engine API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#purpose">Purpose</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#base-url">Base URL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#authentication">Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#endpoints">Endpoints</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#rules-management-api">Rules Management API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#get-rules">GET /rules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#get-rules-id">GET /rules/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#post-rules">POST /rules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#put-rules-id">PUT /rules/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#patch-rules-id-status">PATCH /rules/{id}/status</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#delete-rules-id">DELETE /rules/{id}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rule-operations">Rule Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rule-status-operations">Rule Status Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rule-template-operations">Rule Template Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rule-testing-operations">Rule Testing Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-discovery-operations">Configuration Discovery Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rule-import-export-operations">Rule Import/Export Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statistics-operations">Statistics Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#validation-operations">Validation Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#utility-operations">Utility Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bulk-operations">Bulk Operations</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#rule-templates-api">Rule Templates API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#get-rules-templates">GET /rules/templates</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#post-rules-templates-id-create">POST /rules/templates/{id}/create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#complete-user-flow">Complete User Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-features">Key Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wizard-steps-detail">Wizard Steps Detail</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-types-and-constraints">Data Types and Constraints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rule-object-structure">Rule Object Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#validation-rules">Validation Rules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#template-structure">Template Structure</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#rule-testing-api">Rule Testing API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#post-rules-test">POST /rules/test</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#post-rules-id-test">POST /rules/{id}/test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#integration-points">Integration Points</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#device-management-integration">Device Management Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#alert-messages-integration">Alert Messages Integration</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#configuration-discovery-api">Configuration Discovery API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#get-rules-devices">GET /rules/devices</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#get-rules-tags">GET /rules/tags</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#get-rules-alerts-available">GET /rules/alerts/available</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#rule-import-export-api">Rule Import/Export API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#post-rules-import">POST /rules/import</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#get-rules-export">GET /rules/export</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#rule-statistics-api">Rule Statistics API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#get-rules-statistics">GET /rules/statistics</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#get-rules-id-statistics">GET /rules/{id}/statistics</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#rule-validation-api">Rule Validation API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#post-rules-validate">POST /rules/validate</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#utility-endpoints">Utility Endpoints</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#get-rules-conditions">GET /rules/conditions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#get-rules-units">GET /rules/units</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#error-responses">Error Responses</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#sdk-examples">SDK Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#support">Support</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#webhook-integration">Webhook Integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#data-types-and-constraints">Data Types and Constraints</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#performance-notes">Performance Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#performance-considerations">Performance Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#security-notes">Security Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#monitoring-and-logging">Monitoring and Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deployment-considerations">Deployment Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-strategy">Testing Strategy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#browser-compatibility">Browser Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#api-versioning">API Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#support-and-resources">Support and Resources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#changelog">Changelog</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#migration-notes">Migration Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#future-enhancements">Future Enhancements</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="notification.html">Notification Channels API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#purpose">Purpose</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#base-url">Base URL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#authentication">Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#endpoints">Endpoints</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#channels-management-api">Channels Management API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-all-channels">Get All Channels</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-single-channel">Get Single Channel</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#create-channel">Create Channel</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#update-channel">Update Channel</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#update-channel-status">Update Channel Status</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#delete-channel">Delete Channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-operations">Channel Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-status-operations">Channel Status Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#testing-operations">Testing Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#gateway-operations">Gateway Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#status-dashboard-operations">Status Dashboard Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#alert-integration-operations">Alert Integration Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-configuration-templates">Channel Configuration Templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#configuration-validation-operations">Configuration Validation Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#delivery-operations">Delivery Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#import-export-operations">Import/Export Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#monitoring-operations">Monitoring Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#webhook-configuration">Webhook Configuration</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-configuration-templates-api">Channel Configuration Templates API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-channel-template">Get Channel Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#complete-user-flow">Complete User Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#key-features">Key Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#channel-types-configuration">Channel Types Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#mqtt-configuration-template">MQTT Configuration Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#email-configuration-template">Email Configuration Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#sms-configuration-template">SMS Configuration Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#webhook-configuration-template">Webhook Configuration Template</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-testing-api">Channel Testing API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#test-channel-configuration">Test Channel Configuration</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#test-multiple-channels">Test Multiple Channels</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-channel-types-info">Get Channel Types Info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#performance-guidelines">Performance Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#security-considerations">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#common-issues-and-solutions">Common Issues and Solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#debug-checklist">Debug Checklist</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-statistics-api">Channel Statistics API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-channel-statistics">Get Channel Statistics</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-overview-statistics">Get Overview Statistics</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-channel-status-dashboard">Get Channel Status Dashboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#webhooks-integration">Webhooks Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-status-change-webhook">Channel Status Change Webhook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#delivery-status-webhook">Delivery Status Webhook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#gateway-switch-webhook">Gateway Switch Webhook</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-alert-delivery-api">Channel Alert Delivery API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#deliver-alert">Deliver Alert</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-delivery-history">Get Delivery History</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-configuration-validation-api">Channel Configuration Validation API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#validate-configuration">Validate Configuration</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#test-connection">Test Connection</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#gateway-management-api">Gateway Management API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-available-gateways">Get Available Gateways</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#switch-gateway-context">Switch Gateway Context</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-import-export-api">Channel Import/Export API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#export-channels">Export Channels</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#import-channels">Import Channels</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-monitoring-api">Channel Monitoring API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-real-time-monitoring">Get Real-time Monitoring</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#alert-messages-integration-api">Alert Messages Integration API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-alert-messages-for-testing">Get Alert Messages for Testing</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#test-alert-with-variables">Test Alert with Variables</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#webhook-configuration-api">Webhook Configuration API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#configure-webhook-endpoints">Configure Webhook Endpoints</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#error-responses">Error Responses</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#webhooks">Webhooks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#sdk-examples">SDK Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#support">Support</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#channel-types-and-configuration">Channel Types and Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#security-best-practices">Security Best Practices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#performance-considerations">Performance Considerations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#troubleshooting">Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notification.html#compliance-and-regulations">Compliance and Regulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#support">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#version-information">Version Information</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="CraneIQ.html">CraneIQ Pro API</a><ul>
@@ -881,112 +803,70 @@
 <h2>Purpose<a class="headerlink" href="#purpose" title="Link to this heading">¶</a></h2>
 <p>The Rules Engine API manages conditional rules that monitor device data and trigger alerts when specific conditions are met. It provides CRUD operations for rule definitions with a simplified interface matching the Univa Gateway UI.</p>
 </section>
-<section id="base-url">
-<h2>Base URL<a class="headerlink" href="#base-url" title="Link to this heading">¶</a></h2>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">https://api.univagateway.com/v1</span>
+<section id="page-route-frontend">
+<h2>Page Route (Frontend)<a class="headerlink" href="#page-route-frontend" title="Link to this heading">¶</a></h2>
+<dl class="http get">
+<dt class="sig sig-object http" id="get--rules-engine">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/rules-engine</span></span><a class="headerlink" href="#get--rules-engine" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Renders the complete rules engine management page with all rules, templates, and statistics embedded in the HTML.</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Cookie: session_token=&lt;token&gt;</span>
 </pre></div>
 </div>
+<p><strong>Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">text/html</span>
+
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Rules Engine - Univa Gateway<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;app&quot;</span> <span class="na">data-rules</span><span class="o">=</span><span class="s">&#39;[...]&#39;</span> <span class="na">data-templates</span><span class="o">=</span><span class="s">&#39;[...]&#39;</span> <span class="na">data-statistics</span><span class="o">=</span><span class="s">&#39;{...}&#39;</span><span class="p">&gt;</span>
+    <span class="cm">&lt;!-- Rules engine page with:</span>
+<span class="cm">         - Rules list sidebar</span>
+<span class="cm">         - Rule editor wizard (3-step)</span>
+<span class="cm">         - Quick start templates</span>
+<span class="cm">         - Test functionality</span>
+<span class="cm">         - Import/export options</span>
+<span class="cm">    --&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p><strong>How it works</strong>:
+- Server renders the HTML page
+- All rules, templates, and statistics are embedded in the page
+- JavaScript reads this data and renders the rules management interface
+- No separate API call needed on initial page load</p>
+<p><strong>Error Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">302</span> <span class="ne">Found</span>
+<span class="na">Location</span><span class="o">:</span> <span class="l">/login</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
-<section id="authentication">
-<h2>Authentication<a class="headerlink" href="#authentication" title="Link to this heading">¶</a></h2>
-<p>All API requests require authentication via API key.</p>
-<p><strong>Headers:</strong></p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;api_key&gt;</span>
+<section id="api-endpoints-backend">
+<h2>API Endpoints (Backend)<a class="headerlink" href="#api-endpoints-backend" title="Link to this heading">¶</a></h2>
+<p>These endpoints handle all rule operations triggered from the page.</p>
+<section id="rule-operations">
+<h3>Rule Operations<a class="headerlink" href="#rule-operations" title="Link to this heading">¶</a></h3>
+<dl class="http post">
+<dt class="sig sig-object http" id="post--api-rules-engine-rules">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/rules-engine/rules</span></span><a class="headerlink" href="#post--api-rules-engine-rules" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Add new rule (when user clicks “Create New Rule” or finishes wizard).</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Cookie: session_token=&lt;token&gt;</span>
 <span class="err">Content-Type: application/json</span>
 </pre></div>
 </div>
-</section>
-<section id="endpoints">
-<h2>Endpoints<a class="headerlink" href="#endpoints" title="Link to this heading">¶</a></h2>
-<section id="rules-management-api">
-<h3>Rules Management API<a class="headerlink" href="#rules-management-api" title="Link to this heading">¶</a></h3>
-<section id="get-rules">
-<h4>GET /rules<a class="headerlink" href="#get-rules" title="Link to this heading">¶</a></h4>
-<p>Retrieve all rules with simplified response format.</p>
-<p><strong>Query Parameters:</strong></p>
-<ul class="simple">
-<li><p><strong>status</strong> (optional): Filter by enabled status - <code class="docutils literal notranslate"><span class="pre">true</span></code>, <code class="docutils literal notranslate"><span class="pre">false</span></code></p></li>
-<li><p><strong>type</strong> (optional): Filter by rule type - <code class="docutils literal notranslate"><span class="pre">tag</span></code>, <code class="docutils literal notranslate"><span class="pre">device</span></code>, <code class="docutils literal notranslate"><span class="pre">schedule</span></code></p></li>
-<li><p><strong>device</strong> (optional): Filter by device name</p></li>
-<li><p><strong>sort</strong> (optional): Sort field - <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">created_date</span></code>, <code class="docutils literal notranslate"><span class="pre">last_triggered</span></code></p></li>
-<li><p><strong>order</strong> (optional): Sort order - <code class="docutils literal notranslate"><span class="pre">asc</span></code>, <code class="docutils literal notranslate"><span class="pre">desc</span></code> (default: <code class="docutils literal notranslate"><span class="pre">asc</span></code>)</p></li>
-</ul>
-<p><strong>Response:</strong></p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/api/rules-engine/rules</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">session_token=&lt;token&gt;</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-
-<span class="p">[</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RULE-2025-001&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Overtemp-Motor&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tag&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;last_triggered&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12m ago&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Temperature &gt; 80°C for 30s&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;trigger_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_Drive_01&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;temperature_celsius&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;selected_alerts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;alert-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;alert-002&quot;</span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;created_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-15&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;last_modified&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-15&quot;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">]</span>
-</pre></div>
-</div>
-<p><strong>Status Codes:</strong></p>
-<ul class="simple">
-<li><p><strong>200 OK</strong>: Successful retrieval</p></li>
-<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
-<li><p><strong>500 Internal Server Error</strong>: Server error</p></li>
-</ul>
-</section>
-<section id="get-rules-id">
-<h4>GET /rules/{id}<a class="headerlink" href="#get-rules-id" title="Link to this heading">¶</a></h4>
-<p>Retrieve a specific rule by ID.</p>
-<p><strong>Path Parameters:</strong></p>
-<ul class="simple">
-<li><p><strong>id</strong> (string): Rule ID (e.g., “RULE-2025-001”)</p></li>
-</ul>
-<p><strong>Response:</strong></p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-
-<span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RULE-2025-001&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Overtemp-Motor&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tag&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Temperature &gt; 80°C for 30s&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_Drive_01&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;temperature_celsius&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;condition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;°C&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;scaled_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;rising_edge_only&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;trigger_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;last_triggered&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12m ago&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;created_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-15&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;last_modified&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-15&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;selected_alerts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;alert-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;alert-002&quot;</span><span class="p">]</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p><strong>Status Codes:</strong></p>
-<ul class="simple">
-<li><p><strong>200 OK</strong>: Successful retrieval</p></li>
-<li><p><strong>404 Not Found</strong>: Rule not found</p></li>
-<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
-</ul>
-</section>
-<section id="post-rules">
-<h4>POST /rules<a class="headerlink" href="#post-rules" title="Link to this heading">¶</a></h4>
-<p>Create a new rule with simplified payload.</p>
-<p><strong>Request:</strong></p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/rules</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
 
 <span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;High-Temperature-Alert&quot;</span><span class="p">,</span>
@@ -1002,142 +882,128 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Required Fields:</strong></p>
-<ul class="simple">
-<li><p><strong>name</strong> (string): Name of the rule (3-100 characters)</p></li>
-<li><p><strong>type</strong> (string): Rule type - <code class="docutils literal notranslate"><span class="pre">tag</span></code>, <code class="docutils literal notranslate"><span class="pre">device</span></code>, <code class="docutils literal notranslate"><span class="pre">schedule</span></code></p></li>
-<li><p><strong>device</strong> (string): Device name or “All Devices”</p></li>
-<li><p><strong>tag</strong> (string): Tag to monitor</p></li>
-<li><p><strong>condition</strong> (string): Condition operator - <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code></p></li>
-<li><p><strong>value</strong> (string/number): Threshold value</p></li>
-<li><p><strong>duration</strong> (integer): Duration in seconds (0-86400)</p></li>
-<li><p><strong>selected_alerts</strong> (array): Array of alert IDs to trigger</p></li>
-</ul>
-<p><strong>Optional Fields:</strong></p>
-<ul class="simple">
-<li><p><strong>enabled</strong> (boolean): Whether rule is enabled (default: true)</p></li>
-<li><p><strong>unit</strong> (string): Unit of measurement</p></li>
-<li><p><strong>scaled_value</strong> (boolean): Use scaled value (default: false)</p></li>
-<li><p><strong>rising_edge_only</strong> (boolean): Trigger only on rising edge (default: true)</p></li>
-</ul>
-<p><strong>Response:</strong></p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
 <span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RULE-2025-045&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;High-Temperature-Alert&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tag&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_Drive_01.temperature_celsius &gt; 80°C for 30s&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_Drive_01&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;temperature_celsius&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;condition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;°C&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;scaled_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;rising_edge_only&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;trigger_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;last_triggered&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Never&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;created_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-15&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;last_modified&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-15&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;selected_alerts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;alert-001&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;rule&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RULE-2025-045&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;High-Temperature-Alert&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tag&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_Drive_01.temperature_celsius &gt; 80°C for 30s&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_Drive_01&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;temperature_celsius&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;condition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;°C&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;trigger_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;last_triggered&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Never&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;created_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-15&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;last_modified&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-15&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;selected_alerts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;alert-001&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Status Codes:</strong></p>
-<ul class="simple">
-<li><p><strong>201 Created</strong>: Rule created successfully</p></li>
-<li><p><strong>400 Bad Request</strong>: Missing or invalid fields</p></li>
-<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
-<li><p><strong>404 Not Found</strong>: One or more alerts not found</p></li>
-<li><p><strong>409 Conflict</strong>: Rule with same name already exists</p></li>
-</ul>
-</section>
-<section id="put-rules-id">
-<h4>PUT /rules/{id}<a class="headerlink" href="#put-rules-id" title="Link to this heading">¶</a></h4>
-<p>Update an existing rule.</p>
-<p><strong>Path Parameters:</strong></p>
-<ul class="simple">
-<li><p><strong>id</strong> (string): Rule ID</p></li>
-</ul>
-<p><strong>Request:</strong></p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">PUT</span> <span class="nn">/rules/RULE-2025-001</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
+</dd></dl>
 
-<span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Overtemp-Motor-Updated&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tag&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_Drive_01&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;temperature_celsius&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;condition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;°C&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;selected_alerts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;alert-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;alert-002&quot;</span><span class="p">]</span>
-<span class="p">}</span>
+<dl class="http put">
+<dt class="sig sig-object http" id="put--api-rules-engine-rules-rule_id">
+<span class="sig-name descname"><span class="pre">PUT</span> </span><span class="sig-name descname"><span class="pre">/api/rules-engine/rules/{rule_id}</span></span><a class="headerlink" href="#put--api-rules-engine-rules-rule_id" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Edit rule (when user edits an existing rule).</p>
+<p><strong>Path Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>rule_id</strong> (string): Rule identifier (e.g., “RULE-2025-001”)</p></li>
+</ul>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Cookie: session_token=&lt;token&gt;</span>
+<span class="err">Content-Type: application/json</span>
 </pre></div>
 </div>
-<p><strong>Response:</strong></p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
 <span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RULE-2025-001&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Overtemp-Motor-Updated&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tag&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_Drive_01.temperature_celsius &gt; 85°C for 25s&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_Drive_01&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;temperature_celsius&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;condition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;°C&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;scaled_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;rising_edge_only&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;trigger_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;last_triggered&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12m ago&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;created_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-15&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;last_modified&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-15&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;selected_alerts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;alert-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;alert-002&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;rule&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RULE-2025-001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Overtemp-Motor-Updated&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tag&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_Drive_01.temperature_celsius &gt; 85°C for 25s&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_Drive_01&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;temperature_celsius&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;condition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;°C&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;trigger_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;last_triggered&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12m ago&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;selected_alerts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;alert-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;alert-002&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Status Codes:</strong></p>
+</dd></dl>
+
+<dl class="http delete">
+<dt class="sig sig-object http" id="delete--api-rules-engine-rules-rule_id">
+<span class="sig-name descname"><span class="pre">DELETE</span> </span><span class="sig-name descname"><span class="pre">/api/rules-engine/rules/{rule_id}</span></span><a class="headerlink" href="#delete--api-rules-engine-rules-rule_id" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Remove rule (when user clicks “Delete” on a rule).</p>
+<p><strong>Path Parameters</strong>:</p>
 <ul class="simple">
-<li><p><strong>200 OK</strong>: Rule updated successfully</p></li>
-<li><p><strong>400 Bad Request</strong>: Invalid fields</p></li>
-<li><p><strong>404 Not Found</strong>: Rule or alerts not found</p></li>
-<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
+<li><p><strong>rule_id</strong> (string): Rule identifier</p></li>
 </ul>
-</section>
-<section id="patch-rules-id-status">
-<h4>PATCH /rules/{id}/status<a class="headerlink" href="#patch-rules-id-status" title="Link to this heading">¶</a></h4>
-<p>Update rule enabled status (UI toggle).</p>
-<p><strong>Path Parameters:</strong></p>
-<ul class="simple">
-<li><p><strong>id</strong> (string): Rule ID</p></li>
-</ul>
-<p><strong>Request:</strong></p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">PATCH</span> <span class="nn">/rules/RULE-2025-001/status</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Cookie: session_token=&lt;token&gt;</span>
+</pre></div>
+</div>
+<p><strong>Success Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;rule_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RULE-2025-001&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Overtemp-Motor-Updated&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="rule-status-operations">
+<h3>Rule Status Operations<a class="headerlink" href="#rule-status-operations" title="Link to this heading">¶</a></h3>
+<dl class="http patch">
+<dt class="sig sig-object http" id="patch--api-rules-engine-rules-rule_id-status">
+<span class="sig-name descname"><span class="pre">PATCH</span> </span><span class="sig-name descname"><span class="pre">/api/rules-engine/rules/{rule_id}/status</span></span><a class="headerlink" href="#patch--api-rules-engine-rules-rule_id-status" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Toggle rule enabled status (UI toggle switch).</p>
+<p><strong>Path Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>rule_id</strong> (string): Rule identifier</p></li>
+</ul>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">PATCH</span> <span class="nn">/api/rules-engine/rules/RULE-2025-001/status</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">session_token=&lt;token&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
 <span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Response:</strong></p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
 <span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RULE-2025-001&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;rule_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RULE-2025-001&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Overtemp-Motor-Updated&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;previous_status&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
@@ -1145,45 +1011,16 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Status Codes:</strong></p>
-<ul class="simple">
-<li><p><strong>200 OK</strong>: Status updated successfully</p></li>
-<li><p><strong>404 Not Found</strong>: Rule not found</p></li>
-<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
-</ul>
-</section>
-<section id="delete-rules-id">
-<h4>DELETE /rules/{id}<a class="headerlink" href="#delete-rules-id" title="Link to this heading">¶</a></h4>
-<p>Delete a rule.</p>
-<p><strong>Path Parameters:</strong></p>
-<ul class="simple">
-<li><p><strong>id</strong> (string): Rule ID</p></li>
-</ul>
-<p><strong>Response:</strong></p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+</dd></dl>
 
-<span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;deleted&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RULE-2025-001&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Overtemp-Motor-Updated&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p><strong>Status Codes:</strong></p>
-<ul class="simple">
-<li><p><strong>200 OK</strong>: Rule deleted successfully</p></li>
-<li><p><strong>404 Not Found</strong>: Rule not found</p></li>
-<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
-</ul>
 </section>
-</section>
-<section id="rule-templates-api">
-<h3>Rule Templates API<a class="headerlink" href="#rule-templates-api" title="Link to this heading">¶</a></h3>
-<section id="get-rules-templates">
-<h4>GET /rules/templates<a class="headerlink" href="#get-rules-templates" title="Link to this heading">¶</a></h4>
-<p>Get available rule templates for quick start (matching UI).</p>
-<p><strong>Response:</strong></p>
+<section id="rule-template-operations">
+<h3>Rule Template Operations<a class="headerlink" href="#rule-template-operations" title="Link to this heading">¶</a></h3>
+<dl class="http get">
+<dt class="sig sig-object http" id="get--api-rules-engine-templates">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/rules-engine/templates</span></span><a class="headerlink" href="#get--api-rules-engine-templates" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Get available rule templates for quick start (matching UI templates).</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1213,79 +1050,24 @@
 <span class="w">    </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;default_alerts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;alert-002&quot;</span><span class="p">]</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vibration-template&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Vibration Alert&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fa-wave-square&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Monitor vibration levels&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Pump_Station_A&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vibration_level&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;condition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">5.0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mm/s&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;default_alerts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;alert-003&quot;</span><span class="p">]</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pressure-template&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Pressure Monitor&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fa-gauge-high&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Monitor pressure values&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Compressor_Unit_03&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pressure_bar&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;condition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bar&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;default_alerts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;alert-004&quot;</span><span class="p">]</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;current-template&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Current Monitor&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fa-bolt&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Monitor electrical current&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Generator_Set_02&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;current_amperes&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;condition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;default_alerts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;alert-001&quot;</span><span class="p">]</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;schedule-template&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Scheduled Alert&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fa-calendar-days&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Time-based alerts&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;System&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;condition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;schedule&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;daily&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;default_alerts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;alert-005&quot;</span><span class="p">]</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">]</span>
 </pre></div>
 </div>
-<p><strong>Status Codes:</strong></p>
+</dd></dl>
+
+<dl class="http post">
+<dt class="sig sig-object http" id="post--api-rules-engine-templates-template_id-create">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/rules-engine/templates/{template_id}/create</span></span><a class="headerlink" href="#post--api-rules-engine-templates-template_id-create" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Create a rule from template (when user clicks template in UI).</p>
+<p><strong>Path Parameters</strong>:</p>
 <ul class="simple">
-<li><p><strong>200 OK</strong>: Templates retrieved successfully</p></li>
-<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
+<li><p><strong>template_id</strong> (string): Template identifier</p></li>
 </ul>
-</section>
-<section id="post-rules-templates-id-create">
-<h4>POST /rules/templates/{id}/create<a class="headerlink" href="#post-rules-templates-id-create" title="Link to this heading">¶</a></h4>
-<p>Create a rule from a template (UI “Start from Template” button).</p>
-<p><strong>Path Parameters:</strong></p>
-<ul class="simple">
-<li><p><strong>id</strong> (string): Template ID</p></li>
-</ul>
-<p><strong>Request:</strong></p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/rules/templates/temp-template/create</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/api/rules-engine/templates/temp-template/create</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">session_token=&lt;token&gt;</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
 
 <span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Custom Temperature Rule&quot;</span><span class="p">,</span>
@@ -1295,59 +1077,44 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Optional Overrides:</strong></p>
-<ul class="simple">
-<li><p><strong>name</strong> (string): Custom rule name</p></li>
-<li><p><strong>device</strong> (string): Custom device</p></li>
-<li><p><strong>tag</strong> (string): Custom tag</p></li>
-<li><p><strong>condition</strong> (string): Custom condition</p></li>
-<li><p><strong>value</strong> (string/number): Custom value</p></li>
-<li><p><strong>duration</strong> (integer): Custom duration</p></li>
-<li><p><strong>selected_alerts</strong> (array): Custom alert selection</p></li>
-</ul>
-<p><strong>Response:</strong></p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
 <span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RULE-2025-046&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Custom Temperature Rule&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tag&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_02.temperature_celsius &gt; 75°C for 25s&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_02&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;temperature_celsius&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;condition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">75</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;°C&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;scaled_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;rising_edge_only&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;trigger_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;last_triggered&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Never&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;created_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-15&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;last_modified&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-15&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;selected_alerts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;alert-001&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;rule&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RULE-2025-046&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Custom Temperature Rule&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tag&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_02.temperature_celsius &gt; 75°C for 25s&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_02&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;temperature_celsius&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;condition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">75</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;°C&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;trigger_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;last_triggered&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Never&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;selected_alerts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;alert-001&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Status Codes:</strong></p>
-<ul class="simple">
-<li><p><strong>201 Created</strong>: Rule created successfully</p></li>
-<li><p><strong>404 Not Found</strong>: Template not found</p></li>
-<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
-</ul>
+</dd></dl>
+
 </section>
-</section>
-<section id="rule-testing-api">
-<h3>Rule Testing API<a class="headerlink" href="#rule-testing-api" title="Link to this heading">¶</a></h3>
-<section id="post-rules-test">
-<h4>POST /rules/test<a class="headerlink" href="#post-rules-test" title="Link to this heading">¶</a></h4>
-<p>Test a rule configuration without saving (UI “Test Rule” button).</p>
-<p><strong>Request:</strong></p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/rules/test</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<section id="rule-testing-operations">
+<h3>Rule Testing Operations<a class="headerlink" href="#rule-testing-operations" title="Link to this heading">¶</a></h3>
+<dl class="http post">
+<dt class="sig sig-object http" id="post--api-rules-engine-rules-test">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/rules-engine/rules/test</span></span><a class="headerlink" href="#post--api-rules-engine-rules-test" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Test rule configuration without saving (UI “Test Rule” button).</p>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/api/rules-engine/rules/test</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">session_token=&lt;token&gt;</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
 
 <span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Test Temperature Rule&quot;</span><span class="p">,</span>
@@ -1362,11 +1129,12 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Response:</strong></p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
 <span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;rule_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Test Temperature Rule&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;rule_conditions&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_Drive_01.temperature_celsius &gt; 80°C for 30s&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;test_result&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;would_trigger&quot;</span><span class="p">,</span>
@@ -1378,29 +1146,24 @@
 <span class="w">      </span><span class="nt">&quot;channels&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;mqtt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dashboard&quot;</span><span class="p">]</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">],</span>
-<span class="w">  </span><span class="nt">&quot;simulation_result&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rule would trigger 1 alert&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;test_timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-15T11:50:30Z&quot;</span>
+<span class="w">  </span><span class="nt">&quot;simulation_result&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rule would trigger 1 alert&quot;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Status Codes:</strong></p>
+</dd></dl>
+
+<dl class="http post">
+<dt class="sig sig-object http" id="post--api-rules-engine-rules-rule_id-test">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/rules-engine/rules/{rule_id}/test</span></span><a class="headerlink" href="#post--api-rules-engine-rules-rule_id-test" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Test an existing rule with specific values.</p>
+<p><strong>Path Parameters</strong>:</p>
 <ul class="simple">
-<li><p><strong>200 OK</strong>: Test completed successfully</p></li>
-<li><p><strong>400 Bad Request</strong>: Invalid rule configuration</p></li>
-<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
+<li><p><strong>rule_id</strong> (string): Rule identifier</p></li>
 </ul>
-</section>
-<section id="post-rules-id-test">
-<h4>POST /rules/{id}/test<a class="headerlink" href="#post-rules-id-test" title="Link to this heading">¶</a></h4>
-<p>Test an existing rule.</p>
-<p><strong>Path Parameters:</strong></p>
-<ul class="simple">
-<li><p><strong>id</strong> (string): Rule ID</p></li>
-</ul>
-<p><strong>Request:</strong></p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/rules/RULE-2025-001/test</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/api/rules-engine/rules/RULE-2025-001/test</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">session_token=&lt;token&gt;</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
 
 <span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;test_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span>
@@ -1408,11 +1171,12 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Response:</strong></p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
 <span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;rule_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RULE-2025-001&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;rule_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Overtemp-Motor&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;test_conditions&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_Drive_01.temperature_celsius &gt; 80°C for 30s&quot;</span><span class="p">,</span>
@@ -1425,25 +1189,20 @@
 <span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;High Temperature Alert&quot;</span><span class="p">,</span>
 <span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;would_trigger&quot;</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">],</span>
-<span class="w">  </span><span class="nt">&quot;test_summary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rule would trigger 1 alert&quot;</span>
+<span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Status Codes:</strong></p>
-<ul class="simple">
-<li><p><strong>200 OK</strong>: Test completed successfully</p></li>
-<li><p><strong>404 Not Found</strong>: Rule not found</p></li>
-<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
-</ul>
+</dd></dl>
+
 </section>
-</section>
-<section id="configuration-discovery-api">
-<h3>Configuration Discovery API<a class="headerlink" href="#configuration-discovery-api" title="Link to this heading">¶</a></h3>
-<section id="get-rules-devices">
-<h4>GET /rules/devices<a class="headerlink" href="#get-rules-devices" title="Link to this heading">¶</a></h4>
-<p>Get available devices for dropdown (UI device selector).</p>
-<p><strong>Response:</strong></p>
+<section id="configuration-discovery-operations">
+<h3>Configuration Discovery Operations<a class="headerlink" href="#configuration-discovery-operations" title="Link to this heading">¶</a></h3>
+<dl class="http get">
+<dt class="sig sig-object http" id="get--api-rules-engine-devices">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/rules-engine/devices</span></span><a class="headerlink" href="#get--api-rules-engine-devices" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Get available devices for dropdown (UI device selector).</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1461,38 +1220,21 @@
 <span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pump&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;online&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;vibration_level&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;pressure_bar&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;flow_rate&quot;</span><span class="p">]</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Compressor_Unit_03&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Compressor Unit 03&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;compressor&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;online&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;pressure_bar&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;temperature_celsius&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;runtime&quot;</span><span class="p">]</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Generator_Set_02&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Generator Set 02&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;generator&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;offline&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;current_amperes&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;voltage_volts&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;frequency_hz&quot;</span><span class="p">]</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">]</span>
 </pre></div>
 </div>
-<p><strong>Status Codes:</strong></p>
-<ul class="simple">
-<li><p><strong>200 OK</strong>: Devices retrieved successfully</p></li>
-<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
-</ul>
-</section>
-<section id="get-rules-tags">
-<h4>GET /rules/tags<a class="headerlink" href="#get-rules-tags" title="Link to this heading">¶</a></h4>
-<p>Get available tags for dropdown (UI tag selector).</p>
-<p><strong>Query Parameters:</strong></p>
+</dd></dl>
+
+<dl class="http get">
+<dt class="sig sig-object http" id="get--api-rules-engine-tags">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/rules-engine/tags</span></span><a class="headerlink" href="#get--api-rules-engine-tags" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Get available tags for dropdown (UI tag selector).</p>
+<p><strong>Query Parameters</strong>:</p>
 <ul class="simple">
 <li><p><strong>device</strong> (optional): Filter tags by device ID</p></li>
 </ul>
-<p><strong>Response:</strong></p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1512,51 +1254,17 @@
 <span class="w">    </span><span class="nt">&quot;data_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;min_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;max_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3000</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vibration_level&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Vibration&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mm/s&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;data_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;float&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;min_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;max_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;current_amperes&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Current&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;data_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;float&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;min_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;max_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pressure_bar&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Pressure&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bar&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;data_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;float&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;min_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;max_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">20.0</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;status&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Status&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;data_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;valid_values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;online&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;offline&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;maintenance&quot;</span><span class="p">]</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">]</span>
 </pre></div>
 </div>
-<p><strong>Status Codes:</strong></p>
-<ul class="simple">
-<li><p><strong>200 OK</strong>: Tags retrieved successfully</p></li>
-<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
-</ul>
-</section>
-<section id="get-rules-alerts-available">
-<h4>GET /rules/alerts/available<a class="headerlink" href="#get-rules-alerts-available" title="Link to this heading">¶</a></h4>
-<p>Get available alerts for selection (UI alert selector).</p>
-<p><strong>Response:</strong></p>
+</dd></dl>
+
+<dl class="http get">
+<dt class="sig sig-object http" id="get--api-rules-engine-alerts-available">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/rules-engine/alerts/available</span></span><a class="headerlink" href="#get--api-rules-engine-alerts-available" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Get available alerts for selection (UI alert selector).</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1572,76 +1280,43 @@
 <span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Device Offline Alert&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Triggers when device goes offline&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;alert-003&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Vibration Warning&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Triggers on high vibration levels&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;alert-004&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Pressure Critical&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Triggers on critical pressure levels&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;alert-005&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Maintenance Reminder&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Scheduled maintenance alerts&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;alert-006&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Energy Consumption Alert&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;High energy usage detection&quot;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">]</span>
 </pre></div>
 </div>
-<p><strong>Status Codes:</strong></p>
-<ul class="simple">
-<li><p><strong>200 OK</strong>: Alerts retrieved successfully</p></li>
-<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
-</ul>
-</section>
-</section>
-<section id="rule-import-export-api">
-<h3>Rule Import/Export API<a class="headerlink" href="#rule-import-export-api" title="Link to this heading">¶</a></h3>
-<section id="post-rules-import">
-<h4>POST /rules/import<a class="headerlink" href="#post-rules-import" title="Link to this heading">¶</a></h4>
-<p>Import rules from JSON (UI import button).</p>
-<p><strong>Request:</strong></p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/rules/import</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
+</dd></dl>
 
-<span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;rules&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Imported Temperature Rule&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tag&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_Drive_01&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;temperature_celsius&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;condition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;selected_alerts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;alert-001&quot;</span><span class="p">]</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">],</span>
-<span class="w">  </span><span class="nt">&quot;options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;overwrite_existing&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;enable_rules&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
+</section>
+<section id="rule-import-export-operations">
+<h3>Rule Import/Export Operations<a class="headerlink" href="#rule-import-export-operations" title="Link to this heading">¶</a></h3>
+<dl class="http post">
+<dt class="sig sig-object http" id="post--api-rules-engine-import">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/rules-engine/import</span></span><a class="headerlink" href="#post--api-rules-engine-import" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Import rules from JSON (UI import button).</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Cookie: session_token=&lt;token&gt;</span>
+<span class="err">Content-Type: multipart/form-data</span>
 </pre></div>
 </div>
-<p><strong>Response:</strong></p>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/api/rules-engine/import</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">session_token=&lt;token&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">multipart/form-data</span>
+
+--boundary
+Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;rules.json&quot;
+Content-Type: application/json
+
+&lt;JSON file content&gt;
+--boundary--
+</pre></div>
+</div>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
 <span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;imported&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;skipped&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;failed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
@@ -1653,51 +1328,56 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Status Codes:</strong></p>
-<ul class="simple">
-<li><p><strong>200 OK</strong>: Rules imported successfully</p></li>
-<li><p><strong>400 Bad Request</strong>: Invalid import data</p></li>
-<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
-</ul>
-</section>
-<section id="get-rules-export">
-<h4>GET /rules/export<a class="headerlink" href="#get-rules-export" title="Link to this heading">¶</a></h4>
-<p>Export rules to JSON.</p>
-<p><strong>Query Parameters:</strong></p>
-<ul class="simple">
-<li><p><strong>format</strong> (optional): Export format - <code class="docutils literal notranslate"><span class="pre">json</span></code> (default)</p></li>
-</ul>
-<p><strong>Response:</strong></p>
+</dd></dl>
+
+<dl class="http post">
+<dt class="sig sig-object http" id="post--api-rules-engine-export">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/rules-engine/export</span></span><a class="headerlink" href="#post--api-rules-engine-export" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Export rules to JSON file (when user exports rules).</p>
+<p><strong>Headers</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Cookie: session_token=&lt;token&gt;</span>
+</pre></div>
+</div>
+<p><strong>Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">Content-Disposition</span><span class="o">:</span> <span class="l">attachment; filename=&quot;rules_export_20250115.json&quot;</span>
 
 <span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;export_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://api.univagateway.com/v1/downloads/rules-export-2025-01-15.json&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;expires_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-16T11:30:00Z&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;summary&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;rules_exported&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;file_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;45.2 KB&quot;</span>
-<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nt">&quot;rules&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RULE-2025-001&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Overtemp-Motor&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tag&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_Drive_01&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;temperature_celsius&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;condition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;selected_alerts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;alert-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;alert-002&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;export_timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-15T10:30:00Z&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Status Codes:</strong></p>
-<ul class="simple">
-<li><p><strong>200 OK</strong>: Export prepared successfully</p></li>
-<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
-</ul>
+</dd></dl>
+
 </section>
-</section>
-<section id="rule-statistics-api">
-<h3>Rule Statistics API<a class="headerlink" href="#rule-statistics-api" title="Link to this heading">¶</a></h3>
-<section id="get-rules-statistics">
-<h4>GET /rules/statistics<a class="headerlink" href="#get-rules-statistics" title="Link to this heading">¶</a></h4>
-<p>Get rule statistics for UI display.</p>
-<p><strong>Response:</strong></p>
+<section id="statistics-operations">
+<h3>Statistics Operations<a class="headerlink" href="#statistics-operations" title="Link to this heading">¶</a></h3>
+<dl class="http get">
+<dt class="sig sig-object http" id="get--api-rules-engine-statistics">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/rules-engine/statistics</span></span><a class="headerlink" href="#get--api-rules-engine-statistics" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Get rule statistics for UI display.</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
 <span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;total_rules&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;enabled_rules&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">38</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;disabled_rules&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
@@ -1715,24 +1395,22 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Status Codes:</strong></p>
+</dd></dl>
+
+<dl class="http get">
+<dt class="sig sig-object http" id="get--api-rules-engine-rules-rule_id-statistics">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/rules-engine/rules/{rule_id}/statistics</span></span><a class="headerlink" href="#get--api-rules-engine-rules-rule_id-statistics" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Get statistics for a specific rule.</p>
+<p><strong>Path Parameters</strong>:</p>
 <ul class="simple">
-<li><p><strong>200 OK</strong>: Statistics retrieved successfully</p></li>
-<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
+<li><p><strong>rule_id</strong> (string): Rule identifier</p></li>
 </ul>
-</section>
-<section id="get-rules-id-statistics">
-<h4>GET /rules/{id}/statistics<a class="headerlink" href="#get-rules-id-statistics" title="Link to this heading">¶</a></h4>
-<p>Get statistics for a specific rule.</p>
-<p><strong>Path Parameters:</strong></p>
-<ul class="simple">
-<li><p><strong>id</strong> (string): Rule ID</p></li>
-</ul>
-<p><strong>Response:</strong></p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
 <span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;rule_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RULE-2025-001&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;rule_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Overtemp-Motor&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;trigger_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
@@ -1743,23 +1421,19 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Status Codes:</strong></p>
-<ul class="simple">
-<li><p><strong>200 OK</strong>: Statistics retrieved successfully</p></li>
-<li><p><strong>404 Not Found</strong>: Rule not found</p></li>
-<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
-</ul>
+</dd></dl>
+
 </section>
-</section>
-<section id="rule-validation-api">
-<h3>Rule Validation API<a class="headerlink" href="#rule-validation-api" title="Link to this heading">¶</a></h3>
-<section id="post-rules-validate">
-<h4>POST /rules/validate<a class="headerlink" href="#post-rules-validate" title="Link to this heading">¶</a></h4>
-<p>Validate rule configuration.</p>
-<p><strong>Request:</strong></p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/rules/validate</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<section id="validation-operations">
+<h3>Validation Operations<a class="headerlink" href="#validation-operations" title="Link to this heading">¶</a></h3>
+<dl class="http post">
+<dt class="sig sig-object http" id="post--api-rules-engine-validate">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/rules-engine/validate</span></span><a class="headerlink" href="#post--api-rules-engine-validate" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Validate rule configuration.</p>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/api/rules-engine/validate</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">session_token=&lt;token&gt;</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;api_key&gt;</span>
 
 <span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Test Rule&quot;</span><span class="p">,</span>
@@ -1772,11 +1446,12 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Response:</strong></p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
 <span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;valid&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;issues&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
 <span class="w">  </span><span class="nt">&quot;suggestions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -1786,20 +1461,16 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><strong>Status Codes:</strong></p>
-<ul class="simple">
-<li><p><strong>200 OK</strong>: Validation completed</p></li>
-<li><p><strong>400 Bad Request</strong>: Invalid configuration</p></li>
-<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
-</ul>
+</dd></dl>
+
 </section>
-</section>
-<section id="utility-endpoints">
-<h3>Utility Endpoints<a class="headerlink" href="#utility-endpoints" title="Link to this heading">¶</a></h3>
-<section id="get-rules-conditions">
-<h4>GET /rules/conditions<a class="headerlink" href="#get-rules-conditions" title="Link to this heading">¶</a></h4>
-<p>Get available condition operators.</p>
-<p><strong>Response:</strong></p>
+<section id="utility-operations">
+<h3>Utility Operations<a class="headerlink" href="#utility-operations" title="Link to this heading">¶</a></h3>
+<dl class="http get">
+<dt class="sig sig-object http" id="get--api-rules-engine-conditions">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/rules-engine/conditions</span></span><a class="headerlink" href="#get--api-rules-engine-conditions" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Get available condition operators.</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1837,16 +1508,13 @@
 <span class="p">]</span>
 </pre></div>
 </div>
-<p><strong>Status Codes:</strong></p>
-<ul class="simple">
-<li><p><strong>200 OK</strong>: Conditions retrieved successfully</p></li>
-<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
-</ul>
-</section>
-<section id="get-rules-units">
-<h4>GET /rules/units<a class="headerlink" href="#get-rules-units" title="Link to this heading">¶</a></h4>
-<p>Get available units for tags.</p>
-<p><strong>Response:</strong></p>
+</dd></dl>
+
+<dl class="http get">
+<dt class="sig sig-object http" id="get--api-rules-engine-units">
+<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/rules-engine/units</span></span><a class="headerlink" href="#get--api-rules-engine-units" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Get available units for tags.</p>
+<p><strong>Success Response</strong>:</p>
 <div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 
@@ -1879,31 +1547,199 @@
 <span class="p">]</span>
 </pre></div>
 </div>
-<p><strong>Status Codes:</strong></p>
-<ul class="simple">
-<li><p><strong>200 OK</strong>: Units retrieved successfully</p></li>
-<li><p><strong>401 Unauthorized</strong>: Invalid or missing API key</p></li>
-</ul>
+</dd></dl>
+
 </section>
-</section>
-</section>
-<section id="error-responses">
-<h2>Error Responses<a class="headerlink" href="#error-responses" title="Link to this heading">¶</a></h2>
-<p>All error responses follow this format:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ERROR_CODE&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Human readable error message&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
-<span class="w">  </span><span class="p">}</span>
+<section id="bulk-operations">
+<h3>Bulk Operations<a class="headerlink" href="#bulk-operations" title="Link to this heading">¶</a></h3>
+<dl class="http post">
+<dt class="sig sig-object http" id="post--api-rules-engine-rules-bulk-delete">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/rules-engine/rules/bulk-delete</span></span><a class="headerlink" href="#post--api-rules-engine-rules-bulk-delete" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Delete multiple rules in a single request.</p>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/api/rules-engine/rules/bulk-delete</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">session_token=&lt;token&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;RULE-2025-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;RULE-2025-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;RULE-2025-003&quot;</span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
+<p><strong>Success Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;deleted_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;failed_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;failed_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">  </span><span class="nt">&quot;errors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="http post">
+<dt class="sig sig-object http" id="post--api-rules-engine-rules-bulk-status">
+<span class="sig-name descname"><span class="pre">POST</span> </span><span class="sig-name descname"><span class="pre">/api/rules-engine/rules/bulk-status</span></span><a class="headerlink" href="#post--api-rules-engine-rules-bulk-status" title="Link to this definition">¶</a></dt>
+<dd><p><strong>Description</strong>: Update status for multiple rules.</p>
+<p><strong>Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/api/rules-engine/rules/bulk-status</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">session_token=&lt;token&gt;</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;RULE-2025-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;RULE-2025-002&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Success Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;updated_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;failed_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;failed_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+</section>
+<section id="route-summary">
+<h2>Route Summary<a class="headerlink" href="#route-summary" title="Link to this heading">¶</a></h2>
 <table class="docutils align-default" id="id1">
-<caption><span class="caption-text">Rules Engine Error Codes</span><a class="headerlink" href="#id1" title="Link to this table">¶</a></caption>
+<caption><span class="caption-text">Rules Engine Routes</span><a class="headerlink" href="#id1" title="Link to this table">¶</a></caption>
 <colgroup>
-<col style="width: 30.0%" />
-<col style="width: 70.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 50.0%" />
+<col style="width: 10.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Method</p></th>
+<th class="head"><p>Route &amp; Purpose</p></th>
+<th class="head"><p>Auth</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Page</p></td>
+<td><p>GET</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/rules-engine</span></code> - Main rules engine page</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>API</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/rules-engine/rules</span></code> - Add rule</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>API</p></td>
+<td><p>PUT</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/rules-engine/rules/{id}</span></code> - Edit rule</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>API</p></td>
+<td><p>DELETE</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/rules-engine/rules/{id}</span></code> - Delete rule</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>API</p></td>
+<td><p>PATCH</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/rules-engine/rules/{id}/status</span></code> - Toggle rule status</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>API</p></td>
+<td><p>GET</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/rules-engine/templates</span></code> - Get templates</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>API</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/rules-engine/templates/{id}/create</span></code> - Create from template</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>API</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/rules-engine/rules/test</span></code> - Test rule config</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>API</p></td>
+<td><p>GET</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/rules-engine/devices</span></code> - Get devices</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>API</p></td>
+<td><p>GET</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/rules-engine/tags</span></code> - Get tags</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>API</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/rules-engine/import</span></code> - Import rules</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>API</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/rules-engine/export</span></code> - Export rules</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>API</p></td>
+<td><p>GET</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/rules-engine/statistics</span></code> - Get statistics</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>API</p></td>
+<td><p>POST</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/api/rules-engine/validate</span></code> - Validate rule</p></td>
+<td><p>Yes</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="complete-user-flow">
+<h2>Complete User Flow<a class="headerlink" href="#complete-user-flow" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>User goes to page</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/rules-engine</span></code>
+- Server renders HTML with embedded rules data
+- Page shows rules sidebar, empty editor wizard</p></li>
+<li><p><strong>User creates new rule</strong>:
+- Clicks “Create New Rule” → shows wizard Step 1 (templates)
+- Selects template → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/rules-engine/templates/{id}/create</span></code>
+- Or builds from scratch → wizard progresses through steps</p></li>
+<li><p><strong>User configures trigger</strong> (Step 2):
+- Selects device, tag, condition, value, duration
+- UI updates logic preview in real-time</p></li>
+<li><p><strong>User selects alerts</strong> (Step 3):
+- Chooses alerts to trigger → <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/rules-engine/alerts/available</span></code>
+- Can test rule → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/rules-engine/rules/test</span></code>
+- Saves rule → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/rules-engine/rules</span></code>
+- New rule appears in sidebar</p></li>
+<li><p><strong>User edits existing rule</strong>:
+- Clicks rule in sidebar → loads into editor
+- Makes changes → <code class="docutils literal notranslate"><span class="pre">PUT</span> <span class="pre">/api/rules-engine/rules/{id}</span></code>
+- Toggles status → <code class="docutils literal notranslate"><span class="pre">PATCH</span> <span class="pre">/api/rules-engine/rules/{id}/status</span></code></p></li>
+<li><p><strong>User imports/export rules</strong>:
+- Clicks “Import Rules” → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/rules-engine/import</span></code>
+- Exports configuration → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/rules-engine/export</span></code></p></li>
+<li><p><strong>User monitors statistics</strong>:
+- Stats displayed in UI from <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/rules-engine/statistics</span></code>
+- Individual rule stats from <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/rules-engine/rules/{id}/statistics</span></code></p></li>
+</ol>
+</section>
+<section id="error-codes">
+<h2>Error Codes<a class="headerlink" href="#error-codes" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Rules Engine Error Codes</span><a class="headerlink" href="#id2" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Error Code</p></th>
@@ -1911,214 +1747,92 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong>RULES_001</strong></p></td>
-<td><p>Invalid rule configuration</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>RULES_002</strong></p></td>
+<tr class="row-even"><td><p>RULES_001</p></td>
 <td><p>Rule not found</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>RULES_003</strong></p></td>
+<tr class="row-odd"><td><p>RULES_002</p></td>
+<td><p>Invalid rule configuration</p></td>
+</tr>
+<tr class="row-even"><td><p>RULES_003</p></td>
 <td><p>Rule already exists</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>RULES_004</strong></p></td>
+<tr class="row-odd"><td><p>RULES_004</p></td>
 <td><p>Cannot delete - rule in use</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>RULES_005</strong></p></td>
+<tr class="row-even"><td><p>RULES_005</p></td>
 <td><p>Invalid condition for rule type</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>RULES_006</strong></p></td>
+<tr class="row-odd"><td><p>RULES_006</p></td>
 <td><p>Device not found</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>RULES_007</strong></p></td>
+<tr class="row-even"><td><p>RULES_007</p></td>
 <td><p>Tag not found on device</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>RULES_008</strong></p></td>
+<tr class="row-odd"><td><p>RULES_008</p></td>
 <td><p>Alert not found</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>RULES_009</strong></p></td>
+<tr class="row-even"><td><p>RULES_009</p></td>
 <td><p>Rule validation failed</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>RULES_010</strong></p></td>
+<tr class="row-odd"><td><p>RULES_010</p></td>
 <td><p>Import/export error</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>RULES_011</strong></p></td>
+<tr class="row-even"><td><p>RULES_011</p></td>
 <td><p>Test execution failed</p></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="rate-limiting">
-<h2>Rate Limiting<a class="headerlink" href="#rate-limiting" title="Link to this heading">¶</a></h2>
+<section id="key-features">
+<h2>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><strong>Standard Tier:</strong> 100 requests per minute</p></li>
-<li><p><strong>Enterprise Tier:</strong> 1000 requests per minute</p></li>
-</ul>
-<p><strong>Headers:</strong></p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">X-RateLimit-Limit: 100</span>
-<span class="err">X-RateLimit-Remaining: 95</span>
-<span class="err">X-RateLimit-Reset: 1609459200</span>
-</pre></div>
-</div>
-</section>
-<section id="sdk-examples">
-<h2>SDK Examples<a class="headerlink" href="#sdk-examples" title="Link to this heading">¶</a></h2>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">apiKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;your_api_key&quot;</span><span class="p">;</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">baseUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://api.univagateway.com/v1&quot;</span><span class="p">;</span>
-
-<span class="kd">const</span><span class="w"> </span><span class="nx">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="s2">&quot;Authorization&quot;</span><span class="o">:</span><span class="w"> </span><span class="sb">`Bearer </span><span class="si">${</span><span class="nx">apiKey</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;Content-Type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span>
-<span class="p">};</span>
-
-<span class="c1">// Get all rules (for sidebar list)</span>
-<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">getRules</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">baseUrl</span><span class="si">}</span><span class="sb">/rules`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">headers</span><span class="w"> </span><span class="p">});</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="c1">// Create a new rule (from wizard)</span>
-<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">createRule</span><span class="p">(</span><span class="nx">ruleData</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">baseUrl</span><span class="si">}</span><span class="sb">/rules`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;POST&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">headers</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">ruleData</span><span class="p">)</span>
-<span class="w">    </span><span class="p">});</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="c1">// Test a rule (from test button)</span>
-<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">testRule</span><span class="p">(</span><span class="nx">ruleConfig</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">baseUrl</span><span class="si">}</span><span class="sb">/rules/test`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;POST&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">headers</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">ruleConfig</span><span class="p">)</span>
-<span class="w">    </span><span class="p">});</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="c1">// Get available alerts (for selection)</span>
-<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">getAvailableAlerts</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">baseUrl</span><span class="si">}</span><span class="sb">/rules/alerts/available`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">headers</span><span class="w"> </span><span class="p">});</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="c1">// Get devices (for dropdown)</span>
-<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">getDevices</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">baseUrl</span><span class="si">}</span><span class="sb">/rules/devices`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">headers</span><span class="w"> </span><span class="p">});</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="c1">// Get templates (for quick start)</span>
-<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">getTemplates</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">baseUrl</span><span class="si">}</span><span class="sb">/rules/templates`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">headers</span><span class="w"> </span><span class="p">});</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="c1">// Toggle rule status</span>
-<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">toggleRuleStatus</span><span class="p">(</span><span class="nx">ruleId</span><span class="p">,</span><span class="w"> </span><span class="nx">enabled</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">baseUrl</span><span class="si">}</span><span class="sb">/rules/</span><span class="si">${</span><span class="nx">ruleId</span><span class="si">}</span><span class="sb">/status`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;PATCH&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">headers</span><span class="p">,</span>
-<span class="w">        </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="w"> </span><span class="nx">enabled</span><span class="w"> </span><span class="p">})</span>
-<span class="w">    </span><span class="p">});</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">RulesAPI</span><span class="p">:</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api_key</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">=</span> <span class="s2">&quot;https://api.univagateway.com/v1&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Bearer </span><span class="si">{</span><span class="n">api_key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span>
-        <span class="p">}</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="n">params</span> <span class="o">=</span> <span class="n">filters</span> <span class="ow">or</span> <span class="p">{}</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/rules&quot;</span><span class="p">,</span>
-                              <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
-                              <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">create_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule_data</span><span class="p">):</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/rules&quot;</span><span class="p">,</span>
-                               <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
-                               <span class="n">json</span><span class="o">=</span><span class="n">rule_data</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">test_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule_config</span><span class="p">):</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/rules/test&quot;</span><span class="p">,</span>
-                               <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
-                               <span class="n">json</span><span class="o">=</span><span class="n">rule_config</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_devices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/rules/devices&quot;</span><span class="p">,</span>
-                              <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_alerts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/rules/alerts/available&quot;</span><span class="p">,</span>
-                              <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-
-<span class="c1"># Usage example</span>
-<span class="n">api</span> <span class="o">=</span> <span class="n">RulesAPI</span><span class="p">(</span><span class="s2">&quot;your_api_key&quot;</span><span class="p">)</span>
-<span class="n">rules</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">get_rules</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">rules</span><span class="p">)</span><span class="si">}</span><span class="s2"> rules&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="support">
-<h2>Support<a class="headerlink" href="#support" title="Link to this heading">¶</a></h2>
-<p>For API support, contact:</p>
-<ul class="simple">
-<li><p><strong>Email:</strong> <a class="reference external" href="mailto:api-support&#37;&#52;&#48;univagateway&#46;com">api-support<span>&#64;</span>univagateway<span>&#46;</span>com</a></p></li>
-<li><p><strong>Documentation:</strong> <a class="reference external" href="https://docs.univagateway.com/api/rules">https://docs.univagateway.com/api/rules</a></p></li>
-<li><p><strong>Status Page:</strong> <a class="reference external" href="https://status.univagateway.com">https://status.univagateway.com</a></p></li>
+<li><p><strong>Wizard-based interface</strong> - 3-step rule creation (Trigger → Conditions → Alerts)</p></li>
+<li><p><strong>Quick start templates</strong> - Pre-configured rule templates</p></li>
+<li><p><strong>Real-time logic preview</strong> - Shows rule logic as user configures</p></li>
+<li><p><strong>Device/tag discovery</strong> - Dynamic dropdowns from device management</p></li>
+<li><p><strong>Alert integration</strong> - Seamless connection with alert messages</p></li>
+<li><p><strong>Test functionality</strong> - Test rules before saving</p></li>
+<li><p><strong>Import/export</strong> - JSON-based configuration sharing</p></li>
+<li><p><strong>Statistics tracking</strong> - Rule trigger counts and activity</p></li>
+<li><p><strong>Bulk operations</strong> - Mass enable/disable/delete</p></li>
+<li><p><strong>Validation</strong> - Comprehensive rule validation</p></li>
 </ul>
 </section>
-<section id="webhook-integration">
-<h2>Webhook Integration<a class="headerlink" href="#webhook-integration" title="Link to this heading">¶</a></h2>
-<p>When a rule is triggered, a webhook can be sent:</p>
-<p><strong>Payload:</strong></p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rule.triggered&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-15T10:18:00Z&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;rule_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RULE-2025-001&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;rule_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Overtemp-Motor&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;trigger_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">82.5</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;condition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_Drive_01.temperature_celsius &gt; 80°C for 30s&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;duration_met&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;alerts_triggered&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;alert-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;alert-002&quot;</span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Motor_Drive_01&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;temperature_celsius&quot;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>When a rule status changes (enabled/disabled):</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rule.status_changed&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-15T11:30:00Z&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;rule_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RULE-2025-001&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;rule_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Overtemp-Motor&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;previous_status&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;new_status&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;changed_by&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user@example.com&quot;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
+<section id="wizard-steps-detail">
+<h2>Wizard Steps Detail<a class="headerlink" href="#wizard-steps-detail" title="Link to this heading">¶</a></h2>
+<dl class="simple">
+<dt><strong>Step 1: Quick Start</strong></dt><dd><ul class="simple">
+<li><p>Template selection (temperature, device status, vibration, pressure, current, schedule)</p></li>
+<li><p>Start from scratch</p></li>
+<li><p>Copy existing rule</p></li>
+</ul>
+</dd>
+<dt><strong>Step 2: Trigger Configuration</strong></dt><dd><ul class="simple">
+<li><p>Rule type selection (tag, device, schedule)</p></li>
+<li><p>Device selection (from available devices)</p></li>
+<li><p>Tag selection (device-specific tags)</p></li>
+<li><p>Condition operators (&gt;, &lt;, &gt;=, &lt;=, ==, !=)</p></li>
+<li><p>Threshold value entry</p></li>
+<li><p>Duration/hysteresis setting</p></li>
+<li><p>Advanced options (scaled value, rising edge only)</p></li>
+</ul>
+</dd>
+<dt><strong>Step 3: Alert Selection</strong></dt><dd><ul class="simple">
+<li><p>Available alerts listing (from alert messages)</p></li>
+<li><p>Multi-select for alerts to trigger</p></li>
+<li><p>Alert status indication (enabled/disabled)</p></li>
+<li><p>Test rule functionality</p></li>
+<li><p>Final save</p></li>
+</ul>
+</dd>
+</dl>
 </section>
 <section id="data-types-and-constraints">
 <h2>Data Types and Constraints<a class="headerlink" href="#data-types-and-constraints" title="Link to this heading">¶</a></h2>
-<table class="docutils align-default" id="id2">
-<caption><span class="caption-text">Rule Object Structure</span><a class="headerlink" href="#id2" title="Link to this table">¶</a></caption>
+<section id="rule-object-structure">
+<h3>Rule Object Structure<a class="headerlink" href="#rule-object-structure" title="Link to this heading">¶</a></h3>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">Rule Object Fields</span><a class="headerlink" href="#id3" title="Link to this table">¶</a></caption>
 <colgroup>
 <col style="width: 25.0%" />
 <col style="width: 50.0%" />
@@ -2197,6 +1911,9 @@
 </tr>
 </tbody>
 </table>
+</section>
+<section id="validation-rules">
+<h3>Validation Rules<a class="headerlink" href="#validation-rules" title="Link to this heading">¶</a></h3>
 <ol class="arabic simple">
 <li><p><strong>Name Validation:</strong>
 - Must be unique across all rules
@@ -2215,8 +1932,78 @@
 - Only enabled alerts can be selected</p></li>
 </ol>
 </section>
-<section id="performance-notes">
-<h2>Performance Notes<a class="headerlink" href="#performance-notes" title="Link to this heading">¶</a></h2>
+<section id="template-structure">
+<h3>Template Structure<a class="headerlink" href="#template-structure" title="Link to this heading">¶</a></h3>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-text">Template Object</span><a class="headerlink" href="#id4" title="Link to this table">¶</a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>id</strong></p></td>
+<td><p>Template identifier</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>name</strong></p></td>
+<td><p>Template name</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>icon</strong></p></td>
+<td><p>FontAwesome icon class</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>description</strong></p></td>
+<td><p>Template description</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>device</strong></p></td>
+<td><p>Default device</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>tag</strong></p></td>
+<td><p>Default tag</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>condition</strong></p></td>
+<td><p>Default condition</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>value</strong></p></td>
+<td><p>Default value</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>duration</strong></p></td>
+<td><p>Default duration</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>unit</strong></p></td>
+<td><p>Default unit</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>default_alerts</strong></p></td>
+<td><p>Default alerts to trigger</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="integration-points">
+<h2>Integration Points<a class="headerlink" href="#integration-points" title="Link to this heading">¶</a></h2>
+<section id="device-management-integration">
+<h3>Device Management Integration<a class="headerlink" href="#device-management-integration" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Device list</strong>: Pulls from <code class="docutils literal notranslate"><span class="pre">/api/device-management/devices</span></code></p></li>
+<li><p><strong>Device tags</strong>: Uses device-specific tags from device config</p></li>
+<li><p><strong>Device status</strong>: Monitors device online/offline status</p></li>
+</ul>
+</section>
+<section id="alert-messages-integration">
+<h3>Alert Messages Integration<a class="headerlink" href="#alert-messages-integration" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Alert list</strong>: Pulls from <code class="docutils literal notranslate"><span class="pre">/api/alert-messages/alert-messages</span></code></p></li>
+<li><p><strong>Alert triggering</strong>: Uses alert IDs to trigger notifications</p></li>
+<li><p><strong>Alert configuration</strong>: Respects alert channel settings</p></li>
+</ul>
+</section>
+</section>
+<section id="performance-considerations">
+<h2>Performance Considerations<a class="headerlink" href="#performance-considerations" title="Link to this heading">¶</a></h2>
 <ol class="arabic simple">
 <li><p><strong>Rule Evaluation:</strong>
 - Active rules evaluated every 5 seconds
@@ -2227,14 +2014,91 @@
 - POST/PUT requests: &lt; 500ms
 - Test requests: &lt; 1000ms</p></li>
 <li><p><strong>Rate Limits:</strong>
-- 100 requests/minute per API key
+- 100 requests/minute per session
 - Bulk operations count as single request</p></li>
 </ol>
 </section>
+<section id="security-notes">
+<h2>Security Notes<a class="headerlink" href="#security-notes" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Session-based authentication</strong> for web interface</p></li>
+<li><p><strong>CSRF protection</strong> on all POST/PUT/DELETE endpoints</p></li>
+<li><p><strong>Input validation</strong> on all user-provided data</p></li>
+<li><p><strong>Permission-based access control</strong> (read/write/admin)</p></li>
+<li><p><strong>Rule execution sandboxing</strong> for safety</p></li>
+</ul>
+</section>
+<section id="monitoring-and-logging">
+<h2>Monitoring and Logging<a class="headerlink" href="#monitoring-and-logging" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Rule triggers</strong> logged with timestamp and values</p></li>
+<li><p><strong>User actions</strong> (create, edit, delete) audited</p></li>
+<li><p><strong>System performance</strong> monitored (evaluation time, memory)</p></li>
+<li><p><strong>Error rates</strong> tracked and alerted</p></li>
+</ul>
+</section>
+<section id="deployment-considerations">
+<h2>Deployment Considerations<a class="headerlink" href="#deployment-considerations" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Database requirements</strong>: PostgreSQL 12+ with JSON support</p></li>
+<li><p><strong>Memory requirements</strong>: 512MB minimum, 2GB recommended</p></li>
+<li><p><strong>Scalability</strong>: Horizontal scaling with load balancer</p></li>
+<li><p><strong>Backup</strong>: Rule configurations should be regularly backed up</p></li>
+</ul>
+</section>
+<section id="testing-strategy">
+<h2>Testing Strategy<a class="headerlink" href="#testing-strategy" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Unit Tests:</strong>
+- Rule validation logic
+- Template creation
+- Condition evaluation</p></li>
+<li><p><strong>Integration Tests:</strong>
+- Device/Rule integration
+- Alert triggering
+- Import/export workflows</p></li>
+<li><p><strong>UI Tests:</strong>
+- Wizard navigation
+- Form validation
+- Real-time updates</p></li>
+<li><p><strong>Performance Tests:</strong>
+- Rule evaluation under load
+- Concurrent user access
+- Large rule set management</p></li>
+</ol>
+</section>
+<section id="browser-compatibility">
+<h2>Browser Compatibility<a class="headerlink" href="#browser-compatibility" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Modern browsers</strong>: Chrome 80+, Firefox 75+, Safari 13+, Edge 80+</p></li>
+<li><p><strong>JavaScript required</strong>: Full functionality requires JavaScript</p></li>
+<li><p><strong>Responsive design</strong>: Mobile/tablet compatible</p></li>
+<li><p><strong>Accessibility</strong>: WCAG 2.1 AA compliant</p></li>
+</ul>
+</section>
+<section id="api-versioning">
+<h2>API Versioning<a class="headerlink" href="#api-versioning" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Current version: v1</p></li>
+<li><p>Version included in URL path (future: /v2/rules-engine)</p></li>
+<li><p>Backward compatibility maintained for minor versions</p></li>
+<li><p>Deprecation notices for breaking changes</p></li>
+</ul>
+</section>
+<section id="support-and-resources">
+<h2>Support and Resources<a class="headerlink" href="#support-and-resources" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Documentation</strong>: Available at /docs/rules-engine</p></li>
+<li><p><strong>API Reference</strong>: Swagger docs at /api-docs/rules-engine</p></li>
+<li><p><strong>Support Email</strong>: <a class="reference external" href="mailto:rules-support&#37;&#52;&#48;univagateway&#46;com">rules-support<span>&#64;</span>univagateway<span>&#46;</span>com</a></p></li>
+<li><p><strong>Issue Tracker</strong>: <a class="reference external" href="https://github.com/univagateway/issues">https://github.com/univagateway/issues</a></p></li>
+<li><p><strong>Community Forum</strong>: <a class="reference external" href="https://community.univagateway.com">https://community.univagateway.com</a></p></li>
+</ul>
+</section>
 <section id="changelog">
 <h2>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">¶</a></h2>
-<table class="docutils align-default" id="id3">
-<caption><span class="caption-text">API Changelog</span><a class="headerlink" href="#id3" title="Link to this table">¶</a></caption>
+<table class="docutils align-default" id="id5">
+<caption><span class="caption-text">API Changelog</span><a class="headerlink" href="#id5" title="Link to this table">¶</a></caption>
 <colgroup>
 <col style="width: 25.0%" />
 <col style="width: 75.0%" />
@@ -2246,25 +2110,39 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>v1.0.0</strong> (2025-01-15)</p></td>
-<td><p>Initial release with UI-compatible endpoints</p></td>
+<td><p>Initial release with basic rule CRUD operations</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>v1.1.0</strong> (2025-02-01)</p></td>
-<td><p>Added template and discovery endpoints</p></td>
+<td><p>Added template system and wizard interface</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>v1.2.0</strong> (2025-03-01)</p></td>
-<td><p>Added test and validation endpoints</p></td>
+<td><p>Added test functionality and validation endpoints</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>v1.3.0</strong> (2025-04-01)</p></td>
+<td><p>Added bulk operations and enhanced statistics</p></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="migration-notes">
-<h2>Migration Notes<a class="headerlink" href="#migration-notes" title="Link to this heading">¶</a></h2>
-<p>From previous version (if any):</p>
+<section id="future-enhancements">
+<h2>Future Enhancements<a class="headerlink" href="#future-enhancements" title="Link to this heading">¶</a></h2>
 <ol class="arabic simple">
-<li><p><strong>Rule ID format changed</strong> to “RULE-YYYY-NNN”</p></li>
-<li><p><strong>Simplified response structure</strong> - removed nested “data” and “meta”</p></li>
-<li><p><strong>Added UI-focused endpoints</strong> for devices, tags, alerts discovery</p></li>
-<li><p><strong>Removed complex execution history</strong> - simplified to “last_triggered” field</p></li>
+<li><p><strong>Advanced Conditions:</strong>
+- Multiple condition combinations (AND/OR)
+- Time-based conditions
+- Rate-of-change triggers</p></li>
+<li><p><strong>Enhanced Templates:</strong>
+- User-defined templates
+- Template sharing
+- Template marketplace</p></li>
+<li><p><strong>Advanced Features:</strong>
+- Rule dependencies
+- Escalation rules
+- Machine learning-based thresholds</p></li>
+<li><p><strong>Integration:</strong>
+- External system webhooks
+- Custom script execution
+- Advanced notification routing</p></li>
 </ol>
 </section>
 </section>

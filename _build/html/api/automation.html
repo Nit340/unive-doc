@@ -552,7 +552,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#system-status-overview">System Status (Overview)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#job-management-section-1">Job Management (SECTION 1)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#job-configuration-section-2">Job Configuration (SECTION 2)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#gateway-management-section-3">Gateway Management (SECTION 3)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#schedule-types-section-4">Schedule Types (SECTION 4)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#conflict-detection-section-5">Conflict Detection (SECTION 5)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#bulk-operations-section-6">Bulk Operations (SECTION 6)</a></li>
@@ -581,196 +580,119 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="alerts.html">Alert Messages API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#purpose">Purpose</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#base-url">Base URL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#authentication">Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#endpoints">Endpoints</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="alerts.html#alert-classes-api">1. Alert Classes API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-alert-classes">GET /alert-classes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-alert-classes-id">GET /alert-classes/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-alert-classes-id-messages">GET /alert-classes/{id}/messages</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#post-alert-classes">POST /alert-classes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#put-alert-classes-id">PUT /alert-classes/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#patch-alert-classes-id">PATCH /alert-classes/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#delete-alert-classes-id">DELETE /alert-classes/{id}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="alerts.html#alert-classes-operations">Alert Classes Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="alerts.html#alert-messages-operations">Alert Messages Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="alerts.html#preview-operations">Preview Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="alerts.html#configuration-operations">Configuration Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="alerts.html#bulk-operations">Bulk Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="alerts.html#live-preview-operations">Live Preview Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="alerts.html#utilities-operations">Utilities Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="alerts.html#save-configuration">Save Configuration</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="alerts.html#id1">2. Alert Messages API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-alert-messages">GET /alert-messages</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-alert-messages-id">GET /alert-messages/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#post-alert-messages">POST /alert-messages</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#put-alert-messages-id">PUT /alert-messages/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#patch-alert-messages-id">PATCH /alert-messages/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#delete-alert-messages-id">DELETE /alert-messages/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#post-alert-messages-bulk-delete">POST /alert-messages/bulk-delete</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="alerts.html#preview-api">3. Preview API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#post-alert-messages-preview">POST /alert-messages/preview</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-alert-messages-id-preview">GET /alert-messages/{id}/preview</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="alerts.html#configuration-api">4. Configuration API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-configuration-alert-settings">GET /configuration/alert-settings</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#post-configuration-alert-settings-import">POST /configuration/alert-settings/import</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#post-configuration-reset">POST /configuration/reset</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="alerts.html#utilities-api">5. Utilities API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-variables">GET /variables</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-channels">GET /channels</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-alert-colors">GET /alert-colors</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#get-alert-icons">GET /alert-icons</a></li>
-<li class="toctree-l4"><a class="reference internal" href="alerts.html#post-validate-message">POST /validate/message</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#error-responses">Error Responses</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#versioning">Versioning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#changelog">Changelog</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alerts.html#sdk-examples">SDK Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#complete-user-flow">Complete User Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#key-features">Key Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#security-notes">Security Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#performance-considerations">Performance Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#browser-compatibility">Browser Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#monitoring">Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alerts.html#deployment">Deployment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="alerts.html#support">Support</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="rule.html">Rules Engine API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="rule.html#purpose">Purpose</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rule.html#base-url">Base URL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rule.html#authentication">Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rule.html#endpoints">Endpoints</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="rule.html#rules-management-api">Rules Management API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rule.html#get-rules">GET /rules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rule.html#get-rules-id">GET /rules/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rule.html#post-rules">POST /rules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rule.html#put-rules-id">PUT /rules/{id}</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rule.html#patch-rules-id-status">PATCH /rules/{id}/status</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rule.html#delete-rules-id">DELETE /rules/{id}</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rule.html#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rule.html#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rule.html#rule-operations">Rule Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rule.html#rule-status-operations">Rule Status Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rule.html#rule-template-operations">Rule Template Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rule.html#rule-testing-operations">Rule Testing Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rule.html#configuration-discovery-operations">Configuration Discovery Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rule.html#rule-import-export-operations">Rule Import/Export Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rule.html#statistics-operations">Statistics Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rule.html#validation-operations">Validation Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rule.html#utility-operations">Utility Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rule.html#bulk-operations">Bulk Operations</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="rule.html#rule-templates-api">Rule Templates API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rule.html#get-rules-templates">GET /rules/templates</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rule.html#post-rules-templates-id-create">POST /rules/templates/{id}/create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rule.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rule.html#complete-user-flow">Complete User Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rule.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rule.html#key-features">Key Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rule.html#wizard-steps-detail">Wizard Steps Detail</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rule.html#data-types-and-constraints">Data Types and Constraints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rule.html#rule-object-structure">Rule Object Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rule.html#validation-rules">Validation Rules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rule.html#template-structure">Template Structure</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="rule.html#rule-testing-api">Rule Testing API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rule.html#post-rules-test">POST /rules/test</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rule.html#post-rules-id-test">POST /rules/{id}/test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rule.html#integration-points">Integration Points</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rule.html#device-management-integration">Device Management Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rule.html#alert-messages-integration">Alert Messages Integration</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="rule.html#configuration-discovery-api">Configuration Discovery API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rule.html#get-rules-devices">GET /rules/devices</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rule.html#get-rules-tags">GET /rules/tags</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rule.html#get-rules-alerts-available">GET /rules/alerts/available</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="rule.html#rule-import-export-api">Rule Import/Export API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rule.html#post-rules-import">POST /rules/import</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rule.html#get-rules-export">GET /rules/export</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="rule.html#rule-statistics-api">Rule Statistics API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rule.html#get-rules-statistics">GET /rules/statistics</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rule.html#get-rules-id-statistics">GET /rules/{id}/statistics</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="rule.html#rule-validation-api">Rule Validation API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rule.html#post-rules-validate">POST /rules/validate</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="rule.html#utility-endpoints">Utility Endpoints</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="rule.html#get-rules-conditions">GET /rules/conditions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rule.html#get-rules-units">GET /rules/units</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="rule.html#error-responses">Error Responses</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rule.html#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rule.html#sdk-examples">SDK Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rule.html#support">Support</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rule.html#webhook-integration">Webhook Integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rule.html#data-types-and-constraints">Data Types and Constraints</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rule.html#performance-notes">Performance Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rule.html#performance-considerations">Performance Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rule.html#security-notes">Security Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rule.html#monitoring-and-logging">Monitoring and Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rule.html#deployment-considerations">Deployment Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rule.html#testing-strategy">Testing Strategy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rule.html#browser-compatibility">Browser Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rule.html#api-versioning">API Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rule.html#support-and-resources">Support and Resources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rule.html#changelog">Changelog</a></li>
-<li class="toctree-l2"><a class="reference internal" href="rule.html#migration-notes">Migration Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rule.html#future-enhancements">Future Enhancements</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="notification.html">Notification Channels API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#purpose">Purpose</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#base-url">Base URL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#authentication">Authentication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#endpoints">Endpoints</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#channels-management-api">Channels Management API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-all-channels">Get All Channels</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-single-channel">Get Single Channel</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#create-channel">Create Channel</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#update-channel">Update Channel</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#update-channel-status">Update Channel Status</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#delete-channel">Delete Channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#page-route-frontend">Page Route (Frontend)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#api-endpoints-backend">API Endpoints (Backend)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-operations">Channel Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-status-operations">Channel Status Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#testing-operations">Testing Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#gateway-operations">Gateway Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#status-dashboard-operations">Status Dashboard Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#alert-integration-operations">Alert Integration Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-configuration-templates">Channel Configuration Templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#configuration-validation-operations">Configuration Validation Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#delivery-operations">Delivery Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#import-export-operations">Import/Export Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#monitoring-operations">Monitoring Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#webhook-configuration">Webhook Configuration</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-configuration-templates-api">Channel Configuration Templates API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-channel-template">Get Channel Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#route-summary">Route Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#complete-user-flow">Complete User Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#error-codes">Error Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#key-features">Key Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#channel-types-configuration">Channel Types Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#mqtt-configuration-template">MQTT Configuration Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#email-configuration-template">Email Configuration Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#sms-configuration-template">SMS Configuration Template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#webhook-configuration-template">Webhook Configuration Template</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-testing-api">Channel Testing API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#test-channel-configuration">Test Channel Configuration</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#test-multiple-channels">Test Multiple Channels</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-channel-types-info">Get Channel Types Info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#performance-guidelines">Performance Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#security-considerations">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#common-issues-and-solutions">Common Issues and Solutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#debug-checklist">Debug Checklist</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-statistics-api">Channel Statistics API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-channel-statistics">Get Channel Statistics</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-overview-statistics">Get Overview Statistics</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-channel-status-dashboard">Get Channel Status Dashboard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#webhooks-integration">Webhooks Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-status-change-webhook">Channel Status Change Webhook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#delivery-status-webhook">Delivery Status Webhook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification.html#gateway-switch-webhook">Gateway Switch Webhook</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-alert-delivery-api">Channel Alert Delivery API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#deliver-alert">Deliver Alert</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-delivery-history">Get Delivery History</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-configuration-validation-api">Channel Configuration Validation API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#validate-configuration">Validate Configuration</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#test-connection">Test Connection</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#gateway-management-api">Gateway Management API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-available-gateways">Get Available Gateways</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#switch-gateway-context">Switch Gateway Context</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-import-export-api">Channel Import/Export API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#export-channels">Export Channels</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#import-channels">Import Channels</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#channel-monitoring-api">Channel Monitoring API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-real-time-monitoring">Get Real-time Monitoring</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#alert-messages-integration-api">Alert Messages Integration API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#get-alert-messages-for-testing">Get Alert Messages for Testing</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#test-alert-with-variables">Test Alert with Variables</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="notification.html#webhook-configuration-api">Webhook Configuration API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="notification.html#configure-webhook-endpoints">Configure Webhook Endpoints</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#error-responses">Error Responses</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#webhooks">Webhooks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#rate-limiting">Rate Limiting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#sdk-examples">SDK Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#support">Support</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#channel-types-and-configuration">Channel Types and Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#security-best-practices">Security Best Practices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#performance-considerations">Performance Considerations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notification.html#troubleshooting">Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notification.html#compliance-and-regulations">Compliance and Regulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#support">Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notification.html#version-information">Version Information</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="CraneIQ.html">CraneIQ Pro API</a><ul>
@@ -1343,99 +1265,6 @@
 <span class="w">  </span><span class="p">},</span>
 <span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tags retrieved successfully&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</dd></dl>
-
-</section>
-<section id="gateway-management-section-3">
-<h3>Gateway Management (SECTION 3)<a class="headerlink" href="#gateway-management-section-3" title="Link to this heading">¶</a></h3>
-<dl class="http get">
-<dt class="sig sig-object http" id="get--api-v1-scheduler-gateways">
-<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/v1/scheduler/gateways</span></span><a class="headerlink" href="#get--api-v1-scheduler-gateways" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Description</strong>: Retrieve list of available gateways.</p>
-<p><strong>UI Element</strong>: SECTION 3 - Gateway selection and management</p>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-<span class="err">X-Gateway-ID: GW-3920A9</span>
-</pre></div>
-</div>
-<p><strong>Query Parameters</strong>:</p>
-<ul class="simple">
-<li><p><strong>status</strong> (string): Filter by gateway status <em>(optional)</em></p></li>
-<li><p><strong>online</strong> (boolean): Filter by online/offline state <em>(optional)</em></p></li>
-</ul>
-<p><strong>Response</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-
-<span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;gateways&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">      </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;univa-gw-01&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Univa-GW-01&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;online&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Building A&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;last_seen&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-03-12T15:10:30Z&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;jobs_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;active_jobs&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
-<span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;univa-gw-02&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Univa-GW-02&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;offline&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Building B&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;last_seen&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-03-12T10:30:00Z&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;jobs_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;active_jobs&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">      </span><span class="p">}</span>
-<span class="w">    </span><span class="p">]</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Gateways retrieved successfully&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="http get">
-<dt class="sig sig-object http" id="get--api-v1-scheduler-gateways-gateway_id-jobs">
-<span class="sig-name descname"><span class="pre">GET</span> </span><span class="sig-name descname"><span class="pre">/api/v1/scheduler/gateways/{gateway_id}/jobs</span></span><a class="headerlink" href="#get--api-v1-scheduler-gateways-gateway_id-jobs" title="Link to this definition">¶</a></dt>
-<dd><p><strong>Description</strong>: Get all jobs for a specific gateway.</p>
-<p><strong>UI Element</strong>: SECTION 3 - Gateway job list</p>
-<p><strong>Path Parameters</strong>:</p>
-<ul class="simple">
-<li><p><strong>gateway_id</strong> (string): Gateway identifier</p></li>
-</ul>
-<p><strong>Headers</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="err">Authorization: Bearer &lt;token&gt;</span>
-<span class="err">X-Gateway-ID: GW-3920A9</span>
-</pre></div>
-</div>
-<p><strong>Response</strong>:</p>
-<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-
-<span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;gateway_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;univa-gw-01&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;gateway_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Univa-GW-01&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;total_jobs&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;active_jobs&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;jobs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">      </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;job_001&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Modbus Poll&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;interval&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;next_execution&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-03-12T15:10:30Z&quot;</span>
-<span class="w">      </span><span class="p">}</span>
-<span class="w">    </span><span class="p">]</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Gateway jobs retrieved successfully&quot;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -2246,16 +2075,6 @@
 <td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/scheduler/tags</span></code> - Get tags</p></td>
 <td><p>Yes</p></td>
 </tr>
-<tr class="row-even"><td><p>Gateways</p></td>
-<td><p>GET</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/scheduler/gateways</span></code> - Get gateways</p></td>
-<td><p>Yes</p></td>
-</tr>
-<tr class="row-odd"><td><p>Gateways</p></td>
-<td><p>GET</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/scheduler/gateways/{id}/jobs</span></code> - Get gateway jobs</p></td>
-<td><p>Yes</p></td>
-</tr>
 <tr class="row-even"><td><p>Schedules</p></td>
 <td><p>POST</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">/api/v1/scheduler/schedules/validate</span></code> - Validate schedule</p></td>
@@ -2359,9 +2178,8 @@
 - Select from job templates → <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/v1/scheduler/templates</span></code>
 - Manage tags → <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/v1/scheduler/tags</span></code>
 - Validate schedule → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/v1/scheduler/schedules/validate</span></code></p></li>
-<li><p><strong>User manages gateways</strong> (SECTION 3):
-- View available gateways → <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/v1/scheduler/gateways</span></code>
-- View gateway jobs → <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/v1/scheduler/gateways/{id}/jobs</span></code></p></li>
+</ol>
+<ol class="arabic simple" start="6">
 <li><p><strong>User checks conflicts</strong> (SECTION 5):
 - Detect scheduling conflicts → <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/v1/scheduler/conflicts/check</span></code>
 - Monitor resources → <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/v1/scheduler/resources/usage</span></code></p></li>

@@ -515,104 +515,6 @@ Job Configuration (SECTION 2)
         "message": "Tags retrieved successfully"
       }
 
-Gateway Management (SECTION 3)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:get:: /api/v1/scheduler/gateways
-
-   **Description**: Retrieve list of available gateways.
-   
-   **UI Element**: SECTION 3 - Gateway selection and management
-   
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      X-Gateway-ID: GW-3920A9
-
-   **Query Parameters**:
-
-   * **status** (string): Filter by gateway status *(optional)*
-   * **online** (boolean): Filter by online/offline state *(optional)*
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "data": {
-          "gateways": [
-            {
-              "id": "univa-gw-01",
-              "name": "Univa-GW-01",
-              "status": "online",
-              "location": "Building A",
-              "last_seen": "2025-03-12T15:10:30Z",
-              "jobs_count": 4,
-              "active_jobs": 3
-            },
-            {
-              "id": "univa-gw-02",
-              "name": "Univa-GW-02",
-              "status": "offline",
-              "location": "Building B",
-              "last_seen": "2025-03-12T10:30:00Z",
-              "jobs_count": 2,
-              "active_jobs": 1
-            }
-          ]
-        },
-        "success": true,
-        "message": "Gateways retrieved successfully"
-      }
-
-.. http:get:: /api/v1/scheduler/gateways/{gateway_id}/jobs
-
-   **Description**: Get all jobs for a specific gateway.
-   
-   **UI Element**: SECTION 3 - Gateway job list
-   
-   **Path Parameters**:
-
-   * **gateway_id** (string): Gateway identifier
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      X-Gateway-ID: GW-3920A9
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "data": {
-          "gateway_id": "univa-gw-01",
-          "gateway_name": "Univa-GW-01",
-          "total_jobs": 4,
-          "active_jobs": 3,
-          "jobs": [
-            {
-              "id": "job_001",
-              "name": "Modbus Poll",
-              "type": "interval",
-              "enabled": true,
-              "next_execution": "2025-03-12T15:10:30Z"
-            }
-          ]
-        },
-        "success": true,
-        "message": "Gateway jobs retrieved successfully"
-      }
 
 Schedule Types (SECTION 4)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1460,14 +1362,6 @@ Route Summary
      - GET
      - ``/api/v1/scheduler/tags`` - Get tags
      - Yes
-   * - Gateways
-     - GET
-     - ``/api/v1/scheduler/gateways`` - Get gateways
-     - Yes
-   * - Gateways
-     - GET
-     - ``/api/v1/scheduler/gateways/{id}/jobs`` - Get gateway jobs
-     - Yes
    * - Schedules
      - POST
      - ``/api/v1/scheduler/schedules/validate`` - Validate schedule
@@ -1557,9 +1451,6 @@ Complete User Flow
    - Manage tags → ``GET /api/v1/scheduler/tags``
    - Validate schedule → ``POST /api/v1/scheduler/schedules/validate``
 
-5. **User manages gateways** (SECTION 3):
-   - View available gateways → ``GET /api/v1/scheduler/gateways``
-   - View gateway jobs → ``GET /api/v1/scheduler/gateways/{id}/jobs``
 
 6. **User checks conflicts** (SECTION 5):
    - Detect scheduling conflicts → ``POST /api/v1/scheduler/conflicts/check``

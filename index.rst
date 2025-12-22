@@ -20,11 +20,6 @@ IoT Gateway API Documentation
    api/security
    api/license
    api/backup
-
-.. toctree::
-   :maxdepth: 2
-   :caption: UNDER VALIDATION
-
    api/data-retention
    api/diagnostics
    api/loggar
