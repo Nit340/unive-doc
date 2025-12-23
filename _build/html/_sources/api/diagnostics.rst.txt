@@ -1,1269 +1,938 @@
 Diagnostics & Terminal API
-==========================
+===========================
 
-APIs for system monitoring, real-time terminal access, diagnostic tools, and packet capture capabilities.
+.. contents::
+   :depth: 3
+   :local:
 
-Overview
---------
+Page Route (Frontend)
+---------------------
 
-The Diagnostics & Terminal API provides comprehensive system monitoring, real-time terminal access, diagnostic tools, and packet capture capabilities for the Univa Gateway platform. This system enables administrators to monitor system health, execute commands, analyze network traffic, and troubleshoot issues in real-time.
+.. http:get:: /diagnostics
 
-Base URL
---------
+   **Description**: Renders the complete diagnostics and terminal management page with all system metrics, logs, terminal access, and diagnostic tools.
 
-::
+   **Headers**::
 
-   https://univa-gateway/api/v1/diagnostics
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
 
-Authentication
---------------
+   **Response**::
 
-All endpoints require JWT authentication via the ``Authorization`` header:
+      HTTP/1.1 200 OK
+      Content-Type: text/html
+      
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Diagnostics & Terminal - Univa Gateway</title>
+      </head>
+      <body>
+        <div id="app" data-metrics='{...}' data-logs='[...]' data-terminal-status='{...}'>
+          <!-- Diagnostics page with:
+               SECTION 1: System Metrics Dashboard
+               SECTION 2: Real-time Log Viewer
+               SECTION 3: Terminal Access
+               SECTION 4: Diagnostic Tools
+               SECTION 5: Packet Capture
+               SECTION 6: RF Spectrum Analysis
+               FOOTER: Export, Clear, System Controls
+          -->
+        </div>
+      </body>
+      </html>
 
-.. code-block:: http
+   **How it works**:
+   - Server renders the HTML page with embedded system metrics and logs
+   - All diagnostics information, active sessions, and tool status are embedded
+   - JavaScript reads this data and renders the complete diagnostics interface
+   - Gateway context is provided via X-Gateway-ID header
 
-   Authorization: Bearer <jwt_token>
+   **Error Response**::
 
-.. note::
+      HTTP/1.1 302 Found
+      Location: /login
 
-   Terminal access and diagnostic tools require admin-level privileges.
+API Endpoints (Backend)
+-----------------------
 
-System Logs API
----------------
+These endpoints handle all diagnostics operations triggered from the page. All endpoints operate on the current gateway context identified by the `X-Gateway-ID` header.
 
-Get Real-Time Logs
-~~~~~~~~~~~~~~~~~~
+System Metrics (SECTION 1)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:get:: /diagnostics/logs/stream
+.. http:get:: /api/diagnostics/metrics
 
-   Stream real-time system logs with filtering capabilities.
+   **Description**: Get current system metrics and health status.
+   
+   **Headers**::
 
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Query Parameters**:
-
-   * **levels** (optional): Comma-separated log levels (ERROR, WARN, INFO, DEBUG, TRACE)
-   * **categories** (optional): Comma-separated categories (System, Network, ModbusEngine, ACS, MQTT, CraneIQ, RF_Radio)
-   * **search** (optional): Search term to filter logs
-   * **limit** (optional): Maximum number of log entries (default: 1000)
-   * **tail** (optional): Return only recent N lines (default: 100)
-   * **since** (optional): ISO timestamp to get logs from specific time
-
-   **Response**:
-
-   .. sourcecode:: http
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "success": true,
+        "cpu_usage": 34.2,
+        "memory_usage": 68.5,
+        "disk_usage": 44.0,
+        "network_traffic": {
+          "rx_bytes_sec": 245000,
+          "tx_bytes_sec": 123000
+        },
+        "system_uptime": "2 days, 14:12:05"
+      }
+
+.. http:get:: /api/diagnostics/metrics/history
+
+   **Description**: Get historical system metrics.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Query Parameters**:
+   
+   * **interval** (optional): Time interval (1m, 5m, 1h, 1d)
+   * **duration** (optional): Duration to fetch (1h, 6h, 24h, 7d)
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "metrics": [
+          {
+            "timestamp": "2024-03-20T14:00:00Z",
+            "cpu": 32.1,
+            "memory": 67.8,
+            "network_rx": 240000,
+            "network_tx": 120000
+          }
+        ]
+      }
+
+Real-time Logs (SECTION 2)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:get:: /api/diagnostics/logs
+
+   **Description**: Get system logs with filtering.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Query Parameters**:
+   
+   * **level** (optional): Log level (error, warn, info, debug)
+   * **category** (optional): Log category
+   * **search** (optional): Search term
+   * **limit** (optional): Maximum entries (default: 1000)
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
         "logs": [
           {
-            "timestamp": "2025-03-12T09:44:10Z",
+            "timestamp": "2024-03-20T14:30:22Z",
             "level": "INFO",
             "category": "System",
-            "message": "Boot sequence completed successfully.",
-            "source": "kernel",
-            "tags": ["boot", "startup"]
-          },
-          {
-            "timestamp": "2025-03-12T09:44:11Z",
-            "level": "INFO",
-            "category": "NetManager",
-            "message": "eth0 link up, IP 192.168.1.105",
-            "tags": ["network", "interface"]
-          },
-          {
-            "timestamp": "2025-03-12T09:44:12Z",
-            "level": "INFO",
-            "category": "ModbusEngine",
-            "message": "Polling device ID 3, address 40001",
-            "tags": ["modbus", "polling"]
+            "message": "Boot sequence completed",
+            "source": "kernel"
           }
         ],
-        "total": 1250,
-        "filtered": 3,
-        "has_more": true
+        "total": 1250
       }
 
-Export Logs
-~~~~~~~~~~~
+.. http:post:: /api/diagnostics/logs/stream
 
-.. http:post:: /diagnostics/logs/export
+   **Description**: Start streaming real-time logs via WebSocket.
+   
+   **Headers**::
 
-   Export logs to downloadable format.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
+   
+   **Request**::
 
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /diagnostics/logs/export HTTP/1.1
-      Authorization: Bearer <token>
+      POST /api/diagnostics/logs/stream HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
       
       {
-        "format": "json", // "json", "csv", "text", "archive"
-        "compression": "gzip", // "none", "gzip", "zip"
-        "date_from": "2025-03-10T00:00:00Z",
-        "date_to": "2025-03-12T23:59:59Z",
-        "filters": {
-          "levels": ["ERROR", "WARN"],
-          "categories": ["CraneIQ", "ACS"]
-        }
+        "levels": ["ERROR", "WARN", "INFO"],
+        "categories": ["System", "Network"],
+        "websocket_url": "wss://gateway/diagnostics/logs/ws"
       }
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "success": true,
-        "export_id": "logs_export_20250312_143000",
-        "download_url": "/api/v1/diagnostics/logs/export/download/logs_export_20250312_143000",
-        "estimated_size_mb": 45
+        "stream_started": true,
+        "session_id": "log_stream_20240320_001",
+        "websocket_url": "wss://gateway/diagnostics/logs/ws/log_stream_20240320_001"
       }
 
-Terminal API
-------------
-
-Establish SSH Session
-~~~~~~~~~~~~~~~~~~~~~
-
-.. http:post:: /diagnostics/terminal/sessions
-
-   Create a new SSH terminal session.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /diagnostics/terminal/sessions HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "session_type": "ssh", // "ssh", "serial", "telnet"
-        "host": "localhost", // or gateway IP for remote
-        "port": 22,
-        "username": "root",
-        "timeout_seconds": 300,
-        "pty_config": {
-          "rows": 40,
-          "cols": 120,
-          "term": "xterm-256color"
-        }
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "session_id": "term_session_20250312_150000",
-        "status": "connected",
-        "gateway_info": {
-          "hostname": "univa-gw-01",
-          "os": "Linux 5.10.0-21-arm64",
-          "uptime": "2 days, 14:12"
-        },
-        "websocket_url": "wss://univa-gateway/api/v1/diagnostics/terminal/ws/term_session_20250312_150000",
-        "session_expires": "2025-03-12T15:30:00Z"
-      }
-
-Execute Command Directly
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:post:: /diagnostics/terminal/execute
-
-   Execute a single command without interactive session.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /diagnostics/terminal/execute HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "command": "rf-test-tool --scan",
-        "working_directory": "/root",
-        "timeout_seconds": 30,
-        "capture_output": true
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "execution_id": "exec_20250312_150230",
-        "command": "rf-test-tool --scan",
-        "exit_code": 0,
-        "output": "Scanning 433MHz band...\n[+] Channel 1 (433.100): RSSI -92 dBm (Clear)\n[+] Channel 2 (433.200): RSSI -88 dBm (Clear)\n[!] Channel 3 (433.300): RSSI -45 dBm (BUSY)\nScan complete.",
-        "duration_ms": 2450,
-        "start_time": "2025-03-12T15:02:30Z",
-        "end_time": "2025-03-12T15:02:32Z"
-      }
-
-Command History
-~~~~~~~~~~~~~~~
-
-.. http:get:: /diagnostics/terminal/history
-
-   Get command execution history.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Query Parameters**:
-
-   * **limit** (optional): Number of commands to return (default: 50)
-   * **user** (optional): Filter by user
-   * **date_from** (optional): Filter commands after this date
-   * **status** (optional): Filter by exit code (0=success, other=error)
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "history": [
-          {
-            "command_id": "cmd_20250312_145500",
-            "command": "uname -a",
-            "user": "admin",
-            "exit_code": 0,
-            "duration_ms": 120,
-            "timestamp": "2025-03-12T14:55:00Z",
-            "output_summary": "Linux univa-gw 5.10.0-21-arm64..."
-          },
-          {
-            "command_id": "cmd_20250312_145200",
-            "command": "top -b -n 1 | head -n 5",
-            "user": "admin",
-            "exit_code": 0,
-            "duration_ms": 250,
-            "timestamp": "2025-03-12T14:52:00Z",
-            "output_summary": "top - 09:45:02 up 2 days..."
-          }
-        ],
-        "total_commands": 2450,
-        "success_rate": 98.5
-      }
-
-System Monitoring API
----------------------
-
-Get System Metrics
-~~~~~~~~~~~~~~~~~~
-
-.. http:get:: /diagnostics/metrics/system
-
-   Retrieve real-time system resource metrics.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Query Parameters**:
-
-   * **interval** (optional): Time interval in seconds for data points (default: 1)
-   * **duration** (optional): Duration to fetch in seconds (default: 60)
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "metrics": {
-          "cpu": {
-            "usage_percent": 34.2,
-            "cores": 4,
-            "load_average": [0.45, 0.32, 0.28],
-            "process_count": 112
-          },
-          "memory": {
-            "total_mb": 3920,
-            "used_mb": 824.5,
-            "free_mb": 1452.2,
-            "usage_percent": 68.5
-          },
-          "storage": {
-            "root": {
-              "total_mb": 29000,
-              "used_mb": 12000,
-              "free_mb": 16000,
-              "usage_percent": 44
-            },
-            "boot": {
-              "total_mb": 253,
-              "used_mb": 52,
-              "free_mb": 201,
-              "usage_percent": 21
-            }
-          },
-          "network": {
-            "interfaces": {
-              "eth0": {
-                "rx_bytes_sec": 245000,
-                "tx_bytes_sec": 123000,
-                "rx_packets_sec": 450,
-                "tx_packets_sec": 320,
-                "ip_address": "192.168.1.105"
-              }
-            }
-          }
-        },
-        "timestamp": "2025-03-12T15:00:02Z"
-      }
-
-RF Signal Monitoring
-~~~~~~~~~~~~~~~~~~~~
-
-.. http:get:: /diagnostics/metrics/rf
-
-   Monitor RF signal quality and spectrum.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Query Parameters**:
-
-   * **frequency_range** (optional): Comma-separated min,max in MHz (default: "433,434")
-   * **scan** (optional): Perform fresh scan (true/false)
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "rf_metrics": {
-          "current_frequency_mhz": 433.3,
-          "signal_strength_dbm": -45,
-          "signal_quality": "BUSY",
-          "noise_floor_dbm": -92,
-          "scan_results": [
-            {
-              "frequency_mhz": 433.1,
-              "rssi_dbm": -92,
-              "status": "Clear",
-              "bandwidth_khz": 200
-            },
-            {
-              "frequency_mhz": 433.2,
-              "rssi_dbm": -88,
-              "status": "Clear",
-              "bandwidth_khz": 200
-            },
-            {
-              "frequency_mhz": 433.3,
-              "rssi_dbm": -45,
-              "status": "BUSY",
-              "bandwidth_khz": 200,
-              "occupied": true
-            }
-          ],
-          "last_scan": "2025-03-12T15:00:00Z"
-        },
-        "health": {
-          "status": "healthy",
-          "message": "RF system operating normally"
-        }
-      }
-
-Diagnostic Tools API
---------------------
-
-Packet Capture
-~~~~~~~~~~~~~~
-
-.. http:post:: /diagnostics/tools/packet-capture/start
-
-   Start network packet capture.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /diagnostics/tools/packet-capture/start HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "interface": "eth0", // "eth0", "wlan0", "can0", "rf0"
-        "duration_seconds": 30,
-        "buffer_size_mb": 50,
-        "filters": {
-          "protocols": ["modbus", "mqtt"],
-          "ports": [502, 1883],
-          "promiscuous": true
-        },
-        "output_format": "pcap" // "pcap", "json", "text"
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "capture_id": "pcap_20250312_151500",
-        "status": "running",
-        "interface": "eth0",
-        "estimated_size_mb": 120,
-        "stop_url": "/api/v1/diagnostics/tools/packet-capture/stop/pcap_20250312_151500",
-        "download_url": "/api/v1/diagnostics/tools/packet-capture/download/pcap_20250312_151500"
-      }
-
-Stop Packet Capture
-~~~~~~~~~~~~~~~~~~~
-
-.. http:post:: /diagnostics/tools/packet-capture/stop/{capture_id}
-
-   Stop ongoing packet capture.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Path Parameters**:
-
-   * **capture_id** (required): ID of the capture operation
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "capture_id": "pcap_20250312_151500",
-        "status": "stopped",
-        "duration_seconds": 28,
-        "packets_captured": 12450,
-        "file_size_mb": 12.5,
-        "download_url": "/api/v1/diagnostics/tools/packet-capture/download/pcap_20250312_151500"
-      }
-
-Serial Port Monitor
-~~~~~~~~~~~~~~~~~~~
-
-.. http:post:: /diagnostics/tools/serial-monitor
-
-   Monitor and interact with serial ports.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /diagnostics/tools/serial-monitor HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "port": "/dev/ttyUSB0",
-        "baud_rate": 115200,
-        "data_bits": 8,
-        "parity": "none", // "none", "odd", "even"
-        "stop_bits": 1,
-        "flow_control": "none" // "none", "rts_cts", "xon_xoff"
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "session_id": "serial_20250312_152000",
-        "status": "connected",
-        "port": "/dev/ttyUSB0",
-        "baud_rate": 115200,
-        "websocket_url": "wss://univa-gateway/api/v1/diagnostics/tools/serial/ws/serial_20250312_152000",
-        "log_file": "/var/log/serial_monitor_20250312_152000.log"
-      }
-
-RF Spectrum Scanner
-~~~~~~~~~~~~~~~~~~~
-
-.. http:post:: /diagnostics/tools/rf-scanner/scan
-
-   Perform RF spectrum analysis.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /diagnostics/tools/rf-scanner/scan HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "frequency_range_mhz": [433.0, 434.0],
-        "step_size_mhz": 0.2,
-        "sensitivity_dbm": -80,
-        "duration_seconds": 10,
-        "output_format": "json" // "json", "csv", "text"
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "scan_id": "rfscan_20250312_153000",
-        "status": "scanning",
-        "parameters": {
-          "range": "433.0-434.0 MHz",
-          "steps": 10,
-          "duration": "10 seconds"
-        },
-        "results_url": "/api/v1/diagnostics/tools/rf-scanner/results/rfscan_20250312_153000"
-      }
-
-Get RF Scan Results
-~~~~~~~~~~~~~~~~~~~
-
-.. http:get:: /diagnostics/tools/rf-scanner/results/{scan_id}
-
-   Retrieve completed RF scan results.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Path Parameters**:
-
-   * **scan_id** (required): ID of the scan operation
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "scan_id": "rfscan_20250312_153000",
-        "status": "completed",
-        "scan_time": "2025-03-12T15:30:00Z",
-        "results": [
-          {
-            "frequency_mhz": 433.1,
-            "rssi_dbm": -92.5,
-            "noise_floor_dbm": -95.2,
-            "snr_db": 2.7,
-            "status": "Clear",
-            "bandwidth_khz": 200
-          },
-          {
-            "frequency_mhz": 433.3,
-            "rssi_dbm": -45.2,
-            "noise_floor_dbm": -95.1,
-            "snr_db": 49.9,
-            "status": "BUSY",
-            "bandwidth_khz": 200,
-            "occupied": true
-          }
-        ],
-        "summary": {
-          "total_channels": 10,
-          "occupied_channels": 1,
-          "max_signal_dbm": -45.2,
-          "min_signal_dbm": -95.1,
-          "average_noise_dbm": -95.2
-        }
-      }
-
-Quick Diagnostics API
----------------------
-
-Run System Diagnostics
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:post:: /diagnostics/run
-
-   Execute comprehensive system diagnostics.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /diagnostics/run HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "checks": [
-          "hardware",
-          "network",
-          "rf_system"
-        ],
-        "verbose": true
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "diagnostic_id": "diag_full_20250312_154500",
-        "status": "running",
-        "estimated_duration_seconds": 45,
-        "checks": [
-          {
-            "name": "hardware_diagnostic",
-            "status": "in_progress",
-            "progress": 30
-          },
-          {
-            "name": "network_diagnostic",
-            "status": "pending",
-            "progress": 0
-          }
-        ],
-        "results_url": "/api/v1/diagnostics/results/diag_full_20250312_154500"
-      }
-
-Get Diagnostic Results
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:get:: /diagnostics/results/{diagnostic_id}
-
-   Retrieve diagnostic check results.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Path Parameters**:
-
-   * **diagnostic_id** (required): ID of the diagnostic operation
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "diagnostic_id": "diag_full_20250312_154500",
-        "status": "completed",
-        "timestamp": "2025-03-12T15:45:30Z",
-        "duration_seconds": 42,
-        "results": {
-          "hardware": {
-            "status": "healthy",
-            "checks": [
-              {"name": "cpu_temperature", "status": "pass", "value": "45°C", "threshold": "80°C"},
-              {"name": "memory_integrity", "status": "pass", "value": "OK"},
-              {"name": "storage_health", "status": "warning", "value": "85% used", "threshold": "90%"}
-            ]
-          },
-          "network": {
-            "status": "healthy",
-            "checks": [
-              {"name": "internet_connectivity", "status": "pass", "value": "Connected", "latency_ms": 45},
-              {"name": "dns_resolution", "status": "pass", "value": "OK", "response_time_ms": 12}
-            ]
-          }
-        },
-        "summary": {
-          "total_checks": 24,
-          "passed": 22,
-          "warnings": 2,
-          "failed": 0,
-          "overall_status": "healthy"
-        }
-      }
-
-Configuration Management API
-----------------------------
-
-Get Diagnostics Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:get:: /diagnostics/config
-
-   Retrieve current diagnostics configuration.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "config": {
-          "log_settings": {
-            "retention_days": 30,
-            "max_size_mb": 1024,
-            "levels_enabled": ["ERROR", "WARN", "INFO", "DEBUG"],
-            "categories_enabled": ["System", "Network", "ModbusEngine", "ACS", "CraneIQ"]
-          },
-          "terminal_settings": {
-            "session_timeout_minutes": 30,
-            "max_sessions": 3,
-            "history_size": 1000
-          },
-          "monitoring_settings": {
-            "metrics_interval_seconds": 1,
-            "rf_scan_interval_minutes": 5
-          },
-          "capture_settings": {
-            "max_capture_size_mb": 100,
-            "default_duration_seconds": 30,
-            "allowed_interfaces": ["eth0", "wlan0"]
-          }
-        }
-      }
-
-Update Diagnostics Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:put:: /diagnostics/config
-
-   Update diagnostics system configuration.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      PUT /diagnostics/config HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "log_settings": {
-          "retention_days": 45,
-          "levels_enabled": ["ERROR", "WARN", "INFO"]
-        },
-        "terminal_settings": {
-          "session_timeout_minutes": 45,
-          "max_sessions": 5
-        }
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "message": "Diagnostics configuration updated successfully",
-        "requires_restart": false
-      }
-
-Export & Backup API
--------------------
-
-Export All Diagnostics Data
+Terminal Access (SECTION 3)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:post:: /diagnostics/export/all
+.. http:post:: /api/diagnostics/terminal/session
 
-   Export comprehensive diagnostics data package.
+   **Description**: Create a new terminal session.
+   
+   **Headers**::
 
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
+   
+   **Request**::
 
-   **Request**:
+      POST /api/diagnostics/terminal/session HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+      
+      {
+        "session_type": "ssh",
+        "host": "localhost",
+        "username": "admin",
+        "timeout": 300
+      }
+   
+   **Success Response**::
 
-   .. sourcecode:: http
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "session_created": true,
+        "session_id": "term_20240320_001",
+        "websocket_url": "wss://gateway/diagnostics/terminal/ws/term_20240320_001",
+        "expires_at": "2024-03-20T15:30:00Z"
+      }
 
-      POST /diagnostics/export/all HTTP/1.1
-      Authorization: Bearer <token>
+.. http:post:: /api/diagnostics/terminal/execute
+
+   **Description**: Execute a command directly.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+   
+   **Request**::
+
+      POST /api/diagnostics/terminal/execute HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+      
+      {
+        "command": "df -h",
+        "timeout": 30,
+        "capture_output": true
+      }
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "executed": true,
+        "exit_code": 0,
+        "output": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/root        29G   12G   16G  44% /",
+        "duration_ms": 120
+      }
+
+.. http:get:: /api/diagnostics/terminal/sessions
+
+   **Description**: Get active terminal sessions.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "sessions": [
+          {
+            "session_id": "term_20240320_001",
+            "user": "admin",
+            "started_at": "2024-03-20T14:30:00Z",
+            "active": true
+          }
+        ]
+      }
+
+.. http:delete:: /api/diagnostics/terminal/session/{session_id}
+
+   **Description**: Terminate a terminal session.
+   
+   **Path Parameters**:
+   
+   * **session_id** (string): Terminal session identifier
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "terminated": true,
+        "session_id": "term_20240320_001",
+        "message": "Terminal session terminated"
+      }
+
+Diagnostic Tools (SECTION 4)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:post:: /api/diagnostics/tools/ping
+
+   **Description**: Perform network ping test.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+   
+   **Request**::
+
+      POST /api/diagnostics/tools/ping HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+      
+      {
+        "target": "8.8.8.8",
+        "count": 4,
+        "timeout": 5
+      }
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "completed": true,
+        "target": "8.8.8.8",
+        "packets_sent": 4,
+        "packets_received": 4,
+        "average_latency": 45.2,
+        "result": "Success"
+      }
+
+.. http:post:: /api/diagnostics/tools/traceroute
+
+   **Description**: Perform traceroute.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+   
+   **Request**::
+
+      POST /api/diagnostics/tools/traceroute HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+      
+      {
+        "target": "google.com",
+        "max_hops": 30,
+        "timeout": 10
+      }
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "completed": true,
+        "hops": [
+          {"hop": 1, "ip": "192.168.1.1", "latency": 1.2},
+          {"hop": 2, "ip": "10.0.0.1", "latency": 5.4}
+        ]
+      }
+
+.. http:post:: /api/diagnostics/tools/speedtest
+
+   **Description**: Perform network speed test.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+   
+   **Request**::
+
+      POST /api/diagnostics/tools/speedtest HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+      
+      {
+        "server": "auto",
+        "duration": 10
+      }
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "completed": true,
+        "download_mbps": 95.4,
+        "upload_mbps": 42.1,
+        "latency": 24,
+        "server": "New York, US"
+      }
+
+Packet Capture (SECTION 5)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:post:: /api/diagnostics/packet-capture/start
+
+   **Description**: Start packet capture on network interface.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+   
+   **Request**::
+
+      POST /api/diagnostics/packet-capture/start HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+      
+      {
+        "interface": "eth0",
+        "duration": 30,
+        "filter": "port 502 or port 1883",
+        "max_size": 50
+      }
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "started": true,
+        "capture_id": "pcap_20240320_001",
+        "interface": "eth0",
+        "estimated_size": 25,
+        "stop_url": "/api/diagnostics/packet-capture/stop/pcap_20240320_001"
+      }
+
+.. http:post:: /api/diagnostics/packet-capture/stop/{capture_id}
+
+   **Description**: Stop packet capture.
+   
+   **Path Parameters**:
+   
+   * **capture_id** (string): Capture session identifier
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "stopped": true,
+        "capture_id": "pcap_20240320_001",
+        "duration": 28,
+        "packets_captured": 12450,
+        "file_size": 12.5,
+        "download_url": "/api/diagnostics/packet-capture/download/pcap_20240320_001"
+      }
+
+.. http:get:: /api/diagnostics/packet-capture/list
+
+   **Description**: List available packet captures.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "captures": [
+          {
+            "capture_id": "pcap_20240320_001",
+            "interface": "eth0",
+            "started": "2024-03-20T14:30:00Z",
+            "duration": 30,
+            "size": 12.5,
+            "status": "completed"
+          }
+        ]
+      }
+
+.. http:get:: /api/diagnostics/packet-capture/download/{capture_id}
+
+   **Description**: Download packet capture file.
+   
+   **Path Parameters**:
+   
+   * **capture_id** (string): Capture session identifier
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/octet-stream
+      Content-Disposition: attachment; filename="capture_20240320_001.pcap"
+      
+      [Binary PCAP data]
+
+RF Spectrum Analysis (SECTION 6)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. http:post:: /api/diagnostics/rf/scan
+
+   **Description**: Start RF spectrum scan.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+   
+   **Request**::
+
+      POST /api/diagnostics/rf/scan HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+      
+      {
+        "frequency_range": [433.0, 434.0],
+        "step_size": 0.1,
+        "duration": 10
+      }
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "started": true,
+        "scan_id": "rfscan_20240320_001",
+        "frequency_range": "433.0-434.0 MHz",
+        "estimated_duration": 10,
+        "results_url": "/api/diagnostics/rf/results/rfscan_20240320_001"
+      }
+
+.. http:get:: /api/diagnostics/rf/results/{scan_id}
+
+   **Description**: Get RF scan results.
+   
+   **Path Parameters**:
+   
+   * **scan_id** (string): RF scan identifier
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "results": [
+          {
+            "frequency": 433.1,
+            "signal_strength": -92,
+            "noise_floor": -95,
+            "status": "Clear"
+          },
+          {
+            "frequency": 433.3,
+            "signal_strength": -45,
+            "noise_floor": -95,
+            "status": "Busy"
+          }
+        ],
+        "summary": {
+          "channels_scanned": 10,
+          "busy_channels": 1,
+          "max_signal": -45,
+          "min_signal": -95
+        }
+      }
+
+.. http:get:: /api/diagnostics/rf/status
+
+   **Description**: Get current RF system status.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "rf_system": "operational",
+        "current_frequency": 433.3,
+        "signal_strength": -45,
+        "noise_floor": -92,
+        "transmit_power": 20,
+        "temperature": 42.5
+      }
+
+Footer Actions
+~~~~~~~~~~~~~~
+
+.. http:post:: /api/diagnostics/export
+
+   **Description**: Export diagnostics data.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+   
+   **Request**::
+
+      POST /api/diagnostics/export HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
       
       {
         "include_logs": true,
         "include_metrics": true,
-        "include_captures": true,
-        "include_diagnostics": true,
-        "date_from": "2025-03-10T00:00:00Z",
-        "date_to": "2025-03-12T23:59:59Z",
-        "compression": "zip"
+        "include_captures": false,
+        "date_range": "last_7_days",
+        "format": "zip"
       }
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "success": true,
-        "export_id": "export_full_20250312_160000",
-        "status": "processing",
-        "estimated_size_mb": 320,
-        "contents": {
-          "logs_mb": 45,
-          "metrics_mb": 120,
-          "captures_mb": 150,
-          "diagnostics_mb": 5
-        },
-        "download_url": "/api/v1/diagnostics/export/download/export_full_20250312_160000"
+        "exported": true,
+        "export_id": "export_20240320_001",
+        "download_url": "/api/diagnostics/export/download/export_20240320_001.zip",
+        "size": 45.2
       }
 
-Clear Diagnostic Data
-~~~~~~~~~~~~~~~~~~~~~
+.. http:post:: /api/diagnostics/clear
 
-.. http:post:: /diagnostics/clear
+   **Description**: Clear diagnostics data.
+   
+   **Headers**::
 
-   Clear diagnostic data and logs.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
+   
+   **Request**::
 
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /diagnostics/clear HTTP/1.1
-      Authorization: Bearer <token>
+      POST /api/diagnostics/clear HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
       
       {
         "clear_logs": true,
         "clear_captures": true,
-        "older_than_days": 7,
+        "older_than": 30,
         "reason": "Storage cleanup"
       }
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "success": true,
-        "operation_id": "clear_20250312_163000",
-        "status": "completed",
-        "cleared_data": {
-          "logs_mb": 125,
-          "captures_mb": 320,
-          "files_deleted": 45
-        },
-        "remaining_data_mb": 45,
-        "freed_space_mb": 445
+        "cleared": true,
+        "logs_cleared": 125,
+        "captures_cleared": 320,
+        "space_freed": 445
       }
 
-System Control API
-------------------
+.. http:post:: /api/diagnostics/system/reboot
 
-Reboot Gateway
-~~~~~~~~~~~~~~
+   **Description**: Reboot the gateway system.
+   
+   **Headers**::
 
-.. http:post:: /diagnostics/system/reboot
-
-   Reboot the Univa Gateway.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
+   
+   **Request**::
 
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /diagnostics/system/reboot HTTP/1.1
-      Authorization: Bearer <token>
+      POST /api/diagnostics/system/reboot HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
       
       {
-        "delay_seconds": 10,
-        "reason": "Diagnostics maintenance"
+        "delay": 10,
+        "reason": "System maintenance"
       }
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "success": true,
-        "message": "System reboot scheduled",
-        "reboot_time": "2025-03-12T16:35:10Z",
-        "estimated_downtime": "00:01:30"
+        "reboot_scheduled": true,
+        "reboot_time": "2024-03-20T15:30:10Z",
+        "estimated_downtime": "90 seconds"
       }
 
-Reset to Factory Defaults
-~~~~~~~~~~~~~~~~~~~~~~~~~
+.. http:post:: /api/diagnostics/system/reset
 
-.. http:post:: /diagnostics/system/reset-defaults
+   **Description**: Reset diagnostics configuration.
+   
+   **Headers**::
 
-   Reset diagnostics configuration to factory defaults.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
+   
+   **Request**::
 
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /diagnostics/system/reset-defaults HTTP/1.1
-      Authorization: Bearer <token>
+      POST /api/diagnostics/system/reset HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
       
       {
-        "preserve_logs": true
+        "preserve_logs": true,
+        "preserve_captures": false
       }
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "success": true,
-        "message": "Diagnostics system reset to factory defaults",
-        "reset_components": [
-          "terminal_settings",
-          "monitoring_settings",
-          "capture_settings"
-        ],
-        "preserved_components": [
-          "logs",
-          "diagnostic_history"
-        ]
+        "reset": true,
+        "preserved_logs": true,
+        "preserved_captures": false,
+        "config_reset": true
       }
 
-WebSocket API
+Route Summary
 -------------
 
-Log Stream WebSocket
-~~~~~~~~~~~~~~~~~~~~
-
-Connection Endpoint
-^^^^^^^^^^^^^^^^^^^
-
-::
-
-   wss://univa-gateway/api/v1/diagnostics/logs/ws?token=<jwt_token>
-
-Subscribe Message
-^^^^^^^^^^^^^^^^^
-
-.. code-block:: json
-
-   {
-     "action": "subscribe",
-     "filters": {
-       "levels": ["ERROR", "WARN"],
-       "categories": ["CraneIQ", "ACS"]
-     }
-   }
-
-Log Message
-^^^^^^^^^^^
-
-.. code-block:: json
-
-   {
-     "event": "log_entry",
-     "data": {
-       "timestamp": "2025-03-12T15:00:00Z",
-       "level": "ERROR",
-       "category": "CraneIQ",
-       "message": "Brake slip detected"
-     }
-   }
-
-Terminal WebSocket
-~~~~~~~~~~~~~~~~~~
-
-Connection Endpoint
-^^^^^^^^^^^^^^^^^^^
-
-::
-
-   wss://univa-gateway/api/v1/diagnostics/terminal/ws/{session_id}
-
-Send Command
-^^^^^^^^^^^^
-
-.. code-block:: json
-
-   {
-     "type": "command",
-     "command": "uname -a",
-     "working_directory": "/root"
-   }
-
-Terminal Output
-^^^^^^^^^^^^^^^
-
-.. code-block:: json
-
-   {
-     "type": "output",
-     "data": "Linux univa-gw 5.10.0-21-arm64...",
-     "timestamp": "2025-03-12T15:01:00Z"
-   }
-
-Exit Notification
-^^^^^^^^^^^^^^^^^
-
-.. code-block:: json
-
-   {
-     "type": "exit",
-     "exit_code": 0,
-     "duration_ms": 150
-   }
-
-Metrics WebSocket
-~~~~~~~~~~~~~~~~~
-
-Connection Endpoint
-^^^^^^^^^^^^^^^^^^^
-
-::
-
-   wss://univa-gateway/api/v1/diagnostics/metrics/ws?token=<jwt_token>
-
-Subscribe Message
-^^^^^^^^^^^^^^^^^
-
-.. code-block:: json
-
-   {
-     "action": "subscribe",
-     "metrics": ["cpu", "memory", "network"],
-     "interval_ms": 1000
-   }
-
-Metrics Update
-^^^^^^^^^^^^^^
-
-.. code-block:: json
-
-   {
-     "type": "metrics_update",
-     "timestamp": "2025-03-12T15:01:00Z",
-     "data": {
-       "cpu_usage": 35.2,
-       "memory_usage": 68.7,
-       "network_rx": 245120,
-       "network_tx": 123450
-     }
-   }
-
-General WebSocket Events
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Connection Endpoint
-^^^^^^^^^^^^^^^^^^^
-
-::
-
-   wss://univa-gateway/api/v1/diagnostics/ws?token=<jwt_token>
-
-Event Types
-^^^^^^^^^^^
-
-**Capture Progress**:
-
-.. code-block:: json
-
-   {
-     "event": "capture_progress",
-     "data": {
-       "capture_id": "pcap_20250312_151500",
-       "packets_captured": 12450,
-       "size_mb": 12.5,
-       "progress_percent": 65
-     }
-   }
-
-**Diagnostic Progress**:
-
-.. code-block:: json
-
-   {
-     "event": "diagnostic_progress",
-     "data": {
-       "diagnostic_id": "diag_full_20250312_154500",
-       "current_check": "network_diagnostic",
-       "progress_percent": 45,
-       "estimated_remaining_seconds": 25
-     }
-   }
-
-Error Handling
---------------
-
-Error Response Format
-~~~~~~~~~~~~~~~~~~~~~
-
-.. sourcecode:: http
-
-   HTTP/1.1 400 Bad Request
-   Content-Type: application/json
+.. list-table:: Diagnostics Management Routes
+   :header-rows: 1
+   :widths: 15 15 50 20
    
-   {
-     "success": false,
-     "error": "Error Code",
-     "message": "Human-readable error message",
-     "code": "ERROR_CODE",
-     "timestamp": "2025-03-12T16:00:00Z",
-     "request_id": "req_abc123def456"
-   }
+   * - Type
+     - Method
+     - Route & Purpose
+     - Auth
+   * - Page
+     - GET
+     - ``/diagnostics`` - Main diagnostics page
+     - Yes
+   * - Metrics
+     - GET
+     - ``/api/diagnostics/metrics`` - Current system metrics
+     - Yes
+   * - Metrics
+     - GET
+     - ``/api/diagnostics/metrics/history`` - Historical metrics
+     - Yes
+   * - Logs
+     - GET
+     - ``/api/diagnostics/logs`` - Get system logs
+     - Yes
+   * - Logs
+     - POST
+     - ``/api/diagnostics/logs/stream`` - Start log streaming
+     - Yes
+   * - Terminal
+     - POST
+     - ``/api/diagnostics/terminal/session`` - Create terminal session
+     - Yes
+   * - Terminal
+     - POST
+     - ``/api/diagnostics/terminal/execute`` - Execute command
+     - Yes
+   * - Terminal
+     - GET
+     - ``/api/diagnostics/terminal/sessions`` - List sessions
+     - Yes
+   * - Terminal
+     - DELETE
+     - ``/api/diagnostics/terminal/session/{id}`` - Terminate session
+     - Yes
+   * - Tools
+     - POST
+     - ``/api/diagnostics/tools/ping`` - Ping test
+     - Yes
+   * - Tools
+     - POST
+     - ``/api/diagnostics/tools/traceroute`` - Traceroute
+     - Yes
+   * - Tools
+     - POST
+     - ``/api/diagnostics/tools/speedtest`` - Speed test
+     - Yes
+   * - Packet
+     - POST
+     - ``/api/diagnostics/packet-capture/start`` - Start capture
+     - Yes
+   * - Packet
+     - POST
+     - ``/api/diagnostics/packet-capture/stop/{id}`` - Stop capture
+     - Yes
+   * - Packet
+     - GET
+     - ``/api/diagnostics/packet-capture/list`` - List captures
+     - Yes
+   * - Packet
+     - GET
+     - ``/api/diagnostics/packet-capture/download/{id}`` - Download capture
+     - Yes
+   * - RF
+     - POST
+     - ``/api/diagnostics/rf/scan`` - Start RF scan
+     - Yes
+   * - RF
+     - GET
+     - ``/api/diagnostics/rf/results/{id}`` - Get RF results
+     - Yes
+   * - RF
+     - GET
+     - ``/api/diagnostics/rf/status`` - RF system status
+     - Yes
+   * - Footer
+     - POST
+     - ``/api/diagnostics/export`` - Export data
+     - Yes
+   * - Footer
+     - POST
+     - ``/api/diagnostics/clear`` - Clear data
+     - Yes
+   * - Footer
+     - POST
+     - ``/api/diagnostics/system/reboot`` - Reboot system
+     - Yes
+   * - Footer
+     - POST
+     - ``/api/diagnostics/system/reset`` - Reset config
+     - Yes
 
-Common Error Codes
-~~~~~~~~~~~~~~~~~~
+Complete User Flow
+------------------
+
+1. **User goes to page**: ``GET /diagnostics``
+   - Server renders HTML with embedded system data
+   - All 6 sections populated with current diagnostics data
+
+2. **User views system metrics** (SECTION 1):
+   - Real-time CPU, memory, disk, network usage
+   - Historical graphs via ``GET /api/diagnostics/metrics/history``
+   - Auto-refresh every 5 seconds
+
+3. **User monitors logs** (SECTION 2):
+   - Real-time log viewer with filtering
+   - "Start Streaming" → ``POST /api/diagnostics/logs/stream``
+   - Search and filter capabilities
+
+4. **User accesses terminal** (SECTION 3):
+   - "New Terminal" → ``POST /api/diagnostics/terminal/session``
+   - "Execute Command" → ``POST /api/diagnostics/terminal/execute``
+   - "View Active Sessions" → ``GET /api/diagnostics/terminal/sessions``
+   - "Terminate Session" → ``DELETE /api/diagnostics/terminal/session/{id}``
+
+5. **User runs diagnostic tools** (SECTION 4):
+   - "Ping Test" → ``POST /api/diagnostics/tools/ping``
+   - "Traceroute" → ``POST /api/diagnostics/tools/traceroute``
+   - "Speed Test" → ``POST /api/diagnostics/tools/speedtest``
+
+6. **User captures packets** (SECTION 5):
+   - "Start Capture" → ``POST /api/diagnostics/packet-capture/start``
+   - "Stop Capture" → ``POST /api/diagnostics/packet-capture/stop/{id}``
+   - "Download Capture" → ``GET /api/diagnostics/packet-capture/download/{id}``
+
+7. **User analyzes RF spectrum** (SECTION 6):
+   - "Start RF Scan" → ``POST /api/diagnostics/rf/scan``
+   - "View Results" → ``GET /api/diagnostics/rf/results/{id}``
+   - "RF Status" → ``GET /api/diagnostics/rf/status``
+
+8. **User uses footer actions**:
+   - "Export Data" → ``POST /api/diagnostics/export``
+   - "Clear Data" → ``POST /api/diagnostics/clear``
+   - "Reboot System" → ``POST /api/diagnostics/system/reboot``
+   - "Reset Config" → ``POST /api/diagnostics/system/reset``
+
+Error Codes
+-----------
 
 .. list-table:: Diagnostics Error Codes
    :widths: 30 70
@@ -1271,531 +940,219 @@ Common Error Codes
 
    * - Error Code
      - Description
-   * - **TERMINAL_SESSION_LIMIT**
+   * - TERMINAL_SESSION_LIMIT
      - Maximum terminal sessions reached
-   * - **INVALID_COMMAND**
+   * - INVALID_COMMAND
      - Command not allowed or invalid
-   * - **CAPTURE_ACTIVE**
+   * - CAPTURE_ACTIVE
      - Packet capture already in progress
-   * - **INSUFFICIENT_STORAGE**
+   * - INSUFFICIENT_STORAGE
      - Not enough storage for operation
-   * - **PERMISSION_DENIED**
+   * - PERMISSION_DENIED
      - User lacks required permissions
-   * - **SESSION_EXPIRED**
+   * - SESSION_EXPIRED
      - Terminal session has expired
-   * - **INTERFACE_UNAVAILABLE**
+   * - INTERFACE_UNAVAILABLE
      - Network interface not available
-   * - **DIAGNOSTIC_RUNNING**
-     - Diagnostic already in progress
-   * - **RF_SCANNER_BUSY**
+   * - RF_SCANNER_BUSY
      - RF spectrum scanner already in use
-   * - **SERIAL_PORT_BUSY**
-     - Serial port already in use
-   * - **EXPORT_TOO_LARGE**
+   * - EXPORT_TOO_LARGE
      - Export exceeds maximum allowed size
-   * - **REBOOT_SCHEDULED**
-     - System reboot already scheduled
+   * - SYSTEM_BUSY
+     - System operation cannot be performed now
 
-Examples
---------
+Authentication & Context
+------------------------
 
-Python - System Monitoring
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+All endpoints require gateway context identification::
 
-.. code-block:: python
+   Cookie: session_token=<token>
+   X-Gateway-ID: GW-3920A9
 
-   import requests
-   import json
-   
-   # Configuration
-   BASE_URL = "https://univa-gateway/api/v1/diagnostics"
-   TOKEN = "your_jwt_token_here"
-   
-   headers = {
-       "Authorization": f"Bearer {TOKEN}",
-       "Content-Type": "application/json"
-   }
-   
-   # Get system metrics
-   response = requests.get(
-       f"{BASE_URL}/metrics/system",
-       headers=headers,
-       params={"interval": 5, "duration": 60}
-   )
-   
-   if response.status_code == 200:
-       metrics = response.json()
-       print(f"CPU Usage: {metrics['metrics']['cpu']['usage_percent']}%")
-       print(f"Memory Usage: {metrics['metrics']['memory']['usage_percent']}%")
-   
-   # Execute terminal command
-   command_data = {
-       "command": "rf-test-tool --scan",
-       "working_directory": "/opt/univa/rf-tools",
-       "timeout_seconds": 30,
-       "capture_output": True
-   }
-   
-   response = requests.post(
-       f"{BASE_URL}/terminal/execute",
-       json=command_data,
-       headers=headers
-   )
-   
-   if response.status_code == 200:
-       result = response.json()
-       print(f"Command Output:\n{result['output']}")
-   
-   # Start packet capture
-   capture_data = {
-       "interface": "eth0",
-       "duration_seconds": 30,
-       "buffer_size_mb": 50,
-       "filters": {
-           "protocols": ["modbus"],
-           "ports": [502],
-           "promiscuous": True
-       },
-       "output_format": "pcap"
-   }
-   
-   response = requests.post(
-       f"{BASE_URL}/tools/packet-capture/start",
-       json=capture_data,
-       headers=headers
-   )
-   
-   if response.status_code == 200:
-       capture = response.json()
-       print(f"Capture started: {capture['capture_id']}")
+**Important**: This API only manages diagnostics for the current gateway specified in `X-Gateway-ID` header. Each gateway has its own independent diagnostics data.
 
-JavaScript - Real-time Monitoring
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+System Requirements
+-------------------
 
-.. code-block:: javascript
+### Storage Requirements
+- **Log retention**: Minimum 1GB for 30 days of logs
+- **Packet captures**: 100MB per capture session
+- **Metrics storage**: 500MB for 1 year of metrics
+- **Total minimum**: 2GB free space recommended
 
-   // WebSocket connection for real-time logs
-   const logSocket = new WebSocket(
-       `wss://univa-gateway/api/v1/diagnostics/logs/ws?token=${token}`
-   );
-   
-   logSocket.onopen = function() {
-       console.log('Connected to log stream');
-       
-       // Subscribe to error and warning logs
-       logSocket.send(JSON.stringify({
-           action: 'subscribe',
-           filters: {
-               levels: ['ERROR', 'WARN'],
-               categories: ['CraneIQ', 'ACS', 'RF_Radio']
-           }
-       }));
-   };
-   
-   logSocket.onmessage = function(event) {
-       const message = JSON.parse(event.data);
-       
-       if (message.event === 'log_entry') {
-           displayLog(message.data);
-       }
-   };
-   
-   // Real-time metrics
-   const metricsSocket = new WebSocket(
-       `wss://univa-gateway/api/v1/diagnostics/metrics/ws?token=${token}`
-   );
-   
-   metricsSocket.onopen = function() {
-       metricsSocket.send(JSON.stringify({
-           action: 'subscribe',
-           metrics: ['cpu', 'memory', 'network'],
-           interval_ms: 1000
-       }));
-   };
-   
-   metricsSocket.onmessage = function(event) {
-       const message = JSON.parse(event.data);
-       
-       if (message.type === 'metrics_update') {
-           updateDashboard(message.data);
-       }
-   };
+### Performance Impact
+- **Log streaming**: <5% CPU usage
+- **Packet capture**: 10-20% CPU during active capture
+- **RF scanning**: 15-25% CPU during active scan
+- **Terminal sessions**: <2% CPU per active session
 
-Python - Complete Diagnostics Workflow
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: python
-
-   import requests
-   import time
-   
-   class DiagnosticsClient:
-       def __init__(self, base_url, token):
-           self.base_url = base_url
-           self.headers = {
-               "Authorization": f"Bearer {token}",
-               "Content-Type": "application/json"
-           }
-       
-       def run_system_diagnostics(self):
-           """Run comprehensive system diagnostics"""
-           data = {
-               "checks": ["hardware", "network", "rf_system"],
-               "verbose": True
-           }
-           
-           response = requests.post(
-               f"{self.base_url}/run",
-               json=data,
-               headers=self.headers
-           )
-           
-           if response.status_code == 200:
-               result = response.json()
-               diagnostic_id = result['diagnostic_id']
-               
-               # Wait for completion
-               return self.wait_for_diagnostics(diagnostic_id)
-           
-           return None
-       
-       def wait_for_diagnostics(self, diagnostic_id):
-           """Poll for diagnostic results"""
-           max_attempts = 60  # 30 seconds max
-           
-           for attempt in range(max_attempts):
-               response = requests.get(
-                   f"{self.base_url}/results/{diagnostic_id}",
-                   headers=self.headers
-               )
-               
-               if response.status_code == 200:
-                   result = response.json()
-                   
-                   if result['status'] == 'completed':
-                       return result
-                   
-               time.sleep(0.5)  # Wait 500ms between checks
-           
-           return None
-       
-       def export_diagnostics_data(self, days=7):
-           """Export recent diagnostics data"""
-           import datetime
-           
-           end_date = datetime.datetime.utcnow()
-           start_date = end_date - datetime.timedelta(days=days)
-           
-           data = {
-               "include_logs": True,
-               "include_metrics": True,
-               "include_diagnostics": True,
-               "date_from": start_date.isoformat() + "Z",
-               "date_to": end_date.isoformat() + "Z",
-               "compression": "zip"
-           }
-           
-           response = requests.post(
-               f"{self.base_url}/export/all",
-               json=data,
-               headers=self.headers
-           )
-           
-           return response.json()
-   
-   # Usage
-   client = DiagnosticsClient(
-       base_url="https://univa-gateway/api/v1/diagnostics",
-       token="your_token_here"
-   )
-   
-   # Run diagnostics
-   results = client.run_system_diagnostics()
-   
-   if results:
-       print(f"Overall Status: {results['summary']['overall_status']}")
-       print(f"Checks Passed: {results['summary']['passed']}/{results['summary']['total_checks']}")
-   
-   # Export data
-   export_result = client.export_diagnostics_data(days=30)
-   print(f"Export ID: {export_result['export_id']}")
-   print(f"Download URL: {export_result['download_url']}")
-
-JavaScript - Dashboard Integration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: javascript
-
-   class DiagnosticsDashboard {
-       constructor(baseUrl, token) {
-           this.baseUrl = baseUrl;
-           this.token = token;
-           this.headers = {
-               'Authorization': `Bearer ${token}`,
-               'Content-Type': 'application/json'
-           };
-       }
-       
-       async getSystemMetrics() {
-           const response = await fetch(`${this.baseUrl}/metrics/system`, {
-               headers: this.headers
-           });
-           
-           if (!response.ok) {
-               throw new Error(`Failed to fetch metrics: ${response.status}`);
-           }
-           
-           return await response.json();
-       }
-       
-       async executeCommand(command, options = {}) {
-           const data = {
-               command: command,
-               working_directory: options.workingDirectory || '/root',
-               timeout_seconds: options.timeout || 30,
-               capture_output: true
-           };
-           
-           const response = await fetch(`${this.baseUrl}/terminal/execute`, {
-               method: 'POST',
-               headers: this.headers,
-               body: JSON.stringify(data)
-           });
-           
-           if (!response.ok) {
-               throw new Error(`Command execution failed: ${response.status}`);
-           }
-           
-           return await response.json();
-       }
-       
-       async startPacketCapture(interface, options = {}) {
-           const data = {
-               interface: interface,
-               duration_seconds: options.duration || 30,
-               buffer_size_mb: options.bufferSize || 50,
-               filters: {
-                   protocols: options.protocols || ['modbus', 'mqtt'],
-                   ports: options.ports || [502, 1883],
-                   promiscuous: options.promiscuous || true
-               },
-               output_format: options.format || 'pcap'
-           };
-           
-           const response = await fetch(`${this.baseUrl}/tools/packet-capture/start`, {
-               method: 'POST',
-               headers: this.headers,
-               body: JSON.stringify(data)
-           });
-           
-           if (!response.ok) {
-               throw new Error(`Capture failed to start: ${response.status}`);
-           }
-           
-           return await response.json();
-       }
-       
-       async getLogs(filterOptions = {}) {
-           const params = new URLSearchParams();
-           
-           if (filterOptions.levels) {
-               params.append('levels', filterOptions.levels.join(','));
-           }
-           
-           if (filterOptions.categories) {
-               params.append('categories', filterOptions.categories.join(','));
-           }
-           
-           if (filterOptions.search) {
-               params.append('search', filterOptions.search);
-           }
-           
-           if (filterOptions.limit) {
-               params.append('limit', filterOptions.limit);
-           }
-           
-           const response = await fetch(
-               `${this.baseUrl}/logs/stream?${params.toString()}`,
-               { headers: this.headers }
-           );
-           
-           if (!response.ok) {
-               throw new Error(`Failed to fetch logs: ${response.status}`);
-           }
-           
-           return await response.json();
-       }
-   }
-   
-   // Usage in dashboard
-   const dashboard = new DiagnosticsDashboard(
-       'https://univa-gateway/api/v1/diagnostics',
-       localStorage.getItem('token')
-   );
-   
-   // Update metrics every 5 seconds
-   setInterval(async () => {
-       try {
-           const metrics = await dashboard.getSystemMetrics();
-           updateMetricsUI(metrics);
-       } catch (error) {
-           console.error('Failed to update metrics:', error);
-       }
-   }, 5000);
-
-Best Practices
---------------
-
-System Monitoring
-~~~~~~~~~~~~~~~~~
-
-1. **Real-time Monitoring**
-   - Use WebSockets for live metrics updates
-   - Set appropriate update intervals (1-5 seconds)
-   - Implement connection recovery
-
-2. **Log Management**
-   - Apply filters to reduce network traffic
-   - Use search parameters for specific issues
-   - Export logs regularly for archiving
-
-3. **Terminal Operations**
-   - Always specify timeout for commands
-   - Use working directory appropriately
-   - Review command history regularly
-
-Diagnostic Tools
-~~~~~~~~~~~~~~~~
-
-1. **Packet Capture**
-   - Start with short durations (10-30 seconds)
-   - Use protocol filters to reduce capture size
-   - Stop captures when troubleshooting is complete
-
-2. **RF Scanning**
-   - Scan during maintenance windows
-   - Document interference sources
-   - Compare scans over time for trends
-
-3. **Serial Monitoring**
-   - Verify port settings before connecting
-   - Monitor for communication errors
-   - Log serial traffic for debugging
-
-Security Considerations
------------------------
-
-Authentication
-~~~~~~~~~~~~~~
-
-- **Terminal Access**: Requires admin privileges
-- **Command Execution**: Commands are logged and audited
-- **Data Export**: Export data is secured and encrypted
-
-Data Protection
-~~~~~~~~~~~~~~~
-
-- **Packet Capture**: May contain sensitive data - handle with care
-- **Log Export**: Password protect archives containing sensitive information
-- **Session Management**: Terminal sessions expire automatically
+### Network Requirements
+- **WebSocket connections**: Stable connection required
+- **Data export**: High bandwidth for large exports
+- **Remote access**: VPN recommended for WAN access
 
 Rate Limiting
 -------------
 
-.. list-table:: Rate Limits
+.. list-table:: Diagnostics Rate Limits
    :widths: 40 30 30
    :header-rows: 1
 
    * - Endpoint Type
      - Requests/Minute
      - Notes
-   * - **Log streaming**
-     - 1000
-     - Real-time log access
+   * - **Log access**
+     - 120
+     - Per user
    * - **Terminal commands**
      - 60
-     - Per session limit
+     - Per session
    * - **Packet capture**
      - 1 concurrent
-     - One capture at a time
-   * - **Diagnostic runs**
+     - System-wide
+   * - **RF scanning**
      - 1 concurrent
-     - One diagnostic at a time
-   * - **WebSocket connections**
-     - 5 per user
-     - Concurrent connections
+     - System-wide
+   * - **System control**
+     - 10
+     - Critical operations
 
-System Requirements
--------------------
+Data Retention
+--------------
 
-Minimum Requirements
-~~~~~~~~~~~~~~~~~~~~
+### Default Retention Periods
+- **System logs**: 30 days
+- **Packet captures**: 7 days
+- **Metrics data**: 1 year (aggregated)
+- **Terminal history**: 90 days
+- **Diagnostic results**: 30 days
 
-.. list-table:: System Requirements
-   :widths: 40 60
-   :header-rows: 1
+### Automatic Cleanup
+- Old data automatically deleted based on retention policy
+- Manual cleanup via ``POST /api/diagnostics/clear``
+- Configurable retention in settings
 
-   * - Component
-     - Requirement
-   * - **Storage**
-     - 2GB for diagnostics data
-   * - **Memory**
-     - 1GB for monitoring tools
-   * - **CPU**
-     - Multi-core for parallel diagnostics
-   * - **Network**
-     - Stable for WebSocket connections
+Security Considerations
+-----------------------
 
-Performance Impact
-~~~~~~~~~~~~~~~~~~
+### Terminal Access Security
+- All terminal commands are logged with user attribution
+- Command execution requires admin privileges
+- Session timeout after 30 minutes of inactivity
+- Maximum 3 concurrent terminal sessions per user
 
-- **Metrics Collection**: <5% CPU usage
-- **Log Streaming**: <10% network bandwidth
-- **Packet Capture**: 10-100 MB/min depending on traffic
-- **RF Scanning**: <15% CPU during active scans
+### Packet Capture Security
+- Capture files encrypted at rest
+- Access restricted to authorized users
+- Automatic deletion after retention period
+- No capture of sensitive protocols (SSH, HTTPS)
+
+### Data Export Security
+- Exports encrypted with user-specific key
+- Download links expire after 24 hours
+- Export logs tracked for audit purposes
 
 Troubleshooting
 ---------------
 
-Common Issues
-~~~~~~~~~~~~~
+### Common Issues
 
-1. **Terminal Connection Failed**
-   - Verify user has admin privileges
-   - Check SSH service is running
+1. **Terminal connection fails**
+   - Verify SSH service is running
+   - Check user has admin privileges
    - Confirm network connectivity
 
-2. **Logs Not Streaming**
-   - Check WebSocket connection
-   - Verify filters are not too restrictive
+2. **Logs not updating**
    - Check log service status
+   - Verify disk space availability
+   - Check log retention settings
 
-3. **Metrics Not Updating**
-   - Verify monitoring service is running
-   - Check system resources
-   - Review error logs
+3. **Packet capture fails**
+   - Verify interface exists and is up
+   - Check available storage space
+   - Confirm user has capture permissions
 
-Getting Help
-~~~~~~~~~~~~
+4. **RF scanner not responding**
+   - Check RF hardware status
+   - Verify driver is loaded
+   - Confirm frequency range is valid
 
-- **API Documentation**: https://docs.univagateway.com/api/diagnostics
-- **Support Email**: diagnostics-support@univagateway.com
-- **Emergency Contact**: +1-800-DIAGNOSTIC (342-4667)
-- **Status Page**: https://status.univagateway.com
+### Debug Information
 
-Versioning
-----------
+When contacting support, provide:
+- Gateway ID
+- Error message and code
+- Timestamp of issue
+- Steps to reproduce
+- Relevant logs or captures
 
-API version is included in the URL path (``/api/v1/``). Breaking changes will result in a new version number.
+Support Information
+-------------------
 
-Changelog
----------
+- **Email**: diagnostics-support@univa.com
+- **Phone**: +1 (555) 987-6543
+- **Support Hours**: 24/7 for critical issues
+- **Documentation**: https://docs.univa.com/diagnostics
 
-**v1.0.0** (2025-03-12)
-~~~~~~~~~~~~~~~~~~~~~~~
+Version History
+---------------
 
-- Initial release of Diagnostics & Terminal API
-- Complete system monitoring capabilities
-- Real-time terminal access
-- Comprehensive diagnostic tools
-- WebSocket support for live updates
+.. list-table:: API Version History
+   :widths: 15 85
+   :header-rows: 1
+
+   * - Version
+     - Changes
+   * - 1.0.0
+     - Initial release of Diagnostics API
+   * - 1.1.0
+     - Added WebSocket support for real-time data
+   * - 1.2.0
+     - Added RF spectrum analysis tools
+   * - 1.3.0
+     - Enhanced packet capture capabilities
+
+Deprecation Notes
+-----------------
+
+No endpoints are currently deprecated. All endpoints are fully supported in the current version.
+
+Glossary
+--------
+
+.. glossary::
+
+   System Metrics
+      Real-time measurements of CPU, memory, disk, and network usage.
+
+   Log Streaming
+      Real-time delivery of system log entries via WebSocket.
+
+   Terminal Session
+      Interactive command-line access to the gateway system.
+
+   Packet Capture
+      Recording of network traffic for analysis and debugging.
+
+   RF Spectrum Analysis
+      Scanning and analysis of radio frequency signals.
+
+   Diagnostic Tools
+      Utilities for network testing and system diagnostics.
+
+   Export Package
+      Compressed archive containing diagnostics data for analysis.
+
+   Retention Policy
+      Rules governing how long diagnostics data is stored.
+
+   Rate Limiting
+      Restrictions on API request frequency to prevent abuse.
+
+   WebSocket
+      Protocol for full-duplex communication over a single TCP connection.
+
+---
+*Document last updated: March 20, 2024*
+*API Version: 1.3.0*
+*Gateway Version: 2.5.1*

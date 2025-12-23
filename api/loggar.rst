@@ -1,274 +1,232 @@
 Device-Level Logging API
-======================================
+========================
 
-APIs for granular control over system logging at the hardware, protocol, and subsystem levels.
+.. contents::
+   :depth: 3
+   :local:
 
-Overview
---------
+Page Route (Frontend)
+---------------------
 
-The Device-Level Logging API provides granular control over system logging at the hardware, protocol, and subsystem levels. This API enables configuration of detailed logging for troubleshooting, monitoring, and debugging gateway operations across multiple categories including system, network, CAN bus, Modbus, MQTT, and security events.
+.. http:get:: /logging-management
 
-Base URL
---------
+   **Description**: Renders the complete device-level logging management page with all logging configurations, categories, destinations, and system status embedded in the HTML.
 
-::
+   **Headers**::
 
-   https://univa-gateway/api/v1/logging
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
 
-Authentication
---------------
+   **Response**::
 
-All endpoints require JWT authentication via the ``Authorization`` header:
+      HTTP/1.1 200 OK
+      Content-Type: text/html
+      
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Device-Level Logging - Univa Gateway</title>
+      </head>
+      <body>
+        <div id="app" data-global-status='{...}' data-categories='[...]' data-destinations='{...}' data-rotation='{...}'>
+          <!-- Logging management page with:
+               SECTION 1: Global Status Dashboard
+               SECTION 2: Log Categories Configuration
+               SECTION 3: Output Destinations
+               SECTION 4: Log Rotation Settings
+               SECTION 5: Gateway Management
+               SECTION 6: Operations & Testing
+               FOOTER: Save All, Reset, System Actions
+          -->
+        </div>
+      </body>
+      </html>
 
-.. code-block:: http
+   **How it works**:
+   - Server renders the HTML page with embedded logging configuration data
+   - All logging settings, categories, destinations, and rotation settings are embedded
+   - JavaScript reads this data and renders the complete logging interface
+   - Gateway context is provided via X-Gateway-ID header
 
-   Authorization: Bearer <jwt_token>
+   **Error Response**::
 
-.. note::
+      HTTP/1.1 302 Found
+      Location: /login
 
-   Advanced logging configuration requires admin-level privileges.
+API Endpoints (Backend)
+-----------------------
 
-Master Configuration API
-------------------------
+These endpoints handle all logging operations triggered from the page. All endpoints operate on the current gateway context identified by the `X-Gateway-ID` header.
 
-Get Global Logging Status
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Global Status Dashboard (SECTION 1)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:get:: /logging/status
+.. http:get:: /api/logging-management/status
 
-   Retrieve global logging system status and configuration.
+   **Description**: Get global logging system status and dashboard data.
+   
+   **Headers**::
 
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Response**:
-
-   .. sourcecode:: http
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "success": true,
-        "status": {
-          "enabled": true,
-          "global_log_level": "INFO",
-          "storage": {
-            "total_mb": 300,
-            "used_mb": 156,
-            "available_mb": 144,
-            "usage_percentage": 52,
-            "status": "healthy"
-          },
-          "rotation": {
-            "mode": "fifo-compress",
-            "last_rotation": "2025-03-12T14:00:00Z",
-            "next_rotation": "2025-03-13T02:00:00Z"
-          },
-          "files": {
-            "active": 8,
-            "compressed": 12,
-            "total_lines_today": 42156
-          },
-          "errors_24h": {
-            "critical": 0,
-            "error": 12,
-            "warning": 47
-          }
+        "enabled": true,
+        "global_log_level": "INFO",
+        "storage": {
+          "total_mb": 300,
+          "used_mb": 156,
+          "available_mb": 144,
+          "usage_percentage": 52
         },
-        "timestamp": "2025-03-12T15:00:00Z"
+        "files": {
+          "active": 8,
+          "compressed": 12,
+          "total_lines_today": 42156
+        },
+        "errors_24h": {
+          "critical": 0,
+          "error": 12,
+          "warning": 47
+        }
       }
 
-Update Global Settings
-~~~~~~~~~~~~~~~~~~~~~~
+.. http:put:: /api/logging-management/global-settings
 
-.. http:put:: /logging/settings/global
+   **Description**: Update global logging settings.
+   
+   **Headers**::
 
-   Update global logging system settings.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
+   
+   **Request**::
 
-   **Request**:
-
-   .. sourcecode:: http
-
-      PUT /logging/settings/global HTTP/1.1
-      Authorization: Bearer <token>
+      PUT /api/logging-management/global-settings HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
       
       {
         "enabled": true,
         "global_log_level": "INFO",
         "max_storage_mb": 300,
-        "rotation_mode": "fifo-compress",
-        "enable_auto_rotation": true,
-        "rotation_schedule": "daily",
-        "rotation_time": "02:00"
+        "rotation_mode": "fifo-compress"
       }
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "success": true,
+        "updated": true,
         "message": "Global logging settings updated",
-        "new_settings": {
-          "enabled": true,
-          "global_log_level": "INFO",
-          "max_storage_mb": 300,
-          "rotation_mode": "fifo-compress",
-          "estimated_log_files": 15
-        },
         "requires_restart": false
       }
 
-Get Global Dashboard Data
-~~~~~~~~~~~~~~~~~~~~~~~~~
+.. http:get:: /api/logging-management/storage-analytics
 
-.. http:get:: /logging/dashboard
+   **Description**: Get detailed storage analytics and trends.
+   
+   **Headers**::
 
-   Get dashboard data including storage usage, recent errors, and rotation info.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Response**:
-
-   .. sourcecode:: http
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "success": true,
-        "dashboard": {
-          "storage": {
-            "used_mb": 156,
-            "total_mb": 300,
-            "available_mb": 144,
-            "usage_percentage": 52
-          },
-          "files": {
-            "active": 8,
-            "compressed": 12,
-            "total_lines_today": 42156
-          },
-          "errors_24h": {
-            "critical": 0,
-            "error": 12,
-            "warning": 47
-          },
-          "rotation": {
-            "last_rotation_ago": "2 hours",
-            "next_rotation_in": "~22 hours",
-            "oldest_log_days": 14
-          }
-        },
-        "timestamp": "2025-03-12T15:00:00Z"
+        "daily_usage": [
+          {"date": "2024-03-18", "size_mb": 145},
+          {"date": "2024-03-19", "size_mb": 152},
+          {"date": "2024-03-20", "size_mb": 156}
+        ],
+        "category_breakdown": [
+          {"category": "system", "size_mb": 45},
+          {"category": "network", "size_mb": 32},
+          {"category": "modbus", "size_mb": 28}
+        ],
+        "predictions": {
+          "full_in_days": 21,
+          "recommended_action": "Increase storage limit"
+        }
       }
 
-Category Management API
------------------------
+Log Categories Configuration (SECTION 2)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-List Log Categories with UI Data
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. http:get:: /api/logging-management/categories
 
-.. http:get:: /logging/categories/ui
+   **Description**: Get all log categories with their configurations.
+   
+   **Headers**::
 
-   Get all log categories formatted for UI display.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Response**:
-
-   .. sourcecode:: http
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "success": true,
         "categories": [
           {
             "id": "system",
             "name": "System Logs",
-            "description": "Kernel, watchdog, crash reports",
             "enabled": true,
             "log_level": "INFO",
             "log_format": "TIMESTAMP LEVEL MODULE MESSAGE",
             "interval_ms": 1000,
             "max_file_size_mb": 10,
             "retention_days": 30,
-            "last_activity": "2025-03-12T14:55:00Z",
-            "lines_today": 12500,
-            "ui_badge": "INFO",
-            "ui_badge_color": "blue",
-            "ui_interval_display": "1s"
+            "lines_today": 12500
           },
           {
             "id": "network",
             "name": "Network Logs",
-            "description": "Ethernet, Wi-Fi, 4G, packet drops",
             "enabled": true,
             "log_level": "DEBUG",
-            "log_format": "TIMESTAMP INTERFACE PROTOCOL SOURCE DESTINATION",
+            "log_format": "TIMESTAMP INTERFACE PROTOCOL",
             "interval_ms": 5000,
             "max_file_size_mb": 15,
             "retention_days": 14,
-            "last_activity": "2025-03-12T14:56:00Z",
-            "lines_today": 8500,
-            "ui_badge": "DEBUG",
-            "ui_badge_color": "green",
-            "ui_interval_display": "5s"
+            "lines_today": 8500
           }
-        ]
+        ],
+        "total_categories": 12,
+        "enabled_count": 8
       }
 
-Get Category Configuration for UI
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. http:get:: /api/logging-management/categories/{category_id}/config
 
-.. http:get:: /logging/categories/{category_id}/ui
-
-   Get detailed configuration for a specific log category formatted for UI.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
+   **Description**: Get detailed configuration for a specific category.
+   
    **Path Parameters**:
+   
+   * **category_id** (string): Category identifier
+   
+   **Headers**::
 
-   * **category_id** (required): Category ID
-
-   **Response**:
-
-   .. sourcecode:: http
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "success": true,
         "category": {
           "id": "system",
           "name": "System Logs",
@@ -281,62 +239,35 @@ Get Category Configuration for UI
             "max_file_size_mb": 10,
             "retention_days": 30,
             "buffer_size_kb": 1024,
-            "flush_interval_ms": 5000,
-            "include_timestamps": true,
+            "flush_interval_ms": 5000
+          },
+          "advanced_settings": {
             "include_process_id": true,
             "include_thread_id": false,
-            "file_path": "/var/log/system.log",
-            "compression": "gzip"
-          },
-          "ui_config": {
-            "format_options": [
-              {"value": "TIMESTAMP LEVEL MODULE MESSAGE", "label": "Standard (Timestamp + Level + Module + Message)"},
-              {"value": "TIMESTAMP LEVEL MESSAGE", "label": "Basic (Timestamp + Level + Message)"},
-              {"value": "TIMESTAMP MESSAGE", "label": "Simple (Timestamp + Message)"},
-              {"value": "LEVEL MODULE MESSAGE", "label": "Compact (Level + Module + Message - No Timestamp)"},
-              {"value": "MODULE MESSAGE", "label": "Minimal (Module + Message)"}
-            ],
-            "level_options": ["CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG", "TRACE"],
-            "advanced_fields": {
-              "include_detailed_data": {
-                "label": "Include Process Info",
-                "description": "Include process ID and thread information",
-                "value": true
-              },
-              "include_debug_info": {
-                "label": "Include Thread IDs",
-                "description": "Include thread identification in logs",
-                "value": false
-              }
-            }
+            "file_path": "/var/log/system.log"
           }
         }
       }
 
-Update Category Configuration (UI Format)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. http:put:: /api/logging-management/categories/{category_id}/config
 
-.. http:put:: /logging/categories/{category_id}/ui
-
-   Update configuration for a specific log category from UI.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
+   **Description**: Update configuration for a specific category.
+   
    **Path Parameters**:
+   
+   * **category_id** (string): Category identifier
+   
+   **Headers**::
 
-   * **category_id** (required): Category ID
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+   
+   **Request**::
 
-   **Request**:
-
-   .. sourcecode:: http
-
-      PUT /logging/categories/system/ui HTTP/1.1
-      Authorization: Bearer <token>
+      PUT /api/logging-management/categories/system/config HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
       
       {
@@ -345,353 +276,264 @@ Update Category Configuration (UI Format)
         "log_format": "TIMESTAMP LEVEL MODULE MESSAGE",
         "interval_ms": 1000,
         "max_file_size_mb": 10,
-        "retention_days": 30,
-        "buffer_size_kb": 1024,
-        "flush_interval_ms": 5000,
-        "advanced_settings": {
-          "include_detailed_data": true,
-          "include_debug_info": false
-        }
+        "retention_days": 30
       }
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "success": true,
-        "message": "Category configuration updated successfully",
-        "category": {
-          "id": "system",
-          "enabled": true,
-          "log_level": "INFO",
-          "ui_badge": "INFO",
-          "ui_badge_color": "blue",
-          "ui_interval_display": "1s",
-          "estimated_storage_mb_per_day": 25,
-          "restart_required": false
-        }
+        "updated": true,
+        "category_id": "system",
+        "message": "Category configuration updated successfully"
       }
 
-Batch Toggle Categories
-~~~~~~~~~~~~~~~~~~~~~~~
+.. http:post:: /api/logging-management/categories/batch-update
 
-.. http:post:: /logging/categories/batch-toggle
+   **Description**: Update multiple categories at once.
+   
+   **Headers**::
 
-   Toggle multiple log categories at once.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
+   
+   **Request**::
 
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /logging/categories/batch-toggle HTTP/1.1
-      Authorization: Bearer <token>
+      POST /api/logging-management/categories/batch-update HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
       
       {
-        "categories": ["system", "network", "can", "modbus", "mqtt", "security", "sensor", "ruleEngine", "debug"],
-        "enabled": true,
-        "apply_global_level": false
+        "updates": [
+          {
+            "category_id": "system",
+            "enabled": true,
+            "log_level": "INFO"
+          },
+          {
+            "category_id": "network",
+            "enabled": true,
+            "log_level": "DEBUG"
+          }
+        ]
       }
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "success": true,
-        "updated": 9,
-        "results": {
-          "system": {"enabled": true, "log_level": "INFO"},
-          "network": {"enabled": true, "log_level": "DEBUG"},
-          "can": {"enabled": true, "log_level": "WARN"},
-          "modbus": {"enabled": true, "log_level": "ERROR"},
-          "mqtt": {"enabled": true, "log_level": "INFO"},
-          "security": {"enabled": true, "log_level": "CRITICAL"},
-          "sensor": {"enabled": false, "log_level": "INFO"},
-          "ruleEngine": {"enabled": false, "log_level": "DEBUG"},
-          "debug": {"enabled": false, "log_level": "TRACE"}
-        }
+        "updated": true,
+        "updated_categories": 2,
+        "results": [
+          {"category_id": "system", "success": true},
+          {"category_id": "network", "success": true}
+        ]
       }
 
-Apply Global Level to All Categories
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. http:post:: /api/logging-management/categories/apply-global-level
 
-.. http:post:: /logging/categories/apply-global
+   **Description**: Apply global log level to all enabled categories.
+   
+   **Headers**::
 
-   Apply global log level to all enabled categories.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
+   
+   **Request**::
 
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /logging/categories/apply-global HTTP/1.1
-      Authorization: Bearer <token>
+      POST /api/logging-management/categories/apply-global-level HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
       
       {
         "global_level": "INFO",
         "exclude_categories": ["security", "debug"]
       }
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "success": true,
+        "applied": true,
         "message": "Global level applied to 7 categories",
-        "applied_categories": ["system", "network", "can", "modbus", "mqtt", "sensor", "ruleEngine"],
-        "excluded_categories": ["security", "debug"],
-        "new_level": "INFO"
+        "applied_categories": ["system", "network", "can", "modbus", "mqtt", "sensor", "ruleEngine"]
       }
 
-Output Destinations API
------------------------
+Output Destinations (SECTION 3)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Get Output Destinations for UI
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. http:get:: /api/logging-management/destinations
 
-.. http:get:: /logging/destinations/ui
+   **Description**: Get all configured output destinations.
+   
+   **Headers**::
 
-   Get all configured logging output destinations formatted for UI.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Response**:
-
-   .. sourcecode:: http
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "success": true,
         "destinations": {
           "local": {
             "enabled": true,
             "path": "/var/log",
             "available_mb": 144,
-            "status": "healthy",
-            "files_count": 20,
-            "ui_label": "Local Storage",
-            "ui_description": "Default debugging location (/var/log)"
-          },
-          "usb": {
-            "enabled": false,
-            "path": "/media/usb/logs",
-            "available_mb": 0,
-            "status": "not_connected",
-            "files_count": 0,
-            "ui_label": "External USB Storage",
-            "ui_description": "Field engineers onsite collection"
+            "status": "healthy"
           },
           "cloud": {
             "enabled": true,
             "endpoint": "https://logs.yourcloud.com/api/v1/logs",
             "status": "connected",
-            "last_sync": "2025-03-12T14:30:00Z",
-            "pending_uploads": 0,
-            "ui_label": "Cloud Upload Endpoint",
-            "ui_description": "For cloud dashboards and remote monitoring",
-            "placeholder": "https://logs.yourcloud.com/api/v1/logs"
+            "last_sync": "2024-03-20T14:30:00Z"
           },
           "syslog": {
             "enabled": true,
             "server": "192.168.1.100:514",
             "protocol": "udp",
-            "status": "connected",
-            "facility": "local7",
-            "ui_label": "Syslog Server",
-            "ui_description": "Industrial IT environments (IP:Port)",
-            "placeholder": "192.168.1.100:514"
+            "status": "connected"
           },
           "mqtt": {
             "enabled": true,
             "topic": "iot/device/logs",
             "broker": "mqtt://localhost:1883",
-            "status": "connected",
-            "qos": 1,
-            "ui_label": "MQTT Topic Output",
-            "ui_description": "Pipe logs to external monitoring systems",
-            "placeholder": "iot/device/logs"
-          },
-          "websocket": {
-            "enabled": true,
-            "clients_connected": 3,
-            "status": "active",
-            "ui_label": "WebSocket Streaming",
-            "ui_description": "Enable live log viewer in Web UI"
+            "status": "connected"
           }
         }
       }
 
-Configure Output Destination (UI Format)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. http:put:: /api/logging-management/destinations/{destination_type}
 
-.. http:put:: /logging/destinations/{destination_type}/ui
-
-   Configure a specific output destination from UI.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
+   **Description**: Configure a specific output destination.
+   
    **Path Parameters**:
+   
+   * **destination_type** (string): Destination type (local, cloud, syslog, mqtt)
+   
+   **Headers**::
 
-   * **destination_type** (required): Destination type
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+   
+   **Request**::
 
-   **Request**:
-
-   .. sourcecode:: http
-
-      PUT /logging/destinations/cloud/ui HTTP/1.1
-      Authorization: Bearer <token>
+      PUT /api/logging-management/destinations/cloud HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
       
       {
         "enabled": true,
-        "endpoint": "https://logs.yourcloud.com/api/v1/logs"
+        "endpoint": "https://logs.yourcloud.com/api/v1/logs",
+        "api_key": "your_api_key_here"
       }
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "success": true,
-        "destination": {
-          "type": "cloud",
-          "enabled": true,
-          "endpoint": "https://logs.yourcloud.com/api/v1/logs",
-          "status": "configured",
-          "ui_label": "Cloud Upload Endpoint",
-          "ui_description": "For cloud dashboards and remote monitoring"
+        "configured": true,
+        "destination_type": "cloud",
+        "message": "Cloud destination configured successfully"
+      }
+
+.. http:post:: /api/logging-management/destinations/test
+
+   **Description**: Test all configured destinations.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+   
+   **Request**::
+
+      POST /api/logging-management/destinations/test HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+      
+      {
+        "destinations": ["cloud", "syslog", "mqtt"],
+        "test_message": "Logging destination test"
+      }
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "tested": true,
+        "results": {
+          "cloud": {"success": true, "latency_ms": 145},
+          "syslog": {"success": true, "latency_ms": 35},
+          "mqtt": {"success": true, "latency_ms": 42}
         }
       }
 
-Log Rotation API
-----------------
-
-Get Rotation Configuration for UI
+Log Rotation Settings (SECTION 4)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:get:: /logging/rotation/ui
+.. http:get:: /api/logging-management/rotation
 
-   Get log rotation settings formatted for UI.
+   **Description**: Get log rotation configuration.
+   
+   **Headers**::
 
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Response**:
-
-   .. sourcecode:: http
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "success": true,
-        "rotation": {
-          "enabled": true,
-          "mode": "fifo-compress",
-          "max_file_size_mb": 20,
-          "max_log_files": 10,
-          "compress_older_days": 7,
-          "delete_oldest": true,
-          "schedule": "daily",
-          "time": "02:00",
-          "last_rotation": "2025-03-12T02:00:00Z",
-          "next_rotation": "2025-03-13T02:00:00Z",
-          "compression": {
-            "algorithm": "gzip",
-            "level": 6,
-            "remove_original": true
-          },
-          "ui_settings": {
-            "max_file_size": {
-              "label": "Max Log File Size",
-              "description": "Individual log file size limit",
-              "unit": "MB",
-              "min": 1,
-              "max": 100
-            },
-            "max_log_files": {
-              "label": "Max Log Files",
-              "description": "Number of log files to keep",
-              "min": 1,
-              "max": 100
-            },
-            "compress_logs": {
-              "label": "Compress Older Files",
-              "description": "Gzip compress logs older than 7 days",
-              "value": true
-            },
-            "delete_oldest": {
-              "label": "Delete Oldest When Full",
-              "description": "Automatically delete oldest logs when storage is full",
-              "value": true
-            }
-          }
-        }
+        "enabled": true,
+        "mode": "fifo-compress",
+        "max_file_size_mb": 20,
+        "max_log_files": 10,
+        "compress_older_days": 7,
+        "delete_oldest": true,
+        "schedule": "daily",
+        "time": "02:00",
+        "last_rotation": "2024-03-20T02:00:00Z",
+        "next_rotation": "2024-03-21T02:00:00Z"
       }
 
-Update Rotation Settings (UI Format)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. http:put:: /api/logging-management/rotation
 
-.. http:put:: /logging/rotation/ui
+   **Description**: Update log rotation settings.
+   
+   **Headers**::
 
-   Update log rotation configuration from UI.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
+   
+   **Request**::
 
-   **Request**:
-
-   .. sourcecode:: http
-
-      PUT /logging/rotation/ui HTTP/1.1
-      Authorization: Bearer <token>
+      PUT /api/logging-management/rotation HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
       
       {
@@ -700,387 +542,81 @@ Update Rotation Settings (UI Format)
         "compress_older_days": 7,
         "delete_oldest": true
       }
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "success": true,
+        "updated": true,
         "message": "Rotation settings updated",
-        "rotation": {
-          "max_file_size_mb": 20,
-          "max_log_files": 10,
-          "compress_older_days": 7,
-          "delete_oldest": true,
-          "next_rotation": "2025-03-13T02:00:00Z"
-        }
+        "next_rotation": "2024-03-21T02:00:00Z"
       }
 
-Log Operations API
-------------------
+.. http:post:: /api/logging-management/rotation/manual
 
-Test Logging Configuration (UI Format)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   **Description**: Trigger manual log rotation.
+   
+   **Headers**::
 
-.. http:post:: /logging/operations/test/ui
-
-   Test logging configuration by generating test log entries.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
+   
+   **Request**::
 
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /logging/operations/test/ui HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "categories": ["system", "network", "modbus"],
-        "levels": ["INFO", "ERROR", "WARNING"],
-        "test_messages_count": 10,
-        "verify_destinations": true
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "test_id": "log_test_20250312_161500",
-        "status": "completed",
-        "messages_generated": 30,
-        "destinations_tested": {
-          "local": "success",
-          "cloud": "success",
-          "syslog": "success",
-          "mqtt": "success",
-          "websocket": "success"
-        },
-        "verification": {
-          "files_created": 3,
-          "lines_written": 30,
-          "errors_found": 0,
-          "latency_ms": {
-            "local": 12,
-            "cloud": 145,
-            "syslog": 35,
-            "mqtt": 42
-          }
-        },
-        "message": "Logging configuration test successful! All destinations are reachable."
-      }
-
-Trigger Manual Rotation (UI Format)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:post:: /logging/rotation/manual/ui
-
-   Manually trigger log rotation.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /logging/rotation/manual/ui HTTP/1.1
-      Authorization: Bearer <token>
+      POST /api/logging-management/rotation/manual HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
       Content-Type: application/json
       
       {
         "reason": "Manual rotation triggered from UI",
         "compress_immediately": true
       }
-
-   **Response**:
-
-   .. sourcecode:: http
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "success": true,
-        "rotation_id": "rotation_manual_20250312_160000",
-        "status": "completed",
+        "rotated": true,
         "files_rotated": 8,
         "files_compressed": 8,
         "original_size_mb": 156,
         "compressed_size_mb": 52,
-        "message": "Log rotation complete! Old logs have been archived."
+        "message": "Log rotation complete"
       }
 
-Restart Logging Service (UI Format)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:post:: /logging/operations/restart/ui
-
-   Restart the logging service to apply configuration changes.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /logging/operations/restart/ui HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "graceful": true,
-        "timeout_seconds": 30,
-        "backup_config": true
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "restart_id": "restart_20250312_162000",
-        "status": "scheduled",
-        "graceful": true,
-        "estimated_downtime_seconds": 5,
-        "backup_created": true,
-        "backup_path": "/var/log/config_backup_20250312_162000.json",
-        "restart_time": "2025-03-12T16:20:05Z",
-        "message": "Logging service restart scheduled. Changes will take effect after restart."
-      }
-
-Save All Configurations
-~~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:post:: /logging/operations/save-all
-
-   Save all logging configurations at once.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /logging/operations/save-all HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "global": {
-          "enabled": true,
-          "log_level": "INFO",
-          "max_storage_mb": 300,
-          "rotation_mode": "fifo-compress"
-        },
-        "categories": {
-          "system": {
-            "enabled": true,
-            "log_level": "INFO",
-            "interval_ms": 1000,
-            "max_file_size_mb": 10,
-            "retention_days": 30
-          },
-          "network": {
-            "enabled": true,
-            "log_level": "DEBUG",
-            "interval_ms": 5000,
-            "max_file_size_mb": 15,
-            "retention_days": 14
-          }
-        },
-        "destinations": {
-          "local": true,
-          "usb": false,
-          "cloud": "https://logs.yourcloud.com/api/v1/logs",
-          "syslog": "192.168.1.100:514",
-          "mqtt": "iot/device/logs",
-          "websocket": true
-        },
-        "rotation": {
-          "max_file_size_mb": 20,
-          "max_files": 10,
-          "compress": true,
-          "delete_oldest": true
-        }
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "message": "All logging configurations saved successfully",
-        "saved_sections": ["global", "categories", "destinations", "rotation"],
-        "restart_required": true,
-        "restart_scheduled": true,
-        "restart_time": "2025-03-12T16:30:00Z"
-      }
-
-Reset to Default Configuration
+Gateway Management (SECTION 5)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. http:post:: /logging/operations/reset
+.. http:get:: /api/logging-management/gateways
 
-   Reset logging configuration to factory defaults.
+   **Description**: Get list of available gateways for logging management.
+   
+   **Headers**::
 
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /logging/operations/reset HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "confirmation": "I confirm to reset all logging settings to defaults",
-        "backup_current": true
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "success": true,
-        "message": "Logging configuration reset to factory defaults",
-        "backup_created": true,
-        "backup_path": "/var/log/config_backup_pre_reset_20250312_163000.json",
-        "restart_required": true,
-        "restart_scheduled": true
-      }
-
-Gateway Management API
-----------------------
-
-Switch Gateway Context
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:post:: /logging/gateway/switch
-
-   Switch to a different gateway context.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-      Content-Type: application/json
-
-   **Request**:
-
-   .. sourcecode:: http
-
-      POST /logging/gateway/switch HTTP/1.1
-      Authorization: Bearer <token>
-      Content-Type: application/json
-      
-      {
-        "gateway_id": "Univa-GW-02",
-        "save_current": true
-      }
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
-        "message": "Gateway context switched to Univa-GW-02",
-        "gateway": {
-          "id": "Univa-GW-02",
-          "name": "Univa-GW-02",
-          "status": "online",
-          "ip_address": "192.168.1.102",
-          "last_seen": "2025-03-12T15:05:00Z"
-        },
-        "configuration_loaded": true,
-        "requires_reload": true
-      }
-
-Get Available Gateways
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. http:get:: /logging/gateways/available
-
-   Get list of available gateways for selection.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Response**:
-
-   .. sourcecode:: http
-
-      HTTP/1.1 200 OK
-      Content-Type: application/json
-      
-      {
-        "success": true,
         "gateways": [
           {
             "id": "Univa-GW-01",
             "name": "Univa-GW-01",
             "status": "online",
             "ip_address": "192.168.1.101",
-            "last_seen": "2025-03-12T15:00:00Z",
             "log_status": {
               "enabled": true,
-              "storage_used_mb": 156,
-              "storage_total_mb": 300
+              "storage_used_mb": 156
             }
           },
           {
@@ -1088,244 +624,476 @@ Get Available Gateways
             "name": "Univa-GW-02",
             "status": "online",
             "ip_address": "192.168.1.102",
-            "last_seen": "2025-03-12T15:02:00Z",
             "log_status": {
               "enabled": true,
-              "storage_used_mb": 89,
-              "storage_total_mb": 300
-            }
-          },
-          {
-            "id": "Univa-GW-03",
-            "name": "Univa-GW-03",
-            "status": "offline",
-            "ip_address": "192.168.1.103",
-            "last_seen": "2025-03-12T08:30:00Z",
-            "log_status": {
-              "enabled": false,
-              "storage_used_mb": 0,
-              "storage_total_mb": 300
+              "storage_used_mb": 89
             }
           }
-        ]
+        ],
+        "current_gateway": "Univa-GW-01"
       }
 
-Category-Specific Configuration API
------------------------------------
+.. http:post:: /api/logging-management/gateways/switch
 
-Get Category UI Configuration Template
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   **Description**: Switch to a different gateway context.
+   
+   **Headers**::
 
-.. http:get:: /logging/categories/{category_id}/ui-template
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+   
+   **Request**::
 
-   Get UI configuration template for a specific category.
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Path Parameters**:
-
-   * **category_id** (required): Category ID
-
-   **Response**:
-
-   .. sourcecode:: http
+      POST /api/logging-management/gateways/switch HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+      
+      {
+        "gateway_id": "Univa-GW-02",
+        "save_current": true
+      }
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
       Content-Type: application/json
       
       {
-        "success": true,
-        "category": {
-          "id": "system",
-          "name": "System Logs",
-          "description": "Kernel, watchdog, crash reports",
-          "ui_template": {
-            "title": "System Logs Configuration",
-            "subtitle": "Configure kernel, watchdog, crash reports, and system events",
-            "sections": [
-              {
-                "title": "Basic Settings",
-                "fields": [
-                  {
-                    "type": "toggle",
-                    "id": "enabled",
-                    "label": "Enable Logging",
-                    "description": "Turn logging on/off for this category",
-                    "value": true
-                  },
-                  {
-                    "type": "select",
-                    "id": "log_level",
-                    "label": "Log Level",
-                    "description": "Minimum severity level to log",
-                    "options": [
-                      {"value": "CRITICAL", "label": "CRITICAL"},
-                      {"value": "ERROR", "label": "ERROR"},
-                      {"value": "WARNING", "label": "WARNING"},
-                      {"value": "INFO", "label": "INFO"},
-                      {"value": "DEBUG", "label": "DEBUG"},
-                      {"value": "TRACE", "label": "TRACE"}
-                    ],
-                    "value": "INFO"
-                  },
-                  {
-                    "type": "select",
-                    "id": "log_format",
-                    "label": "Log Format",
-                    "description": "Structure of each log entry",
-                    "options": [
-                      {"value": "TIMESTAMP LEVEL MODULE MESSAGE", "label": "Standard (Timestamp + Level + Module + Message)"},
-                      {"value": "TIMESTAMP LEVEL MESSAGE", "label": "Basic (Timestamp + Level + Message)"},
-                      {"value": "TIMESTAMP MESSAGE", "label": "Simple (Timestamp + Message)"},
-                      {"value": "LEVEL MODULE MESSAGE", "label": "Compact (Level + Module + Message - No Timestamp)"},
-                      {"value": "MODULE MESSAGE", "label": "Minimal (Module + Message)"}
-                    ],
-                    "value": "TIMESTAMP LEVEL MODULE MESSAGE"
-                  },
-                  {
-                    "type": "number",
-                    "id": "interval_ms",
-                    "label": "Log Interval (ms)",
-                    "description": "How often to write logs (0 = immediate)",
-                    "min": 0,
-                    "max": 60000,
-                    "unit": "ms",
-                    "value": 1000
-                  }
-                ]
-              },
-              {
-                "title": "Advanced Settings",
-                "fields": [
-                  {
-                    "type": "number",
-                    "id": "max_file_size_mb",
-                    "label": "Max File Size",
-                    "description": "Maximum size of individual log files",
-                    "min": 1,
-                    "max": 100,
-                    "unit": "MB",
-                    "value": 10
-                  },
-                  {
-                    "type": "number",
-                    "id": "retention_days",
-                    "label": "Retention Period",
-                    "description": "How long to keep logs before deletion",
-                    "min": 1,
-                    "max": 365,
-                    "unit": "days",
-                    "value": 30
-                  },
-                  {
-                    "type": "number",
-                    "id": "buffer_size_kb",
-                    "label": "Buffer Size",
-                    "description": "Memory buffer for log entries before writing to disk",
-                    "min": 128,
-                    "max": 16384,
-                    "unit": "KB",
-                    "value": 1024
-                  },
-                  {
-                    "type": "number",
-                    "id": "flush_interval_ms",
-                    "label": "Flush Interval",
-                    "description": "How often to flush buffer to disk",
-                    "min": 100,
-                    "max": 30000,
-                    "unit": "ms",
-                    "value": 5000
-                  }
-                ]
-              },
-              {
-                "title": "Additional Information",
-                "fields": [
-                  {
-                    "type": "toggle",
-                    "id": "include_detailed_data",
-                    "label": "Include Process Info",
-                    "description": "Include process ID and thread information",
-                    "value": true
-                  },
-                  {
-                    "type": "toggle",
-                    "id": "include_debug_info",
-                    "label": "Include Thread IDs",
-                    "description": "Include thread identification in logs",
-                    "value": false
-                  }
-                ]
-              }
-            ]
-          }
-        }
+        "switched": true,
+        "gateway_id": "Univa-GW-02",
+        "message": "Gateway context switched successfully",
+        "requires_reload": true
       }
 
-Real-Time Updates API
----------------------
+.. http:get:: /api/logging-management/gateways/{gateway_id}/sync-status
 
-Subscribe to Configuration Updates
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   **Description**: Get synchronization status for a gateway.
+   
+   **Path Parameters**:
+   
+   * **gateway_id** (string): Gateway identifier
+   
+   **Headers**::
 
-.. http:get:: /logging/updates/subscribe
-
-   Subscribe to real-time configuration updates via Server-Sent Events (SSE).
-
-   **Headers**:
-
-   .. code-block:: http
-
-      Authorization: Bearer <token>
-
-   **Response**:
-
-   .. code-block:: http
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+   
+   **Success Response**::
 
       HTTP/1.1 200 OK
-      Content-Type: text/event-stream
-      Cache-Control: no-cache
-      Connection: keep-alive
+      Content-Type: application/json
       
-      event: config_update
-      data: {"type": "category_updated", "category": "system", "enabled": true, "log_level": "INFO"}
-      
-      event: storage_update
-      data: {"used_mb": 157, "total_mb": 300, "usage_percentage": 52.3}
-      
-      event: rotation_update
-      data: {"last_rotation": "2025-03-12T16:00:00Z", "next_rotation": "2025-03-13T02:00:00Z"}
+      {
+        "gateway_id": "Univa-GW-02",
+        "sync_status": "in_sync",
+        "last_sync": "2024-03-20T14:30:00Z",
+        "pending_changes": 0,
+        "configuration_match": true
+      }
 
-Error Handling
---------------
+Operations & Testing (SECTION 6)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Error Response Format
-~~~~~~~~~~~~~~~~~~~~~
+.. http:post:: /api/logging-management/test
 
-.. sourcecode:: http
-
-   HTTP/1.1 400 Bad Request
-   Content-Type: application/json
+   **Description**: Test logging configuration by generating test entries.
    
-   {
-     "success": false,
-     "error": "Error Code",
-     "message": "Human-readable error message",
-     "code": "ERROR_CODE",
-     "timestamp": "2025-03-12T16:00:00Z",
-     "request_id": "req_abc123def456",
-     "validation_errors": [
-       {"field": "max_storage_mb", "error": "Value must be between 10 and 1000"}
-     ]
-   }
+   **Headers**::
 
-Common Error Codes
-~~~~~~~~~~~~~~~~~~
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+   
+   **Request**::
+
+      POST /api/logging-management/test HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+      
+      {
+        "categories": ["system", "network", "modbus"],
+        "levels": ["INFO", "ERROR", "WARNING"],
+        "test_messages_count": 10
+      }
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "tested": true,
+        "messages_generated": 30,
+        "files_created": 3,
+        "lines_written": 30,
+        "errors_found": 0,
+        "message": "Logging test completed successfully"
+      }
+
+.. http:post:: /api/logging-management/validate
+
+   **Description**: Validate all logging configurations.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "validated": true,
+        "issues_found": 0,
+        "validations": [
+          {"check": "storage_available", "status": "pass", "message": "Sufficient storage available"},
+          {"check": "destinations_reachable", "status": "pass", "message": "All destinations reachable"},
+          {"check": "configuration_valid", "status": "pass", "message": "All configurations valid"}
+        ]
+      }
+
+.. http:post:: /api/logging-management/restart-service
+
+   **Description**: Restart the logging service.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+   
+   **Request**::
+
+      POST /api/logging-management/restart-service HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+      
+      {
+        "graceful": true,
+        "timeout_seconds": 30
+      }
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "restarted": true,
+        "restart_id": "restart_20240320_162000",
+        "estimated_downtime_seconds": 5,
+        "message": "Logging service restart scheduled"
+      }
+
+Footer Actions
+~~~~~~~~~~~~~~
+
+.. http:post:: /api/logging-management/save-all
+
+   **Description**: Save all logging configurations.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+   
+   **Request**::
+
+      POST /api/logging-management/save-all HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+      
+      {
+        "global": {
+          "enabled": true,
+          "log_level": "INFO",
+          "max_storage_mb": 300
+        },
+        "categories": {
+          "system": {
+            "enabled": true,
+            "log_level": "INFO",
+            "interval_ms": 1000
+          },
+          "network": {
+            "enabled": true,
+            "log_level": "DEBUG",
+            "interval_ms": 5000
+          }
+        },
+        "destinations": {
+          "local": true,
+          "cloud": "https://logs.yourcloud.com/api/v1/logs",
+          "syslog": "192.168.1.100:514"
+        },
+        "rotation": {
+          "max_file_size_mb": 20,
+          "max_files": 10
+        }
+      }
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "saved": true,
+        "message": "All logging configurations saved successfully",
+        "saved_sections": ["global", "categories", "destinations", "rotation"],
+        "restart_required": true
+      }
+
+.. http:post:: /api/logging-management/reset
+
+   **Description**: Reset logging configuration to defaults.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+   
+   **Request**::
+
+      POST /api/logging-management/reset HTTP/1.1
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+      
+      {
+        "confirmation": "I confirm to reset all logging settings to defaults",
+        "backup_current": true
+      }
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "reset": true,
+        "message": "Logging configuration reset to factory defaults",
+        "backup_created": true,
+        "restart_required": true
+      }
+
+.. http:post:: /api/logging-management/export-config
+
+   **Description**: Export logging configuration.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: application/json
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      Content-Disposition: attachment; filename="logging_config_export.json"
+      
+      {
+        "global_settings": { ... },
+        "categories": [ ... ],
+        "destinations": { ... },
+        "rotation_settings": { ... }
+      }
+
+.. http:post:: /api/logging-management/import-config
+
+   **Description**: Import logging configuration from file.
+   
+   **Headers**::
+
+      Cookie: session_token=<token>
+      X-Gateway-ID: GW-3920A9
+      Content-Type: multipart/form-data
+   
+   **Success Response**::
+
+      HTTP/1.1 200 OK
+      Content-Type: application/json
+      
+      {
+        "imported": true,
+        "message": "Logging configuration imported successfully",
+        "sections_imported": ["global", "categories", "destinations"],
+        "restart_required": true
+      }
+
+Route Summary
+-------------
+
+.. list-table:: Logging Management Routes
+   :header-rows: 1
+   :widths: 15 15 50 20
+   
+   * - Type
+     - Method
+     - Route & Purpose
+     - Auth
+   * - Page
+     - GET
+     - ``/logging-management`` - Main logging page
+     - Yes
+   * - Status
+     - GET
+     - ``/api/logging-management/status`` - Global status
+     - Yes
+   * - Status
+     - PUT
+     - ``/api/logging-management/global-settings`` - Update global settings
+     - Yes
+   * - Status
+     - GET
+     - ``/api/logging-management/storage-analytics`` - Storage analytics
+     - Yes
+   * - Categories
+     - GET
+     - ``/api/logging-management/categories`` - Get all categories
+     - Yes
+   * - Categories
+     - GET
+     - ``/api/logging-management/categories/{id}/config`` - Get category config
+     - Yes
+   * - Categories
+     - PUT
+     - ``/api/logging-management/categories/{id}/config`` - Update category config
+     - Yes
+   * - Categories
+     - POST
+     - ``/api/logging-management/categories/batch-update`` - Batch update categories
+     - Yes
+   * - Categories
+     - POST
+     - ``/api/logging-management/categories/apply-global-level`` - Apply global level
+     - Yes
+   * - Destinations
+     - GET
+     - ``/api/logging-management/destinations`` - Get destinations
+     - Yes
+   * - Destinations
+     - PUT
+     - ``/api/logging-management/destinations/{type}`` - Configure destination
+     - Yes
+   * - Destinations
+     - POST
+     - ``/api/logging-management/destinations/test`` - Test destinations
+     - Yes
+   * - Rotation
+     - GET
+     - ``/api/logging-management/rotation`` - Get rotation settings
+     - Yes
+   * - Rotation
+     - PUT
+     - ``/api/logging-management/rotation`` - Update rotation settings
+     - Yes
+   * - Rotation
+     - POST
+     - ``/api/logging-management/rotation/manual`` - Manual rotation
+     - Yes
+   * - Gateways
+     - GET
+     - ``/api/logging-management/gateways`` - List gateways
+     - Yes
+   * - Gateways
+     - POST
+     - ``/api/logging-management/gateways/switch`` - Switch gateway
+     - Yes
+   * - Gateways
+     - GET
+     - ``/api/logging-management/gateways/{id}/sync-status`` - Get sync status
+     - Yes
+   * - Operations
+     - POST
+     - ``/api/logging-management/test`` - Test logging
+     - Yes
+   * - Operations
+     - POST
+     - ``/api/logging-management/validate`` - Validate config
+     - Yes
+   * - Operations
+     - POST
+     - ``/api/logging-management/restart-service`` - Restart service
+     - Yes
+   * - Footer
+     - POST
+     - ``/api/logging-management/save-all`` - Save all configs
+     - Yes
+   * - Footer
+     - POST
+     - ``/api/logging-management/reset`` - Reset to defaults
+     - Yes
+   * - Footer
+     - POST
+     - ``/api/logging-management/export-config`` - Export config
+     - Yes
+   * - Footer
+     - POST
+     - ``/api/logging-management/import-config`` - Import config
+     - Yes
+
+Complete User Flow
+------------------
+
+1. **User goes to page**: ``GET /logging-management``
+   - Server renders HTML with embedded logging data
+   - All 6 sections populated with current configuration
+
+2. **User views global status** (SECTION 1):
+   - Storage usage charts and analytics
+   - Error statistics and system health
+   - "Update Settings" → ``PUT /api/logging-management/global-settings``
+   - "View Analytics" → ``GET /api/logging-management/storage-analytics``
+
+3. **User configures log categories** (SECTION 2):
+   - Category table with enable/disable toggles
+   - "Configure" button → ``GET /api/logging-management/categories/{id}/config``
+   - "Update Config" → ``PUT /api/logging-management/categories/{id}/config``
+   - "Batch Update" → ``POST /api/logging-management/categories/batch-update``
+   - "Apply Global Level" → ``POST /api/logging-management/categories/apply-global-level``
+
+4. **User manages output destinations** (SECTION 3):
+   - Destination cards with connection status
+   - "Configure Destination" → ``PUT /api/logging-management/destinations/{type}``
+   - "Test Destinations" → ``POST /api/logging-management/destinations/test``
+   - Real-time status indicators
+
+5. **User sets rotation settings** (SECTION 4):
+   - Rotation configuration form
+   - Schedule and compression settings
+   - "Update Rotation" → ``PUT /api/logging-management/rotation``
+   - "Rotate Now" → ``POST /api/logging-management/rotation/manual``
+
+6. **User switches between gateways** (SECTION 5):
+   - Gateway selector dropdown
+   - "Switch Gateway" → ``POST /api/logging-management/gateways/switch``
+   - "Check Sync Status" → ``GET /api/logging-management/gateways/{id}/sync-status``
+
+7. **User performs operations** (SECTION 6):
+   - "Test Logging" → ``POST /api/logging-management/test``
+   - "Validate Config" → ``POST /api/logging-management/validate``
+   - "Restart Service" → ``POST /api/logging-management/restart-service``
+
+8. **User uses footer actions**:
+   - "Save All" → ``POST /api/logging-management/save-all``
+   - "Reset to Defaults" → ``POST /api/logging-management/reset``
+   - "Export Config" → ``POST /api/logging-management/export-config``
+   - "Import Config" → ``POST /api/logging-management/import-config``
+
+Error Codes
+-----------
 
 .. list-table:: Logging Error Codes
    :widths: 30 70
@@ -1333,466 +1101,124 @@ Common Error Codes
 
    * - Error Code
      - Description
-   * - **CATEGORY_DISABLED**
-     - Log category is disabled
-   * - **STORAGE_FULL**
+   * - STORAGE_FULL
      - Log storage is full
-   * - **DESTINATION_UNREACHABLE**
+   * - DESTINATION_UNREACHABLE
      - Log destination cannot be reached
-   * - **INVALID_LOG_FORMAT**
+   * - INVALID_LOG_FORMAT
      - Log format specification is invalid
-   * - **PERMISSION_DENIED**
-     - Insufficient permissions for operation
-   * - **CONFIGURATION_INVALID**
+   * - CONFIGURATION_INVALID
      - Logging configuration is invalid
-   * - **ROTATION_FAILED**
+   * - ROTATION_FAILED
      - Log rotation failed
-   * - **BUFFER_OVERFLOW**
-     - Log buffer overflow
-   * - **GATEWAY_SWITCH_FAILED**
-     - Failed to switch gateway context
-   * - **GATEWAY_OFFLINE**
+   * - GATEWAY_OFFLINE
      - Target gateway is offline
-   * - **CONFIGURATION_LOCKED**
-     - Configuration is being modified by another user
-   * - **VALIDATION_ERROR**
+   * - VALIDATION_ERROR
      - Configuration validation failed
+   * - PERMISSION_DENIED
+     - Insufficient permissions for operation
+   * - CATEGORY_DISABLED
+     - Log category is disabled
+   * - CONFIGURATION_LOCKED
+     - Configuration is being modified by another user
 
-Examples
---------
+Authentication & Context
+------------------------
 
-JavaScript - Complete UI Integration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+All endpoints require gateway context identification::
 
-.. code-block:: javascript
+   Cookie: session_token=<token>
+   X-Gateway-ID: GW-3920A9
 
-   // Initialize logging dashboard
-   async function initializeLoggingDashboard() {
-       try {
-           // Load dashboard data
-           const dashboardResponse = await fetch('/api/v1/logging/dashboard', {
-               headers: { 'Authorization': `Bearer ${token}` }
-           });
-           const dashboardData = await dashboardResponse.json();
-           renderDashboard(dashboardData.dashboard);
-           
-           // Load categories
-           const categoriesResponse = await fetch('/api/v1/logging/categories/ui', {
-               headers: { 'Authorization': `Bearer ${token}` }
-           });
-           const categoriesData = await categoriesResponse.json();
-           renderCategories(categoriesData.categories);
-           
-           // Load destinations
-           const destinationsResponse = await fetch('/api/v1/logging/destinations/ui', {
-               headers: { 'Authorization': `Bearer ${token}` }
-           });
-           const destinationsData = await destinationsResponse.json();
-           renderDestinations(destinationsData.destinations);
-           
-           // Load rotation settings
-           const rotationResponse = await fetch('/api/v1/logging/rotation/ui', {
-               headers: { 'Authorization': `Bearer ${token}` }
-           });
-           const rotationData = await rotationResponse.json();
-           renderRotationSettings(rotationData.rotation);
-           
-           // Load available gateways
-           const gatewaysResponse = await fetch('/api/v1/logging/gateways/available', {
-               headers: { 'Authorization': `Bearer ${token}` }
-           });
-           const gatewaysData = await gatewaysResponse.json();
-           populateGatewaySelector(gatewaysData.gateways);
-           
-           // Subscribe to updates
-           subscribeToUpdates();
-           
-       } catch (error) {
-           console.error('Failed to initialize dashboard:', error);
-           showError('Failed to load logging configuration');
-       }
-   }
-   
-   // Open category configuration modal
-   async function openCategoryConfigModal(categoryId) {
-       try {
-           const response = await fetch(`/api/v1/logging/categories/${categoryId}/ui-template`, {
-               headers: { 'Authorization': `Bearer ${token}` }
-           });
-           const data = await response.json();
-           
-           if (data.success) {
-               renderConfigModal(data.category.ui_template);
-               showModal();
-           }
-       } catch (error) {
-           console.error('Failed to load category config:', error);
-           showError('Failed to load configuration template');
-       }
-   }
-   
-   // Save category configuration
-   async function saveCategoryConfig(categoryId, config) {
-       try {
-           const response = await fetch(`/api/v1/logging/categories/${categoryId}/ui`, {
-               method: 'PUT',
-               headers: {
-                   'Authorization': `Bearer ${token}`,
-                   'Content-Type': 'application/json'
-               },
-               body: JSON.stringify(config)
-           });
-           
-           const result = await response.json();
-           
-           if (result.success) {
-               showSuccessNotification(`Configuration saved for ${categoryId}`);
-               updateCategoryUI(categoryId, result.category);
-               return result;
-           } else {
-               throw new Error(result.message || 'Save failed');
-           }
-       } catch (error) {
-           console.error('Failed to save category config:', error);
-           showError(`Failed to save configuration: ${error.message}`);
-       }
-   }
-   
-   // Save all configurations
-   async function saveAllConfigurations() {
-       const allConfig = {
-           global: {
-               enabled: document.getElementById('enableLogging').checked,
-               log_level: document.getElementById('globalLogLevel').value,
-               max_storage_mb: parseInt(document.getElementById('maxStorage').value),
-               rotation_mode: document.getElementById('rotationMode').value
-           },
-           categories: getCategoriesConfig(),
-           destinations: getDestinationsConfig(),
-           rotation: getRotationConfig()
-       };
-       
-       try {
-           const response = await fetch('/api/v1/logging/operations/save-all', {
-               method: 'POST',
-               headers: {
-                   'Authorization': `Bearer ${token}`,
-                   'Content-Type': 'application/json'
-               },
-               body: JSON.stringify(allConfig)
-           });
-           
-           const result = await response.json();
-           
-           if (result.success) {
-               showSuccessNotification('All configurations saved successfully!');
-               if (result.restart_required) {
-                   showRestartNotification(result.restart_time);
-               }
-               return result;
-           } else {
-               throw new Error(result.message || 'Save failed');
-           }
-       } catch (error) {
-           console.error('Failed to save all configurations:', error);
-           showError(`Failed to save configurations: ${error.message}`);
-       }
-   }
-   
-   // Test logging configuration
-   async function testLoggingConfig() {
-       try {
-           const response = await fetch('/api/v1/logging/operations/test/ui', {
-               method: 'POST',
-               headers: {
-                   'Authorization': `Bearer ${token}`,
-                   'Content-Type': 'application/json'
-               },
-               body: JSON.stringify({
-                   categories: ['system', 'network', 'modbus'],
-                   levels: ['INFO', 'ERROR', 'WARNING'],
-                   test_messages_count: 10,
-                   verify_destinations: true
-               })
-           });
-           
-           const result = await response.json();
-           
-           if (result.success) {
-               showSuccessNotification(result.message);
-               return result;
-           } else {
-               throw new Error(result.message || 'Test failed');
-           }
-       } catch (error) {
-           console.error('Failed to test logging:', error);
-           showError(`Test failed: ${error.message}`);
-       }
-   }
-   
-   // Rotate logs now
-   async function rotateLogsNow() {
-       try {
-           const response = await fetch('/api/v1/logging/rotation/manual/ui', {
-               method: 'POST',
-               headers: {
-                   'Authorization': `Bearer ${token}`,
-                   'Content-Type': 'application/json'
-               },
-               body: JSON.stringify({
-                   reason: 'Manual rotation triggered from UI',
-                   compress_immediately: true
-               })
-           });
-           
-           const result = await response.json();
-           
-           if (result.success) {
-               showSuccessNotification(result.message);
-               updateStorageDisplay();
-               return result;
-           } else {
-               throw new Error(result.message || 'Rotation failed');
-           }
-       } catch (error) {
-           console.error('Failed to rotate logs:', error);
-           showError(`Rotation failed: ${error.message}`);
-       }
-   }
-   
-   // Switch gateway
-   async function switchGateway(gatewayId) {
-       try {
-           const response = await fetch('/api/v1/logging/gateway/switch', {
-               method: 'POST',
-               headers: {
-                   'Authorization': `Bearer ${token}`,
-                   'Content-Type': 'application/json'
-               },
-               body: JSON.stringify({
-                   gateway_id: gatewayId,
-                   save_current: true
-               })
-           });
-           
-           const result = await response.json();
-           
-           if (result.success) {
-               if (result.requires_reload) {
-                   location.reload();
-               } else {
-                   updateGatewayInfo(result.gateway);
-               }
-               return result;
-           } else {
-               throw new Error(result.message || 'Gateway switch failed');
-           }
-       } catch (error) {
-           console.error('Failed to switch gateway:', error);
-           showError(`Failed to switch gateway: ${error.message}`);
-           // Reset dropdown to current gateway
-           document.getElementById('gateway-select').value = currentGatewayId;
-       }
-   }
-   
-   // Subscribe to real-time updates
-   function subscribeToUpdates() {
-       const eventSource = new EventSource('/api/v1/logging/updates/subscribe?token=' + token);
-       
-       eventSource.addEventListener('config_update', function(event) {
-           const data = JSON.parse(event.data);
-           handleConfigUpdate(data);
-       });
-       
-       eventSource.addEventListener('storage_update', function(event) {
-           const data = JSON.parse(event.data);
-           updateStorageDisplay(data);
-       });
-       
-       eventSource.addEventListener('rotation_update', function(event) {
-           const data = JSON.parse(event.data);
-           updateRotationDisplay(data);
-       });
-       
-       eventSource.addEventListener('error', function(event) {
-           console.error('SSE connection error:', event);
-           // Attempt to reconnect
-           setTimeout(subscribeToUpdates, 5000);
-       });
-   }
+**Important**: This API manages logging configuration for the current gateway specified in `X-Gateway-ID` header. Gateway switching allows management of multiple gateways.
 
-Best Practices for UI Integration
----------------------------------
+Log Categories
+--------------
 
-Data Loading Strategy
-~~~~~~~~~~~~~~~~~~~~~
+### Available Categories
 
-1. **Initial Load**:
-   - Load dashboard data first for quick display
-   - Load categories, destinations, and rotation in parallel
-   - Show loading states for each section
-
-2. **Caching**:
-   - Cache configuration data locally
-   - Use ETag headers for conditional requests
-   - Implement optimistic updates
-
-3. **Error Handling**:
-   - Show partial data when some requests fail
-   - Implement retry logic for failed requests
-   - Provide offline fallback options
-
-Real-time Updates
-~~~~~~~~~~~~~~~~~
-
-1. **Server-Sent Events**:
-   - Use SSE for configuration updates
-   - Handle reconnection automatically
-   - Update UI components incrementally
-
-2. **Optimistic Updates**:
-   - Update UI immediately on user action
-   - Show loading states during API calls
-   - Roll back changes on failure
-
-Validation
-~~~~~~~~~~
-
-1. **Client-side Validation**:
-   - Validate input formats before submission
-   - Show inline validation errors
-   - Prevent invalid submissions
-
-2. **Server-side Validation**:
-   - Handle validation errors gracefully
-   - Show detailed error messages
-   - Suggest corrections when possible
-
-Performance Optimization
-~~~~~~~~~~~~~~~~~~~~~~~
-
-1. **Lazy Loading**:
-   - Load category templates on demand
-   - Paginate large log lists
-   - Defer non-critical data loading
-
-2. **Batching**:
-   - Batch multiple configuration updates
-   - Use compound endpoints for related data
-   - Minimize round trips
-
-Security Considerations
------------------------
-
-1. **Input Sanitization**:
-   - Validate all user inputs
-   - Escape special characters in log messages
-   - Prevent injection attacks
-
-2. **Access Control**:
-   - Implement role-based access
-   - Log all configuration changes
-   - Audit user actions
-
-3. **Data Protection**:
-   - Encrypt sensitive configuration data
-   - Secure API keys and credentials
-   - Implement rate limiting
-
-Troubleshooting
----------------
-
-Common Issues
-~~~~~~~~~~~~~
-
-1. **Configuration Not Applying**:
-   - Check if restart is required
-   - Verify permissions
-   - Check for validation errors
-
-2. **Storage Issues**:
-   - Monitor storage usage
-   - Configure rotation properly
-   - Clean up old logs
-
-3. **Connectivity Problems**:
-   - Check network connectivity
-   - Verify destination URLs
-   - Test with minimal configuration
-
-Debugging Tools
-~~~~~~~~~~~~~~~
-
-1. **Test Endpoints**:
-   - Use `/logging/operations/test/ui` to verify configuration
-   - Test individual destinations
-   - Generate test log entries
-
-2. **Diagnostic Endpoints**:
-   - Check system health
-   - View error logs
-   - Monitor performance metrics
-
-3. **Log Files**:
-   - Access system logs for debugging
-   - Check API request logs
-   - Review error logs
-
-Support
--------
-
-For API support, contact:
-
-- **Email**: logging-support@univagateway.com
-- **Documentation**: https://docs.univagateway.com/api/logging
-- **Emergency**: +1-800-LOGGING (564-4644)
-- **API Status**: https://status.univagateway.com/api
-
-Version History
----------------
-
-.. list-table:: API Version History
-   :widths: 20 30 50
+.. list-table:: Log Categories
+   :widths: 30 40 30
    :header-rows: 1
 
-   * - Version
-     - Date
-     - Changes
-   * - **v1.0**
-     - 2025-03-01
-     - Initial release with basic logging API
-   * - **v1.1**
-     - 2025-03-12
-     - Added UI-specific endpoints, real-time updates, and gateway management
-   * - **v1.2**
-     - 2025-03-15
-     - Added batch operations and enhanced error handling
+   * - Category ID
+     - Description
+     - Default Level
+   * - **system**
+     - Kernel, watchdog, crash reports
+     - INFO
+   * - **network**
+     - Ethernet, Wi-Fi, 4G, packet drops
+     - DEBUG
+   * - **can**
+     - CAN bus messages, errors, timing
+     - WARN
+   * - **modbus**
+     - Modbus requests, responses, errors
+     - ERROR
+   * - **mqtt**
+     - MQTT publish/subscribe, connections
+     - INFO
+   * - **security**
+     - Authentication, authorization, attacks
+     - CRITICAL
+   * - **sensor**
+     - Sensor readings, calibration, errors
+     - INFO
+   * - **ruleEngine**
+     - Rule execution, conditions, actions
+     - DEBUG
+   * - **debug**
+     - Debug information for developers
+     - TRACE
 
-Compliance
-----------
+### Log Levels
 
-This API complies with:
+1. **CRITICAL**: System is unusable
+2. **ERROR**: Error conditions
+3. **WARNING**: Warning conditions
+4. **INFO**: Informational messages
+5. **DEBUG**: Debug-level messages
+6. **TRACE**: Trace-level messages
 
-1. **RESTful Design Principles**
-2. **JSON API Specification**
-3. **OAuth 2.0 / JWT Authentication**
-4. **GDPR Data Protection**
-5. **ISO 27001 Security Standards**
+Output Destinations
+-------------------
 
-Deprecation Policy
+### Supported Destinations
+
+1. **Local Storage**: Default debugging location (/var/log)
+2. **Cloud Upload**: For cloud dashboards and remote monitoring
+3. **Syslog Server**: Industrial IT environments (IP:Port)
+4. **MQTT Topic**: Pipe logs to external monitoring systems
+5. **WebSocket**: Enable live log viewer in Web UI
+
+### Destination Priorities
+- Local storage is always enabled as fallback
+- Multiple destinations can be active simultaneously
+- Failed destinations are automatically retried
+
+Storage Management
 ------------------
 
-Endpoints marked as deprecated will:
+### Storage Requirements
+- **Minimum storage**: 100MB for basic logging
+- **Recommended storage**: 1GB for 30 days retention
+- **Maximum storage**: Configurable up to 10GB
 
-1. Remain functional for 6 months
-2. Return deprecation warnings in headers
-3. Have replacement endpoints documented
-4. Be removed after the deprecation period
+### Retention Policies
+- Logs automatically rotated based on size and age
+- Compression applied to logs older than 7 days
+- Oldest logs deleted when storage limit reached
+
+### Performance Impact
+- **Log writing**: <5% CPU usage during normal operation
+- **Compression**: 10-15% CPU during rotation
+- **Network destinations**: Varies based on bandwidth
 
 Rate Limiting
 -------------
 
-.. list-table:: Rate Limits
+.. list-table:: Logging Rate Limits
    :widths: 40 30 30
    :header-rows: 1
 
@@ -1803,21 +1229,137 @@ Rate Limiting
      - 10
      - PUT/POST endpoints
    * - **Data queries**
-     - 100
-     - GET endpoints
-   * - **UI-specific endpoints**
      - 60
-     - /ui suffix endpoints
-   * - **Real-time updates**
-     - 5 connections
-     - Per user limit
-   * - **Bulk operations**
+     - GET endpoints
+   * - **Batch operations**
      - 5
      - Save-all, batch updates
+   * - **System operations**
+     - 2
+     - Restart, reset operations
+   * - **Gateway switching**
+     - 5
+     - Per user limit
 
-License
--------
+Security Considerations
+-----------------------
 
-Copyright © 2025 Univa Gateway. All rights reserved.
+### Access Control
+- Log configuration requires admin privileges
+- Sensitive destinations (cloud, syslog) require additional authentication
+- All configuration changes are logged for audit
 
-This API is proprietary and confidential. Unauthorized use, copying, or distribution is prohibited.
+### Data Protection
+- Cloud destinations use HTTPS with certificate validation
+- API keys encrypted in configuration
+- Local log files have restricted permissions
+
+### Audit Trail
+- All configuration changes logged with user attribution
+- Failed authentication attempts logged
+- Unauthorized access attempts trigger alerts
+
+Troubleshooting
+---------------
+
+### Common Issues
+
+1. **Logs not appearing**
+   - Check category is enabled
+   - Verify log level setting
+   - Check storage availability
+
+2. **Destination not working**
+   - Test destination connectivity
+   - Verify authentication credentials
+   - Check network connectivity
+
+3. **Storage full**
+   - Increase storage limit
+   - Reduce retention period
+   - Manually rotate logs
+
+4. **Performance issues**
+   - Reduce logging frequency
+   - Disable debug/trace levels
+   - Optimize log formats
+
+### Debug Information
+
+When contacting support, provide:
+- Gateway ID and firmware version
+- Error message and code
+- Log configuration export
+- Storage usage statistics
+- Network connectivity status
+
+Support Information
+-------------------
+
+- **Email**: logging-support@univa.com
+- **Phone**: +1 (555) 234-5678
+- **Support Hours**: Monday-Friday 8am-8pm EST
+- **Documentation**: https://docs.univa.com/logging
+
+Version History
+---------------
+
+.. list-table:: API Version History
+   :widths: 15 85
+   :header-rows: 1
+
+   * - Version
+     - Changes
+   * - 1.0.0
+     - Initial release of Device-Level Logging API
+   * - 1.1.0
+     - Added multi-gateway management
+   * - 1.2.0
+     - Enhanced destination testing and validation
+   * - 1.3.0
+     - Added storage analytics and predictions
+
+Deprecation Notes
+-----------------
+
+No endpoints are currently deprecated. All endpoints are fully supported in the current version.
+
+Glossary
+--------
+
+.. glossary::
+
+   Log Category
+      Group of related log messages (system, network, etc.)
+
+   Log Level
+      Severity of log messages (CRITICAL to TRACE)
+
+   Output Destination
+      Where logs are sent (local, cloud, syslog, etc.)
+
+   Log Rotation
+      Process of archiving old logs and creating new log files
+
+   Retention Period
+      How long logs are kept before deletion
+
+   Buffer Size
+      Memory allocated for log entries before writing to disk
+
+   Flush Interval
+      How often buffered logs are written to storage
+
+   Compression
+      Reducing log file size using algorithms like gzip
+
+   Gateway Context
+      The specific gateway being managed
+
+   Configuration Sync
+      Synchronizing settings between multiple gateways
+
+---
+*Document last updated: March 20, 2024*
+*API Version: 1.3.0*
+*Gateway Version: 2.5.1*
