@@ -1351,7 +1351,3 @@ Best Practices
 7. **Keep Recovery Images**: Maintain current recovery images
 8. **Verify Signatures**: Always verify update signatures
 
----
-*Document last updated: March 15, 2025*
-*API Version: 1.0.0*
-*Gateway OTA Version: 3.2.1*

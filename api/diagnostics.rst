@@ -1,10 +1,6 @@
 Diagnostics & Terminal API
 ===========================
 
-.. contents::
-   :depth: 3
-   :local:
-
 Page Route (Frontend)
 ---------------------
 
@@ -1032,26 +1028,6 @@ Data Retention
 - Manual cleanup via ``POST /api/diagnostics/clear``
 - Configurable retention in settings
 
-Security Considerations
------------------------
-
-### Terminal Access Security
-- All terminal commands are logged with user attribution
-- Command execution requires admin privileges
-- Session timeout after 30 minutes of inactivity
-- Maximum 3 concurrent terminal sessions per user
-
-### Packet Capture Security
-- Capture files encrypted at rest
-- Access restricted to authorized users
-- Automatic deletion after retention period
-- No capture of sensitive protocols (SSH, HTTPS)
-
-### Data Export Security
-- Exports encrypted with user-specific key
-- Download links expire after 24 hours
-- Export logs tracked for audit purposes
-
 Troubleshooting
 ---------------
 
@@ -1086,36 +1062,6 @@ When contacting support, provide:
 - Steps to reproduce
 - Relevant logs or captures
 
-Support Information
--------------------
-
-- **Email**: diagnostics-support@univa.com
-- **Phone**: +1 (555) 987-6543
-- **Support Hours**: 24/7 for critical issues
-- **Documentation**: https://docs.univa.com/diagnostics
-
-Version History
----------------
-
-.. list-table:: API Version History
-   :widths: 15 85
-   :header-rows: 1
-
-   * - Version
-     - Changes
-   * - 1.0.0
-     - Initial release of Diagnostics API
-   * - 1.1.0
-     - Added WebSocket support for real-time data
-   * - 1.2.0
-     - Added RF spectrum analysis tools
-   * - 1.3.0
-     - Enhanced packet capture capabilities
-
-Deprecation Notes
------------------
-
-No endpoints are currently deprecated. All endpoints are fully supported in the current version.
 
 Glossary
 --------
@@ -1152,7 +1098,3 @@ Glossary
    WebSocket
       Protocol for full-duplex communication over a single TCP connection.
 
----
-*Document last updated: March 20, 2024*
-*API Version: 1.3.0*
-*Gateway Version: 2.5.1*

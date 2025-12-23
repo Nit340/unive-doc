@@ -957,32 +957,6 @@ Renewal Process
 - Recommended for uninterrupted service
 - Sends email notifications before renewal
 
-Support Information
--------------------
-
-- **Email**: licenses@univa.com
-- **Phone**: +1 (555) 123-4567
-- **Support Hours**: Monday-Friday 9am-6pm EST
-- **Documentation**: https://docs.univa.com/licensing
-
-Version History
----------------
-
-.. list-table:: API Version History
-   :widths: 15 85
-   :header-rows: 1
-
-   * - Version
-     - Changes
-   * - 1.0.0
-     - Initial release of Licensing & Subscriptions API
-   * - 1.1.0
-     - Added license transfer functionality
-   * - 1.2.0
-     - Enhanced cloud sync with detailed status
-   * - 1.3.0
-     - Added license activation history
-
 Deprecation Notes
 -----------------
 
@@ -1084,9 +1058,3 @@ Glossary
 
    Grace Period
       Time after license expiry where features remain active before deactivation.
-
-
----
-*Document last updated: March 20, 2024*
-*API Version: 1.3.0*
-*Gateway Version: 2.5.1*

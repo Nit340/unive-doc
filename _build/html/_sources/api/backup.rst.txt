@@ -1638,26 +1638,3 @@ Error Codes
    * - OPERATION_IN_PROGRESS
      - Another operation is in progress
 
-Authentication & Context
-------------------------
-
-All endpoints require gateway context identification::
-
-   Authorization: Bearer <token>
-   X-Gateway-ID: GW-3920A9
-
-**Important**: This API only manages backups for the current gateway specified in `X-Gateway-ID` header.
-
-Support Information
--------------------
-
-- **Backup Support**: backup-support@univa.com
-- **Disaster Recovery**: +1 (555) 789-0789
-- **Support Hours**: 24/7 for recovery incidents
-- **Documentation**: https://docs.univa.com/backup
-- **Status Page**: https://status.univa.com/backup
-
----
-*Document last updated: March 15, 2025*
-*API Version: 1.0.0*
-*Backup Module Version: 2.3.0*

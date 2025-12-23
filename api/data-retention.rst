@@ -1,10 +1,6 @@
 Data Retention Management API
 ==============================
 
-.. contents::
-   :depth: 3
-   :local:
-
 Page Route (Frontend)
 ---------------------
 
@@ -1218,31 +1214,6 @@ Rate Limiting
      - 2
      - Reset, emergency actions
 
-Security Considerations
------------------------
-
-### Protected Categories
-
-1. **CraneIQ Safety Logs**
-   - Cannot be modified without admin approval
-   - Special confirmation required for any changes
-   - Always excluded from automatic purge operations
-   - Maximum retention period cannot be reduced
-
-### Audit Requirements
-
-1. **All operations logged**: Timestamp, user, action, details
-2. **Compliance tracking**: Policy changes, purge operations
-3. **Security events**: Unauthorized access attempts
-4. **System events**: Auto-purge, threshold breaches
-
-### Data Protection
-
-1. **Encryption**: All sensitive configurations encrypted
-2. **Access control**: Role-based access to operations
-3. **Confirmation**: Critical operations require explicit confirmation
-4. **Backup**: Backup before destructive operations
-
 Troubleshooting
 ---------------
 
@@ -1281,32 +1252,6 @@ When contacting support, provide:
 - Error messages and codes
 - Audit log entries
 - Diagnostic report
-
-Support Information
--------------------
-
-- **Email**: retention-support@univa.com
-- **Phone**: +1 (555) 345-6789
-- **Support Hours**: 24/7 for critical issues
-- **Documentation**: https://docs.univa.com/retention
-
-Version History
----------------
-
-.. list-table:: API Version History
-   :widths: 15 85
-   :header-rows: 1
-
-   * - Version
-     - Changes
-   * - 1.0.0
-     - Initial release of Data Retention API
-   * - 1.1.0
-     - Added offline buffering support
-   * - 1.2.0
-     - Enhanced analytics and forecasting
-   * - 1.3.0
-     - Added compliance and audit features
 
 Deprecation Notes
 -----------------
@@ -1348,7 +1293,3 @@ Glossary
    Emergency Purge
       Forced cleanup when storage is critically full.
 
----
-*Document last updated: March 20, 2024*
-*API Version: 1.3.0*
-*Gateway Version: 2.5.1*

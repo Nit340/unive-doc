@@ -960,25 +960,6 @@ Security Notes
 - **Rate limiting** on API endpoints
 - **Permission-based access control**
 
-Performance Considerations
---------------------------
-
-- **Server-side rendering** for initial page load
-- **Client-side caching** of configuration data
-- **Lazy loading** of preview data
-- **Compression** of exported configuration files
-- **Database indexing** on frequently queried fields
-- **Connection pooling** for database access
-
-Browser Compatibility
----------------------
-
-- **Modern browsers** (Chrome 80+, Firefox 75+, Safari 13+, Edge 80+)
-- **JavaScript required** for interactive features
-- **Responsive design** for mobile/tablet devices
-- **Progressive enhancement** for basic functionality
-- **Accessibility** (WCAG 2.1 AA compliant)
-
 Testing
 -------
 
@@ -988,29 +969,4 @@ Testing
 - **Load testing** for performance validation
 - **Security testing** for vulnerability assessment
 
-Monitoring
-----------
 
-- **API response times** tracked
-- **Error rates** monitored
-- **User activity** logged
-- **Configuration changes** audited
-- **System health** checked regularly
-
-Deployment
-----------
-
-- **Docker containers** for easy deployment
-- **Kubernetes** for orchestration
-- **CI/CD pipeline** for automated testing and deployment
-- **Environment-specific configurations**
-- **Rollback capabilities** for failed deployments
-
-Support
--------
-
-- **Documentation** available at /docs/alert-messages
-- **API reference** at /api-docs/alert-messages
-- **Support email**: alerts-support@univagateway.com
-- **Issue tracker**: https://github.com/univagateway/issues
-- **Community forum**: https://community.univagateway.com

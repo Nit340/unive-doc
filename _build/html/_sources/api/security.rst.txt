@@ -1829,17 +1829,3 @@ All endpoints require gateway context identification::
    X-Gateway-ID: GW-3920A9
 
 **Important**: This API only manages security for the current gateway specified in `X-Gateway-ID` header.
-
-Support Information
--------------------
-
-- **Security Support**: security-support@univa.com
-- **Emergency Response**: +1 (555) 789-0456
-- **Support Hours**: 24/7 for security incidents
-- **Documentation**: https://docs.univa.com/security
-- **Security Status**: https://status.univa.com/security
-
----
-*Document last updated: March 15, 2025*
-*API Version: 1.0.0*
-*Security Module Version: 2.1.0*

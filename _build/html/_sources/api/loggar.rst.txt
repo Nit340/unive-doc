@@ -1,10 +1,6 @@
 Device-Level Logging API
 ========================
 
-.. contents::
-   :depth: 3
-   :local:
-
 Page Route (Frontend)
 ---------------------
 
@@ -1122,16 +1118,6 @@ Error Codes
    * - CONFIGURATION_LOCKED
      - Configuration is being modified by another user
 
-Authentication & Context
-------------------------
-
-All endpoints require gateway context identification::
-
-   Cookie: session_token=<token>
-   X-Gateway-ID: GW-3920A9
-
-**Important**: This API manages logging configuration for the current gateway specified in `X-Gateway-ID` header. Gateway switching allows management of multiple gateways.
-
 Log Categories
 --------------
 
@@ -1197,24 +1183,6 @@ Output Destinations
 - Multiple destinations can be active simultaneously
 - Failed destinations are automatically retried
 
-Storage Management
-------------------
-
-### Storage Requirements
-- **Minimum storage**: 100MB for basic logging
-- **Recommended storage**: 1GB for 30 days retention
-- **Maximum storage**: Configurable up to 10GB
-
-### Retention Policies
-- Logs automatically rotated based on size and age
-- Compression applied to logs older than 7 days
-- Oldest logs deleted when storage limit reached
-
-### Performance Impact
-- **Log writing**: <5% CPU usage during normal operation
-- **Compression**: 10-15% CPU during rotation
-- **Network destinations**: Varies based on bandwidth
-
 Rate Limiting
 -------------
 
@@ -1241,23 +1209,6 @@ Rate Limiting
      - 5
      - Per user limit
 
-Security Considerations
------------------------
-
-### Access Control
-- Log configuration requires admin privileges
-- Sensitive destinations (cloud, syslog) require additional authentication
-- All configuration changes are logged for audit
-
-### Data Protection
-- Cloud destinations use HTTPS with certificate validation
-- API keys encrypted in configuration
-- Local log files have restricted permissions
-
-### Audit Trail
-- All configuration changes logged with user attribution
-- Failed authentication attempts logged
-- Unauthorized access attempts trigger alerts
 
 Troubleshooting
 ---------------
@@ -1284,45 +1235,7 @@ Troubleshooting
    - Disable debug/trace levels
    - Optimize log formats
 
-### Debug Information
 
-When contacting support, provide:
-- Gateway ID and firmware version
-- Error message and code
-- Log configuration export
-- Storage usage statistics
-- Network connectivity status
-
-Support Information
--------------------
-
-- **Email**: logging-support@univa.com
-- **Phone**: +1 (555) 234-5678
-- **Support Hours**: Monday-Friday 8am-8pm EST
-- **Documentation**: https://docs.univa.com/logging
-
-Version History
----------------
-
-.. list-table:: API Version History
-   :widths: 15 85
-   :header-rows: 1
-
-   * - Version
-     - Changes
-   * - 1.0.0
-     - Initial release of Device-Level Logging API
-   * - 1.1.0
-     - Added multi-gateway management
-   * - 1.2.0
-     - Enhanced destination testing and validation
-   * - 1.3.0
-     - Added storage analytics and predictions
-
-Deprecation Notes
------------------
-
-No endpoints are currently deprecated. All endpoints are fully supported in the current version.
 
 Glossary
 --------
@@ -1359,7 +1272,4 @@ Glossary
    Configuration Sync
       Synchronizing settings between multiple gateways
 
----
-*Document last updated: March 20, 2024*
-*API Version: 1.3.0*
-*Gateway Version: 2.5.1*
+

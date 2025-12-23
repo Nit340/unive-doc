@@ -1509,26 +1509,3 @@ Error Codes
    * - OPERATION_IN_PROGRESS
      - Another operation is in progress
 
-Authentication & Context
-------------------------
-
-All endpoints require gateway context identification::
-
-   Authorization: Bearer <token>
-   X-Gateway-ID: GW-3920A9
-
-**Important**: This API only manages scheduler for the current gateway specified in `X-Gateway-ID` header.
-
-Support Information
--------------------
-
-- **Scheduler Support**: scheduler-support@univa.com
-- **Automation Help**: +1 (555) 789-0999
-- **Support Hours**: 24/7 for critical automation failures
-- **Documentation**: https://docs.univa.com/scheduler
-- **Status Page**: https://status.univa.com/scheduler
-
----
-*Document last updated: March 15, 2025*
-*API Version: 1.0.0*
-*Scheduler Module Version: 2.5.0*
